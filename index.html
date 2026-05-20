@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colgo — Il catalogo digitale per qualsiasi struttura</title>
+  <meta name="description" content="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, senza complicazioni." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Palette principale Colgo */
+      --black:         #0D0D0D;   /* near-black — profondità, overlay */
+      --petrol:        #1E3A35;   /* petrol green — sfondo dark, header */
+      --petrol-deep:   #10231F;   /* verde profondo — sfumature dark */
+      --petrol-deeper: #142C27;   /* verde più profondo — gradienti */
+      --ochre:         #C8922A;   /* oro caldo — accento principale */
+      --ochre-dark:    #9E6F1F;   /* bronzo — ombre ochre */
+      --ochre-dim:     rgba(200,146,42,0.15);
+      --ochre-faint:   rgba(200,146,42,0.08);
+
+      /* Testi */
+      --cream:         #F5F1E8;   /* testo primario dark / sfondo light */
+      --warm-white:    #FAF7F0;   /* sfondo luminoso / card light */
+      --grey-green:    #AEB8AE;   /* testo secondario dark */
+      --grey-text:     #5E6B66;   /* testo secondario light */
+
+      /* Alias per compatibilità template */
+      --gold:          #C8922A;
+      --gold-light:    #d4a84b;
+      --gold-dim:      rgba(200,146,42,0.15);
+      --white:         #F5F1E8;
+      --white-dim:     rgba(245,241,232,0.5);
+      --white-faint:   rgba(245,241,232,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+    }
+
+    .nav-logo {
+      height: 28px;
+      opacity: 0.95;
+    }
+
+    .nav-lang {
+      display: flex;
+      gap: 6px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--white-dim);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.2s;
+    }
+
+    .lang-btn.active, .lang-btn:hover { color: var(--gold); }
+    .lang-btn:first-child::after { content: '/'; margin-left: 6px; color: var(--white-faint); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 32px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,58,53,0.5) 0%, rgba(200,146,42,0.06) 40%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-icon {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+      flex-shrink: 0;
+    }
+
+    .hero-icon svg { width: 100%; height: 100%; }
+
+    #hero-pupil, #hero-shine {
+      transition: transform 0.4s cubic-bezier(0.25,0,0.75,1);
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.15;
+      max-width: 760px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--white-dim);
+      max-width: 480px;
+      line-height: 1.9;
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.8s forwards;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      padding: 18px 40px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--white-dim);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      padding: 18px 40px;
+      border: 1px solid rgba(245,241,232,0.15);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s;
+      margin-left: 16px;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.4s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    /* ── DIVIDER ── */
+    .gold-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 64px;
+      opacity: 0.4;
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 120px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 4vw, 48px);
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--white-dim);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 72px;
+      line-height: 1.9;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── PROBLEM GRID ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-bottom: 64px;
+    }
+
+    .problem-card {
+      background: rgba(30,58,53,0.2);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .problem-card:hover { background: rgba(30,58,53,0.35); }
+
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 0;
+      background: var(--gold);
+      transition: height 0.4s ease;
+    }
+
+    .problem-card:hover::before { height: 100%; }
+
+    .problem-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      display: block;
+      opacity: 0.7;
+    }
+
+    .problem-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .problem-desc {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+    }
+
+    .problem-vs {
+      text-align: center;
+      padding: 48px 0;
+    }
+
+    .vs-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .vs-statement {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 0;
+    }
+
+    .step {
+      padding: 48px 36px;
+      background: rgba(30,58,53,0.2);
+      position: relative;
+      text-align: center;
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── FOR WHO ── */
+    .who-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 48px;
+    }
+
+    .who-tag {
+      border: 1px solid rgba(200,146,42,0.3);
+      padding: 12px 24px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--white-dim);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .who-tag:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── PRICING ── */
+    .pricing-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      border: 1px solid rgba(200,146,42,0.2);
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(30,58,53,0.25), rgba(16,35,31,0.15));
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      font-size: 9px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      padding: 6px 20px;
+    }
+
+    .pricing-name {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .pricing-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .pricing-amount sup {
+      font-size: 28px;
+      vertical-align: super;
+      opacity: 0.6;
+    }
+
+    .pricing-period {
+      font-size: 11px;
+      color: var(--white-dim);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .pricing-annual {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 48px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .pricing-features li {
+      font-size: 12px;
+      color: var(--white-dim);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--white-faint);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pricing-features li::before {
+      content: '—';
+      color: var(--gold);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .pricing-note {
+      font-size: 11px;
+      color: var(--white-dim);
+      margin-top: 24px;
+      letter-spacing: 0.5px;
+      line-height: 1.8;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      text-align: center;
+      padding: 160px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,58,53,0.4) 0%, rgba(200,146,42,0.04) 50%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(32px, 5vw, 60px);
+      line-height: 1.2;
+      max-width: 680px;
+      margin: 0 auto 48px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--white-faint);
+      padding: 48px 48px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo { height: 20px; opacity: 0.5; }
+
+    .footer-copy {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--white-dim);
+      opacity: 0.4;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 24px 24px; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .btn-ghost { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .pricing-card { padding: 48px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <img src="colgo-logo.png" alt="Colgo" class="nav-logo" />
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- cerchio esterno ocra -->
+        <circle cx="50" cy="50" r="44" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+        <!-- virgola interna — ruota -->
+        <g id="hero-virgola" style="transform-origin:50px 50px;">
+          <path d="M 16 50 A 34 34 0 0 0 66 78" fill="none" stroke="#C8922A"
+                stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+        </g>
+        <!-- pupilla bianco caldo -->
+        <circle id="hero-pupil" cx="50" cy="50" r="8" fill="#F5F1E8"/>
+        <!-- riflesso -->
+        <circle id="hero-shine" cx="53.5" cy="46.5" r="2.5" fill="rgba(255,255,255,0.65)"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow" data-it="CATALOGO DIGITALE · CANALE DI COMUNICAZIONE · PER QUALSIASI STRUTTURA" data-en="DIGITAL CATALOGUE · COMMUNICATION CHANNEL · FOR ANY BUSINESS"></div>
+    <h1 class="hero-headline">
+      <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>."></span>
+    </h1>
+    <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages."></p>
+    <div class="hero-cta">
+      <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
+      <a href="#come-funziona" class="btn-ghost" data-it="SCOPRI COME FUNZIONA" data-en="SEE HOW IT WORKS"></a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA -->
+  <section>
+    <div class="section-label" data-it="IL PROBLEMA" data-en="THE PROBLEM"></div>
+    <h2 class="section-title" data-it="Come comunica oggi la tua struttura con i tuoi clienti?" data-en="How does your business communicate with customers today?"></h2>
+    <p class="section-sub" data-it="Quattro soluzioni che esistono già. Nessuna pensata davvero per chi è già lì." data-en="Four solutions that already exist. None truly designed for the person already there."></p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">📄</span>
+        <div class="problem-title" data-it="Il foglio stampato" data-en="The printed sheet"></div>
+        <p class="problem-desc" data-it="Si sporca, si perde, va ristampato ogni volta che cambia qualcosa. Non parla la lingua del tuo cliente." data-en="Gets dirty, gets lost, needs reprinting every time something changes. Doesn't speak your customer's language."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🛎️</span>
+        <div class="problem-title" data-it="Le stesse domande ogni giorno" data-en="The same questions every day"></div>
+        <p class="problem-desc" data-it="Orari, prezzi, disponibilità — il tuo staff risponde dieci volte al giorno alle stesse cose. Tempo sprecato per tutti." data-en="Hours, prices, availability — your staff answers the same things ten times a day. Time wasted for everyone."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">📱</span>
+        <div class="problem-title" data-it="Il QR code che non porta da nessuna parte" data-en="The QR code that leads nowhere useful"></div>
+        <p class="problem-desc" data-it="Porta a un PDF o a una pagina pubblica generica. Nessuno lo aggiorna. Non è pensato per il cliente che hai davanti." data-en="Links to a PDF or a generic public page. Nobody keeps it updated. Not built for the customer in front of you."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🌐</span>
+        <div class="problem-title" data-it="Il sito web" data-en="The website"></div>
+        <p class="problem-desc" data-it="È pubblico, pensato per chi deve ancora venire — non per chi è già lì. Aggiornarlo richiede tempo e spesso qualcun altro." data-en="Public, built for people who haven't arrived yet — not for those already there. Updating it takes time and often someone else."></p>
+      </div>
+    </div>
+
+    <div class="problem-vs">
+      <div class="vs-label" data-it="E INVECE" data-en="INSTEAD"></div>
+      <p class="vs-statement" data-it="Colgo è il tuo catalogo digitale privato — configurato da te, sempre aggiornato, accessibile via QR o link nella lingua del tuo cliente." data-en="Colgo is your private digital catalogue — configured by you, always up to date, accessible via QR or link in your customer's language."></p>
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section id="come-funziona" style="padding-top:0;">
+    <div class="gold-line"></div>
+    <div class="section-label" data-it="COME FUNZIONA" data-en="HOW IT WORKS"></div>
+    <h2 class="section-title" data-it="Tre passi. Nessun tecnico." data-en="Three steps. No technician needed."></h2>
+    <p class="section-sub" data-it="Configuri tutto da solo, dal telefono o dal computer. In meno di un'ora sei operativo." data-en="You set everything up yourself, from your phone or computer. Operational in under an hour."></p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-it="Configuri" data-en="You configure"></div>
+        <p class="step-desc" data-it="Inserisci il tuo catalogo: servizi, orari, prezzi, informazioni. Tutto modificabile in qualsiasi momento in 30 secondi, da solo." data-en="Add your catalogue: services, hours, prices, info. Everything editable at any moment in 30 seconds, by yourself."></p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-it="Condividi" data-en="You share"></div>
+        <p class="step-desc" data-it="Stampi un QR code, lo metti dove vuoi, oppure invii un link direttamente al tuo cliente prima che arrivi." data-en="Print a QR code, place it anywhere, or send a link directly to your customer before they arrive."></p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-it="Il cliente esplora" data-en="The customer explores"></div>
+        <p class="step-desc" data-it="Senza scaricare nulla. Nella sua lingua. Si informa, pianifica, aggiunge al carrello — e poi interagisce con te quando è pronto." data-en="No download needed. In their language. They browse, plan, add to cart — and interact with you when ready."></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESEMPI -->
+  <section style="padding-top:0;">
+    <div class="gold-line"></div>
+    <div class="section-label" data-it="AD ESEMPIO" data-en="FOR EXAMPLE"></div>
+    <h2 class="section-title" data-it="Un motore solo. <em>Ogni contesto.</em>" data-en="One engine. <em>Every context.</em>"></h2>
+    <p class="section-sub" data-it="Colgo si adatta a qualsiasi struttura che abbia un catalogo e dei clienti. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base a come lo configuri." data-en="Colgo adapts to any business with a catalogue and customers. The word 'room' becomes table, pitch, berth — based on how you configure it."></p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🏨</span>
+        <div class="problem-title" data-it="Hotel, B&B, agriturismi" data-en="Hotels, B&Bs, farm stays"></div>
+        <p class="problem-desc" data-it="Il cliente riceve il link prima dell'arrivo, esplora i servizi, si organizza il soggiorno. In camera scansiona il QR e trova tutto quello che offri." data-en="The guest gets the link before arrival, explores services, plans their stay. In the room they scan the QR and find everything you offer."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">⛺</span>
+        <div class="problem-title" data-it="Campeggi e villaggi" data-en="Campsites and holiday villages"></div>
+        <p class="problem-desc" data-it="Il QR è sulla piazzola. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch. The customer knows what services are available, bar hours, activities — without getting up or calling."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🍽️</span>
+        <div class="problem-title" data-it="Ristoranti" data-en="Restaurants"></div>
+        <p class="problem-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal."></p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🏪</span>
+        <div class="problem-title" data-it="Negozi e vetrine" data-en="Shops and storefronts"></div>
+        <p class="problem-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona da casa, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans from home, browses the catalogue, prepares their list — and when they walk in they already know what they want."></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PER CHI -->
+  <section style="padding-top:0; text-align:center;">
+    <div class="gold-line"></div>
+    <div class="section-label" data-it="PER CHI È COLGO" data-en="WHO IS COLGO FOR"></div>
+    <h2 class="section-title" data-it="Qualsiasi struttura con un <em>catalogo</em> e dei clienti." data-en="Any business with a <em>catalogue</em> and customers."></h2>
+    <p class="section-sub" data-it="Non serve un gestionale enorme. Basta avere qualcosa da offrire e voler comunicarlo meglio." data-en="You don't need a massive management system. Just have something to offer and want to communicate it better."></p>
+    <div class="who-list">
+      <div class="who-tag" data-it="HOTEL INDIPENDENTI" data-en="INDEPENDENT HOTELS"></div>
+      <div class="who-tag" data-it="BED & BREAKFAST" data-en="BED & BREAKFAST"></div>
+      <div class="who-tag" data-it="CAMPEGGI" data-en="CAMPSITES"></div>
+      <div class="who-tag" data-it="AGRITURISMI" data-en="FARM STAYS"></div>
+      <div class="who-tag" data-it="RISTORANTI" data-en="RESTAURANTS"></div>
+      <div class="who-tag" data-it="STABILIMENTI BALNEARI" data-en="BEACH CLUBS"></div>
+      <div class="who-tag" data-it="PORTI E ORMEGGI" data-en="MARINAS & BERTHS"></div>
+      <div class="who-tag" data-it="APPARTAMENTI TURISTICI" data-en="HOLIDAY APARTMENTS"></div>
+      <div class="who-tag" data-it="NEGOZI E VETRINE" data-en="SHOPS & STOREFRONTS"></div>
+      <div class="who-tag" data-it="VILLAGGI VACANZE" data-en="HOLIDAY VILLAGES"></div>
+    </div>
+  </section>
+
+  <!-- CTA FINALE -->
+  <div class="cta-section">
+    <h2 class="cta-headline" data-it="Il cliente scansiona. <em>Tu ricevi.</em>" data-en="The customer scans. <em>You receive.</em>"></h2>
+    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%;">
+
+      <!-- Logo -->
+      <img src="colgo-logo.png" alt="Colgo" class="footer-logo" />
+
+      <!-- Social -->
+      <div style="display:flex; gap:16px; align-items:center;">
+        <!-- Instagram -->
+        <a href="https://instagram.com/colgo.app" target="_blank" aria-label="Instagram"
+           style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"
+           onmouseover="this.style.borderColor='#C8922A';this.style.color='#C8922A'"
+           onmouseout="this.style.borderColor='rgba(245,241,232,0.12)';this.style.color='rgba(245,241,232,0.4)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com/@colgo" target="_blank" aria-label="YouTube"
+           style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"
+           onmouseover="this.style.borderColor='#C8922A';this.style.color='#C8922A'"
+           onmouseout="this.style.borderColor='rgba(245,241,232,0.12)';this.style.color='rgba(245,241,232,0.4)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="https://tiktok.com/@colgo" target="_blank" aria-label="TikTok"
+           style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"
+           onmouseover="this.style.borderColor='#C8922A';this.style.color='#C8922A'"
+           onmouseout="this.style.borderColor='rgba(245,241,232,0.12)';this.style.color='rgba(245,241,232,0.4)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/company/colgo" target="_blank" aria-label="LinkedIn"
+           style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"
+           onmouseover="this.style.borderColor='#C8922A';this.style.color='#C8922A'"
+           onmouseout="this.style.borderColor='rgba(245,241,232,0.12)';this.style.color='rgba(245,241,232,0.4)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+
+      <!-- Link legali -->
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+        <a href="mailto:colgo@gmail.com" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;">colgo@gmail.com</a>
+        <a href="#" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+        <a href="#" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy">Cookie Policy</a>
+      </div>
+
+      <div class="footer-copy">© 2026 COLGO · COLGO.APP</div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'it';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (!text) return;
+        if (el.tagName === 'H1' || el.tagName === 'H2') {
+          el.innerHTML = `<span data-it="${el.querySelector('span')?.getAttribute('data-it') || ''}" data-en="${el.querySelector('span')?.getAttribute('data-en') || ''}">${text}</span>`;
+          return;
+        }
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
+
+    // ── ANIMAZIONE OCCHIO HERO ──
+    const heroMoves = [
+      {dx:0,  dy:0,  rot:0  },
+      {dx:-12,dy:2,  rot:45 },
+      {dx:13, dy:-2, rot:90 },
+      {dx:0,  dy:-12,rot:140},
+      {dx:11, dy:-5, rot:195},
+      {dx:0,  dy:11, rot:250},
+      {dx:-11,dy:5,  rot:310},
+      {dx:0,  dy:0,  rot:360},
+    ];
+    let hmi = 0;
+    const hp  = document.getElementById('hero-pupil');
+    const hs  = document.getElementById('hero-shine');
+    const hvg = document.getElementById('hero-virgola');
+    if (hp) {
+      hp.style.transition  = 'transform 0.45s cubic-bezier(0.25,0,0.75,1)';
+      hs.style.transition  = 'transform 0.45s cubic-bezier(0.25,0,0.75,1)';
+    }
+    setInterval(() => {
+      hmi = (hmi + 1) % heroMoves.length;
+      const m = heroMoves[hmi];
+      if (hp)  hp.style.transform  = `translate(${m.dx}px,${m.dy}px)`;
+      if (hs)  hs.style.transform  = `translate(${m.dx}px,${m.dy}px)`;
+      if (hvg) {
+        hvg.style.transition = 'transform 0.55s cubic-bezier(0.25,0,0.75,1)';
+        hvg.style.transform  = `rotate(${m.rot}deg)`;
+      }
+    }, 900);
+
+    // Init
+    setLang('it');
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.problem-card, .step, .who-tag, .pricing-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

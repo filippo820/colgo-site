@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Colgo</title>
+  <meta name="description" content="Domande frequenti su Colgo. Tutto quello che vuoi sapere prima di iniziare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4JCQ1EGSR9');</script>
+  <style>
+    :root{--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.5);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--cream);font-family:'Josefin Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;background:linear-gradient(to bottom,rgba(13,13,13,0.95),transparent);}
+    .nav-logo{height:28px;opacity:0.95;}
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:24px;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:11px;letter-spacing:2px;transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+    .nav-lang{display:flex;gap:6px;}
+    .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
+    .lang-btn.active,.lang-btn:hover{color:var(--gold);}
+    .lang-btn:first-child::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
+    .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .page-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
+    .page-title em{font-style:italic;color:var(--ochre-l);}
+    .page-sub{font-size:14px;letter-spacing:1px;color:var(--white-dim);max-width:520px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .faq-section{max-width:800px;margin:0 auto;padding:0 32px 120px;}
+    .faq-category{font-size:10px;letter-spacing:4px;color:var(--ochre);margin:64px 0 32px;}
+    .faq-item{border-bottom:1px solid rgba(245,241,232,0.08);padding:28px 0;}
+    .faq-q{font-size:15px;letter-spacing:0.5px;color:var(--cream);cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.6;}
+    .faq-q::after{content:'+';color:var(--ochre);font-size:20px;font-weight:300;flex-shrink:0;transition:transform 0.3s;}
+    .faq-item.open .faq-q::after{transform:rotate(45deg);}
+    .faq-a{font-size:14px;color:rgba(245,241,232,0.55);line-height:1.9;letter-spacing:0.3px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;}
+    .faq-item.open .faq-a{max-height:400px;padding-top:20px;}
+    .cta-section{background:var(--petrol);text-align:center;padding:100px 32px;position:relative;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,146,42,0.1) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+    .cta-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.2;margin-bottom:40px;position:relative;z-index:1;}
+    .cta-headline em{font-style:italic;color:var(--ochre-l);}
+    .btn-primary{display:inline-block;background:var(--ochre);color:var(--black);font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:background 0.25s;position:relative;z-index:1;}
+    .btn-primary:hover{background:var(--ochre-l);}
+    footer{text-align:center;padding:48px 32px;border-top:1px solid rgba(245,241,232,0.06);font-size:10px;letter-spacing:2px;color:rgba(245,241,232,0.2);}
+    footer a{color:rgba(245,241,232,0.3);text-decoration:none;}
+    footer a:hover{color:var(--ochre);}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.faq-section{padding:0 20px 80px;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo"/></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS">COME FUNZIONA</a>
+      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR">PER CHI</a>
+      <a href="/faq.html" class="active">FAQ</a>
+    </div>
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-label" data-it="DOMANDE FREQUENTI" data-en="FREQUENTLY ASKED QUESTIONS"></div>
+  <h1 class="page-title" data-it="Hai <em>domande?</em><br/>Abbiamo le risposte." data-en="Got <em>questions?</em><br/>We've got answers."></h1>
+  <p class="page-sub" data-it="Tutto quello che vuoi sapere su Colgo prima di iniziare." data-en="Everything you want to know about Colgo before you start."></p>
+</div>
+
+<div class="faq-section">
+
+  <div class="faq-category" data-it="GENERALE" data-en="GENERAL"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Cos'è Colgo?" data-en="What is Colgo?"></div>
+    <div class="faq-a" data-it="Colgo è un catalogo digitale accessibile via QR code o link. I tuoi clienti lo aprono sul telefono, vedono i tuoi servizi, prezzi e informazioni — e possono inviare richieste direttamente alla reception o allo staff. Niente app da scaricare, niente carta stampata." data-en="Colgo is a digital catalogue accessible via QR code or link. Your customers open it on their phone, see your services, prices and information — and can send requests directly to reception or staff. No app to download, no printed paper."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="I miei clienti devono scaricare un'app?" data-en="Do my customers need to download an app?"></div>
+    <div class="faq-a" data-it="No. Colgo è una web app — si apre direttamente nel browser del telefono, come un sito web. Basta scansionare il QR o cliccare sul link. Zero download, zero registrazioni per il cliente." data-en="No. Colgo is a web app — it opens directly in the phone's browser, like a website. Just scan the QR or click the link. Zero downloads, zero registrations for the customer."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="In quante lingue funziona?" data-en="How many languages does it support?"></div>
+    <div class="faq-a" data-it="Colgo traduce automaticamente il catalogo in italiano, inglese, tedesco e francese. Il cliente sceglie la lingua al primo accesso. Le traduzioni vengono generate automaticamente quando pubblichi o aggiorni un contenuto." data-en="Colgo automatically translates the catalogue into Italian, English, German and French. The customer chooses their language on first access. Translations are generated automatically when you publish or update content."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Funziona per qualsiasi tipo di struttura?" data-en="Does it work for any type of venue?"></div>
+    <div class="faq-a" data-it="Sì. Colgo è configurabile per hotel, B&B, campeggi, agriturismi, ristoranti, stabilimenti balneari, porti, negozi e molto altro. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base alla tua struttura." data-en="Yes. Colgo is configurable for hotels, B&Bs, campsites, farm stays, restaurants, beach clubs, marinas, shops and much more. The word 'room' becomes table, pitch, berth — based on your venue."></div>
+  </div>
+
+  <div class="faq-category" data-it="CONFIGURAZIONE" data-en="SETUP"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Quanto tempo ci vuole per iniziare?" data-en="How long does it take to get started?"></div>
+    <div class="faq-a" data-it="Puoi avere il catalogo online in meno di un'ora. Crei la struttura, aggiungi le categorie e i servizi, e il link è subito attivo. Non serve nessuna competenza tecnica." data-en="You can have your catalogue online in less than an hour. You create the venue, add categories and services, and the link is immediately active. No technical skills required."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Posso aggiornare il catalogo in qualsiasi momento?" data-en="Can I update the catalogue at any time?"></div>
+    <div class="faq-a" data-it="Sì. Dall'admin panel puoi modificare prezzi, aggiungere servizi, nascondere categorie fuori orario — e tutto va online immediatamente." data-en="Yes. From the admin panel you can change prices, add services, hide out-of-hours categories — and everything goes live immediately."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Posso impostare orari di disponibilità per i servizi?" data-en="Can I set availability hours for services?"></div>
+    <div class="faq-a" data-it="Sì. Ogni categoria può avere una fascia oraria (es. colazione 07:00–10:00), pause, e un'opzione 'preordinabile' che permette ai clienti di richiedere il servizio anche fuori orario." data-en="Yes. Each category can have a time slot (e.g. breakfast 07:00–10:00), breaks, and a 'pre-orderable' option that allows customers to request the service outside opening hours."></div>
+  </div>
+
+  <div class="faq-category" data-it="PAGAMENTI E PREZZI" data-en="PAYMENTS & PRICING"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="I clienti possono pagare online?" data-en="Can customers pay online?"></div>
+    <div class="faq-a" data-it="No. Colgo non gestisce pagamenti online. Il cliente invia la richiesta, tu la ricevi e il pagamento avviene in loco — in reception, al ritiro, o come preferisci. Questa semplicità è una scelta deliberata." data-en="No. Colgo does not handle online payments. The customer sends the request, you receive it and payment happens on-site — at reception, at pickup, or however you prefer. This simplicity is a deliberate choice."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Quanto costa Colgo?" data-en="How much does Colgo cost?"></div>
+    <div class="faq-a" data-it="Colgo costa €39 al mese, o €390 all'anno (equivale a 2 mesi gratis). Il periodo pilota è gratuito e senza obbligo." data-en="Colgo costs €39 per month, or €390 per year (equivalent to 2 months free). The pilot period is free with no obligation."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="C'è un periodo di prova gratuito?" data-en="Is there a free trial?"></div>
+    <div class="faq-a" data-it="Sì. I primi clienti pilota hanno accesso gratuito senza obbligo di continuare. Iscriviti alla lista d'attesa per partecipare." data-en="Yes. The first pilot customers have free access with no obligation to continue. Join the waitlist to participate."></div>
+  </div>
+
+  <div class="faq-category" data-it="TECNICO" data-en="TECHNICAL"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Devo installare qualcosa sul mio server?" data-en="Do I need to install anything on my server?"></div>
+    <div class="faq-a" data-it="No. Colgo è completamente cloud — non devi installare niente, non hai bisogno di un server, non devi gestire aggiornamenti. Funziona da qualsiasi browser, su qualsiasi dispositivo." data-en="No. Colgo is completely cloud-based — you don't install anything, you don't need a server, you don't manage updates. It works from any browser, on any device."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Posso usarlo dal telefono?" data-en="Can I use it from my phone?"></div>
+    <div class="faq-a" data-it="Sì. L'admin panel, il pannello staff e l'app cliente sono tutti ottimizzati per mobile. Puoi gestire tutto dall'iPhone o da Android, anche dalla reception." data-en="Yes. The admin panel, staff panel and customer app are all optimised for mobile. You can manage everything from iPhone or Android, even from the reception desk."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="I miei dati sono al sicuro?" data-en="Is my data safe?"></div>
+    <div class="faq-a" data-it="Sì. Colgo utilizza un database PostgreSQL con politiche di sicurezza per riga e autenticazione JWT. I dati sono conservati in data center europei e non vengono mai condivisi con terze parti." data-en="Yes. Colgo uses a PostgreSQL database with row-level security policies and JWT authentication. Data is stored in European data centres and is never shared with third parties."></div>
+  </div>
+
+</div>
+
+<div class="cta-section">
+  <h2 class="cta-headline" data-it="Hai ancora dubbi?<br/><em>Scrivici.</em>" data-en="Still unsure?<br/><em>Write to us.</em>"></h2>
+  <a href="mailto:colgoapp@gmail.com" class="btn-primary" data-it="CONTATTACI" data-en="CONTACT US"></a>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/" data-it="Home" data-en="Home">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who">Per chi</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+    <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+  </div>
+  © 2026 COLGO · COLGO.APP
+</footer>
+
+<script>
+  let currentLang = 'it';
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelectorAll('[data-it]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      el.innerHTML = text;
+    });
+    document.documentElement.lang = lang;
+  }
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  setLang('it');
+</script>
+</body>
+</html>

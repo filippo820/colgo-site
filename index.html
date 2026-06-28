@@ -11,8 +11,8 @@
     gtag('config', 'G-4JCQ1EGSR9');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Colgo — Il catalogo digitale per qualsiasi struttura</title>
-  <meta name="description" content="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, senza complicazioni." />
+  <title>Colgo — Digital catalogue for hotels, restaurants &amp; shops</title>
+  <meta name="description" content="Colgo brings your catalogue to your guests's phones. QR code, 4 languages, no app needed. Digital where it helps. Human where it counts." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
@@ -594,7 +594,7 @@
   <!-- NAV -->
   <nav>
     <img src="colgo-logo.png" alt="Colgo" class="nav-logo" />
-    <div class="nav-links-pages" style="display:flex;gap:24px;align-items:center;margin-right:24px;"><a href="/come-funziona.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'">COME FUNZIONA</a><a href="/per-chi.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'">PER CHI</a><a href="/faq.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'">FAQ</a></div><div class="nav-lang">
+    <div class="nav-links-pages" style="display:flex;gap:24px;align-items:center;margin-right:24px;"><a href="/come-funziona.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="COME FUNZIONA" data-en="HOW IT WORKS">HOW IT WORKS</a><a href="/per-chi.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="PER CHI" data-en="FOR WHO">FOR WHO</a><a href="/faq.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="FAQ" data-en="FAQ">FAQ</a></div><div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
@@ -623,6 +623,7 @@
       <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>."></span>
     </h1>
     <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages."></p>
+    <p style="font-size:11px;letter-spacing:3px;color:rgba(200,146,42,0.6);margin-top:20px;margin-bottom:0;" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS."></p>
     <div class="hero-cta">
       <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
       <a href="#come-funziona" class="btn-ghost" data-it="SCOPRI COME FUNZIONA" data-en="SEE HOW IT WORKS"></a>
@@ -790,12 +791,12 @@
         <a href="/privacy.html#cookie" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy">Cookie Policy</a>
       </div>
 
-      <div class="footer-copy">© 2026 COLGO · COLGO.APP</div>
+      <div class="footer-copy" data-it="© 2026 COLGO · DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="© 2026 COLGO · DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.">© 2026 COLGO · DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.</div>
     </div>
   </footer>
 
   <script>
-    let currentLang = 'it';
+    let currentLang = 'en';
 
     function setLang(lang) {
       currentLang = lang;
@@ -845,7 +846,7 @@
     }, 900);
 
     // Init
-    setLang('it');
+    setLang('en');
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {

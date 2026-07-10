@@ -102,7 +102,7 @@
     }
 
     .lang-btn.active, .lang-btn:hover { color: var(--gold); }
-    .lang-btn:first-child::after { content: '/'; margin-left: 6px; color: var(--white-faint); }
+    .lang-btn:not(:last-child)::after { content: '/'; margin-left: 6px; color: var(--white-faint); }
 
     /* ── HERO ── */
     .hero {
@@ -594,9 +594,11 @@
   <!-- NAV -->
   <nav>
     <img src="colgo-logo.png" alt="Colgo" class="nav-logo" />
-    <div class="nav-links-pages" style="display:flex;gap:24px;align-items:center;margin-right:24px;"><a href="/come-funziona.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="COME FUNZIONA" data-en="HOW IT WORKS">COME FUNZIONA</a><a href="/per-chi.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="PER CHI" data-en="WHO IT'S FOR">PER CHI</a><a href="/faq.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="FAQ" data-en="FAQ">FAQ</a></div><div class="nav-lang">
+    <div class="nav-links-pages" style="display:flex;gap:24px;align-items:center;margin-right:24px;"><a href="/come-funziona.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a><a href="/per-chi.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a><a href="/faq.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a></div><div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
     </div>
   </nav>
 
@@ -618,15 +620,15 @@
         <circle id="hero-shine" cx="53.5" cy="46.5" r="2.5" fill="rgba(255,255,255,0.65)"/>
       </svg>
     </div>
-    <p style="font-size:12px;letter-spacing:4px;color:rgba(200,146,42,0.75);margin-bottom:28px;font-family:'Josefin Sans',sans-serif;font-weight:300;opacity:0;animation:fadeUp 1s ease 0.3s forwards;" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.">DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.</p>
-    <div class="hero-eyebrow" data-it="CATALOGO DIGITALE · CANALE DI COMUNICAZIONE · PER QUALSIASI STRUTTURA" data-en="DIGITAL CATALOGUE · COMMUNICATION CHANNEL · FOR ANY BUSINESS"></div>
+    <p style="font-size:12px;letter-spacing:4px;color:rgba(200,146,42,0.75);margin-bottom:28px;font-family:'Josefin Sans',sans-serif;font-weight:300;opacity:0;animation:fadeUp 1s ease 0.3s forwards;" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS." data-fr="NUMÉRIQUE LÀ OÙ ÇA AIDE. HUMAIN LÀ OÙ ÇA COMPTE." data-de="DIGITAL WO ES HILFT. MENSCHLICH WO ES ZÄHLT.">DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.</p>
+    <div class="hero-eyebrow" data-it="CATALOGO DIGITALE · CANALE DI COMUNICAZIONE · PER QUALSIASI STRUTTURA" data-en="DIGITAL CATALOGUE · COMMUNICATION CHANNEL · FOR ANY BUSINESS" data-fr="CATALOGUE NUMÉRIQUE · CANAL DE COMMUNICATION · POUR TOUT ÉTABLISSEMENT" data-de="DIGITALER KATALOG · KOMMUNIKATIONSKANAL · FÜR JEDEN BETRIEB"></div>
     <h1 class="hero-headline">
-      <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>."></span>
+      <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>." data-fr="Vos clients méritent mieux qu'une <em>feuille plastifiée</em>." data-de="Ihre Gäste verdienen mehr als ein <em>laminiertes Blatt</em>."></span>
     </h1>
-    <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages."></p>
+    <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages." data-fr="Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, en quatre langues." data-de="Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in vier Sprachen."></p>
     <div class="hero-cta">
-      <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
-      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO"></a>
+      <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST" data-fr="REJOINDRE LA LISTE D'ATTENTE" data-de="AUF DIE WARTELISTE"></a>
+      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO" data-fr="ESSAYER LA DÉMO" data-de="DEMO TESTEN"></a>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -635,61 +637,61 @@
 
   <!-- PROBLEMA -->
   <section>
-    <div class="section-label" data-it="IL PROBLEMA" data-en="THE PROBLEM"></div>
-    <h2 class="section-title" data-it="Come comunica oggi la tua struttura con i tuoi clienti?" data-en="How does your business communicate with customers today?"></h2>
-    <p class="section-sub" data-it="Quattro soluzioni che esistono già. Nessuna pensata davvero per chi è già lì." data-en="Four solutions that already exist. None truly designed for the person already there."></p>
+    <div class="section-label" data-it="IL PROBLEMA" data-en="THE PROBLEM" data-fr="LE PROBLÈME" data-de="DAS PROBLEM"></div>
+    <h2 class="section-title" data-it="Come comunica oggi la tua struttura con i tuoi clienti?" data-en="How does your business communicate with customers today?" data-fr="Comment votre établissement communique-t-il aujourd'hui avec vos clients ?" data-de="Wie kommuniziert Ihr Betrieb heute mit Ihren Gästen?"></h2>
+    <p class="section-sub" data-it="Quattro soluzioni che esistono già. Nessuna pensata davvero per chi è già lì." data-en="Four solutions that already exist. None truly designed for the person already there." data-fr="Quatre solutions qui existent déjà. Aucune vraiment pensée pour celui qui est déjà sur place." data-de="Vier Lösungen, die es bereits gibt. Keine davon wirklich für den gedacht, der schon da ist."></p>
 
     <div class="problem-grid">
       <div class="problem-card">
         <span class="problem-icon">📄</span>
-        <div class="problem-title" data-it="Il foglio stampato" data-en="The printed sheet"></div>
-        <p class="problem-desc" data-it="Si sporca, si perde, va ristampato ogni volta che cambia qualcosa. Non parla la lingua del tuo cliente." data-en="Gets dirty, gets lost, needs reprinting every time something changes. Doesn't speak your customer's language."></p>
+        <div class="problem-title" data-it="Il foglio stampato" data-en="The printed sheet" data-fr="La feuille imprimée" data-de="Das gedruckte Blatt"></div>
+        <p class="problem-desc" data-it="Si sporca, si perde, va ristampato ogni volta che cambia qualcosa. Non parla la lingua del tuo cliente." data-en="Gets dirty, gets lost, needs reprinting every time something changes. Doesn't speak your customer's language." data-fr="Elle se salit, se perd, doit être réimprimée à chaque changement. Elle ne parle pas la langue de votre client." data-de="Wird schmutzig, geht verloren, muss bei jeder Änderung neu gedruckt werden. Spricht nicht die Sprache Ihres Gastes."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🛎️</span>
-        <div class="problem-title" data-it="Le stesse domande ogni giorno" data-en="The same questions every day"></div>
-        <p class="problem-desc" data-it="Orari, prezzi, disponibilità — il tuo staff risponde dieci volte al giorno alle stesse cose. Tempo sprecato per tutti." data-en="Hours, prices, availability — your staff answers the same things ten times a day. Time wasted for everyone."></p>
+        <div class="problem-title" data-it="Le stesse domande ogni giorno" data-en="The same questions every day" data-fr="Les mêmes questions chaque jour" data-de="Die gleichen Fragen jeden Tag"></div>
+        <p class="problem-desc" data-it="Orari, prezzi, disponibilità — il tuo staff risponde dieci volte al giorno alle stesse cose. Tempo sprecato per tutti." data-en="Hours, prices, availability — your staff answers the same things ten times a day. Time wasted for everyone." data-fr="Horaires, prix, disponibilité — votre personnel répond dix fois par jour aux mêmes questions. Du temps perdu pour tout le monde." data-de="Öffnungszeiten, Preise, Verfügbarkeit — Ihr Personal beantwortet zehnmal am Tag dieselben Fragen. Verschwendete Zeit für alle."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">📱</span>
-        <div class="problem-title" data-it="Il QR code che non porta da nessuna parte" data-en="The QR code that leads nowhere useful"></div>
-        <p class="problem-desc" data-it="Porta a un PDF o a una pagina pubblica generica. Nessuno lo aggiorna. Non è pensato per il cliente che hai davanti." data-en="Links to a PDF or a generic public page. Nobody keeps it updated. Not built for the customer in front of you."></p>
+        <div class="problem-title" data-it="Il QR code che non porta da nessuna parte" data-en="The QR code that leads nowhere useful" data-fr="Le QR code qui ne mène nulle part" data-de="Der QR-Code, der ins Leere führt"></div>
+        <p class="problem-desc" data-it="Porta a un PDF o a una pagina pubblica generica. Nessuno lo aggiorna. Non è pensato per il cliente che hai davanti." data-en="Links to a PDF or a generic public page. Nobody keeps it updated. Not built for the customer in front of you." data-fr="Il mène à un PDF ou une page publique générique. Personne ne la met à jour. Pas pensé pour le client en face de vous." data-de="Führt zu einem PDF oder einer generischen öffentlichen Seite. Niemand aktualisiert sie. Nicht für den Gast vor Ort gedacht."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🌐</span>
-        <div class="problem-title" data-it="Il sito web" data-en="The website"></div>
-        <p class="problem-desc" data-it="È pubblico, pensato per chi deve ancora venire — non per chi è già lì. Aggiornarlo richiede tempo e spesso qualcun altro." data-en="Public, built for people who haven't arrived yet — not for those already there. Updating it takes time and often someone else."></p>
+        <div class="problem-title" data-it="Il sito web" data-en="The website" data-fr="Le site web" data-de="Die Webseite"></div>
+        <p class="problem-desc" data-it="È pubblico, pensato per chi deve ancora venire — non per chi è già lì. Aggiornarlo richiede tempo e spesso qualcun altro." data-en="Public, built for people who haven't arrived yet — not for those already there. Updating it takes time and often someone else." data-fr="Il est public, pensé pour ceux qui doivent encore venir — pas pour ceux qui sont déjà là. Le mettre à jour prend du temps et souvent quelqu'un d'autre." data-de="Sie ist öffentlich, für die gedacht, die erst noch kommen — nicht für die, die schon da sind. Aktualisieren kostet Zeit und oft jemand anderen."></p>
       </div>
     </div>
 
     <div class="problem-vs">
-      <div class="vs-label" data-it="E INVECE" data-en="INSTEAD"></div>
-      <p class="vs-statement" data-it="Colgo è il tuo catalogo digitale privato — configurato da te, sempre aggiornato, accessibile via QR o link nella lingua del tuo cliente." data-en="Colgo is your private digital catalogue — configured by you, always up to date, accessible via QR or link in your customer's language."></p>
+      <div class="vs-label" data-it="E INVECE" data-en="INSTEAD" data-fr="ET POURTANT" data-de="STATTDESSEN"></div>
+      <p class="vs-statement" data-it="Colgo è il tuo catalogo digitale privato — configurato da te, sempre aggiornato, accessibile via QR o link nella lingua del tuo cliente." data-en="Colgo is your private digital catalogue — configured by you, always up to date, accessible via QR or link in your customer's language." data-fr="Colgo est votre catalogue numérique privé — configuré par vous, toujours à jour, accessible via QR ou lien dans la langue de votre client." data-de="Colgo ist Ihr privater digitaler Katalog — von Ihnen konfiguriert, immer aktuell, per QR oder Link in der Sprache Ihres Gastes zugänglich."></p>
     </div>
   </section>
 
   <!-- COME FUNZIONA -->
   <section id="come-funziona" style="padding-top:0;">
     <div class="gold-line"></div>
-    <div class="section-label" data-it="COME FUNZIONA" data-en="HOW IT WORKS"></div>
-    <h2 class="section-title" data-it="Tre passi. Nessun tecnico." data-en="Three steps. No technician needed."></h2>
-    <p class="section-sub" data-it="Configuri tutto da solo, dal telefono o dal computer. In meno di un'ora sei operativo." data-en="You set everything up yourself, from your phone or computer. Operational in under an hour."></p>
+    <div class="section-label" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S"></div>
+    <h2 class="section-title" data-it="Tre passi. Nessun tecnico." data-en="Three steps. No technician needed." data-fr="Trois étapes. Aucun technicien." data-de="Drei Schritte. Kein Techniker nötig."></h2>
+    <p class="section-sub" data-it="Configuri tutto da solo, dal telefono o dal computer. In meno di un'ora sei operativo." data-en="You set everything up yourself, from your phone or computer. Operational in under an hour." data-fr="Vous configurez tout vous-même, depuis votre téléphone ou votre ordinateur. Opérationnel en moins d'une heure." data-de="Sie richten alles selbst ein, vom Handy oder Computer aus. In unter einer Stunde einsatzbereit."></p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title" data-it="Configuri" data-en="You configure"></div>
-        <p class="step-desc" data-it="Inserisci il tuo catalogo: servizi, orari, prezzi, informazioni. Tutto modificabile in qualsiasi momento in 30 secondi, da solo." data-en="Add your catalogue: services, hours, prices, info. Everything editable at any moment in 30 seconds, by yourself."></p>
+        <div class="step-title" data-it="Configuri" data-en="You configure" data-fr="Vous configurez" data-de="Sie richten ein"></div>
+        <p class="step-desc" data-it="Inserisci il tuo catalogo: servizi, orari, prezzi, informazioni. Tutto modificabile in qualsiasi momento in 30 secondi, da solo." data-en="Add your catalogue: services, hours, prices, info. Everything editable at any moment in 30 seconds, by yourself." data-fr="Ajoutez votre catalogue : services, horaires, prix, informations. Tout modifiable à tout moment en 30 secondes, seul." data-de="Fügen Sie Ihren Katalog hinzu: Leistungen, Zeiten, Preise, Infos. Alles jederzeit in 30 Sekunden selbst änderbar."></p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title" data-it="Condividi" data-en="You share"></div>
-        <p class="step-desc" data-it="Stampi un QR code, lo metti dove vuoi, oppure invii un link direttamente al tuo cliente prima che arrivi." data-en="Print a QR code, place it anywhere, or send a link directly to your customer before they arrive."></p>
+        <div class="step-title" data-it="Condividi" data-en="You share" data-fr="Vous partagez" data-de="Sie teilen"></div>
+        <p class="step-desc" data-it="Stampi un QR code, lo metti dove vuoi, oppure invii un link direttamente al tuo cliente prima che arrivi." data-en="Print a QR code, place it anywhere, or send a link directly to your customer before they arrive." data-fr="Imprimez un QR code, placez-le où vous voulez, ou envoyez un lien directement à votre client avant son arrivée." data-de="Drucken Sie einen QR-Code, platzieren Sie ihn beliebig, oder senden Sie einen Link direkt vor der Ankunft."></p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title" data-it="Il cliente esplora" data-en="The customer explores"></div>
-        <p class="step-desc" data-it="Senza scaricare nulla. Nella sua lingua. Si informa, pianifica, aggiunge al carrello — e poi interagisce con te quando è pronto." data-en="No download needed. In their language. They browse, plan, add to cart — and interact with you when ready."></p>
+        <div class="step-title" data-it="Il cliente esplora" data-en="The customer explores" data-fr="Le client explore" data-de="Der Gast erkundet"></div>
+        <p class="step-desc" data-it="Senza scaricare nulla. Nella sua lingua. Si informa, pianifica, aggiunge al carrello — e poi interagisce con te quando è pronto." data-en="No download needed. In their language. They browse, plan, add to cart — and interact with you when ready." data-fr="Sans rien télécharger. Dans sa langue. Il s'informe, planifie, ajoute au panier — puis interagit avec vous quand il est prêt." data-de="Ohne Download. In seiner Sprache. Er informiert sich, plant, legt in den Warenkorb — und meldet sich, wenn er bereit ist."></p>
       </div>
     </div>
   </section>
@@ -697,30 +699,30 @@
   <!-- ESEMPI -->
   <section style="padding-top:0;">
     <div class="gold-line"></div>
-    <div class="section-label" data-it="AD ESEMPIO" data-en="FOR EXAMPLE"></div>
-    <h2 class="section-title" data-it="Un motore solo. <em>Ogni contesto.</em>" data-en="One engine. <em>Every context.</em>"></h2>
-    <p class="section-sub" data-it="Colgo si adatta a qualsiasi struttura che abbia un catalogo e dei clienti. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base a come lo configuri." data-en="Colgo adapts to any business with a catalogue and customers. The word 'room' becomes table, pitch, berth — based on how you configure it."></p>
+    <div class="section-label" data-it="AD ESEMPIO" data-en="FOR EXAMPLE" data-fr="PAR EXEMPLE" data-de="ZUM BEISPIEL"></div>
+    <h2 class="section-title" data-it="Un motore solo. <em>Ogni contesto.</em>" data-en="One engine. <em>Every context.</em>" data-fr="Un seul moteur. <em>Tous les contextes.</em>" data-de="Eine Engine. <em>Jeder Kontext.</em>"></h2>
+    <p class="section-sub" data-it="Colgo si adatta a qualsiasi struttura che abbia un catalogo e dei clienti. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base a come lo configuri." data-en="Colgo adapts to any business with a catalogue and customers. The word 'room' becomes table, pitch, berth — based on how you configure it." data-fr="Colgo s'adapte à tout établissement ayant un catalogue et des clients. Le mot « chambre » devient table, emplacement, ponton — selon votre configuration." data-de="Colgo passt sich jedem Betrieb mit Katalog und Gästen an. Aus „Zimmer“ wird Tisch, Stellplatz, Liegeplatz — je nach Konfiguration."></p>
 
     <div class="problem-grid">
       <div class="problem-card">
         <span class="problem-icon">🏨</span>
-        <div class="problem-title" data-it="Hotel, B&B, agriturismi" data-en="Hotels, B&Bs, farm stays"></div>
-        <p class="problem-desc" data-it="Il cliente riceve il link prima dell'arrivo, esplora i servizi, si organizza il soggiorno. In camera scansiona il QR e trova tutto quello che offri." data-en="The guest gets the link before arrival, explores services, plans their stay. In the room they scan the QR and find everything you offer."></p>
+        <div class="problem-title" data-it="Hotel, B&B, agriturismi" data-en="Hotels, B&Bs, farm stays" data-fr="Hôtels, B&B, fermes-auberges" data-de="Hotels, B&Bs, Ferienhöfe"></div>
+        <p class="problem-desc" data-it="Il cliente riceve il link prima dell'arrivo, esplora i servizi, si organizza il soggiorno. In camera scansiona il QR e trova tutto quello che offri." data-en="The guest gets the link before arrival, explores services, plans their stay. In the room they scan the QR and find everything you offer." data-fr="Le client reçoit le lien avant son arrivée, explore les services, organise son séjour. Dans la chambre, il scanne le QR et trouve tout ce que vous offrez." data-de="Der Gast erhält den Link vor der Ankunft, sieht sich die Leistungen an, plant den Aufenthalt. Im Zimmer scannt er den QR und findet alles, was Sie anbieten."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">⛺</span>
-        <div class="problem-title" data-it="Campeggi e villaggi" data-en="Campsites and holiday villages"></div>
-        <p class="problem-desc" data-it="Il QR è sulla piazzola. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch. The customer knows what services are available, bar hours, activities — without getting up or calling."></p>
+        <div class="problem-title" data-it="Campeggi e villaggi" data-en="Campsites and holiday villages" data-fr="Campings et villages vacances" data-de="Campingplätze und Feriendörfer"></div>
+        <p class="problem-desc" data-it="Il QR è sulla piazzola. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch. The customer knows what services are available, bar hours, activities — without getting up or calling." data-fr="Le QR est sur l'emplacement. Le client sait quels services sont disponibles, les horaires du bar, les activités — sans se déplacer ni appeler." data-de="Der QR ist am Stellplatz. Der Gast kennt die Leistungen, Öffnungszeiten der Bar, Aktivitäten — ohne aufzustehen oder anzurufen."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🍽️</span>
-        <div class="problem-title" data-it="Ristoranti" data-en="Restaurants"></div>
-        <p class="problem-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal."></p>
+        <div class="problem-title" data-it="Ristoranti" data-en="Restaurants" data-fr="Restaurants" data-de="Restaurants"></div>
+        <p class="problem-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal." data-fr="Le serveur scanne le QR de la table et envoie la commande directement en cuisine. Le client ne touche à rien — le flux est entièrement interne." data-de="Der Kellner scannt den Tisch-QR und sendet die Bestellung direkt in die Küche. Der Gast berührt nichts — der Ablauf ist rein intern."></p>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🏪</span>
-        <div class="problem-title" data-it="Negozi e vetrine" data-en="Shops and storefronts"></div>
-        <p class="problem-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona da casa, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans from home, browses the catalogue, prepares their list — and when they walk in they already know what they want."></p>
+        <div class="problem-title" data-it="Negozi e vetrine" data-en="Shops and storefronts" data-fr="Boutiques et vitrines" data-de="Geschäfte und Schaufenster"></div>
+        <p class="problem-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona da casa, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans from home, browses the catalogue, prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne depuis chez lui, parcourt le catalogue, prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt von zu Hause, blättert im Katalog, macht seine Liste — und weiß beim Betreten schon, was er will."></p>
       </div>
     </div>
   </section>
@@ -728,31 +730,31 @@
   <!-- PER CHI -->
   <section style="padding-top:0; text-align:center;">
     <div class="gold-line"></div>
-    <div class="section-label" data-it="PER CHI È COLGO" data-en="WHO IS COLGO FOR"></div>
-    <h2 class="section-title" data-it="Qualsiasi struttura con un <em>catalogo</em> e dei clienti." data-en="Any business with a <em>catalogue</em> and customers."></h2>
-    <p class="section-sub" data-it="Non serve un gestionale enorme. Basta avere qualcosa da offrire e voler comunicarlo meglio." data-en="You don't need a massive management system. Just have something to offer and want to communicate it better."></p>
+    <div class="section-label" data-it="PER CHI È COLGO" data-en="WHO IS COLGO FOR" data-fr="POUR QUI EST COLGO" data-de="FÜR WEN IST COLGO"></div>
+    <h2 class="section-title" data-it="Qualsiasi struttura con un <em>catalogo</em> e dei clienti." data-en="Any business with a <em>catalogue</em> and customers." data-fr="Tout établissement avec un <em>catalogue</em> et des clients." data-de="Jeder Betrieb mit einem <em>Katalog</em> und Gästen."></h2>
+    <p class="section-sub" data-it="Non serve un gestionale enorme. Basta avere qualcosa da offrire e voler comunicarlo meglio." data-en="You don't need a massive management system. Just have something to offer and want to communicate it better." data-fr="Pas besoin d'un logiciel de gestion énorme. Il suffit d'avoir quelque chose à offrir et de vouloir mieux le communiquer." data-de="Kein riesiges Verwaltungssystem nötig. Sie brauchen nur etwas anzubieten und es besser zu kommunizieren."></p>
     <div class="who-list">
-      <div class="who-tag" data-it="HOTEL INDIPENDENTI" data-en="INDEPENDENT HOTELS"></div>
-      <div class="who-tag" data-it="BED & BREAKFAST" data-en="BED & BREAKFAST"></div>
-      <div class="who-tag" data-it="CAMPEGGI" data-en="CAMPSITES"></div>
-      <div class="who-tag" data-it="AGRITURISMI" data-en="FARM STAYS"></div>
-      <div class="who-tag" data-it="RISTORANTI" data-en="RESTAURANTS"></div>
-      <div class="who-tag" data-it="STABILIMENTI BALNEARI" data-en="BEACH CLUBS"></div>
-      <div class="who-tag" data-it="PORTI E ORMEGGI" data-en="MARINAS & BERTHS"></div>
-      <div class="who-tag" data-it="APPARTAMENTI TURISTICI" data-en="HOLIDAY APARTMENTS"></div>
-      <div class="who-tag" data-it="NEGOZI E VETRINE" data-en="SHOPS & STOREFRONTS"></div>
-      <div class="who-tag" data-it="VILLAGGI VACANZE" data-en="HOLIDAY VILLAGES"></div>
+      <div class="who-tag" data-it="HOTEL INDIPENDENTI" data-en="INDEPENDENT HOTELS" data-fr="HÔTELS INDÉPENDANTS" data-de="UNABHÄNGIGE HOTELS"></div>
+      <div class="who-tag" data-it="BED & BREAKFAST" data-en="BED & BREAKFAST" data-fr="BED & BREAKFAST" data-de="BED & BREAKFAST"></div>
+      <div class="who-tag" data-it="CAMPEGGI" data-en="CAMPSITES" data-fr="CAMPINGS" data-de="CAMPINGPLÄTZE"></div>
+      <div class="who-tag" data-it="AGRITURISMI" data-en="FARM STAYS" data-fr="FERMES-AUBERGES" data-de="FERIENHÖFE"></div>
+      <div class="who-tag" data-it="RISTORANTI" data-en="RESTAURANTS" data-fr="RESTAURANTS" data-de="RESTAURANTS"></div>
+      <div class="who-tag" data-it="STABILIMENTI BALNEARI" data-en="BEACH CLUBS" data-fr="ÉTABLISSEMENTS BALNÉAIRES" data-de="STRANDBÄDER"></div>
+      <div class="who-tag" data-it="PORTI E ORMEGGI" data-en="MARINAS & BERTHS" data-fr="PORTS ET PONTONS" data-de="HÄFEN & LIEGEPLÄTZE"></div>
+      <div class="who-tag" data-it="APPARTAMENTI TURISTICI" data-en="HOLIDAY APARTMENTS" data-fr="APPARTEMENTS TOURISTIQUES" data-de="FERIENWOHNUNGEN"></div>
+      <div class="who-tag" data-it="NEGOZI E VETRINE" data-en="SHOPS & STOREFRONTS" data-fr="BOUTIQUES ET VITRINES" data-de="GESCHÄFTE & SCHAUFENSTER"></div>
+      <div class="who-tag" data-it="VILLAGGI VACANZE" data-en="HOLIDAY VILLAGES" data-fr="VILLAGES VACANCES" data-de="FERIENDÖRFER"></div>
     </div>
   </section>
 
   <!-- CTA FINALE -->
   <div class="cta-section">
-    <h2 class="cta-headline" data-it="Il cliente scansiona. <em>Tu ricevi.</em>" data-en="The customer scans. <em>You receive.</em>"></h2>
+    <h2 class="cta-headline" data-it="Il cliente scansiona. <em>Tu ricevi.</em>" data-en="The customer scans. <em>You receive.</em>" data-fr="Le client scanne. <em>Vous recevez.</em>" data-de="Der Gast scannt. <em>Sie empfangen.</em>"></h2>
     <div class="hero-cta">
-      <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
-      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO"></a>
+      <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST" data-fr="REJOINDRE LA LISTE D'ATTENTE" data-de="AUF DIE WARTELISTE"></a>
+      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO" data-fr="ESSAYER LA DÉMO" data-de="DEMO TESTEN"></a>
     </div>
-    <p style="font-size:11px;letter-spacing:1px;color:rgba(245,241,232,0.35);margin-top:20px;" data-it="Nessuna registrazione richiesta &middot; 30 secondi" data-en="No signup required &middot; 30 seconds"></p>
+    <p style="font-size:11px;letter-spacing:1px;color:rgba(245,241,232,0.35);margin-top:20px;" data-it="Nessuna registrazione richiesta &middot; 30 secondi" data-en="No signup required &middot; 30 seconds" data-fr="Aucune inscription requise &middot; 30 secondes" data-de="Keine Registrierung nötig &middot; 30 Sekunden"></p>
   </div>
 
   <!-- FOOTER -->
@@ -797,8 +799,8 @@
       <!-- Link legali -->
       <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
         <a href="mailto:colgoapp@gmail.com" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;">colgoapp@gmail.com</a>
-        <a href="/privacy.html" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
-        <a href="/privacy.html#cookie" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy">Cookie Policy</a>
+        <a href="/privacy.html" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
+        <a href="/privacy.html#cookie" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie">Cookie Policy</a>
       </div>
 
       <div class="footer-copy">© 2026 COLGO · COLGO.APP</div>
@@ -811,14 +813,11 @@
     function setLang(lang) {
       currentLang = lang;
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
       document.querySelectorAll('[data-it]').forEach(el => {
-        const text = el.getAttribute('data-' + lang);
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
         if (!text) return;
-        if (el.tagName === 'H1' || el.tagName === 'H2') {
-          el.innerHTML = `<span data-it="${el.querySelector('span')?.getAttribute('data-it') || ''}" data-en="${el.querySelector('span')?.getAttribute('data-en') || ''}">${text}</span>`;
-          return;
-        }
         if (el.querySelector('span[data-it]')) return;
         el.innerHTML = text;
       });

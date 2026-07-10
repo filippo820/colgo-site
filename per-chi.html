@@ -25,7 +25,7 @@
     .nav-lang{display:flex;gap:6px;}
     .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
     .lang-btn.active,.lang-btn:hover{color:var(--gold);}
-    .lang-btn:first-child::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
     .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
     .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
     .page-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
@@ -70,22 +70,24 @@
   <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo"/></a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS">COME FUNZIONA</a>
-      <a href="/per-chi.html" class="active" data-it="PER CHI" data-en="WHO IT'S FOR">PER CHI</a>
-      <a href="/faq.html" data-it="FAQ" data-en="FAQ">FAQ</a>
+      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+      <a href="/per-chi.html" class="active" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+      <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
     </div>
   </div>
 </nav>
 
 <div class="page-hero">
   <div class="page-hero-glow"></div>
-  <div class="page-label" data-it="PER CHI È COLGO" data-en="WHO IS COLGO FOR"></div>
-  <h1 class="page-title" data-it="Un motore solo.<br/><em>Ogni contesto.</em>" data-en="One engine.<br/><em>Every context.</em>"></h1>
-  <p class="page-sub" data-it="Colgo si adatta a qualsiasi struttura con un catalogo e dei clienti. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base a come lo configuri." data-en="Colgo adapts to any business with a catalogue and customers. The word 'room' becomes table, pitch, berth — based on how you configure it."></p>
+  <div class="page-label" data-it="PER CHI È COLGO" data-en="WHO IS COLGO FOR" data-fr="POUR QUI EST COLGO" data-de="FÜR WEN IST COLGO"></div>
+  <h1 class="page-title" data-it="Un motore solo.<br/><em>Ogni contesto.</em>" data-en="One engine.<br/><em>Every context.</em>" data-fr="Un seul moteur.<br/><em>Tous les contextes.</em>" data-de="Eine Engine.<br/><em>Jeder Kontext.</em>"></h1>
+  <p class="page-sub" data-it="Colgo si adatta a qualsiasi struttura con un catalogo e dei clienti. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base a come lo configuri." data-en="Colgo adapts to any business with a catalogue and customers. The word 'room' becomes table, pitch, berth — based on how you configure it." data-fr="Colgo s'adapte à tout établissement avec un catalogue et des clients. Le mot « chambre » devient table, emplacement, ponton — selon votre configuration." data-de="Colgo passt sich jedem Betrieb mit Katalog und Gästen an. Aus „Zimmer“ wird Tisch, Stellplatz, Liegeplatz — je nach Konfiguration."></p>
 </div>
 
 <div class="venues-section">
@@ -94,68 +96,68 @@
 
     <div class="venue-card">
       <div class="venue-icon">🏨</div>
-      <div class="venue-type" data-it="STRUTTURA RICETTIVA" data-en="ACCOMMODATION"></div>
-      <h2 class="venue-title" data-it="Hotel, B&B, <em>agriturismi</em>" data-en="Hotels, B&Bs, <em>farm stays</em>"></h2>
-      <p class="venue-desc" data-it="L'ospite riceve il link prima dell'arrivo e pianifica il soggiorno. In camera scansiona il QR e trova servizi, info locali e orari. Le richieste arrivano in reception in tempo reale." data-en="The guest gets the link before arrival and plans their stay. In the room they scan the QR and find services, local info and hours. Requests arrive at reception in real time."></p>
+      <div class="venue-type" data-it="STRUTTURA RICETTIVA" data-en="ACCOMMODATION" data-fr="HÉBERGEMENT" data-de="UNTERKUNFT"></div>
+      <h2 class="venue-title" data-it="Hotel, B&B, <em>agriturismi</em>" data-en="Hotels, B&Bs, <em>farm stays</em>" data-fr="Hôtels, B&B, <em>fermes-auberges</em>" data-de="Hotels, B&Bs, <em>Ferienhöfe</em>"></h2>
+      <p class="venue-desc" data-it="L'ospite riceve il link prima dell'arrivo e pianifica il soggiorno. In camera scansiona il QR e trova servizi, info locali e orari. Le richieste arrivano in reception in tempo reale." data-en="The guest gets the link before arrival and plans their stay. In the room they scan the QR and find services, local info and hours. Requests arrive at reception in real time." data-fr="Le client reçoit le lien avant son arrivée et planifie son séjour. Dans la chambre, il scanne le QR et trouve services, infos locales et horaires. Les demandes arrivent à la réception en temps réel." data-de="Der Gast erhält den Link vor der Ankunft und plant den Aufenthalt. Im Zimmer scannt er den QR und findet Leistungen, lokale Infos und Zeiten. Anfragen kommen in Echtzeit an der Rezeption an."></p>
       <div>
-        <span class="venue-tag" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL"></span>
-        <span class="venue-tag" data-it="QR IN CAMERA" data-en="QR IN ROOM"></span>
-        <span class="venue-tag" data-it="4 LINGUE" data-en="4 LANGUAGES"></span>
+        <span class="venue-tag" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL" data-fr="PRÉ-ARRIVÉE" data-de="VOR ANKUNFT"></span>
+        <span class="venue-tag" data-it="QR IN CAMERA" data-en="QR IN ROOM" data-fr="QR EN CHAMBRE" data-de="QR IM ZIMMER"></span>
+        <span class="venue-tag" data-it="4 LINGUE" data-en="4 LANGUAGES" data-fr="4 LANGUES" data-de="4 SPRACHEN"></span>
       </div>
     </div>
 
     <div class="venue-card">
       <div class="venue-icon">⛺</div>
-      <div class="venue-type" data-it="OUTDOOR" data-en="OPEN-AIR"></div>
-      <h2 class="venue-title" data-it="Campeggi, villaggi e <em>porti turistici</em>" data-en="Campsites, villages and <em>tourist marinas</em>"></h2>
-      <p class="venue-desc" data-it="Il QR è sulla piazzola, sul bungalow o sull'ormeggio. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch, bungalow or berth. The customer knows what services are available, bar hours, activities — without getting up or calling."></p>
+      <div class="venue-type" data-it="OUTDOOR" data-en="OPEN-AIR" data-fr="PLEIN AIR" data-de="OUTDOOR"></div>
+      <h2 class="venue-title" data-it="Campeggi, villaggi e <em>porti turistici</em>" data-en="Campsites, villages and <em>tourist marinas</em>" data-fr="Campings, villages et <em>ports de plaisance</em>" data-de="Campingplätze, Feriendörfer und <em>Yachthäfen</em>"></h2>
+      <p class="venue-desc" data-it="Il QR è sulla piazzola, sul bungalow o sull'ormeggio. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch, bungalow or berth. The customer knows what services are available, bar hours, activities — without getting up or calling." data-fr="Le QR est sur l'emplacement, le bungalow ou le ponton. Le client sait quels services sont disponibles, les horaires du bar, les activités — sans se déplacer ni appeler." data-de="Der QR ist am Stellplatz, Bungalow oder Liegeplatz. Der Gast kennt die Leistungen, Bar-Öffnungszeiten, Aktivitäten — ohne aufzustehen oder anzurufen."></p>
       <div>
-        <span class="venue-tag" data-it="PIAZZOLA / ORMEGGIO" data-en="PITCH / BERTH"></span>
-        <span class="venue-tag" data-it="SERVIZI OUTDOOR" data-en="OUTDOOR SERVICES"></span>
+        <span class="venue-tag" data-it="PIAZZOLA / ORMEGGIO" data-en="PITCH / BERTH" data-fr="EMPLACEMENT / PONTON" data-de="STELLPLATZ / LIEGEPLATZ"></span>
+        <span class="venue-tag" data-it="SERVIZI OUTDOOR" data-en="OUTDOOR SERVICES" data-fr="SERVICES PLEIN AIR" data-de="OUTDOOR-LEISTUNGEN"></span>
       </div>
     </div>
 
     <div class="venue-card">
       <div class="venue-icon">🍽️</div>
-      <div class="venue-type" data-it="RISTORAZIONE" data-en="FOOD SERVICE"></div>
-      <h2 class="venue-title" data-it="Ristoranti, bar, <em>stabilimenti balneari</em>" data-en="Restaurants, bars, <em>beach clubs</em>"></h2>
-      <p class="venue-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal."></p>
+      <div class="venue-type" data-it="RISTORAZIONE" data-en="FOOD SERVICE" data-fr="RESTAURATION" data-de="GASTRONOMIE"></div>
+      <h2 class="venue-title" data-it="Ristoranti, bar, <em>stabilimenti balneari</em>" data-en="Restaurants, bars, <em>beach clubs</em>" data-fr="Restaurants, bars, <em>établissements balnéaires</em>" data-de="Restaurants, Bars, <em>Strandbäder</em>"></h2>
+      <p class="venue-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal." data-fr="Le serveur scanne le QR de la table et envoie la commande directement en cuisine. Le client ne touche à rien — le flux est entièrement interne." data-de="Der Kellner scannt den Tisch-QR und sendet die Bestellung direkt in die Küche. Der Gast berührt nichts — der Ablauf ist rein intern."></p>
       <div>
-        <span class="venue-tag" data-it="USO INTERNO" data-en="INTERNAL USE"></span>
-        <span class="venue-tag" data-it="CUCINA REAL-TIME" data-en="KITCHEN REAL-TIME"></span>
+        <span class="venue-tag" data-it="USO INTERNO" data-en="INTERNAL USE" data-fr="USAGE INTERNE" data-de="INTERNE NUTZUNG"></span>
+        <span class="venue-tag" data-it="CUCINA REAL-TIME" data-en="KITCHEN REAL-TIME" data-fr="CUISINE EN TEMPS RÉEL" data-de="KÜCHE IN ECHTZEIT"></span>
       </div>
     </div>
 
     <div class="venue-card">
       <div class="venue-icon">🏪</div>
-      <div class="venue-type" data-it="RETAIL" data-en="RETAIL"></div>
-      <h2 class="venue-title" data-it="Negozi, boutique e <em>showroom</em>" data-en="Shops, boutiques and <em>showrooms</em>"></h2>
-      <p class="venue-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona il QR dalla vetrina, anche a negozio chiuso, sfoglia il catalogo e prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans the QR from the window, even outside opening hours, browses the catalogue and prepares their list — and when they walk in they already know what they want."></p>
+      <div class="venue-type" data-it="RETAIL" data-en="RETAIL" data-fr="COMMERCE" data-de="EINZELHANDEL"></div>
+      <h2 class="venue-title" data-it="Negozi, boutique e <em>showroom</em>" data-en="Shops, boutiques and <em>showrooms</em>" data-fr="Boutiques, magasins et <em>showrooms</em>" data-de="Geschäfte, Boutiquen und <em>Showrooms</em>"></h2>
+      <p class="venue-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona il QR dalla vetrina, anche a negozio chiuso, sfoglia il catalogo e prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans the QR from the window, even outside opening hours, browses the catalogue and prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne le QR depuis la vitrine, même magasin fermé, parcourt le catalogue et prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt ihn auch bei geschlossenem Geschäft, blättert im Katalog und macht seine Liste — und weiß beim Betreten schon, was er will."></p>
       <div>
-        <span class="venue-tag" data-it="QR IN VETRINA" data-en="QR ON WINDOW"></span>
-        <span class="venue-tag" data-it="CATALOGO 24/7" data-en="CATALOGUE 24/7"></span>
+        <span class="venue-tag" data-it="QR IN VETRINA" data-en="QR ON WINDOW" data-fr="QR EN VITRINE" data-de="QR IM SCHAUFENSTER"></span>
+        <span class="venue-tag" data-it="CATALOGO 24/7" data-en="CATALOGUE 24/7" data-fr="CATALOGUE 24/7" data-de="KATALOG 24/7"></span>
       </div>
     </div>
 
     <div class="venue-card">
       <div class="venue-icon">🌊</div>
-      <div class="venue-type" data-it="BENESSERE" data-en="WELLNESS"></div>
-      <h2 class="venue-title" data-it="Spa, centri benessere e <em>centri sportivi</em>" data-en="Spa, wellness centres and <em>sports clubs</em>"></h2>
-      <p class="venue-desc" data-it="Trattamenti, orari, info — tutto accessibile via QR in sala d'attesa o reception. Il cliente sceglie e chiede. Lo staff riceve senza interruzioni continue al banco." data-en="Treatments, hours, info — all accessible via QR in the waiting room or reception. The customer chooses, sends a request or books. Staff receive requests without constant interruptions."></p>
+      <div class="venue-type" data-it="BENESSERE" data-en="WELLNESS" data-fr="BIEN-ÊTRE" data-de="WELLNESS"></div>
+      <h2 class="venue-title" data-it="Spa, centri benessere e <em>centri sportivi</em>" data-en="Spa, wellness centres and <em>sports clubs</em>" data-fr="Spas, centres de bien-être et <em>centres sportifs</em>" data-de="Spas, Wellnesszentren und <em>Sportzentren</em>"></h2>
+      <p class="venue-desc" data-it="Trattamenti, orari, info — tutto accessibile via QR in sala d'attesa o reception. Il cliente sceglie e chiede. Lo staff riceve senza interruzioni continue al banco." data-en="Treatments, hours, info — all accessible via QR in the waiting room or reception. The customer chooses, sends a request or books. Staff receive requests without constant interruptions." data-fr="Soins, horaires, infos — tout accessible via QR en salle d'attente ou réception. Le client choisit et demande. Le personnel reçoit sans interruptions constantes au comptoir." data-de="Behandlungen, Zeiten, Infos — alles per QR im Wartezimmer oder an der Rezeption zugänglich. Der Gast wählt und fragt an. Das Personal empfängt ohne ständige Unterbrechungen am Schalter."></p>
       <div>
-        <span class="venue-tag" data-it="TRATTAMENTI" data-en="TREATMENTS"></span>
-        <span class="venue-tag" data-it="INFO SERVIZI" data-en="SERVICE INFO"></span>
+        <span class="venue-tag" data-it="TRATTAMENTI" data-en="TREATMENTS" data-fr="SOINS" data-de="BEHANDLUNGEN"></span>
+        <span class="venue-tag" data-it="INFO SERVIZI" data-en="SERVICE INFO" data-fr="INFOS SERVICES" data-de="LEISTUNGSINFOS"></span>
       </div>
     </div>
 
     <div class="venue-card">
       <div class="venue-icon">🏖️</div>
-      <div class="venue-type" data-it="TURISMO" data-en="TOURISM"></div>
-      <h2 class="venue-title" data-it="Stabilimenti balneari, <em>porti turistici</em>" data-en="Beach clubs, <em>tourist marinas</em>"></h2>
-      <p class="venue-desc" data-it="L'ombrellone, la barca, il posto in spiaggia — ognuno con il suo QR. Il cliente ordina, lo staff riceve tutto sul telefono senza correre avanti e indietro." data-en="The sun lounger, boat, beach spot — each with its own QR. The customer orders, staff receive everything on their phone without running back and forth."></p>
+      <div class="venue-type" data-it="TURISMO" data-en="TOURISM" data-fr="TOURISME" data-de="TOURISMUS"></div>
+      <h2 class="venue-title" data-it="Stabilimenti balneari, <em>porti turistici</em>" data-en="Beach clubs, <em>tourist marinas</em>" data-fr="Établissements balnéaires, <em>ports de plaisance</em>" data-de="Strandbäder, <em>Yachthäfen</em>"></h2>
+      <p class="venue-desc" data-it="L'ombrellone, la barca, il posto in spiaggia — ognuno con il suo QR. Il cliente ordina, lo staff riceve tutto sul telefono senza correre avanti e indietro." data-en="The sun lounger, boat, beach spot — each with its own QR. The customer orders, staff receive everything on their phone without running back and forth." data-fr="Le parasol, le bateau, la place sur la plage — chacun avec son QR. Le client commande, le personnel reçoit tout sur son téléphone sans courir partout." data-de="Sonnenschirm, Boot, Strandplatz — jeder mit eigenem QR. Der Gast bestellt, das Personal empfängt alles auf dem Handy, ohne hin und her zu laufen."></p>
       <div>
-        <span class="venue-tag" data-it="OMBRELLONE / BARCA" data-en="LOUNGER / BOAT"></span>
-        <span class="venue-tag" data-it="STAFF MOBILE" data-en="MOBILE STAFF"></span>
+        <span class="venue-tag" data-it="OMBRELLONE / BARCA" data-en="LOUNGER / BOAT" data-fr="PARASOL / BATEAU" data-de="SONNENSCHIRM / BOOT"></span>
+        <span class="venue-tag" data-it="STAFF MOBILE" data-en="MOBILE STAFF" data-fr="PERSONNEL MOBILE" data-de="MOBILES PERSONAL"></span>
       </div>
     </div>
 
@@ -163,26 +165,26 @@
 </div>
 
 <div class="principle-section">
-  <div class="section-label" data-it="IL PRINCIPIO" data-en="THE PRINCIPLE"></div>
-  <h2 class="section-title" data-it="Se hai un catalogo e dei clienti, <em>Colgo funziona.</em>" data-en="If you have a catalogue and customers, <em>Colgo works.</em>"></h2>
-  <p class="section-sub" data-it="Non serve un gestionale enorme. Non serve integrarsi con niente. Basta avere qualcosa da offrire e voler comunicarlo meglio — Colgo fa il resto." data-en="You don't need a massive management system. You don't need to integrate with anything. Just have something to offer and want to communicate it better — Colgo does the rest."></p>
+  <div class="section-label" data-it="IL PRINCIPIO" data-en="THE PRINCIPLE" data-fr="LE PRINCIPE" data-de="DAS PRINZIP"></div>
+  <h2 class="section-title" data-it="Se hai un catalogo e dei clienti, <em>Colgo funziona.</em>" data-en="If you have a catalogue and customers, <em>Colgo works.</em>" data-fr="Si vous avez un catalogue et des clients, <em>Colgo fonctionne.</em>" data-de="Wenn Sie einen Katalog und Gäste haben, <em>funktioniert Colgo.</em>"></h2>
+  <p class="section-sub" data-it="Non serve un gestionale enorme. Non serve integrarsi con niente. Basta avere qualcosa da offrire e voler comunicarlo meglio — Colgo fa il resto." data-en="You don't need a massive management system. You don't need to integrate with anything. Just have something to offer and want to communicate it better — Colgo does the rest." data-fr="Pas besoin d'un logiciel de gestion énorme. Pas besoin de s'intégrer à quoi que ce soit. Il suffit d'avoir quelque chose à offrir et de vouloir mieux le communiquer — Colgo fait le reste." data-de="Kein riesiges Verwaltungssystem nötig. Keine Integration erforderlich. Sie brauchen nur etwas anzubieten und es besser zu kommunizieren — Colgo erledigt den Rest."></p>
 </div>
 
 <div class="cta-section">
-  <h2 class="cta-headline" data-it="Anche la tua struttura può usare <em>Colgo.</em>" data-en="Your venue can use <em>Colgo.</em>"></h2>
+  <h2 class="cta-headline" data-it="Anche la tua struttura può usare <em>Colgo.</em>" data-en="Your venue can use <em>Colgo.</em>" data-fr="Votre établissement aussi peut utiliser <em>Colgo.</em>" data-de="Auch Ihr Betrieb kann <em>Colgo</em> nutzen."></h2>
   <div class="cta-buttons">
-    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO"></a>
-    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
+    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO" data-fr="ESSAYER LA DÉMO" data-de="DEMO TESTEN"></a>
+    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST" data-fr="REJOINDRE LA LISTE D'ATTENTE" data-de="AUF DIE WARTELISTE"></a>
   </div>
 </div>
 
 <footer>
   <div class="footer-links">
-    <a href="/" data-it="Home" data-en="Home">Home</a>
-    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works">Come funziona</a>
-    <a href="/per-chi.html" data-it="Per chi" data-en="For who">Per chi</a>
-    <a href="/faq.html" data-it="FAQ" data-en="FAQ">FAQ</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+    <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+    <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -191,16 +193,18 @@
 <script>
   let currentLang = 'it';
   function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.querySelectorAll('[data-it]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (!text) return;
-      el.innerHTML = text;
-    });
-    document.documentElement.lang = lang;
-  }
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
+        if (!text) return;
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
   setLang('it');
 </script>
 </body>

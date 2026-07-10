@@ -31,7 +31,7 @@
     .nav-lang{display:flex;gap:6px;}
     .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
     .lang-btn.active,.lang-btn:hover{color:var(--gold);}
-    .lang-btn:first-child::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
 
     .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
     .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
@@ -90,22 +90,115 @@
   <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo"/></a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="/come-funziona.html" class="active" data-it="COME FUNZIONA" data-en="HOW IT WORKS">COME FUNZIONA</a>
-      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR">PER CHI</a>
-      <a href="/faq.html" data-it="FAQ" data-en="FAQ">FAQ</a>
+      <a href="/come-funziona.html" class="active" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+      <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
     </div>
   </div>
 </nav>
 
 <div class="page-hero">
   <div class="page-hero-glow"></div>
-  <div class="page-label" data-it="COME FUNZIONA" data-en="HOW IT WORKS"></div>
-  <h1 class="page-title" data-it="Semplice per il <em>cliente.</em><br/>Potente per te." data-en="Simple for the <em>guest.</em><br/>Powerful for you."></h1>
-  <p class="page-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi ospiti in quattro passi. Niente app, niente installazioni, niente complicazioni." data-en="Colgo brings your catalogue to your guests' phones in four steps. No app, no installations, no complications."></p>
+  <div class="page-label" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S"></div>
+  <h1 class="page-title" data-it="Semplice per il <em>cliente.</em><br/>Potente per te." data-en="Simple for the <em>guest.</em><br/>Powerful for you." data-fr="Simple pour le <em>client.</em><br/>Puissant pour vous." data-de="Einfach für den <em>Gast.</em><br/>Mächtig für Sie."></h1>
+  <p class="page-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi ospiti in quattro passi. Niente app, niente installazioni, niente complicazioni." data-en="Colgo brings your catalogue to your guests' phones in four steps. No app, no installations, no complications." data-fr="Colgo apporte votre catalogue sur le téléphone de vos clients en quatre étapes. Pas d'appli, pas d'installation, pas de complications." data-de="Colgo bringt Ihren Katalog in vier Schritten auf das Handy Ihrer Gäste. Keine App, keine Installation, keine Komplikationen."></p>
+</div>
+
+<div style="padding:20px 32px 0;">
+<div class="flow-diagram">
+  <svg viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:1000px;display:block;margin:0 auto;">
+    <defs>
+      <linearGradient id="flowline" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C8922A" stop-opacity="0.15"/>
+        <stop offset="50%" stop-color="#C8922A" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#C8922A" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+
+    <!-- linea di connessione -->
+    <line x1="150" y1="90" x2="1050" y2="90" stroke="url(#flowline)" stroke-width="1.5"/>
+
+    <!-- Nodo 1 — Configura (ingranaggio) -->
+    <g transform="translate(150,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g stroke="#F5F1E8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle r="14"/>
+        <circle r="5" fill="#C8922A" stroke="none"/>
+        <g stroke="#F5F1E8">
+          <line x1="0" y1="-22" x2="0" y2="-14"/>
+          <line x1="0" y1="14" x2="0" y2="22"/>
+          <line x1="-22" y1="0" x2="-14" y2="0"/>
+          <line x1="14" y1="0" x2="22" y2="0"/>
+          <line x1="-15.5" y1="-15.5" x2="-10" y2="-10"/>
+          <line x1="10" y1="10" x2="15.5" y2="15.5"/>
+          <line x1="15.5" y1="-15.5" x2="10" y2="-10"/>
+          <line x1="-10" y1="10" x2="-15.5" y2="15.5"/>
+        </g>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">01</text>
+    </g>
+
+    <!-- Nodo 2 — QR / Link -->
+    <g transform="translate(450,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g fill="#F5F1E8">
+        <rect x="-16" y="-16" width="10" height="10" opacity="0.9"/>
+        <rect x="6" y="-16" width="10" height="10" opacity="0.9"/>
+        <rect x="-16" y="6" width="10" height="10" opacity="0.9"/>
+        <rect x="6" y="6" width="4" height="4" fill="#C8922A"/>
+        <rect x="12" y="6" width="4" height="4" opacity="0.9"/>
+        <rect x="6" y="12" width="4" height="4" opacity="0.9"/>
+        <rect x="12" y="12" width="4" height="4" fill="#C8922A"/>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">02</text>
+    </g>
+
+    <!-- Nodo 3 — Guest esplora (telefono) -->
+    <g transform="translate(750,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g>
+        <rect x="-13" y="-22" width="26" height="44" rx="5" fill="none" stroke="#F5F1E8" stroke-width="2"/>
+        <line x1="-13" y1="-14" x2="13" y2="-14" stroke="#F5F1E8" stroke-width="1.5" opacity="0.6"/>
+        <rect x="-8" y="-9" width="16" height="3" fill="#F5F1E8" opacity="0.8"/>
+        <rect x="-8" y="-2" width="10" height="3" fill="#C8922A"/>
+        <rect x="-8" y="5" width="16" height="3" fill="#F5F1E8" opacity="0.5"/>
+        <circle cx="0" cy="17" r="2" fill="#C8922A"/>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">03</text>
+    </g>
+
+    <!-- Nodo 4 — Richiesta arriva (campana/notifica) -->
+    <g transform="translate(1050,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g stroke="#F5F1E8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M -13 6 C -13 -8, -9 -18, 0 -18 C 9 -18, 13 -8, 13 6 L 16 12 L -16 12 Z"/>
+        <path d="M -5 12 C -5 16, -2 18, 0 18 C 2 18, 5 16, 5 12" fill="none"/>
+      </g>
+      <circle cx="12" cy="-14" r="5" fill="#C8922A" stroke="#1E3A35" stroke-width="1.5"/>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">04</text>
+    </g>
+
+    <!-- Frecce tra i nodi (nodi a cx=150,450,750,1050, raggio 46 → bordi a 196/404, 496/704, 796/1004) -->
+    <g stroke="#C8922A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+      <path d="M 210 90 L 388 90"/>
+      <path d="M 380 84 L 390 90 L 380 96"/>
+      <path d="M 510 90 L 688 90"/>
+      <path d="M 680 84 L 690 90 L 680 96"/>
+      <path d="M 810 90 L 988 90"/>
+      <path d="M 980 84 L 990 90 L 980 96"/>
+    </g>
+  </svg>
+</div>
 </div>
 
 <div class="steps-section">
@@ -114,95 +207,95 @@
   <div class="step">
     <div class="step-num">01</div>
     <div class="step-body">
-      <div class="step-label" data-it="TU CONFIGURI" data-en="YOU SET UP"></div>
-      <h2 class="step-title" data-it="Crei il tuo catalogo <em>in meno di un'ora.</em>" data-en="You create your catalogue <em>in less than an hour.</em>"></h2>
-      <p class="step-desc" data-it="Dall'admin panel aggiungi le tue categorie — colazione, spa, noleggio bici, informazioni locali — con prezzi, descrizioni e orari di disponibilità. Puoi impostare fasce orarie, pause, e decidere cosa è ordinabile sempre e cosa solo in certi orari." data-en="From the admin panel you add your categories — breakfast, spa, bike rental, local info — with prices, descriptions and availability hours. You can set time slots, breaks, and decide what's always orderable and what's only available at certain times."></p>
+      <div class="step-label" data-it="TU CONFIGURI" data-en="YOU SET UP" data-fr="VOUS CONFIGUREZ" data-de="SIE RICHTEN EIN"></div>
+      <h2 class="step-title" data-it="Crei il tuo catalogo <em>in meno di un'ora.</em>" data-en="You create your catalogue <em>in less than an hour.</em>" data-fr="Vous créez votre catalogue <em>en moins d'une heure.</em>" data-de="Sie erstellen Ihren Katalog <em>in unter einer Stunde.</em>"></h2>
+      <p class="step-desc" data-it="Dall'admin panel aggiungi le tue categorie — colazione, spa, noleggio bici, informazioni locali — con prezzi, descrizioni e orari di disponibilità. Puoi impostare fasce orarie, pause, e decidere cosa è ordinabile sempre e cosa solo in certi orari." data-en="From the admin panel you add your categories — breakfast, spa, bike rental, local info — with prices, descriptions and availability hours. You can set time slots, breaks, and decide what's always orderable and what's only available at certain times." data-fr="Depuis le panneau admin, ajoutez vos catégories — petit-déjeuner, spa, location de vélos, infos locales — avec prix, descriptions et horaires. Vous pouvez définir des plages horaires, des pauses, et décider ce qui est toujours disponible ou seulement à certaines heures." data-de="Im Admin-Panel fügen Sie Kategorien hinzu — Frühstück, Spa, Fahrradverleih, lokale Infos — mit Preisen, Beschreibungen und Verfügbarkeit. Sie können Zeitfenster, Pausen festlegen und bestimmen, was immer oder nur zu bestimmten Zeiten bestellbar ist."></p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">02</div>
     <div class="step-body">
-      <div class="step-label" data-it="L'OSPITE ACCEDE" data-en="GUEST ACCESSES"></div>
-      <h2 class="step-title" data-it="Scansiona il QR o <em>riceve il link.</em>" data-en="Scans the QR or <em>receives the link.</em>"></h2>
-      <p class="step-desc" data-it="Il QR code è in camera — sul comodino, sulla porta o dove preferisci. L'ospite lo scansiona e l'app si apre direttamente nel browser del telefono, senza scaricare nulla. In alternativa mandi il link prima dell'arrivo: l'ospite esplora il catalogo ancora prima del check-in." data-en="The QR code is in the room — on the bedside table, on the door, or wherever you prefer. The guest scans it and the app opens directly in the phone's browser, no download needed. Alternatively you send the link before arrival: the guest explores the catalogue even before check-in."></p>
+      <div class="step-label" data-it="L'OSPITE ACCEDE" data-en="GUEST ACCESSES" data-fr="LE CLIENT ACCÈDE" data-de="DER GAST GREIFT ZU"></div>
+      <h2 class="step-title" data-it="Scansiona il QR o <em>riceve il link.</em>" data-en="Scans the QR or <em>receives the link.</em>" data-fr="Il scanne le QR ou <em>reçoit le lien.</em>" data-de="Er scannt den QR oder <em>erhält den Link.</em>"></h2>
+      <p class="step-desc" data-it="Il QR code è in camera — sul comodino, sulla porta o dove preferisci. L'ospite lo scansiona e l'app si apre direttamente nel browser del telefono, senza scaricare nulla. In alternativa mandi il link prima dell'arrivo: l'ospite esplora il catalogo ancora prima del check-in." data-en="The QR code is in the room — on the bedside table, on the door, or wherever you prefer. The guest scans it and the app opens directly in the phone's browser, no download needed. Alternatively you send the link before arrival: the guest explores the catalogue even before check-in." data-fr="Le QR code est dans la chambre — sur la table de nuit, la porte ou où vous préférez. Le client le scanne et l'application s'ouvre directement dans le navigateur du téléphone, sans rien télécharger. Vous pouvez aussi envoyer le lien avant l'arrivée : le client explore le catalogue avant même le check-in." data-de="Der QR-Code ist im Zimmer — auf dem Nachttisch, an der Tür oder wo Sie möchten. Der Gast scannt ihn und die App öffnet sich direkt im Handy-Browser, ohne Download. Alternativ senden Sie den Link vor der Ankunft: der Gast erkundet den Katalog schon vor dem Check-in."></p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">03</div>
     <div class="step-body">
-      <div class="step-label" data-it="MULTILINGUA AUTOMATICO" data-en="AUTOMATIC MULTILINGUAL"></div>
-      <h2 class="step-title" data-it="Vede tutto nella sua <em>lingua.</em>" data-en="They see everything in their <em>language.</em>"></h2>
-      <p class="step-desc" data-it="Al primo accesso l'ospite sceglie la lingua: italiano, inglese, tedesco o francese. Il catalogo è già tradotto automaticamente — le traduzioni vengono generate da Colgo al momento della pubblicazione di ogni contenuto. Non devi fare niente manualmente." data-en="On first access the guest chooses their language: Italian, English, German or French. The catalogue is already automatically translated — translations are generated by Colgo when each piece of content is published. You don't need to do anything manually."></p>
+      <div class="step-label" data-it="MULTILINGUA AUTOMATICO" data-en="AUTOMATIC MULTILINGUAL" data-fr="MULTILINGUE AUTOMATIQUE" data-de="AUTOMATISCH MEHRSPRACHIG"></div>
+      <h2 class="step-title" data-it="Vede tutto nella sua <em>lingua.</em>" data-en="They see everything in their <em>language.</em>" data-fr="Il voit tout dans sa <em>langue.</em>" data-de="Er sieht alles in seiner <em>Sprache.</em>"></h2>
+      <p class="step-desc" data-it="Al primo accesso l'ospite sceglie la lingua: italiano, inglese, tedesco o francese. Il catalogo è già tradotto automaticamente — le traduzioni vengono generate da Colgo al momento della pubblicazione di ogni contenuto. Non devi fare niente manualmente." data-en="On first access the guest chooses their language: Italian, English, German or French. The catalogue is already automatically translated — translations are generated by Colgo when each piece of content is published. You don't need to do anything manually." data-fr="Au premier accès, le client choisit sa langue : italien, anglais, allemand ou français. Le catalogue est déjà traduit automatiquement — les traductions sont générées par Colgo lors de la publication de chaque contenu. Vous n'avez rien à faire manuellement." data-de="Beim ersten Zugriff wählt der Gast die Sprache: Italienisch, Englisch, Deutsch oder Französisch. Der Katalog ist bereits automatisch übersetzt — Colgo erstellt die Übersetzungen bei jeder Veröffentlichung. Sie müssen nichts manuell tun."></p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">04</div>
     <div class="step-body">
-      <div class="step-label" data-it="LA RICHIESTA ARRIVA" data-en="REQUEST ARRIVES"></div>
-      <h2 class="step-title" data-it="Tu ricevi. <em>In tempo reale.</em>" data-en="You receive. <em>In real time.</em>"></h2>
-      <p class="step-desc" data-it="L'ospite aggiunge quello che vuole al carrello e invia la richiesta. Il pannello staff si aggiorna in tempo reale: vedi l'unità di provenienza, la richiesta inviata e l'orario. Puoi prendere in carico e chiudere ogni richiesta. Niente telefonate, niente carta, niente confusione." data-en="The guest adds what they want to the cart and sends the request. The reception panel updates in real time: you see the source unit, the request and the time it was sent. You can take charge of and close each request. No phone calls, no paper, no confusion."></p>
+      <div class="step-label" data-it="LA RICHIESTA ARRIVA" data-en="REQUEST ARRIVES" data-fr="LA DEMANDE ARRIVE" data-de="DIE ANFRAGE KOMMT AN"></div>
+      <h2 class="step-title" data-it="Tu ricevi. <em>In tempo reale.</em>" data-en="You receive. <em>In real time.</em>" data-fr="Vous recevez. <em>En temps réel.</em>" data-de="Sie empfangen. <em>In Echtzeit.</em>"></h2>
+      <p class="step-desc" data-it="L'ospite aggiunge quello che vuole al carrello e invia la richiesta. Il pannello staff si aggiorna in tempo reale: vedi l'unità di provenienza, la richiesta inviata e l'orario. Puoi prendere in carico e chiudere ogni richiesta. Niente telefonate, niente carta, niente confusione." data-en="The guest adds what they want to the cart and sends the request. The reception panel updates in real time: you see the source unit, the request and the time it was sent. You can take charge of and close each request. No phone calls, no paper, no confusion." data-fr="Le client ajoute ce qu'il veut au panier et envoie la demande. Le panneau du personnel se met à jour en temps réel : vous voyez l'unité d'origine, la demande envoyée et l'heure. Vous pouvez prendre en charge et clôturer chaque demande. Pas d'appels, pas de papier, pas de confusion." data-de="Der Gast legt seine Wünsche in den Warenkorb und sendet die Anfrage. Das Personal-Panel aktualisiert sich in Echtzeit: Sie sehen die Einheit, die Anfrage und die Uhrzeit. Sie können jede Anfrage annehmen und abschließen. Keine Anrufe, kein Papier, keine Verwirrung."></p>
     </div>
   </div>
 </div>
 
 <!-- FEATURES -->
 <div class="tech-section">
-  <div class="section-label" data-it="CARATTERISTICHE" data-en="FEATURES"></div>
-  <h2 class="section-title" data-it="Tutto quello che serve. <em>Niente di superfluo.</em>" data-en="Everything you need. <em>Nothing you don't.</em>"></h2>
-  <p class="section-sub" data-it="Colgo è progettato per essere semplice da usare, non per impressionare con funzionalità che non userai mai." data-en="Colgo is designed to be simple to use, not to impress with features you will never use."></p>
+  <div class="section-label" data-it="CARATTERISTICHE" data-en="FEATURES" data-fr="CARACTÉRISTIQUES" data-de="FUNKTIONEN"></div>
+  <h2 class="section-title" data-it="Tutto quello che serve. <em>Niente di superfluo.</em>" data-en="Everything you need. <em>Nothing you don't.</em>" data-fr="Tout ce qu'il faut. <em>Rien de superflu.</em>" data-de="Alles was nötig ist. <em>Nichts Überflüssiges.</em>"></h2>
+  <p class="section-sub" data-it="Colgo è progettato per essere semplice da usare, non per impressionare con funzionalità che non userai mai." data-en="Colgo is designed to be simple to use, not to impress with features you will never use." data-fr="Colgo est conçu pour être simple à utiliser, pas pour impressionner avec des fonctionnalités que vous n'utiliserez jamais." data-de="Colgo ist auf einfache Bedienung ausgelegt, nicht darauf, mit nie genutzten Funktionen zu beeindrucken."></p>
   <div class="tech-grid">
     <div class="tech-card">
       <div class="tech-card-icon">🌍</div>
-      <div class="tech-card-title" data-it="4 LINGUE" data-en="4 LANGUAGES"></div>
-      <div class="tech-card-desc" data-it="IT · EN · DE · FR. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR. Automatic translation on publish. Zero manual work."></div>
+      <div class="tech-card-title" data-it="4 LINGUE" data-en="4 LANGUAGES" data-fr="4 LANGUES" data-de="4 SPRACHEN"></div>
+      <div class="tech-card-desc" data-it="IT · EN · DE · FR. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR. Automatic translation on publish. Zero manual work." data-fr="IT · EN · DE · FR. Traduction automatique à la publication. Zéro travail manuel." data-de="IT · EN · DE · FR. Automatische Übersetzung bei Veröffentlichung. Kein manueller Aufwand."></div>
     </div>
     <div class="tech-card">
       <div class="tech-card-icon">📱</div>
-      <div class="tech-card-title" data-it="ZERO DOWNLOAD" data-en="ZERO DOWNLOAD"></div>
-      <div class="tech-card-desc" data-it="Web app — si apre nel browser. Niente App Store, niente registrazione per l'ospite." data-en="Web app — opens in the browser. No App Store, no registration for the guest."></div>
+      <div class="tech-card-title" data-it="ZERO DOWNLOAD" data-en="ZERO DOWNLOAD" data-fr="ZÉRO TÉLÉCHARGEMENT" data-de="KEIN DOWNLOAD"></div>
+      <div class="tech-card-desc" data-it="Web app — si apre nel browser. Niente App Store, niente registrazione per l'ospite." data-en="Web app — opens in the browser. No App Store, no registration for the guest." data-fr="Application web — s'ouvre dans le navigateur. Pas d'App Store, pas d'inscription pour le client." data-de="Web-App — öffnet sich im Browser. Kein App Store, keine Registrierung für den Gast."></div>
     </div>
     <div class="tech-card">
       <div class="tech-card-icon">⚡</div>
-      <div class="tech-card-title" data-it="TEMPO REALE" data-en="REAL TIME"></div>
-      <div class="tech-card-desc" data-it="Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale." data-en="Requests arrive at reception immediately. No delay, no manual refresh."></div>
+      <div class="tech-card-title" data-it="TEMPO REALE" data-en="REAL TIME" data-fr="TEMPS RÉEL" data-de="ECHTZEIT"></div>
+      <div class="tech-card-desc" data-it="Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale." data-en="Requests arrive at reception immediately. No delay, no manual refresh." data-fr="Les demandes arrivent immédiatement à la réception. Aucun délai, aucun rafraîchissement manuel." data-de="Anfragen kommen sofort an der Rezeption an. Keine Verzögerung, kein manuelles Neuladen."></div>
     </div>
     <div class="tech-card">
       <div class="tech-card-icon">🕐</div>
-      <div class="tech-card-title" data-it="ORARI SMART" data-en="SMART HOURS"></div>
-      <div class="tech-card-desc" data-it="Fasce orarie, pause, servizi prenotabili in anticipo. Il catalogo si gestisce da solo." data-en="Time slots, breaks, services bookable in advance. The catalogue manages itself."></div>
+      <div class="tech-card-title" data-it="ORARI SMART" data-en="SMART HOURS" data-fr="HORAIRES INTELLIGENTS" data-de="INTELLIGENTE ZEITEN"></div>
+      <div class="tech-card-desc" data-it="Fasce orarie, pause, servizi prenotabili in anticipo. Il catalogo si gestisce da solo." data-en="Time slots, breaks, services bookable in advance. The catalogue manages itself." data-fr="Plages horaires, pauses, services réservables à l'avance. Le catalogue se gère tout seul." data-de="Zeitfenster, Pausen, im Voraus buchbare Leistungen. Der Katalog verwaltet sich von selbst."></div>
     </div>
     <div class="tech-card">
       <div class="tech-card-icon">✈️</div>
-      <div class="tech-card-title" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL"></div>
-      <div class="tech-card-desc" data-it="Invii il link prima del check-in. L'ospite pianifica il soggiorno prima di arrivare." data-en="Send the link before check-in. The guest plans their stay before arriving."></div>
+      <div class="tech-card-title" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL" data-fr="PRÉ-ARRIVÉE" data-de="VOR ANKUNFT"></div>
+      <div class="tech-card-desc" data-it="Invii il link prima del check-in. L'ospite pianifica il soggiorno prima di arrivare." data-en="Send the link before check-in. The guest plans their stay before arriving." data-fr="Vous envoyez le lien avant le check-in. Le client planifie son séjour avant d'arriver." data-de="Sie senden den Link vor dem Check-in. Der Gast plant den Aufenthalt vor der Ankunft."></div>
     </div>
     <div class="tech-card">
       <div class="tech-card-icon">🔧</div>
-      <div class="tech-card-title" data-it="ADMIN PANEL" data-en="ADMIN PANEL"></div>
-      <div class="tech-card-desc" data-it="Modifica prezzi, aggiungi servizi — tutto online in pochi secondi dal telefono o dal computer." data-en="Change prices, add services — everything live in seconds from your phone or computer."></div>
+      <div class="tech-card-title" data-it="ADMIN PANEL" data-en="ADMIN PANEL" data-fr="PANNEAU ADMIN" data-de="ADMIN-PANEL"></div>
+      <div class="tech-card-desc" data-it="Modifica prezzi, aggiungi servizi — tutto online in pochi secondi dal telefono o dal computer." data-en="Change prices, add services — everything live in seconds from your phone or computer." data-fr="Modifiez les prix, ajoutez des services — tout en ligne en quelques secondes depuis votre téléphone ou ordinateur." data-de="Preise ändern, Leistungen hinzufügen — alles in Sekunden online, vom Handy oder Computer."></div>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
 <div class="cta-section">
-  <h2 class="cta-headline" data-it="Pronto a <em>provarlo?</em>" data-en="Ready to <em>try it?</em>"></h2>
+  <h2 class="cta-headline" data-it="Pronto a <em>provarlo?</em>" data-en="Ready to <em>try it?</em>" data-fr="Prêt à <em>l'essayer ?</em>" data-de="Bereit, es <em>auszuprobieren?</em>"></h2>
   <div class="cta-buttons">
-    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO"></a>
-    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST"></a>
+    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO" data-fr="ESSAYER LA DÉMO" data-de="DEMO TESTEN"></a>
+    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST" data-fr="REJOINDRE LA LISTE D'ATTENTE" data-de="AUF DIE WARTELISTE"></a>
   </div>
 </div>
 
 <footer>
   <div class="footer-links">
-    <a href="/" data-it="Home" data-en="Home">Home</a>
-    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works">Come funziona</a>
-    <a href="/per-chi.html" data-it="Per chi" data-en="For who">Per chi</a>
-    <a href="/faq.html" data-it="FAQ" data-en="FAQ">FAQ</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+    <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+    <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -211,16 +304,18 @@
 <script>
   let currentLang = 'it';
   function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.querySelectorAll('[data-it]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (!text) return;
-      el.innerHTML = text;
-    });
-    document.documentElement.lang = lang;
-  }
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
+        if (!text) return;
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
   setLang('it');
 </script>
 </body>

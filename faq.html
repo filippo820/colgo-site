@@ -25,7 +25,7 @@
     .nav-lang{display:flex;gap:6px;}
     .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
     .lang-btn.active,.lang-btn:hover{color:var(--gold);}
-    .lang-btn:first-child::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
     .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
     .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
     .page-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
@@ -59,113 +59,115 @@
   <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo"/></a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS">COME FUNZIONA</a>
-      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR">PER CHI</a>
-      <a href="/faq.html" class="active" data-it="FAQ" data-en="FAQ">FAQ</a>
+      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+      <a href="/faq.html" class="active" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
     </div>
   </div>
 </nav>
 
 <div class="page-hero">
   <div class="page-hero-glow"></div>
-  <div class="page-label" data-it="DOMANDE FREQUENTI" data-en="FREQUENTLY ASKED QUESTIONS"></div>
-  <h1 class="page-title" data-it="Hai <em>domande?</em><br/>Abbiamo le risposte." data-en="Got <em>questions?</em><br/>We've got answers."></h1>
-  <p class="page-sub" data-it="Tutto quello che vuoi sapere su Colgo prima di iniziare." data-en="Everything you want to know about Colgo before you start."></p>
+  <div class="page-label" data-it="DOMANDE FREQUENTI" data-en="FREQUENTLY ASKED QUESTIONS" data-fr="QUESTIONS FRÉQUENTES" data-de="HÄUFIGE FRAGEN"></div>
+  <h1 class="page-title" data-it="Hai <em>domande?</em><br/>Abbiamo le risposte." data-en="Got <em>questions?</em><br/>We've got answers." data-fr="Vous avez des <em>questions ?</em><br/>Nous avons les réponses." data-de="Haben Sie <em>Fragen?</em><br/>Wir haben die Antworten."></h1>
+  <p class="page-sub" data-it="Tutto quello che vuoi sapere su Colgo prima di iniziare." data-en="Everything you want to know about Colgo before you start." data-fr="Tout ce que vous voulez savoir sur Colgo avant de commencer." data-de="Alles, was Sie vor dem Start über Colgo wissen möchten."></p>
 </div>
 
 <div class="faq-section">
 
-  <div class="faq-category" data-it="GENERALE" data-en="GENERAL"></div>
+  <div class="faq-category" data-it="GENERALE" data-en="GENERAL" data-fr="GÉNÉRAL" data-de="ALLGEMEIN"></div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Cos'è Colgo?" data-en="What is Colgo?"></div>
-    <div class="faq-a" data-it="Colgo è un catalogo digitale accessibile via QR code o link. I tuoi clienti lo aprono sul telefono, vedono i tuoi servizi, prezzi e informazioni — e possono inviare richieste direttamente alla reception o allo staff. Niente app da scaricare, niente carta stampata." data-en="Colgo is a digital catalogue accessible via QR code or link. Your customers open it on their phone, see your services, prices and information — and can send requests directly to reception or staff. No app to download, no printed paper."></div>
+    <div class="faq-q" data-it="Cos'è Colgo?" data-en="What is Colgo?" data-fr="Qu'est-ce que Colgo ?" data-de="Was ist Colgo?"></div>
+    <div class="faq-a" data-it="Colgo è un catalogo digitale accessibile via QR code o link. I tuoi clienti lo aprono sul telefono, vedono i tuoi servizi, prezzi e informazioni — e possono inviare richieste direttamente alla reception o allo staff. Niente app da scaricare, niente carta stampata." data-en="Colgo is a digital catalogue accessible via QR code or link. Your customers open it on their phone, see your services, prices and information — and can send requests directly to reception or staff. No app to download, no printed paper." data-fr="Colgo est un catalogue numérique accessible via QR code ou lien. Vos clients l'ouvrent sur leur téléphone, voient vos services, prix et informations — et peuvent envoyer des demandes directement à la réception ou au personnel. Pas d'appli à télécharger, pas de papier imprimé." data-de="Colgo ist ein digitaler Katalog, zugänglich per QR-Code oder Link. Ihre Gäste öffnen ihn auf dem Handy, sehen Leistungen, Preise und Infos — und können Anfragen direkt an Rezeption oder Personal senden. Keine App, kein gedrucktes Papier."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="I miei clienti devono scaricare un'app?" data-en="Do my customers need to download an app?"></div>
-    <div class="faq-a" data-it="No. Colgo è una web app — si apre direttamente nel browser del telefono, come un sito web. Basta scansionare il QR o cliccare sul link. Zero download, zero registrazioni per il cliente." data-en="No. Colgo is a web app — it opens directly in the phone's browser, like a website. Just scan the QR or click the link. Zero downloads, zero registrations for the customer."></div>
+    <div class="faq-q" data-it="I miei clienti devono scaricare un'app?" data-en="Do my customers need to download an app?" data-fr="Mes clients doivent-ils télécharger une application ?" data-de="Müssen meine Gäste eine App herunterladen?"></div>
+    <div class="faq-a" data-it="No. Colgo è una web app — si apre direttamente nel browser del telefono, come un sito web. Basta scansionare il QR o cliccare sul link. Zero download, zero registrazioni per il cliente." data-en="No. Colgo is a web app — it opens directly in the phone's browser, like a website. Just scan the QR or click the link. Zero downloads, zero registrations for the customer." data-fr="Non. Colgo est une application web — elle s'ouvre directement dans le navigateur du téléphone, comme un site web. Il suffit de scanner le QR ou de cliquer sur le lien. Zéro téléchargement, zéro inscription pour le client." data-de="Nein. Colgo ist eine Web-App — sie öffnet sich direkt im Handy-Browser wie eine Webseite. Einfach QR scannen oder Link anklicken. Kein Download, keine Registrierung für den Gast."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="In quante lingue funziona?" data-en="How many languages does it support?"></div>
-    <div class="faq-a" data-it="Colgo traduce automaticamente il catalogo in italiano, inglese, tedesco e francese. Il cliente sceglie la lingua al primo accesso. Le traduzioni vengono generate automaticamente quando pubblichi o aggiorni un contenuto." data-en="Colgo automatically translates the catalogue into Italian, English, German and French. The customer chooses their language on first access. Translations are generated automatically when you publish or update content."></div>
+    <div class="faq-q" data-it="In quante lingue funziona?" data-en="How many languages does it support?" data-fr="En combien de langues fonctionne-t-il ?" data-de="In wie vielen Sprachen funktioniert es?"></div>
+    <div class="faq-a" data-it="Colgo traduce automaticamente il catalogo in italiano, inglese, tedesco e francese. Il cliente sceglie la lingua al primo accesso. Le traduzioni vengono generate automaticamente quando pubblichi o aggiorni un contenuto." data-en="Colgo automatically translates the catalogue into Italian, English, German and French. The customer chooses their language on first access. Translations are generated automatically when you publish or update content." data-fr="Colgo traduit automatiquement le catalogue en italien, anglais, allemand et français. Le client choisit sa langue au premier accès. Les traductions sont générées automatiquement lors de la publication ou mise à jour d'un contenu." data-de="Colgo übersetzt den Katalog automatisch ins Italienische, Englische, Deutsche und Französische. Der Gast wählt beim ersten Zugriff die Sprache. Übersetzungen entstehen automatisch bei jeder Veröffentlichung oder Aktualisierung."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Funziona per qualsiasi tipo di struttura?" data-en="Does it work for any type of venue?"></div>
-    <div class="faq-a" data-it="Sì. Colgo è configurabile per hotel, B&B, campeggi, agriturismi, ristoranti, stabilimenti balneari, porti, negozi e molto altro. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base alla tua struttura." data-en="Yes. Colgo is configurable for hotels, B&Bs, campsites, farm stays, restaurants, beach clubs, marinas, shops and much more. The word 'room' becomes table, pitch, berth — based on your venue."></div>
+    <div class="faq-q" data-it="Funziona per qualsiasi tipo di struttura?" data-en="Does it work for any type of venue?" data-fr="Fonctionne-t-il pour tout type d'établissement ?" data-de="Funktioniert es für jede Art von Betrieb?"></div>
+    <div class="faq-a" data-it="Sì. Colgo è configurabile per hotel, B&B, campeggi, agriturismi, ristoranti, stabilimenti balneari, porti, negozi e molto altro. Il termine 'camera' diventa tavolo, piazzola, ormeggio — in base alla tua struttura." data-en="Yes. Colgo is configurable for hotels, B&Bs, campsites, farm stays, restaurants, beach clubs, marinas, shops and much more. The word 'room' becomes table, pitch, berth — based on your venue." data-fr="Oui. Colgo est configurable pour hôtels, B&B, campings, fermes-auberges, restaurants, établissements balnéaires, ports, boutiques et bien plus. Le mot « chambre » devient table, emplacement, ponton — selon votre établissement." data-de="Ja. Colgo lässt sich für Hotels, B&Bs, Campingplätze, Ferienhöfe, Restaurants, Strandbäder, Häfen, Geschäfte und mehr konfigurieren. Aus „Zimmer“ wird Tisch, Stellplatz, Liegeplatz — je nach Betrieb."></div>
   </div>
 
-  <div class="faq-category" data-it="CONFIGURAZIONE" data-en="SETUP"></div>
+  <div class="faq-category" data-it="CONFIGURAZIONE" data-en="SETUP" data-fr="CONFIGURATION" data-de="KONFIGURATION"></div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Quanto tempo ci vuole per iniziare?" data-en="How long does it take to get started?"></div>
-    <div class="faq-a" data-it="Puoi avere il catalogo online in meno di un'ora. Crei la struttura, aggiungi le categorie e i servizi, e il link è subito attivo. Non serve nessuna competenza tecnica." data-en="You can have your catalogue online in less than an hour. You create the venue, add categories and services, and the link is immediately active. No technical skills required."></div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" data-it="Posso aggiornare il catalogo in qualsiasi momento?" data-en="Can I update the catalogue at any time?"></div>
-    <div class="faq-a" data-it="Sì. Dall'admin panel puoi modificare prezzi, aggiungere servizi, nascondere categorie fuori orario — e tutto va online immediatamente." data-en="Yes. From the admin panel you can change prices, add services, hide out-of-hours categories — and everything goes live immediately."></div>
+    <div class="faq-q" data-it="Quanto tempo ci vuole per iniziare?" data-en="How long does it take to get started?" data-fr="Combien de temps faut-il pour commencer ?" data-de="Wie lange dauert der Einstieg?"></div>
+    <div class="faq-a" data-it="Puoi avere il catalogo online in meno di un'ora. Crei la struttura, aggiungi le categorie e i servizi, e il link è subito attivo. Non serve nessuna competenza tecnica." data-en="You can have your catalogue online in less than an hour. You create the venue, add categories and services, and the link is immediately active. No technical skills required." data-fr="Vous pouvez avoir le catalogue en ligne en moins d'une heure. Vous créez l'établissement, ajoutez catégories et services, et le lien est immédiatement actif. Aucune compétence technique requise." data-de="Ihr Katalog kann in unter einer Stunde online sein. Sie erstellen den Betrieb, fügen Kategorien und Leistungen hinzu, der Link ist sofort aktiv. Keine technischen Kenntnisse nötig."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Posso impostare orari di disponibilità per i servizi?" data-en="Can I set availability hours for services?"></div>
-    <div class="faq-a" data-it="Sì. Ogni categoria può avere una fascia oraria (es. colazione 07:00–10:00), pause, e un'opzione 'preordinabile' che permette ai clienti di richiedere il servizio anche fuori orario." data-en="Yes. Each category can have a time slot (e.g. breakfast 07:00–10:00), breaks, and a 'pre-orderable' option that allows customers to request the service outside opening hours."></div>
-  </div>
-
-  <div class="faq-category" data-it="PAGAMENTI E PREZZI" data-en="PAYMENTS & PRICING"></div>
-
-  <div class="faq-item">
-    <div class="faq-q" data-it="I clienti possono pagare online?" data-en="Can customers pay online?"></div>
-    <div class="faq-a" data-it="No. Colgo non gestisce pagamenti online. Il cliente invia la richiesta, tu la ricevi e il pagamento avviene in loco — in reception, al ritiro, o come preferisci. Questa semplicità è una scelta deliberata." data-en="No. Colgo does not handle online payments. The customer sends the request, you receive it and payment happens on-site — at reception, at pickup, or however you prefer. This simplicity is a deliberate choice."></div>
+    <div class="faq-q" data-it="Posso aggiornare il catalogo in qualsiasi momento?" data-en="Can I update the catalogue at any time?" data-fr="Puis-je mettre à jour le catalogue à tout moment ?" data-de="Kann ich den Katalog jederzeit aktualisieren?"></div>
+    <div class="faq-a" data-it="Sì. Dall'admin panel puoi modificare prezzi, aggiungere servizi, nascondere categorie fuori orario — e tutto va online immediatamente." data-en="Yes. From the admin panel you can change prices, add services, hide out-of-hours categories — and everything goes live immediately." data-fr="Oui. Depuis le panneau admin, vous pouvez modifier les prix, ajouter des services, masquer des catégories hors horaires — et tout est en ligne immédiatement." data-de="Ja. Im Admin-Panel können Sie Preise ändern, Leistungen hinzufügen, Kategorien außerhalb der Zeiten ausblenden — alles sofort online."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Quanto costa Colgo?" data-en="How much does Colgo cost?"></div>
-    <div class="faq-a" data-it="Colgo costa €39 al mese, o €390 all'anno (equivale a 2 mesi gratis). Il periodo pilota è gratuito e senza obbligo." data-en="Colgo costs €39 per month, or €390 per year (equivalent to 2 months free). The pilot period is free with no obligation."></div>
+    <div class="faq-q" data-it="Posso impostare orari di disponibilità per i servizi?" data-en="Can I set availability hours for services?" data-fr="Puis-je définir des horaires de disponibilité pour les services ?" data-de="Kann ich Verfügbarkeitszeiten für Leistungen festlegen?"></div>
+    <div class="faq-a" data-it="Sì. Ogni categoria può avere una fascia oraria (es. colazione 07:00–10:00), pause, e un'opzione 'preordinabile' che permette ai clienti di richiedere il servizio anche fuori orario." data-en="Yes. Each category can have a time slot (e.g. breakfast 07:00–10:00), breaks, and a 'pre-orderable' option that allows customers to request the service outside opening hours." data-fr="Oui. Chaque catégorie peut avoir une plage horaire (ex. petit-déjeuner 07h00–10h00), des pauses, et une option « pré-commandable » qui permet aux clients de demander le service même hors horaires." data-de="Ja. Jede Kategorie kann ein Zeitfenster (z. B. Frühstück 07:00–10:00), Pausen und eine „vorbestellbar“-Option haben, mit der Gäste auch außerhalb der Zeiten anfragen können."></div>
+  </div>
+
+  <div class="faq-category" data-it="PAGAMENTI E PREZZI" data-en="PAYMENTS & PRICING" data-fr="PAIEMENTS ET PRIX" data-de="ZAHLUNGEN & PREISE"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="I clienti possono pagare online?" data-en="Can customers pay online?" data-fr="Les clients peuvent-ils payer en ligne ?" data-de="Können Gäste online bezahlen?"></div>
+    <div class="faq-a" data-it="No. Colgo non gestisce pagamenti online. Il cliente invia la richiesta, tu la ricevi e il pagamento avviene in loco — in reception, al ritiro, o come preferisci. Questa semplicità è una scelta deliberata." data-en="No. Colgo does not handle online payments. The customer sends the request, you receive it and payment happens on-site — at reception, at pickup, or however you prefer. This simplicity is a deliberate choice." data-fr="Non. Colgo ne gère pas les paiements en ligne. Le client envoie la demande, vous la recevez et le paiement se fait sur place — à la réception, au retrait, ou comme vous préférez. Cette simplicité est un choix délibéré." data-de="Nein. Colgo verwaltet keine Online-Zahlungen. Der Gast sendet die Anfrage, Sie empfangen sie, die Zahlung erfolgt vor Ort — an der Rezeption, bei Abholung oder wie gewünscht. Diese Einfachheit ist bewusst gewählt."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="C'è un periodo di prova gratuito?" data-en="Is there a free trial?"></div>
-    <div class="faq-a" data-it="Sì. I primi clienti pilota hanno accesso gratuito senza obbligo di continuare. Iscriviti alla lista d'attesa per partecipare." data-en="Yes. The first pilot customers have free access with no obligation to continue. Join the waitlist to participate."></div>
-  </div>
-
-  <div class="faq-category" data-it="TECNICO" data-en="TECHNICAL"></div>
-
-  <div class="faq-item">
-    <div class="faq-q" data-it="Devo installare qualcosa sul mio server?" data-en="Do I need to install anything on my server?"></div>
-    <div class="faq-a" data-it="No. Colgo è completamente cloud — non devi installare niente, non hai bisogno di un server, non devi gestire aggiornamenti. Funziona da qualsiasi browser, su qualsiasi dispositivo." data-en="No. Colgo is completely cloud-based — you don't install anything, you don't need a server, you don't manage updates. It works from any browser, on any device."></div>
+    <div class="faq-q" data-it="Quanto costa Colgo?" data-en="How much does Colgo cost?" data-fr="Combien coûte Colgo ?" data-de="Was kostet Colgo?"></div>
+    <div class="faq-a" data-it="Colgo costa €39 al mese, o €390 all'anno (equivale a 2 mesi gratis). Il periodo pilota è gratuito e senza obbligo." data-en="Colgo costs €39 per month, or €390 per year (equivalent to 2 months free). The pilot period is free with no obligation." data-fr="Colgo coûte 39€ par mois, ou 390€ par an (équivaut à 2 mois gratuits). La période pilote est gratuite et sans engagement." data-de="Colgo kostet 39€ pro Monat oder 390€ pro Jahr (entspricht 2 Gratismonaten). Die Pilotphase ist kostenlos und unverbindlich."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="Posso usarlo dal telefono?" data-en="Can I use it from my phone?"></div>
-    <div class="faq-a" data-it="Sì. L'admin panel, il pannello staff e l'app cliente sono tutti ottimizzati per mobile. Puoi gestire tutto dall'iPhone o da Android, anche dalla reception." data-en="Yes. The admin panel, staff panel and customer app are all optimised for mobile. You can manage everything from iPhone or Android, even from the reception desk."></div>
+    <div class="faq-q" data-it="C'è un periodo di prova gratuito?" data-en="Is there a free trial?" data-fr="Y a-t-il une période d'essai gratuite ?" data-de="Gibt es eine kostenlose Testphase?"></div>
+    <div class="faq-a" data-it="Sì. I primi clienti pilota hanno accesso gratuito senza obbligo di continuare. Iscriviti alla lista d'attesa per partecipare." data-en="Yes. The first pilot customers have free access with no obligation to continue. Join the waitlist to participate." data-fr="Oui. Les premiers clients pilotes ont un accès gratuit sans obligation de continuer. Inscrivez-vous à la liste d'attente pour participer." data-de="Ja. Die ersten Pilotkunden erhalten kostenlosen Zugang ohne Fortsetzungspflicht. Melden Sie sich auf der Warteliste an, um teilzunehmen."></div>
+  </div>
+
+  <div class="faq-category" data-it="TECNICO" data-en="TECHNICAL" data-fr="TECHNIQUE" data-de="TECHNISCH"></div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="Devo installare qualcosa sul mio server?" data-en="Do I need to install anything on my server?" data-fr="Dois-je installer quelque chose sur mon serveur ?" data-de="Muss ich etwas auf meinem Server installieren?"></div>
+    <div class="faq-a" data-it="No. Colgo è completamente cloud — non devi installare niente, non hai bisogno di un server, non devi gestire aggiornamenti. Funziona da qualsiasi browser, su qualsiasi dispositivo." data-en="No. Colgo is completely cloud-based — you don't install anything, you don't need a server, you don't manage updates. It works from any browser, on any device." data-fr="Non. Colgo est entièrement cloud — vous n'avez rien à installer, pas besoin de serveur, pas de mises à jour à gérer. Fonctionne depuis n'importe quel navigateur, sur n'importe quel appareil." data-de="Nein. Colgo läuft vollständig in der Cloud — nichts zu installieren, kein Server nötig, keine Updates zu verwalten. Funktioniert in jedem Browser, auf jedem Gerät."></div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" data-it="I miei dati sono al sicuro?" data-en="Is my data safe?"></div>
-    <div class="faq-a" data-it="Sì. Colgo utilizza un database PostgreSQL con politiche di sicurezza per riga e autenticazione JWT. I dati sono conservati in data center europei e non vengono mai condivisi con terze parti." data-en="Yes. Colgo uses a PostgreSQL database with row-level security policies and JWT authentication. Data is stored in European data centres and is never shared with third parties."></div>
+    <div class="faq-q" data-it="Posso usarlo dal telefono?" data-en="Can I use it from my phone?" data-fr="Puis-je l'utiliser depuis mon téléphone ?" data-de="Kann ich es vom Handy aus nutzen?"></div>
+    <div class="faq-a" data-it="Sì. L'admin panel, il pannello staff e l'app cliente sono tutti ottimizzati per mobile. Puoi gestire tutto dall'iPhone o da Android, anche dalla reception." data-en="Yes. The admin panel, staff panel and customer app are all optimised for mobile. You can manage everything from iPhone or Android, even from the reception desk." data-fr="Oui. Le panneau admin, le panneau personnel et l'application client sont tous optimisés pour mobile. Vous pouvez tout gérer depuis un iPhone ou Android, même à la réception." data-de="Ja. Admin-Panel, Personal-Panel und Gast-App sind alle für Mobilgeräte optimiert. Sie verwalten alles vom iPhone oder Android aus, auch an der Rezeption."></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" data-it="I miei dati sono al sicuro?" data-en="Is my data safe?" data-fr="Mes données sont-elles en sécurité ?" data-de="Sind meine Daten sicher?"></div>
+    <div class="faq-a" data-it="Sì. Colgo utilizza un database PostgreSQL con politiche di sicurezza per riga e autenticazione JWT. I dati sono conservati in data center europei e non vengono mai condivisi con terze parti." data-en="Yes. Colgo uses a PostgreSQL database with row-level security policies and JWT authentication. Data is stored in European data centres and is never shared with third parties." data-fr="Oui. Colgo utilise une base de données PostgreSQL avec politiques de sécurité par ligne et authentification JWT. Les données sont stockées dans des centres de données européens et ne sont jamais partagées avec des tiers." data-de="Ja. Colgo nutzt eine PostgreSQL-Datenbank mit zeilenbasierten Sicherheitsrichtlinien und JWT-Authentifizierung. Daten werden in europäischen Rechenzentren gespeichert und nie an Dritte weitergegeben."></div>
   </div>
 
 </div>
 
 <div class="cta-section">
-  <h2 class="cta-headline" data-it="Hai ancora dubbi?<br/><em>Scrivici.</em>" data-en="Still unsure?<br/><em>Write to us.</em>"></h2>
-  <a href="mailto:colgoapp@gmail.com" class="btn-primary" data-it="CONTATTACI" data-en="CONTACT US"></a>
+  <h2 class="cta-headline" data-it="Hai ancora dubbi?<br/><em>Scrivici.</em>" data-en="Still unsure?<br/><em>Write to us.</em>" data-fr="Encore des doutes ?<br/><em>Écrivez-nous.</em>" data-de="Noch Fragen?<br/><em>Schreiben Sie uns.</em>"></h2>
+  <a href="mailto:colgoapp@gmail.com" class="btn-primary" data-it="CONTATTACI" data-en="CONTACT US" data-fr="CONTACTEZ-NOUS" data-de="KONTAKTIEREN SIE UNS"></a>
 </div>
 
 <footer>
   <div class="footer-links">
-    <a href="/" data-it="Home" data-en="Home">Home</a>
-    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works">Come funziona</a>
-    <a href="/per-chi.html" data-it="Per chi" data-en="For who">Per chi</a>
-    <a href="/faq.html" data-it="FAQ" data-en="FAQ">FAQ</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+    <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+    <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -174,16 +176,18 @@
 <script>
   let currentLang = 'it';
   function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.querySelectorAll('[data-it]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (!text) return;
-      el.innerHTML = text;
-    });
-    document.documentElement.lang = lang;
-  }
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
+        if (!text) return;
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
 
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {

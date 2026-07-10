@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colgo per Hotel, B&B e Agriturismi — Catalogo digitale per ospiti</title>
+  <meta name="description" content="Colgo per l'ospitalità: gli ospiti scansionano il QR in camera o ricevono il link prima dell'arrivo, esplorano servizi e inviano richieste in tempo reale alla reception." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4JCQ1EGSR9');</script>
+  <style>
+    :root{--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.8);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;--gold-light:#d4a84b;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--cream);font-family:'Josefin Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;background:linear-gradient(to bottom,rgba(13,13,13,0.95),transparent);}
+    .nav-logo{height:28px;opacity:0.95;}
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:24px;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:11px;letter-spacing:2px;transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+    .nav-lang{display:flex;gap:6px;}
+    .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
+    .lang-btn.active,.lang-btn:hover{color:var(--gold);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .page-hero{padding:160px 32px 60px;text-align:center;position:relative;overflow:hidden;}
+    .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .page-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
+    .page-title em{font-style:italic;color:var(--ochre-l);}
+    .page-sub{font-size:14px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 32px;}
+    .section-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;text-align:center;}
+    .section-title em{font-style:italic;color:var(--ochre-l);}
+    .cta-section{text-align:center;padding:100px 32px;}
+    .cta-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.2;margin-bottom:40px;}
+    .cta-headline em{font-style:italic;color:var(--ochre-l);}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{display:inline-block;background:var(--ochre);color:var(--black);font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:background 0.25s;}
+    .btn-primary:hover{background:var(--ochre-l);}
+    .btn-ghost{display:inline-block;border:1px solid rgba(200,146,42,0.4);color:var(--ochre);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:border-color 0.25s;}
+    .btn-ghost:hover{border-color:var(--ochre);}
+    footer{text-align:center;padding:48px 32px;border-top:1px solid rgba(245,241,232,0.06);font-size:10px;letter-spacing:2px;color:rgba(245,241,232,0.4);}
+    footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
+    footer a:hover{color:var(--ochre);}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    
+    .pain-section{max-width:1000px;margin:0 auto;padding:80px 32px 40px;}
+    .pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:48px;}
+    .pain-card{background:rgba(245,241,232,0.03);border:1px solid rgba(245,241,232,0.07);padding:40px 32px;}
+    .pain-icon{font-size:30px;margin-bottom:20px;opacity:0.9;}
+    .pain-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:22px;margin-bottom:14px;}
+    .pain-desc{font-size:13px;color:var(--white-dim);line-height:1.8;}
+    .flow-diagram{margin:20px 0 0;}
+    .feat-section{background:var(--petrol);padding:100px 32px;text-align:center;}
+    .feat-grid{max-width:900px;margin:56px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;text-align:left;}
+    .feat-card{padding:0;}
+    .feat-title{font-size:11px;letter-spacing:2px;color:var(--ochre);margin-bottom:10px;}
+    .feat-desc{font-size:13px;color:var(--white-dim);line-height:1.8;}
+
+    @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.pain-grid{grid-template-columns:1fr;}.feat-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo"/></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+      <a href="/per-chi.html" class="active" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+      <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    </div>
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-label" data-it="PER STRUTTURE RICETTIVE" data-en="FOR ACCOMMODATION" data-fr="POUR HÉBERGEMENTS" data-de="FÜR UNTERKÜNFTE"></div>
+  <h1 class="page-title" data-it="L'ospitalità che <em>non fa aspettare</em>." data-en="Hospitality that <em>doesn't make people wait</em>." data-fr="L'hospitalité qui <em>ne fait pas attendre</em>." data-de="Gastfreundschaft, die <em>nicht warten lässt</em>."></h1>
+  <p class="page-sub" data-it="Il tuo ospite riceve il link prima di arrivare, o scansiona il QR in camera. Trova colazione, spa, noleggio bici e info locali — nella sua lingua, sempre aggiornati." data-en="Your guest gets the link before arrival, or scans the QR in the room. They find breakfast, spa, bike rental and local info — in their language, always up to date." data-fr="Votre client reçoit le lien avant son arrivée, ou scanne le QR dans la chambre. Il trouve petit-déjeuner, spa, location de vélos et infos locales — dans sa langue, toujours à jour." data-de="Ihr Gast erhält den Link vor der Ankunft oder scannt den QR im Zimmer. Er findet Frühstück, Spa, Fahrradverleih und lokale Infos — in seiner Sprache, immer aktuell."></p>
+</div>
+
+<div style="padding:20px 32px 0;">
+<div class="flow-diagram">
+  <svg viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:1000px;display:block;margin:0 auto;">
+    <defs>
+      <linearGradient id="flowline" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C8922A" stop-opacity="0.15"/>
+        <stop offset="50%" stop-color="#C8922A" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#C8922A" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+
+    <!-- linea di connessione -->
+    <line x1="150" y1="90" x2="1050" y2="90" stroke="url(#flowline)" stroke-width="1.5"/>
+
+    <!-- Nodo 1 — Configura (ingranaggio) -->
+    <g transform="translate(150,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g stroke="#F5F1E8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle r="14"/>
+        <circle r="5" fill="#C8922A" stroke="none"/>
+        <g stroke="#F5F1E8">
+          <line x1="0" y1="-22" x2="0" y2="-14"/>
+          <line x1="0" y1="14" x2="0" y2="22"/>
+          <line x1="-22" y1="0" x2="-14" y2="0"/>
+          <line x1="14" y1="0" x2="22" y2="0"/>
+          <line x1="-15.5" y1="-15.5" x2="-10" y2="-10"/>
+          <line x1="10" y1="10" x2="15.5" y2="15.5"/>
+          <line x1="15.5" y1="-15.5" x2="10" y2="-10"/>
+          <line x1="-10" y1="10" x2="-15.5" y2="15.5"/>
+        </g>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">01</text>
+    </g>
+
+    <!-- Nodo 2 — QR / Link -->
+    <g transform="translate(450,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g fill="#F5F1E8">
+        <rect x="-16" y="-16" width="10" height="10" opacity="0.9"/>
+        <rect x="6" y="-16" width="10" height="10" opacity="0.9"/>
+        <rect x="-16" y="6" width="10" height="10" opacity="0.9"/>
+        <rect x="6" y="6" width="4" height="4" fill="#C8922A"/>
+        <rect x="12" y="6" width="4" height="4" opacity="0.9"/>
+        <rect x="6" y="12" width="4" height="4" opacity="0.9"/>
+        <rect x="12" y="12" width="4" height="4" fill="#C8922A"/>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">02</text>
+    </g>
+
+    <!-- Nodo 3 — Guest esplora (telefono) -->
+    <g transform="translate(750,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g>
+        <rect x="-13" y="-22" width="26" height="44" rx="5" fill="none" stroke="#F5F1E8" stroke-width="2"/>
+        <line x1="-13" y1="-14" x2="13" y2="-14" stroke="#F5F1E8" stroke-width="1.5" opacity="0.6"/>
+        <rect x="-8" y="-9" width="16" height="3" fill="#F5F1E8" opacity="0.8"/>
+        <rect x="-8" y="-2" width="10" height="3" fill="#C8922A"/>
+        <rect x="-8" y="5" width="16" height="3" fill="#F5F1E8" opacity="0.5"/>
+        <circle cx="0" cy="17" r="2" fill="#C8922A"/>
+      </g>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">03</text>
+    </g>
+
+    <!-- Nodo 4 — Richiesta arriva (campana/notifica) -->
+    <g transform="translate(1050,90)">
+      <circle r="46" fill="none" stroke="#C8922A" stroke-width="1.5" opacity="0.5"/>
+      <circle r="46" fill="#1E3A35" opacity="0.5"/>
+      <g stroke="#F5F1E8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M -13 6 C -13 -8, -9 -18, 0 -18 C 9 -18, 13 -8, 13 6 L 16 12 L -16 12 Z"/>
+        <path d="M -5 12 C -5 16, -2 18, 0 18 C 2 18, 5 16, 5 12" fill="none"/>
+      </g>
+      <circle cx="12" cy="-14" r="5" fill="#C8922A" stroke="#1E3A35" stroke-width="1.5"/>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">04</text>
+    </g>
+
+    <!-- Frecce tra i nodi (nodi a cx=150,450,750,1050, raggio 46 → bordi a 196/404, 496/704, 796/1004) -->
+    <g stroke="#C8922A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+      <path d="M 210 90 L 388 90"/>
+      <path d="M 380 84 L 390 90 L 380 96"/>
+      <path d="M 510 90 L 688 90"/>
+      <path d="M 680 84 L 690 90 L 680 96"/>
+      <path d="M 810 90 L 988 90"/>
+      <path d="M 980 84 L 990 90 L 980 96"/>
+    </g>
+  </svg>
+</div>
+</div>
+
+<div class="pain-section">
+  <div class="gold-line"></div>
+  <h2 class="section-title" data-it="Le domande che senti <em>ogni giorno.</em>" data-en="The questions you hear <em>every day.</em>" data-fr="Les questions que vous entendez <em>chaque jour.</em>" data-de="Die Fragen, die Sie <em>jeden Tag hören.</em>"></h2>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-icon">📞</div>
+      <h3 class="pain-title" data-it="Il telefono che non si ferma" data-en="The phone that never stops" data-fr="Le téléphone qui ne s'arrête jamais" data-de="Das Telefon, das nie stillsteht"></h3>
+      <p class="pain-desc" data-it="&quot;A che ora è la colazione?&quot; &quot;Fate massaggi?&quot; — le stesse domande, dieci volte al giorno, in lingue diverse." data-en="&quot;What time is breakfast?&quot; &quot;Do you offer massages?&quot; — the same questions, ten times a day, in different languages." data-fr="« À quelle heure est le petit-déjeuner ? » « Faites-vous des massages ? » — les mêmes questions, dix fois par jour, en plusieurs langues." data-de="„Wann gibt es Frühstück?“ „Bieten Sie Massagen an?“ — dieselben Fragen, zehnmal täglich, in verschiedenen Sprachen."></p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📋</div>
+      <h3 class="pain-title" data-it="La brochure sempre vecchia" data-en="The brochure that's always outdated" data-fr="La brochure toujours dépassée" data-de="Die immer veraltete Broschüre"></h3>
+      <p class="pain-desc" data-it="Cambi un prezzo, un orario — e devi ristampare tutto. Nel frattempo l'ospite legge ancora l'informazione sbagliata." data-en="You change a price, a schedule — and have to reprint everything. Meanwhile the guest is still reading outdated info." data-fr="Vous changez un prix, un horaire — et devez tout réimprimer. Pendant ce temps, le client lit encore l'ancienne info." data-de="Sie ändern einen Preis, eine Zeit — und müssen alles neu drucken. Der Gast liest inzwischen noch die alte Info."></p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🌐</div>
+      <h3 class="pain-title" data-it="La lingua che non parli" data-en="The language you don't speak" data-fr="La langue que vous ne parlez pas" data-de="Die Sprache, die Sie nicht sprechen"></h3>
+      <p class="pain-desc" data-it="L'ospite giapponese, coreano o olandese non capisce il menù della spa scritto solo in italiano." data-en="Your Japanese, Korean or Dutch guest doesn't understand the spa menu written only in Italian." data-fr="Votre client japonais, coréen ou néerlandais ne comprend pas le menu du spa écrit seulement en italien." data-de="Ihr japanischer, koreanischer oder niederländischer Gast versteht die nur auf Italienisch verfasste Spa-Karte nicht."></p>
+    </div>
+  </div>
+</div>
+
+<div class="feat-section">
+  <div class="section-label" data-it="PER LA RECEPTION" data-en="FOR THE FRONT DESK" data-fr="POUR LA RÉCEPTION" data-de="FÜR DIE REZEPTION"></div>
+  <h2 class="section-title" data-it="Tutto quello che serve. <em>Niente di superfluo.</em>" data-en="Everything you need. <em>Nothing you don't.</em>" data-fr="Tout ce qu'il faut. <em>Rien de superflu.</em>" data-de="Alles was nötig ist. <em>Nichts Überflüssiges.</em>"></h2>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-title" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL" data-fr="PRÉ-ARRIVÉE" data-de="VOR ANKUNFT"></div>
+      <div class="feat-desc" data-it="Invii il link prima del check-in. L'ospite pianifica il soggiorno prima di arrivare." data-en="Send the link before check-in. The guest plans their stay before arriving." data-fr="Vous envoyez le lien avant le check-in. Le client planifie son séjour avant d'arriver." data-de="Sie senden den Link vor dem Check-in. Der Gast plant den Aufenthalt vor der Ankunft."></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-title" data-it="TEMPO REALE" data-en="REAL TIME" data-fr="TEMPS RÉEL" data-de="ECHTZEIT"></div>
+      <div class="feat-desc" data-it="Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale." data-en="Requests arrive at reception immediately. No delay, no manual refresh." data-fr="Les demandes arrivent immédiatement à la réception. Aucun délai, aucun rafraîchissement manuel." data-de="Anfragen kommen sofort an der Rezeption an. Keine Verzögerung, kein manuelles Neuladen."></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-title" data-it="4 LINGUE" data-en="4 LANGUAGES" data-fr="4 LANGUES" data-de="4 SPRACHEN"></div>
+      <div class="feat-desc" data-it="IT · EN · DE · FR. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR. Automatic translation on publish. Zero manual work." data-fr="IT · EN · DE · FR. Traduction automatique à la publication. Zéro travail manuel." data-de="IT · EN · DE · FR. Automatische Übersetzung bei Veröffentlichung. Kein manueller Aufwand."></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 class="cta-headline" data-it="Il tuo hotel merita <em>di più.</em>" data-en="Your hotel deserves <em>more.</em>" data-fr="Votre hôtel mérite <em>mieux.</em>" data-de="Ihr Hotel verdient <em>mehr.</em>"></h2>
+  <div class="cta-buttons">
+    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA LA DEMO" data-en="TRY THE DEMO" data-fr="ESSAYER LA DÉMO" data-de="DEMO TESTEN"></a>
+    <a href="https://forms.gle/gqmk4gizdCd94Y5r7" target="_blank" class="btn-primary" data-it="ENTRA IN LISTA D'ATTESA" data-en="JOIN THE WAITLIST" data-fr="REJOINDRE LA LISTE D'ATTENTE" data-de="AUF DIE WARTELISTE"></a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+    <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
+    <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+  </div>
+  © 2026 COLGO · COLGO.APP
+</footer>
+
+<script>
+  let currentLang = 'it';
+  function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
+        if (!text) return;
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
+  setLang('it');
+</script>
+</body>
+</html>
+

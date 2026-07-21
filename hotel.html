@@ -32,6 +32,7 @@
     .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
     .page-title em{font-style:italic;color:var(--ochre-l);}
     .page-sub{font-size:14px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .zero-barrier-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:0.5px;color:var(--cream);background:rgba(30,58,53,0.5);border:1px solid rgba(200,146,42,0.35);padding:9px 20px;border-radius:30px;margin:28px auto 0;position:relative;z-index:1;width:fit-content;}
     .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 32px;}
     .section-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
     .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;text-align:center;}
@@ -62,6 +63,15 @@
     .feat-title{font-size:11px;letter-spacing:2px;color:var(--ochre);margin-bottom:10px;}
     .feat-desc{font-size:13px;color:var(--white-dim);line-height:1.8;}
 
+        .screens-section{padding:90px 32px 90px;text-align:center;}
+    .screens-carousel{display:flex;gap:24px;overflow-x:auto;padding:24px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1100px;margin:0 auto;}
+    .screens-carousel::-webkit-scrollbar{display:none;}
+    .screen-item{flex:0 0 auto;scroll-snap-align:center;width:200px;text-align:left;}
+    .screen-item img{width:100%;border-radius:24px;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 50px rgba(0,0,0,0.55);display:block;}
+    .screen-caption{margin-top:14px;font-size:12px;letter-spacing:0.4px;color:var(--white-dim);line-height:1.6;text-align:center;}
+    .screens-hint{margin-top:4px;font-size:10px;letter-spacing:3px;color:var(--ochre);opacity:0.65;}
+    @media(max-width:700px){.screen-item{width:170px;}}
+
     @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.pain-grid{grid-template-columns:1fr;}.feat-grid{grid-template-columns:1fr;}}
   </style>
 </head>
@@ -90,6 +100,7 @@
   <div class="page-label" data-it="PER STRUTTURE RICETTIVE" data-en="FOR ACCOMMODATION" data-fr="POUR HÉBERGEMENTS" data-de="FÜR UNTERKÜNFTE"></div>
   <h1 class="page-title" data-it="L'ospitalità che <em>non fa aspettare</em>." data-en="Hospitality that <em>doesn't make people wait</em>." data-fr="L'hospitalité qui <em>ne fait pas attendre</em>." data-de="Gastfreundschaft, die <em>nicht warten lässt</em>."></h1>
   <p class="page-sub" data-it="Il tuo ospite riceve il link prima di arrivare, o scansiona il QR in camera. Trova colazione, spa, noleggio bici e info locali — nella sua lingua, sempre aggiornati." data-en="Your guest gets the link before arrival, or scans the QR in the room. They find breakfast, spa, bike rental and local info — in their language, always up to date." data-fr="Votre client reçoit le lien avant son arrivée, ou scanne le QR dans la chambre. Il trouve petit-déjeuner, spa, location de vélos et infos locales — dans sa langue, toujours à jour." data-de="Ihr Gast erhält den Link vor der Ankunft oder scannt den QR im Zimmer. Er findet Frühstück, Spa, Fahrradverleih und lokale Infos — in seiner Sprache, immer aktuell."></p>
+  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser."></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -181,6 +192,43 @@
     </g>
   </svg>
 </div>
+</div>
+
+<div class="screens-section">
+  <div class="gold-line"></div>
+  <div class="section-label" data-it="L'APP IN AZIONE" data-en="THE APP IN ACTION" data-fr="L'APPLI EN ACTION" data-de="DIE APP IN AKTION"></div>
+  <h2 class="section-title" data-it="Cosa vede <em>il tuo ospite</em>." data-en="What <em>your guest</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Gast</em> sieht."></h2>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/guest-01-lingua.jpg" alt="Sceglie la lingua" loading="lazy">
+      <p class="screen-caption" data-it="Sceglie la lingua" data-en="Picks the language" data-fr="Choisit la langue" data-de="Wählt die Sprache"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-02-home.jpg" alt="Trova la sua home personalizzata" loading="lazy">
+      <p class="screen-caption" data-it="Trova la sua home personalizzata" data-en="Finds their personalised home" data-fr="Trouve son accueil personnalisé" data-de="Findet seine persönliche Startseite"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-03-catalogo.jpg" alt="Sfoglia il catalogo" loading="lazy">
+      <p class="screen-caption" data-it="Sfoglia il catalogo" data-en="Browses the catalogue" data-fr="Parcourt le catalogue" data-de="Blättert im Katalog"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-04-dettaglio.jpg" alt="Vede dettagli e opzioni" loading="lazy">
+      <p class="screen-caption" data-it="Vede dettagli e opzioni" data-en="Sees details and options" data-fr="Voit les détails et options" data-de="Sieht Details und Optionen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-05-ordine.jpg" alt="Compone la richiesta" loading="lazy">
+      <p class="screen-caption" data-it="Compone la richiesta" data-en="Builds the request" data-fr="Compose sa demande" data-de="Stellt die Anfrage zusammen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-06-conferma.jpg" alt="Conferma prima di inviare" loading="lazy">
+      <p class="screen-caption" data-it="Conferma prima di inviare" data-en="Confirms before sending" data-fr="Confirme avant l'envoi" data-de="Bestätigt vor dem Senden"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/guest-07-inviato.jpg" alt="Richiesta inviata in tempo reale" loading="lazy">
+      <p class="screen-caption" data-it="Richiesta inviata in tempo reale" data-en="Request sent in real time" data-fr="Demande envoyée en temps réel" data-de="Anfrage in Echtzeit gesendet"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
 </div>
 
 <div class="pain-section">

@@ -32,6 +32,7 @@
     .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
     .page-title em{font-style:italic;color:var(--ochre-l);}
     .page-sub{font-size:14px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .zero-barrier-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:0.5px;color:var(--cream);background:rgba(30,58,53,0.5);border:1px solid rgba(200,146,42,0.35);padding:9px 20px;border-radius:30px;margin:28px auto 0;position:relative;z-index:1;width:fit-content;}
     .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 32px;}
     .section-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
     .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;text-align:center;}
@@ -62,6 +63,15 @@
     .feat-title{font-size:11px;letter-spacing:2px;color:var(--ochre);margin-bottom:10px;}
     .feat-desc{font-size:13px;color:var(--white-dim);line-height:1.8;}
 
+        .screens-section{padding:90px 32px 90px;text-align:center;}
+    .screens-carousel{display:flex;gap:24px;overflow-x:auto;padding:24px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1100px;margin:0 auto;}
+    .screens-carousel::-webkit-scrollbar{display:none;}
+    .screen-item{flex:0 0 auto;scroll-snap-align:center;width:200px;text-align:left;}
+    .screen-item img{width:100%;border-radius:24px;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 50px rgba(0,0,0,0.55);display:block;}
+    .screen-caption{margin-top:14px;font-size:12px;letter-spacing:0.4px;color:var(--white-dim);line-height:1.6;text-align:center;}
+    .screens-hint{margin-top:4px;font-size:10px;letter-spacing:3px;color:var(--ochre);opacity:0.65;}
+    @media(max-width:700px){.screen-item{width:170px;}}
+
     @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.pain-grid{grid-template-columns:1fr;}.feat-grid{grid-template-columns:1fr;}}
   </style>
 </head>
@@ -90,6 +100,7 @@
   <div class="page-label" data-it="PER NEGOZI E BOUTIQUE" data-en="FOR SHOPS & BOUTIQUES" data-fr="POUR BOUTIQUES" data-de="FÜR GESCHÄFTE"></div>
   <h1 class="page-title" data-it="La vetrina che <em>lavora anche di notte.</em>" data-en="The window display that <em>works even at night.</em>" data-fr="La vitrine qui <em>travaille même la nuit.</em>" data-de="Das Schaufenster, das <em>auch nachts arbeitet.</em>"></h1>
   <p class="page-sub" data-it="Il QR è in vetrina. Il cliente scansiona anche a negozio chiuso, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans it even when the shop is closed, browses the catalogue, prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne même magasin fermé, parcourt le catalogue, prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt auch bei geschlossenem Geschäft, blättert im Katalog, macht seine Liste — und weiß beim Betreten schon, was er will."></p>
+  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser."></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -181,6 +192,35 @@
     </g>
   </svg>
 </div>
+</div>
+
+<div class="screens-section">
+  <div class="gold-line"></div>
+  <div class="section-label" data-it="L'APP IN AZIONE" data-en="THE APP IN ACTION" data-fr="L'APPLI EN ACTION" data-de="DIE APP IN AKTION"></div>
+  <h2 class="section-title" data-it="Cosa vede <em>il tuo cliente</em>." data-en="What <em>your customer</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Kunde</em> sieht."></h2>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/shop-guest-01-accesso.jpg" alt="Vetrina rilevata dal QR" loading="lazy">
+      <p class="screen-caption" data-it="Vetrina rilevata dal QR" data-en="Shop window detected from the QR" data-fr="Vitrine détectée par le QR" data-de="Schaufenster per QR erkannt"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/shop-guest-02-home.jpg" alt="Home con categorie e orari" loading="lazy">
+      <p class="screen-caption" data-it="Home con categorie e orari" data-en="Home with categories and hours" data-fr="Accueil avec catégories et horaires" data-de="Startseite mit Kategorien und Öffnungszeiten"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/shop-guest-03-categoria.jpg" alt="Sfoglia una categoria con i prezzi" loading="lazy">
+      <p class="screen-caption" data-it="Sfoglia una categoria con i prezzi" data-en="Browses a category with prices" data-fr="Parcourt une catégorie avec les prix" data-de="Blättert durch eine Kategorie mit Preisen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/shop-guest-04-dettaglio.jpg" alt="Vede foto e descrizione del prodotto" loading="lazy">
+      <p class="screen-caption" data-it="Vede foto e descrizione del prodotto" data-en="Sees product photo and description" data-fr="Voit la photo et la description du produit" data-de="Sieht Produktfoto und Beschreibung"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/shop-guest-05-lista.jpg" alt="Compone la lista da mostrare al banco" loading="lazy">
+      <p class="screen-caption" data-it="Compone la lista da mostrare al banco" data-en="Builds the list to show at the counter" data-fr="Compose la liste à montrer au comptoir" data-de="Erstellt die Liste zum Vorzeigen an der Theke"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
 </div>
 
 <div class="pain-section">

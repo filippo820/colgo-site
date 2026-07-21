@@ -32,6 +32,7 @@
     .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
     .page-title em{font-style:italic;color:var(--ochre-l);}
     .page-sub{font-size:14px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .zero-barrier-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:0.5px;color:var(--cream);background:rgba(30,58,53,0.5);border:1px solid rgba(200,146,42,0.35);padding:9px 20px;border-radius:30px;margin:28px auto 0;position:relative;z-index:1;width:fit-content;}
     .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 32px;}
     .section-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
     .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;text-align:center;}
@@ -62,6 +63,15 @@
     .feat-title{font-size:11px;letter-spacing:2px;color:var(--ochre);margin-bottom:10px;}
     .feat-desc{font-size:13px;color:var(--white-dim);line-height:1.8;}
 
+        .screens-section{padding:90px 32px 90px;text-align:center;}
+    .screens-carousel{display:flex;gap:24px;overflow-x:auto;padding:24px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1100px;margin:0 auto;}
+    .screens-carousel::-webkit-scrollbar{display:none;}
+    .screen-item{flex:0 0 auto;scroll-snap-align:center;width:200px;text-align:left;}
+    .screen-item img{width:100%;border-radius:24px;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 50px rgba(0,0,0,0.55);display:block;}
+    .screen-caption{margin-top:14px;font-size:12px;letter-spacing:0.4px;color:var(--white-dim);line-height:1.6;text-align:center;}
+    .screens-hint{margin-top:4px;font-size:10px;letter-spacing:3px;color:var(--ochre);opacity:0.65;}
+    @media(max-width:700px){.screen-item{width:170px;}}
+
     @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.pain-grid{grid-template-columns:1fr;}.feat-grid{grid-template-columns:1fr;}}
   </style>
 </head>
@@ -89,7 +99,8 @@
   <div class="page-hero-glow"></div>
   <div class="page-label" data-it="PER RISTORAZIONE" data-en="FOR FOOD SERVICE" data-fr="POUR LA RESTAURATION" data-de="FÜR GASTRONOMIE"></div>
   <h1 class="page-title" data-it="Il menù che <em>non si sporca mai.</em>" data-en="The menu that <em>never gets dirty.</em>" data-fr="Le menu qui <em>ne se salit jamais.</em>" data-de="Die Speisekarte, die <em>nie schmutzig wird.</em>"></h1>
-  <p class="page-sub" data-it="Il QR è sul tavolo. Il cliente sfoglia il menù nella sua lingua, il cameriere invia l'ordine e la cucina lo riceve subito — senza carta, senza fraintendimenti." data-en="The QR is on the table. The customer browses the menu in their language, the waiter sends the order and the kitchen receives it instantly — no paper, no misunderstandings." data-fr="Le QR est sur la table. Le client parcourt le menu dans sa langue, le serveur envoie la commande et la cuisine la reçoit aussitôt — sans papier, sans malentendus." data-de="Der QR ist auf dem Tisch. Der Gast blättert in seiner Sprache durch die Karte, der Kellner sendet die Bestellung, die Küche empfängt sie sofort — kein Papier, keine Missverständnisse."></p>
+  <p class="page-sub" data-it="Il QR è sul tavolo. Il cliente sfoglia il menù nella sua lingua — e l'ordine arriva in cucina sia che lo invii tu, sia che lo invii direttamente lui." data-en="The QR is on the table. The customer browses the menu in their language — and the order reaches the kitchen whether you send it or they send it themselves." data-fr="Le QR est sur la table. Le client parcourt le menu dans sa langue — et la commande arrive en cuisine que ce soit vous ou lui qui l'envoie." data-de="Der QR ist auf dem Tisch. Der Gast blättert in seiner Sprache durch die Karte — und die Bestellung erreicht die Küche, egal ob Sie oder er sie sendet."></p>
+  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser."></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -183,6 +194,39 @@
 </div>
 </div>
 
+<div class="screens-section">
+  <div class="gold-line"></div>
+  <div class="section-label" data-it="L'APP IN AZIONE" data-en="THE APP IN ACTION" data-fr="L'APPLI EN ACTION" data-de="DIE APP IN AKTION"></div>
+  <h2 class="section-title" data-it="Cosa vede <em>il tuo cliente</em>." data-en="What <em>your customer</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Gast</em> sieht."></h2>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-01-accesso.jpg" alt="Il tavolo viene rilevato dal QR" loading="lazy">
+      <p class="screen-caption" data-it="Il tavolo viene rilevato dal QR" data-en="Table detected from the QR" data-fr="La table est détectée par le QR" data-de="Der Tisch wird per QR erkannt"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-02-home.jpg" alt="Home con tavolo e menù del giorno" loading="lazy">
+      <p class="screen-caption" data-it="Home con tavolo e menù del giorno" data-en="Home with table and today's menu" data-fr="Accueil avec table et menu du jour" data-de="Startseite mit Tisch und Tageskarte"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-03-menu.jpg" alt="Sfoglia il menù per categoria" loading="lazy">
+      <p class="screen-caption" data-it="Sfoglia il menù per categoria" data-en="Browses the menu by category" data-fr="Parcourt le menu par catégorie" data-de="Blättert nach Kategorie durch die Karte"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-04-ordine.jpg" alt="Rivede l'ordine prima di inviarlo" loading="lazy">
+      <p class="screen-caption" data-it="Rivede l'ordine prima di inviarlo" data-en="Reviews the order before sending" data-fr="Vérifie la commande avant l'envoi" data-de="Prüft die Bestellung vor dem Senden"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-05-conferma.jpg" alt="Conferma il totale" loading="lazy">
+      <p class="screen-caption" data-it="Conferma il totale" data-en="Confirms the total" data-fr="Confirme le total" data-de="Bestätigt den Gesamtbetrag"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-guest-06-inviato.jpg" alt="Ordine inviato in cucina" loading="lazy">
+      <p class="screen-caption" data-it="Ordine inviato in cucina" data-en="Order sent to the kitchen" data-fr="Commande envoyée en cuisine" data-de="Bestellung an die Küche gesendet"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
+</div>
+
 <div class="pain-section">
   <div class="gold-line"></div>
   <h2 class="section-title" data-it="I problemi di ogni <em>servizio.</em>" data-en="The problems of every <em>shift.</em>" data-fr="Les problèmes de chaque <em>service.</em>" data-de="Die Probleme jeder <em>Schicht.</em>"></h2>
@@ -205,13 +249,63 @@
   </div>
 </div>
 
+<div class="pain-section" style="padding-top:0;">
+  <div class="gold-line"></div>
+  <div class="section-label" data-it="DUE MODI DI USARLO" data-en="TWO WAYS TO USE IT" data-fr="DEUX FAÇONS DE L'UTILISER" data-de="ZWEI NUTZUNGSARTEN"></div>
+  <h2 class="section-title" data-it="Decidi tu <em>chi invia l'ordine.</em>" data-en="You decide <em>who sends the order.</em>" data-fr="Vous décidez <em>qui envoie la commande.</em>" data-de="Sie entscheiden, <em>wer die Bestellung sendet.</em>"></h2>
+  <p class="section-sub" data-it="Colgo supporta entrambi i modelli — puoi usarne uno solo o lasciare che convivano, sala per sala." data-en="Colgo supports both models — use just one, or let them coexist, room by room." data-fr="Colgo prend en charge les deux modèles — utilisez-en un seul, ou laissez-les coexister, salle par salle." data-de="Colgo unterstützt beide Modelle — nutzen Sie nur eines, oder lassen Sie beide nebeneinander bestehen, raumweise."></p>
+
+  <div class="pain-grid" style="margin-top:48px;">
+    <div class="pain-card">
+      <div class="pain-icon">🧑‍🍳</div>
+      <h3 class="pain-title" data-it="Gestito dal cameriere" data-en="Waiter-managed" data-fr="Géré par le serveur" data-de="Vom Kellner verwaltet"></h3>
+      <p class="pain-desc" data-it="Il cameriere scansiona il QR del tavolo, prende la comanda a voce e la invia lui alla cucina. Il modello classico italiano — il cliente non tocca il telefono." data-en="The waiter scans the table QR, takes the order verbally and sends it to the kitchen. The classic Italian model — the customer never touches a phone." data-fr="Le serveur scanne le QR de la table, prend la commande oralement et l'envoie en cuisine. Le modèle classique italien — le client ne touche jamais un téléphone." data-de="Der Kellner scannt den Tisch-QR, nimmt die Bestellung mündlich auf und sendet sie an die Küche. Das klassische italienische Modell — der Gast berührt nie ein Handy."></p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📲</div>
+      <h3 class="pain-title" data-it="Il cliente ordina da solo" data-en="Guest self-orders" data-fr="Le client commande seul" data-de="Gast bestellt selbst"></h3>
+      <p class="pain-desc" data-it="Il cliente scansiona lui stesso il QR, sfoglia il menù, aggiunge al carrello e invia l'ordine direttamente — nessuna attesa, nessun cameriere necessario. Diffuso in molti paesi asiatici, ancora raro in Italia." data-en="The customer scans the QR themselves, browses the menu, adds to cart and sends the order directly — no waiting, no waiter needed. Common across much of Asia, still rare in Italy." data-fr="Le client scanne lui-même le QR, parcourt le menu, ajoute au panier et envoie la commande directement — aucune attente, aucun serveur nécessaire. Répandu dans une grande partie de l'Asie, encore rare en Italie." data-de="Der Gast scannt den QR selbst, blättert im Menü, legt in den Warenkorb und sendet die Bestellung direkt — kein Warten, kein Kellner nötig. In weiten Teilen Asiens verbreitet, in Italien noch selten."></p>
+    </div>
+  </div>
+</div>
+
+<div class="screens-section">
+  <div class="gold-line"></div>
+  <div class="section-label" data-it="APP CAMERIERE" data-en="WAITER APP" data-fr="APPLI SERVEUR" data-de="KELLNER-APP"></div>
+  <h2 class="section-title" data-it="Se preferisci, <em>resta lui a comandare.</em>" data-en="If you prefer, <em>the waiter stays in control.</em>" data-fr="Si vous préférez, <em>le serveur garde la main.</em>" data-de="Wenn Sie möchten, <em>behält der Kellner die Kontrolle.</em>"></h2>
+  <p class="section-sub" data-it="Stesso catalogo, vista dedicata al cameriere: sceglie il tavolo, compone la comanda, la invia in cucina." data-en="Same catalogue, a dedicated waiter view: pick the table, build the order, send it to the kitchen." data-fr="Même catalogue, vue dédiée au serveur : choisit la table, compose la commande, l'envoie en cuisine." data-de="Derselbe Katalog, eine eigene Kellner-Ansicht: Tisch wählen, Bestellung zusammenstellen, an die Küche senden."></p>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/rist-staff-01-tavoli.jpg" alt="Vista tavoli, liberi e occupati" loading="lazy">
+      <p class="screen-caption" data-it="Vista tavoli, liberi e occupati" data-en="Table view, free and occupied" data-fr="Vue des tables, libres et occupées" data-de="Tischübersicht, frei und besetzt"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-staff-02-menu.jpg" alt="Sfoglia il menù per il tavolo" loading="lazy">
+      <p class="screen-caption" data-it="Sfoglia il menù per il tavolo" data-en="Browses the menu for the table" data-fr="Parcourt le menu pour la table" data-de="Blättert für den Tisch durch die Karte"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-staff-03-aggiungi.jpg" alt="Aggiunge il piatto alla comanda" loading="lazy">
+      <p class="screen-caption" data-it="Aggiunge il piatto alla comanda" data-en="Adds the dish to the order" data-fr="Ajoute le plat à la commande" data-de="Fügt das Gericht zur Bestellung hinzu"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-staff-04-riepilogo.jpg" alt="Conferma la comanda prima dell'invio" loading="lazy">
+      <p class="screen-caption" data-it="Conferma la comanda prima dell'invio" data-en="Confirms the order before sending" data-fr="Confirme la commande avant l'envoi" data-de="Bestätigt die Bestellung vor dem Senden"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/rist-staff-05-conto.jpg" alt="Aggiunge altri ordini o chiude il conto" loading="lazy">
+      <p class="screen-caption" data-it="Aggiunge altri ordini o chiude il conto" data-en="Adds more orders or closes the bill" data-fr="Ajoute d'autres commandes ou clôture l'addition" data-de="Fügt weitere Bestellungen hinzu oder schließt die Rechnung"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
+</div>
+
 <div class="feat-section">
   <div class="section-label" data-it="PER LA CUCINA E LA SALA" data-en="FOR KITCHEN AND FLOOR" data-fr="POUR CUISINE ET SALLE" data-de="FÜR KÜCHE UND SERVICE"></div>
   <h2 class="section-title" data-it="Il flusso resta <em>tutto interno.</em>" data-en="The flow stays <em>entirely internal.</em>" data-fr="Le flux reste <em>entièrement interne.</em>" data-de="Der Ablauf bleibt <em>komplett intern.</em>"></h2>
   <div class="feat-grid">
     <div class="feat-card">
       <div class="feat-title" data-it="QR AL TAVOLO" data-en="QR AT THE TABLE" data-fr="QR SUR LA TABLE" data-de="QR AM TISCH"></div>
-      <div class="feat-desc" data-it="Il cameriere scansiona e apre l'ordinazione per quel tavolo specifico." data-en="The waiter scans and opens the order for that specific table." data-fr="Le serveur scanne et ouvre la commande pour cette table." data-de="Der Kellner scannt und öffnet die Bestellung für diesen Tisch."></div>
+      <div class="feat-desc" data-it="Il cameriere scansiona per prendere la comanda, oppure il cliente scansiona e ordina da solo." data-en="The waiter scans to take the order, or the customer scans and orders themselves." data-fr="Le serveur scanne pour prendre la commande, ou le client scanne et commande seul." data-de="Der Kellner scannt für die Bestellaufnahme, oder der Gast scannt und bestellt selbst."></div>
     </div>
     <div class="feat-card">
       <div class="feat-title" data-it="CUCINA REAL-TIME" data-en="KITCHEN REAL-TIME" data-fr="CUISINE EN TEMPS RÉEL" data-de="KÜCHE IN ECHTZEIT"></div>

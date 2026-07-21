@@ -61,6 +61,15 @@
     footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
     footer a:hover{color:var(--ochre);}
     .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+        .screens-section{padding:20px 32px 90px;text-align:center;}
+    .screens-carousel{display:flex;gap:24px;overflow-x:auto;padding:24px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1100px;margin:0 auto;}
+    .screens-carousel::-webkit-scrollbar{display:none;}
+    .screen-item{flex:0 0 auto;scroll-snap-align:center;width:200px;text-align:left;}
+    .screen-item img{width:100%;border-radius:24px;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 50px rgba(0,0,0,0.55);display:block;}
+    .screen-caption{margin-top:14px;font-size:12px;letter-spacing:0.4px;color:var(--white-dim);line-height:1.6;text-align:center;}
+    .screens-hint{margin-top:4px;font-size:10px;letter-spacing:3px;color:var(--ochre);opacity:0.65;}
+    @media(max-width:700px){.screen-item{width:170px;}}
+
     @media(max-width:700px){nav{padding:20px 24px;}.nav-links{display:none;}.venues-section{padding:40px 20px 80px;}.venues-grid{grid-template-columns:1fr;}}
     
     .concept-section{max-width:1000px;margin:0 auto;padding:80px 32px;}
@@ -142,6 +151,35 @@
       </foreignObject>
 </svg>
   </div>
+</div>
+
+<div class="screens-section">
+  <div class="section-label" data-it="STAFF APP · GESTIONE RICHIESTE" data-en="STAFF APP · REQUEST MANAGEMENT" data-fr="APPLI STAFF · GESTION DES DEMANDES" data-de="STAFF-APP · ANFRAGENVERWALTUNG"></div>
+  <h2 class="section-title" data-it="La coda delle richieste, <em>in tempo reale.</em>" data-en="The request queue, <em>in real time.</em>" data-fr="La file des demandes, <em>en temps réel.</em>" data-de="Die Anfragewarteschlange, <em>in Echtzeit.</em>"></h2>
+  <p class="section-sub" data-it="Ogni PIN vede solo le camere o i tavoli di sua competenza. Nuova, in lavorazione, completata — lo stato è sempre chiaro." data-en="Every PIN only sees the rooms or tables it's responsible for. New, in progress, completed — the status is always clear." data-fr="Chaque PIN ne voit que les chambres ou tables de sa compétence. Nouvelle, en cours, terminée — le statut est toujours clair." data-de="Jedes PIN sieht nur die Zimmer oder Tische, für die es zuständig ist. Neu, in Bearbeitung, abgeschlossen — der Status ist immer klar."></p>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/staff-01-dashboard.jpg" alt="Vista camere con richieste in arrivo" loading="lazy">
+      <p class="screen-caption" data-it="Vista camere con richieste in arrivo" data-en="Room overview with incoming requests" data-fr="Vue des chambres avec demandes entrantes" data-de="Zimmerübersicht mit eingehenden Anfragen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/staff-02-nuove.jpg" alt="Richieste nuove da evadere" loading="lazy">
+      <p class="screen-caption" data-it="Richieste nuove da evadere" data-en="New requests to handle" data-fr="Nouvelles demandes à traiter" data-de="Neue zu bearbeitende Anfragen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/staff-03-inlavorazione.jpg" alt="Presa in carico, poi consegnata" loading="lazy">
+      <p class="screen-caption" data-it="Presa in carico, poi consegnata" data-en="Taken, then marked delivered" data-fr="Prise en charge, puis livrée" data-de="Übernommen, dann als geliefert markiert"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/staff-04-completate.jpg" alt="Storico richieste completate" loading="lazy">
+      <p class="screen-caption" data-it="Storico richieste completate" data-en="History of completed requests" data-fr="Historique des demandes terminées" data-de="Verlauf abgeschlossener Anfragen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/staff-05-dashboard2.jpg" alt="Colpo d'occhio su tutte le camere" loading="lazy">
+      <p class="screen-caption" data-it="Colpo d'occhio su tutte le camere" data-en="Overview across all rooms" data-fr="Vue d'ensemble de toutes les chambres" data-de="Überblick über alle Zimmer"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
 </div>
 
 <div class="concept-section">
@@ -277,6 +315,47 @@
   </foreignObject>
 </svg>
   </div>
+</div>
+
+<div class="screens-section">
+  <div class="section-label" data-it="ADMIN PANEL · EDITOR CATALOGO" data-en="ADMIN PANEL · CATALOGUE EDITOR" data-fr="PANNEAU ADMIN · ÉDITEUR DE CATALOGUE" data-de="ADMIN-PANEL · KATALOG-EDITOR"></div>
+  <h2 class="section-title" data-it="L'editor che tieni <em>sempre a portata di mano.</em>" data-en="The editor you always <em>have at hand.</em>" data-fr="L'éditeur toujours <em>à portée de main.</em>" data-de="Der Editor, den Sie <em>immer griffbereit haben.</em>"></h2>
+  <p class="section-sub" data-it="Categorie, articoli, varianti, prezzi, disponibilità — tutto da telefono o computer, con anteprima esatta di quello che vedrà l'ospite." data-en="Categories, items, variants, prices, availability — all from phone or computer, with an exact preview of what the guest will see." data-fr="Catégories, articles, variantes, prix, disponibilité — tout depuis le téléphone ou l'ordinateur, avec un aperçu exact de ce que verra le client." data-de="Kategorien, Artikel, Varianten, Preise, Verfügbarkeit — alles vom Handy oder Computer aus, mit genauer Vorschau dessen, was der Gast sieht."></p>
+  <div class="screens-carousel">
+    <div class="screen-item">
+      <img src="screenshots/admin-01-categorie.jpg" alt="Categorie del catalogo, riordinabili" loading="lazy">
+      <p class="screen-caption" data-it="Categorie del catalogo, riordinabili" data-en="Catalogue categories, reorderable" data-fr="Catégories du catalogue, réorganisables" data-de="Katalogkategorien, neu anordbar"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-02-categoria.jpg" alt="Visibilità per tipo di unità" loading="lazy">
+      <p class="screen-caption" data-it="Visibilità per tipo di unità" data-en="Visibility by unit type" data-fr="Visibilité par type d'unité" data-de="Sichtbarkeit nach Einheitstyp"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-03-articoli.jpg" alt="Articoli con prezzo e disponibilità" loading="lazy">
+      <p class="screen-caption" data-it="Articoli con prezzo e disponibilità" data-en="Items with price and availability" data-fr="Articles avec prix et disponibilité" data-de="Artikel mit Preis und Verfügbarkeit"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-04-editstep1.jpg" alt="Titolo, descrizione, foto" loading="lazy">
+      <p class="screen-caption" data-it="Titolo, descrizione, foto" data-en="Title, description, photos" data-fr="Titre, description, photos" data-de="Titel, Beschreibung, Fotos"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-05-editstep1b.jpg" alt="Prezzo, disponibilità, stato" loading="lazy">
+      <p class="screen-caption" data-it="Prezzo, disponibilità, stato" data-en="Price, availability, status" data-fr="Prix, disponibilité, statut" data-de="Preis, Verfügbarkeit, Status"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-06-editstep2.jpg" alt="Taglie, colori, materiali" loading="lazy">
+      <p class="screen-caption" data-it="Taglie, colori, materiali" data-en="Sizes, colours, materials" data-fr="Tailles, couleurs, matières" data-de="Größen, Farben, Materialien"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-07-combinazioni.jpg" alt="Combinazioni generate automaticamente" loading="lazy">
+      <p class="screen-caption" data-it="Combinazioni generate automaticamente" data-en="Combinations generated automatically" data-fr="Combinaisons générées automatiquement" data-de="Automatisch generierte Kombinationen"></p>
+    </div>
+    <div class="screen-item">
+      <img src="screenshots/admin-08-anteprima.jpg" alt="Anteprima esatta lato ospite" loading="lazy">
+      <p class="screen-caption" data-it="Anteprima esatta lato ospite" data-en="Exact preview as the guest sees it" data-fr="Aperçu exact côté client" data-de="Genaue Vorschau aus Gastsicht"></p>
+    </div>
+  </div>
+  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →"></div>
 </div>
 
 <div class="concept-section">

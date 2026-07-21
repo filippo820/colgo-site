@@ -299,8 +299,21 @@
         el.innerHTML = text;
       });
       document.documentElement.lang = lang;
+      try { localStorage.setItem('colgo_lang', lang); } catch (e) {}
     }
-  setLang('it');
+  (function () {
+        var supported = ['it', 'en', 'fr', 'de'];
+        var saved = null;
+        try { saved = localStorage.getItem('colgo_lang'); } catch (e) {}
+        var initial;
+        if (saved && supported.indexOf(saved) !== -1) {
+          initial = saved;
+        } else {
+          var nav = ((navigator.language || navigator.userLanguage || 'it') + '').slice(0, 2).toLowerCase();
+          initial = supported.indexOf(nav) !== -1 ? nav : 'it';
+        }
+        setLang(initial);
+      })();
 </script>
 </body>
 </html>

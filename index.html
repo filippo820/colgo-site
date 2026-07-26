@@ -84,6 +84,11 @@
       opacity: 0.95;
     }
 
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:10px;letter-spacing:1.5px;transition:color 0.2s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+
     .nav-lang {
       display: flex;
       gap: 6px;
@@ -103,6 +108,13 @@
 
     .lang-btn.active, .lang-btn:hover { color: var(--gold); }
     .lang-btn:not(:last-child)::after { content: '/'; margin-left: 6px; color: var(--white-faint); }
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:4px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--cream);transition:transform .25s,opacity .25s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+    .nav-overlay.open{display:block;}
 
     /* ── HERO ── */
     .hero {
@@ -293,6 +305,80 @@
       margin: 0 auto 72px;
       line-height: 1.9;
       letter-spacing: 0.5px;
+    }
+
+    /* ── VERTICALS ── */
+    .verticals-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 32px 88px;
+    }
+
+    .verticals-label {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .verticals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .vertical-card {
+      display: block;
+      background: rgba(30,58,53,0.25);
+      padding: 40px 32px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .vertical-card:hover { background: rgba(30,58,53,0.4); transform: translateY(-4px); }
+
+    .vertical-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px; width: 0;
+      background: var(--gold);
+      transition: width 0.4s ease;
+      margin: 0 auto;
+    }
+
+    .vertical-card:hover::before { width: 100%; }
+
+    .vertical-icon { font-size: 34px; display: block; margin-bottom: 16px; }
+
+    .vertical-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .vertical-card p {
+      font-size: 13px;
+      color: var(--white-dim);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      min-height: 44px;
+    }
+
+    .vertical-more {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    @media (max-width: 700px) {
+      .verticals-grid { grid-template-columns: 1fr; }
     }
 
     /* ── PROBLEM GRID ── */
@@ -582,7 +668,10 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
-      nav { padding: 24px 24px; }
+      nav { padding: 20px 24px; }
+      .nav-toggle{display:flex;}
+      .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--black);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}
+      .nav-links.open{transform:translateX(0);}
       .problem-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
       .btn-ghost { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
@@ -595,13 +684,28 @@
 
   <!-- NAV -->
   <nav>
-    <img src="colgo-logo.png" alt="Colgo" class="nav-logo" />
-    <div class="nav-links-pages" style="display:flex;gap:24px;align-items:center;margin-right:24px;"><a href="/come-funziona.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a><a href="/per-chi.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a><a href="/faq.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a><a href="/organizzazione.html" style="color:rgba(245,241,232,0.5);text-decoration:none;font-size:11px;letter-spacing:2px;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='rgba(245,241,232,0.5)'" data-it="DETTAGLI" data-en="DETAILS" data-fr="DÉTAILS" data-de="DETAILS">DETTAGLI</a></div><div class="nav-lang">
-      <button class="lang-btn active" onclick="setLang('it')">IT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    <a href="/"><img src="colgo-logo.png" alt="Colgo" class="nav-logo" /></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+        <a href="/hotel.html" data-it="HOTEL" data-en="HOTEL" data-fr="HÔTEL" data-de="HOTEL">HOTEL</a>
+        <a href="/ristorante.html" data-it="RISTORANTE" data-en="RESTAURANT" data-fr="RESTAURANT" data-de="RESTAURANT">RISTORANTE</a>
+        <a href="/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT">NEGOZIO</a>
+        <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+        <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+        <a href="/organizzazione.html" data-it="DETTAGLI" data-en="DETAILS" data-fr="DÉTAILS" data-de="DETAILS">DETTAGLI</a>
+      </div>
+      <div class="nav-lang">
+        <button class="lang-btn active" onclick="setLang('it')">IT</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+    <div class="nav-overlay" onclick="document.querySelector('.nav-links').classList.remove('open');this.classList.remove('open');document.querySelector('.nav-toggle').classList.remove('open');"></div>
   </nav>
 
   <!-- HERO -->
@@ -637,6 +741,31 @@
       <div class="scroll-line"></div>
     </div>
   </div>
+
+  <!-- VERTICALI -->
+  <section class="verticals-section">
+    <div class="verticals-label" data-it="IL TUO SETTORE" data-en="YOUR BUSINESS" data-fr="VOTRE SECTEUR" data-de="IHR BEREICH"></div>
+    <div class="verticals-grid">
+      <a href="/hotel.html" class="vertical-card">
+        <span class="vertical-icon">🏨</span>
+        <h3 data-it="Struttura ricettiva" data-en="Accommodation" data-fr="Hébergement" data-de="Unterkunft"></h3>
+        <p data-it="Hotel, B&B, campeggi, agriturismi" data-en="Hotels, B&Bs, campsites, farm stays" data-fr="Hôtels, B&B, campings, fermes-auberges" data-de="Hotels, B&Bs, Campingplätze, Ferienhöfe"></p>
+        <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →"></span>
+      </a>
+      <a href="/ristorante.html" class="vertical-card">
+        <span class="vertical-icon">🍽️</span>
+        <h3 data-it="Ristorante" data-en="Restaurant" data-fr="Restaurant" data-de="Restaurant"></h3>
+        <p data-it="Cameriere o cliente, l'ordine arriva in cucina" data-en="Waiter or guest, the order reaches the kitchen" data-fr="Serveur ou client, la commande arrive en cuisine" data-de="Kellner oder Gast, die Bestellung erreicht die Küche"></p>
+        <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →"></span>
+      </a>
+      <a href="/negozio.html" class="vertical-card">
+        <span class="vertical-icon">🛍️</span>
+        <h3 data-it="Negozio" data-en="Shop" data-fr="Boutique" data-de="Geschäft"></h3>
+        <p data-it="Vetrina digitale sempre aperta, senza checkout" data-en="A digital window display, always open, no checkout" data-fr="Vitrine numérique toujours ouverte, sans paiement" data-de="Digitales Schaufenster, immer geöffnet, ohne Kasse"></p>
+        <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →"></span>
+      </a>
+    </div>
+  </section>
 
   <!-- PROBLEMA -->
   <section>

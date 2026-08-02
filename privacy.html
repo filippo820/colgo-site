@@ -130,12 +130,15 @@
   </ul>
   <p>Questi dati sono anonimi e non permettono di identificare il singolo utente.</p>
 
-  <p><strong>b) Dati forniti volontariamente</strong></p>
-  <p>Tramite il modulo di iscrizione alla lista d'attesa (Google Form), raccogliamo:</p>
+  <p><strong>b) Dati forniti alla registrazione</strong></p>
+  <p>Quando crei un account su <strong>app.colgo.app/registrati</strong> per attivare la prova gratuita di 30 giorni, raccogliamo:</p>
   <ul>
-    <li>Indirizzo email</li>
-    <li>Eventuali informazioni fornite volontariamente nel modulo (es. tipo di struttura)</li>
+    <li>Indirizzo email e password (gestiti dal sistema di autenticazione Supabase; la password non è mai leggibile da Colgo)</li>
+    <li>Nome della struttura e tipologia di attività (hotel, ristorante o negozio)</li>
+    <li>Un codice di accesso per lo staff, generato automaticamente e conservato solo in forma crittografata (hash), mai in chiaro</li>
+    <li>Paese e città approssimativi, derivati dall'indirizzo IP al momento della registrazione (nessun servizio di geolocalizzazione esterno)</li>
   </ul>
+  <p>È inoltre disponibile una <strong>modalità demo</strong> (app.colgo.app/demo) che non richiede un indirizzo email reale: viene generato un identificativo tecnico interno, e vengono raccolti dati aggregati sulla provenienza (fonte di traffico, paese, dispositivo) per scopi statistici.</p>
 
   <p><strong>c) Dati nell'applicazione</strong></p>
   <p>L'applicazione <strong>app.colgo.app</strong> non richiede registrazione agli utenti finali (ospiti). Raccogliamo esclusivamente:</p>
@@ -152,14 +155,14 @@
   <ul>
     <li><strong>Erogazione del servizio:</strong> consentire agli ospiti di comunicare con la struttura e inviare richieste/ordini</li>
     <li><strong>Statistiche di utilizzo:</strong> comprendere come gli utenti interagiscono con il sito e l'applicazione, con dati anonimi e aggregati</li>
-    <li><strong>Lista d'attesa:</strong> contattare gli utenti interessati al servizio Colgo</li>
+    <li><strong>Prova gratuita:</strong> creare e attivare l'account della struttura per il periodo di prova di 30 giorni</li>
     <li><strong>Miglioramento del servizio:</strong> ottimizzare le funzionalità dell'applicazione</li>
   </ul>
 
   <h2>4. Base giuridica del trattamento</h2>
   <ul>
-    <li><strong>Esecuzione di un contratto</strong> (art. 6 par. 1 lett. b GDPR): per i dati di sessione nell'applicazione, necessari all'erogazione del servizio richiesto dalla struttura</li>
-    <li><strong>Consenso</strong> (art. 6 par. 1 lett. a GDPR): per i cookie analitici e l'iscrizione alla lista d'attesa</li>
+    <li><strong>Esecuzione di un contratto</strong> (art. 6 par. 1 lett. b GDPR): per i dati di registrazione e di sessione nell'applicazione, necessari all'attivazione della prova gratuita e all'erogazione del servizio richiesto dalla struttura</li>
+    <li><strong>Consenso</strong> (art. 6 par. 1 lett. a GDPR): per i soli cookie analitici</li>
     <li><strong>Legittimo interesse</strong> (art. 6 par. 1 lett. f GDPR): per le statistiche anonime di utilizzo del servizio</li>
   </ul>
 
@@ -175,7 +178,8 @@
   <p>Colgo si avvale dei seguenti servizi di terze parti:</p>
   <ul>
     <li><strong>Google Analytics 4</strong> (Google LLC) — analisi del traffico. Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
-    <li><strong>Google Forms</strong> (Google LLC) — raccolta iscrizioni lista d'attesa</li>
+    <li><strong>Resend</strong> — invio di email transazionali (es. notifica interna di nuova registrazione)</li>
+    <li><strong>Stripe</strong> — gestione dei pagamenti per l'abbonamento Pro. I dati della carta vengono inseriti direttamente su una pagina ospitata da Stripe e non transitano mai sui server di Colgo. Privacy Policy: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a></li>
     <li><strong>Supabase</strong> — database e autenticazione per l'applicazione. I dati sono conservati in data center europei.</li>
     <li><strong>Vercel</strong> — hosting dell'applicazione web</li>
     <li><strong>Netlify</strong> — hosting del sito marketing</li>
@@ -185,7 +189,7 @@
   <h2>7. Conservazione dei dati</h2>
   <ul>
     <li><strong>Dati analitici:</strong> conservati per 14 mesi (impostazione predefinita di Google Analytics 4)</li>
-    <li><strong>Dati lista d'attesa:</strong> conservati fino alla revoca del consenso o alla conclusione del progetto Colgo</li>
+    <li><strong>Dati struttura e account:</strong> conservati per la durata di utilizzo del servizio (prova gratuita o abbonamento attivo), cancellabili su richiesta scrivendo a colgoapp@gmail.com</li>
     <li><strong>Dati di sessione dell'applicazione</strong> (nickname, camera, messaggi, ordini): eliminati automaticamente alla scadenza della sessione o su richiesta della struttura</li>
   </ul>
 

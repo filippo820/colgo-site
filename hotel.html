@@ -2,15 +2,106 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Analytics 4 — Colgo (tracciamento esteso) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+
+    // Lingua scelta dall'utente (il sito cambia lingua senza cambiare URL:
+    // senza questo parametro GA non saprebbe mai in che lingua è stata letta la pagina)
+    var lang = 'it';
+    try { lang = localStorage.getItem('colgo_lang') || document.documentElement.lang || 'it'; } catch(e){}
+
+    // Nome pulito della pagina (home, prezzi, hotel, ristorante...)
+    var slug = location.pathname.replace(/\/+$/,'').split('/').pop() || 'home';
+    slug = slug.replace(/\.html$/,'') || 'home';
+
+    gtag('config', 'G-4JCQ1EGSR9', {
+      colgo_lang: lang,
+      colgo_page: slug
+    });
+
+    var t0 = Date.now(), maxScroll = 0, sent = {};
+    function ev(name, params){ params = params || {}; params.colgo_lang = lang; params.colgo_page = slug; gtag('event', name, params); }
+    function secs(){ return Math.round((Date.now() - t0)/1000); }
+
+    function start(){
+
+      // 1. PROFONDITÀ DI LETTURA — quanto scende nella pagina
+      function onScroll(){
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / h) * 100));
+        if (pct > maxScroll) maxScroll = pct;
+        [25,50,75,90,100].forEach(function(s){
+          if (pct >= s && !sent['s'+s]) { sent['s'+s] = 1; ev('scroll_depth', { percent: s, seconds: secs() }); }
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+
+      // 2. TEMPO SULLA PAGINA — soglie progressive
+      [10,30,60,120,300].forEach(function(s){
+        setTimeout(function(){ if (!document.hidden) ev('time_on_page', { seconds: s }); }, s*1000);
+      });
+
+      // 3. SEZIONI EFFETTIVAMENTE VISTE — dove si è fermato a leggere
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            var name = el.id || (el.querySelector('h1,h2,h3') ? el.querySelector('h1,h2,h3').textContent.trim().slice(0,40) : '');
+            if (!name || sent['sec_'+name]) return;
+            sent['sec_'+name] = 1;
+            ev('section_view', { section: name, seconds: secs() });
+          });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section, header, footer').forEach(function(el){ io.observe(el); });
+      }
+
+      // 4. CLIC — CTA, navigazione, link esterni, email
+      document.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a || !a.href) return;
+        var href = a.href, label = (a.textContent || '').trim().slice(0,50);
+        if (href.indexOf('mailto:') === 0)            ev('click_email',   { link: href });
+        else if (href.indexOf('/demo') > -1)          ev('cta_demo',      { link: href, label: label });
+        else if (href.indexOf('/registrati') > -1)    ev('cta_signup',    { link: href, label: label });
+        else if (href.indexOf(location.hostname) > -1) ev('nav_click',    { link: href, label: label });
+        else                                          ev('click_esterno', { link: href, label: label });
+      }, true);
+
+      // 5. CAMBIO LINGUA
+      if (typeof window.setLang === 'function') {
+        var orig = window.setLang;
+        window.setLang = function(l){ var r = orig.apply(this, arguments); lang = l; ev('lang_switch', { nuova_lingua: l }); return r; };
+      }
+
+      // 6. USCITA — durata reale e punto massimo raggiunto
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState === 'hidden' && !sent.exit) {
+          sent.exit = 1;
+          ev('page_exit', { seconds: secs(), max_scroll: maxScroll });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  })();
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colgo per Hotel, B&B e Agriturismi — Catalogo digitale per ospiti</title>
   <meta name="description" content="Colgo per l'ospitalità: gli ospiti scansionano il QR in camera o ricevono il link prima dell'arrivo, esplorano servizi e inviano richieste in tempo reale alla reception." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4JCQ1EGSR9');</script>
-  <style>
+<style>
     :root{--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.8);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;--gold-light:#d4a84b;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}

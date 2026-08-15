@@ -124,7 +124,7 @@
       --gold-light:    #d4a84b;
       --gold-dim:      rgba(200,146,42,0.15);
       --white:         #F5F1E8;
-      --white-dim:     rgba(245,241,232,0.5);
+      --white-dim:     rgba(245,241,232,0.8);
       --white-faint:   rgba(245,241,232,0.08);
     }
 
@@ -764,7 +764,33 @@
       footer { flex-direction: column; gap: 16px; text-align: center; }
       .pricing-card { padding: 48px 28px; }
     }
-  </style>
+  
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 15px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 14px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 13px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .venue-tag { font-size: 11px; letter-spacing: 1.5px; }
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 11px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 11px; }
+  footer, .footer-links a { font-size: 12px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 12px; padding: 17px 32px; }
+}
+</style>
 </head>
 <body>
 

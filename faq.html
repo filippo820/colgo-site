@@ -149,7 +149,33 @@
     footer a:hover{color:var(--ochre);}
     .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
     @media(max-width:700px){nav{padding:20px 24px;}.nav-toggle{display:flex;}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--black);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}.nav-links.open{transform:translateX(0);}.faq-section{padding:0 20px 80px;}}
-  </style>
+  
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 15px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 14px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 13px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .venue-tag { font-size: 11px; letter-spacing: 1.5px; }
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 11px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 11px; }
+  footer, .footer-links a { font-size: 12px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 12px; padding: 17px 32px; }
+}
+</style>
 </head>
 <body>
 
@@ -236,7 +262,7 @@
 
   <div class="faq-item">
     <div class="faq-q" data-it="Quanto costa Colgo?" data-en="How much does Colgo cost?" data-fr="Combien coûte Colgo ?" data-de="Was kostet Colgo?"></div>
-    <div class="faq-a" data-it="Colgo costa €39 al mese, o €390 all'anno (equivale a 2 mesi gratis). Il periodo pilota è gratuito e senza obbligo." data-en="Colgo costs €39 per month, or €390 per year (equivalent to 2 months free). The pilot period is free with no obligation." data-fr="Colgo coûte 39€ par mois, ou 390€ par an (équivaut à 2 mois gratuits). La période pilote est gratuite et sans engagement." data-de="Colgo kostet 39€ pro Monat oder 390€ pro Jahr (entspricht 2 Gratismonaten). Die Pilotphase ist kostenlos und unverbindlich."></div>
+    <div class="faq-a" data-it="Dipende dal tipo di attività e dal piano. Si parte da 29 € al mese per i negozi e da 39 € per strutture ricettive e ristoranti, con due mensilità in omaggio scegliendo l&#39;annuale. Il listino completo è nella pagina Prezzi." data-en="It depends on the type of business and the plan. Prices start at €29 a month for shops and €39 for accommodation and restaurants, with two months free if you choose annual billing. The full price list is on the Pricing page." data-fr="Cela dépend du type d&#39;activité et de la formule. À partir de 29 € par mois pour les boutiques et 39 € pour les hébergements et les restaurants, avec deux mois offerts en choisissant l&#39;annuel. Le tarif complet est sur la page Tarifs." data-de="Das hängt von der Art des Betriebs und vom Tarif ab. Ab 29 € pro Monat für Geschäfte und ab 39 € für Beherbergungsbetriebe und Restaurants, mit zwei Gratismonaten bei jährlicher Zahlung. Die vollständige Preisliste finden Sie auf der Seite Preise."></div>
   </div>
 
   <div class="faq-item">
@@ -258,7 +284,7 @@
 
   <div class="faq-item">
     <div class="faq-q" data-it="I miei dati sono al sicuro?" data-en="Is my data safe?" data-fr="Mes données sont-elles en sécurité ?" data-de="Sind meine Daten sicher?"></div>
-    <div class="faq-a" data-it="Sì. Colgo utilizza un database PostgreSQL con politiche di sicurezza per riga e autenticazione JWT. I dati sono conservati in data center europei e non vengono mai condivisi con terze parti." data-en="Yes. Colgo uses a PostgreSQL database with row-level security policies and JWT authentication. Data is stored in European data centres and is never shared with third parties." data-fr="Oui. Colgo utilise une base de données PostgreSQL avec politiques de sécurité par ligne et authentification JWT. Les données sont stockées dans des centres de données européens et ne sont jamais partagées avec des tiers." data-de="Ja. Colgo nutzt eine PostgreSQL-Datenbank mit zeilenbasierten Sicherheitsrichtlinien und JWT-Authentifizierung. Daten werden in europäischen Rechenzentren gespeichert und nie an Dritte weitergegeben."></div>
+    <div class="faq-a" data-it="Sì. I dati sono conservati su infrastruttura europea, con isolamento totale tra strutture: nessuna struttura può vedere i dati di un&#39;altra. Non vendiamo né cediamo dati a nessuno. I fornitori tecnici che utilizziamo — hosting, database, pagamenti — sono elencati nella privacy policy, ciascuno con il proprio ruolo." data-en="Yes. Data is stored on European infrastructure, with complete isolation between properties: no property can see another&#39;s data. We do not sell or pass on data to anyone. The technical providers we use — hosting, database, payments — are listed in the privacy policy, each with its role." data-fr="Oui. Les données sont hébergées sur une infrastructure européenne, avec une isolation totale entre établissements : aucun établissement ne peut voir les données d&#39;un autre. Nous ne vendons ni ne cédons de données à qui que ce soit. Les prestataires techniques que nous utilisons — hébergement, base de données, paiements — sont listés dans la politique de confidentialité, chacun avec son rôle." data-de="Ja. Die Daten liegen auf europäischer Infrastruktur, mit vollständiger Trennung zwischen Betrieben: kein Betrieb kann die Daten eines anderen sehen. Wir verkaufen oder übermitteln keine Daten. Die technischen Dienstleister, die wir einsetzen — Hosting, Datenbank, Zahlungen — sind in der Datenschutzerklärung aufgeführt, jeweils mit ihrer Rolle."></div>
   </div>
 
 </div>
@@ -273,6 +299,7 @@
     <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
     <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
     <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+        <a href="/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise">Prezzi</a>
     <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     <a href="/organizzazione.html" data-it="Dettagli" data-en="Details" data-fr="Détails" data-de="Details">Dettagli</a>
     <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>

@@ -941,6 +941,23 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Schermate in home e nei prezzi (16/08/2026) ──────────────────────
+   36 schermate esistevano gia' ed erano usate su hotel, ristorante,
+   negozio e organizzazione — ma NON sulle due pagine dove atterra il
+   traffico. Chi arrivava in home leggeva del foglio plastificato e non
+   vedeva mai cosa compra. Stessi stili delle altre pagine, copiati e non
+   reinventati: il sito non ha parti condivise, quindi la coerenza si
+   ottiene solo copiando con cura. */
+.screens-section { padding:90px 32px 90px; text-align:center; }
+.screens-carousel { display:flex; gap:24px; overflow-x:auto; padding:24px 6px 20px;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  max-width:1100px; margin:0 auto; }
+.screens-carousel::-webkit-scrollbar { display:none; }
+.screen-item { flex:0 0 auto; scroll-snap-align:center; width:200px; text-align:left; }
+.screen-item img { width:100%; border-radius:24px; border:1px solid rgba(200,146,42,0.25);
+  box-shadow:0 20px 50px rgba(0,0,0,0.55); display:block; }
+@media (max-width:700px){ .screen-item { width:170px; } }
 </style>
 </head>
 <body>
@@ -1072,6 +1089,42 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
       </div>
     </div>
   </section>
+
+  <!-- Le schermate esistevano gia' in cartella: qui si mostrano dove la
+       gente arriva davvero. -->
+  <div class="screens-section">
+    <div class="gold-line"></div>
+    <div class="section-label" data-it="IL PRODOTTO, NON LA PROMESSA" data-en="THE PRODUCT, NOT THE PROMISE" data-fr="LE PRODUIT, PAS LA PROMESSE" data-de="DAS PRODUKT, NICHT DAS VERSPRECHEN">IL PRODOTTO, NON LA PROMESSA</div>
+    <h2 class="section-title" data-it="Ecco <em>cosa succede</em> davvero." data-en="Here is <em>what actually happens</em>." data-fr="Voici <em>ce qui se passe</em> vraiment." data-de="So <em>läuft es</em> wirklich ab.">Ecco <em>cosa succede</em> davvero.</h2>
+    <div class="screens-carousel">
+      <div class="screen-item">
+        <img src="screenshots/guest-03-catalogo.jpg" alt="Il cliente sfoglia il catalogo" loading="lazy">
+        <p class="screen-caption" data-it="Il cliente sfoglia il catalogo" data-en="The customer browses the catalogue" data-fr="Le client parcourt le catalogue" data-de="Der Kunde blättert im Katalog">Il cliente sfoglia il catalogo</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/guest-05-ordine.jpg" alt="Compone la richiesta" loading="lazy">
+        <p class="screen-caption" data-it="Compone la richiesta" data-en="Puts the request together" data-fr="Compose sa demande" data-de="Stellt die Anfrage zusammen">Compone la richiesta</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/staff-01-dashboard.jpg" alt="Tu la ricevi, in tempo reale" loading="lazy">
+        <p class="screen-caption" data-it="Tu la ricevi, in tempo reale" data-en="You receive it, in real time" data-fr="Vous la recevez, en temps réel" data-de="Sie empfangen sie in Echtzeit">Tu la ricevi, in tempo reale</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/rist-staff-01-tavoli.jpg" alt="Al ristorante: i tavoli a colpo d'occhio" loading="lazy">
+        <p class="screen-caption" data-it="Al ristorante: i tavoli a colpo d'occhio" data-en="In restaurants: tables at a glance" data-fr="Au restaurant : les tables en un coup d'œil" data-de="Im Restaurant: Tische auf einen Blick">Al ristorante: i tavoli a colpo d'occhio</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/shop-guest-03-categoria.jpg" alt="In negozio: la vetrina sempre aperta" loading="lazy">
+        <p class="screen-caption" data-it="In negozio: la vetrina sempre aperta" data-en="In shops: the window always open" data-fr="En boutique : la vitrine toujours ouverte" data-de="Im Laden: das Schaufenster immer offen">In negozio: la vetrina sempre aperta</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/admin-01-categorie.jpg" alt="E il catalogo lo governi tu" loading="lazy">
+        <p class="screen-caption" data-it="E il catalogo lo governi tu" data-en="And you run the catalogue" data-fr="Et c'est vous qui gérez le catalogue" data-de="Und den Katalog steuern Sie">E il catalogo lo governi tu</p>
+      </div>
+    </div>
+    <p class="screens-hint" data-it="SCORRI PER VEDERE" data-en="SWIPE TO SEE MORE" data-fr="FAITES DÉFILER" data-de="ZUM ANSEHEN WISCHEN">SCORRI PER VEDERE</p>
+  </div>
+
 
   <!-- VERTICALI -->
   <section class="verticals-section">

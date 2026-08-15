@@ -269,6 +269,28 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Schermate in home e nei prezzi (16/08/2026) ──────────────────────
+   36 schermate esistevano gia' ed erano usate su hotel, ristorante,
+   negozio e organizzazione — ma NON sulle due pagine dove atterra il
+   traffico. Chi arrivava in home leggeva del foglio plastificato e non
+   vedeva mai cosa compra. Stessi stili delle altre pagine, copiati e non
+   reinventati: il sito non ha parti condivise, quindi la coerenza si
+   ottiene solo copiando con cura. */
+.screens-section { padding:90px 32px 90px; text-align:center; }
+.screens-carousel { display:flex; gap:24px; overflow-x:auto; padding:24px 6px 20px;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  max-width:1100px; margin:0 auto; }
+.screens-carousel::-webkit-scrollbar { display:none; }
+.screen-item { flex:0 0 auto; scroll-snap-align:center; width:200px; text-align:left; }
+.screen-item img { width:100%; border-radius:24px; border:1px solid rgba(200,146,42,0.25);
+  box-shadow:0 20px 50px rgba(0,0,0,0.55); display:block; }
+@media (max-width:700px){ .screen-item { width:170px; } }
+
+.gold-line { width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 32px; }
+.section-title { font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;text-align:center; }
+.section-title em { font-style:italic;color:var(--ochre-l); }
 </style>
 </head>
 <body>
@@ -442,6 +464,30 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 </div>
 
 <p class="onboarding-note" data-it="Prima di qualsiasi pagamento c'è una demo gratuita di 30 giorni: <strong>provi il prodotto vero</strong>, non una versione ridotta, poi decidi se continuare. Nessun pagamento automatico — l'attivazione a pagamento avviene solo dopo, con un breve onboarding personale." data-en="Before any payment there's a free 30-day demo: <strong>you try the real product</strong>, not a limited version, then decide whether to continue. No automatic billing — paid activation only happens afterwards, through a short personal onboarding." data-fr="Avant tout paiement, il y a une démo gratuite de 30 jours : <strong>vous essayez le vrai produit</strong>, pas une version limitée, puis vous décidez de continuer ou non. Aucun paiement automatique — l'activation payante n'a lieu qu'ensuite, via un court accompagnement personnel." data-de="Vor jeder Zahlung gibt es eine kostenlose 30-Tage-Demo: <strong>Sie testen das echte Produkt</strong>, keine eingeschränkte Version, und entscheiden dann, ob Sie fortfahren möchten. Keine automatische Abrechnung — die kostenpflichtige Aktivierung erfolgt erst danach, im Rahmen eines kurzen persönlichen Onboardings.">Prima di qualsiasi pagamento c'è una demo gratuita di 30 giorni: <strong>provi il prodotto vero</strong>, non una versione ridotta, poi decidi se continuare. Nessun pagamento automatico — l'attivazione a pagamento avviene solo dopo, con un breve onboarding personale.</p>
+
+  <!-- Le schermate esistevano gia' in cartella: qui si mostrano dove la
+       gente arriva davvero. -->
+  <div class="screens-section">
+    <div class="gold-line"></div>
+    <div class="section-label" data-it="COSA STAI COMPRANDO" data-en="WHAT YOU ARE BUYING" data-fr="CE QUE VOUS ACHETEZ" data-de="WAS SIE KAUFEN">COSA STAI COMPRANDO</div>
+    <h2 class="section-title" data-it="Non un abbonamento al buio." data-en="Not a subscription in the dark." data-fr="Pas un abonnement à l'aveugle." data-de="Kein Abo im Blindflug.">Non un abbonamento al buio.</h2>
+    <div class="screens-carousel">
+      <div class="screen-item">
+        <img src="screenshots/guest-03-catalogo.jpg" alt="Il catalogo che vede il cliente" loading="lazy">
+        <p class="screen-caption" data-it="Il catalogo che vede il cliente" data-en="The catalogue your customer sees" data-fr="Le catalogue que voit le client" data-de="Der Katalog, den Ihr Kunde sieht">Il catalogo che vede il cliente</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/staff-01-dashboard.jpg" alt="Le richieste che arrivano a te" loading="lazy">
+        <p class="screen-caption" data-it="Le richieste che arrivano a te" data-en="The requests that reach you" data-fr="Les demandes qui vous parviennent" data-de="Die Anfragen, die bei Ihnen ankommen">Le richieste che arrivano a te</p>
+      </div>
+      <div class="screen-item">
+        <img src="screenshots/admin-04-editstep1.jpg" alt="Il pannello con cui gestisci tutto" loading="lazy">
+        <p class="screen-caption" data-it="Il pannello con cui gestisci tutto" data-en="The panel you manage it all from" data-fr="Le panneau depuis lequel vous gérez tout" data-de="Das Panel, mit dem Sie alles verwalten">Il pannello con cui gestisci tutto</p>
+      </div>
+    </div>
+    <p class="screens-hint" data-it="SCORRI PER VEDERE" data-en="SWIPE TO SEE MORE" data-fr="FAITES DÉFILER" data-de="ZUM ANSEHEN WISCHEN">SCORRI PER VEDERE</p>
+  </div>
+
 
 <div class="cta-section">
   <h2 class="cta-headline" data-it="Pronto a lasciare<br/><em>il foglio plastificato?</em>" data-en="Ready to leave<br/><em>the laminated sheet behind?</em>" data-fr="Prêt à abandonner<br/><em>la feuille plastifiée ?</em>" data-de="Bereit, das<br/><em>laminierte Blatt hinter sich zu lassen?</em>">Pronto a lasciare<br/><em>il foglio plastificato?</em></h2>

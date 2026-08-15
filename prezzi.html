@@ -97,6 +97,22 @@
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prezzi — Colgo</title>
+
+  <!-- Open Graph — anteprima quando il link viene condiviso su
+       WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
+       JavaScript, quindi leggono solo questi meta e il testo gia' presente
+       nei tag: senza, un link a colgo.app arriva in chat senza titolo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Colgo" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:title" content="Prezzi — Colgo" />
+  <meta property="og:description" content="Prezzi Colgo per hotel, ristoranti e negozi. Un prezzo per struttura, non per camera o tavolo. Mensile o annuale." />
+  <meta property="og:url" content="https://colgo.app/prezzi.html" />
+  <meta property="og:image" content="https://colgo.app/colgo-logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Prezzi — Colgo" />
+  <meta name="twitter:description" content="Prezzi Colgo per hotel, ristoranti e negozi. Un prezzo per struttura, non per camera o tavolo. Mensile o annuale." />
+  <meta name="twitter:image" content="https://colgo.app/colgo-logo.png" />
   <meta name="description" content="Prezzi Colgo per hotel, ristoranti e negozi. Un prezzo per struttura, non per camera o tavolo. Mensile o annuale." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -240,10 +256,10 @@
 
 <div class="page-hero">
   <div class="page-hero-glow"></div>
-  <div class="page-label" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE"></div>
+  <div class="page-label" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE">PREZZI</div>
   <h1 class="page-title" data-it="Un prezzo per struttura.<br/>Nessuna sorpresa <em>per camera o tavolo.</em>" data-en="One price per business.<br/>No surprises <em>per room or table.</em>" data-fr="Un prix par établissement.<br/>Aucune surprise <em>par chambre ou table.</em>" data-de="Ein Preis pro Betrieb.<br/>Keine Überraschungen <em>pro Zimmer oder Tisch.</em>"></h1>
-  <p class="page-sub" data-it="Scegli il tuo settore, scegli mensile o annuale. Nessun limite al numero di articoli in catalogo." data-en="Pick your sector, choose monthly or annual. No limit on the number of catalogue items." data-fr="Choisissez votre secteur, mensuel ou annuel. Aucune limite au nombre d'articles au catalogue." data-de="Wählen Sie Ihren Bereich, monatlich oder jährlich. Keine Begrenzung der Katalogartikel."></p>
-  <p class="page-sub" style="margin-top:8px;font-size:11px;letter-spacing:2px;color:var(--gold);opacity:0.85;" data-it="TUTTI I PREZZI SONO IVA ESCLUSA" data-en="ALL PRICES EXCLUDE VAT" data-fr="TOUS LES PRIX S'ENTENDENT HORS TAXES" data-de="ALLE PREISE VERSTEHEN SICH ZZGL. MWST."></p>
+  <p class="page-sub" data-it="Scegli il tuo settore, scegli mensile o annuale. Nessun limite al numero di articoli in catalogo." data-en="Pick your sector, choose monthly or annual. No limit on the number of catalogue items." data-fr="Choisissez votre secteur, mensuel ou annuel. Aucune limite au nombre d'articles au catalogue." data-de="Wählen Sie Ihren Bereich, monatlich oder jährlich. Keine Begrenzung der Katalogartikel.">Scegli il tuo settore, scegli mensile o annuale. Nessun limite al numero di articoli in catalogo.</p>
+  <p class="page-sub" style="margin-top:8px;font-size:11px;letter-spacing:2px;color:var(--gold);opacity:0.85;" data-it="TUTTI I PREZZI SONO IVA ESCLUSA" data-en="ALL PRICES EXCLUDE VAT" data-fr="TOUS LES PRIX S'ENTENDENT HORS TAXES" data-de="ALLE PREISE VERSTEHEN SICH ZZGL. MWST.">TUTTI I PREZZI SONO IVA ESCLUSA</p>
 </div>
 
 <div class="tabs-wrap">
@@ -265,15 +281,15 @@
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE">BASE</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390">39</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Catalogo digitale multilingua (IT/EN/FR/DE)" data-en="Multilingual digital catalogue (IT/EN/FR/DE)" data-fr="Catalogue numérique multilingue (IT/EN/FR/DE)" data-de="Mehrsprachiger digitaler Katalog (IT/EN/FR/DE)"></li>
-        <li data-it="QR in camera + link pre-arrivo" data-en="In-room QR + pre-arrival link" data-fr="QR en chambre + lien pré-arrivée" data-de="QR im Zimmer + Vor-Ankunfts-Link"></li>
-        <li data-it="Richieste in tempo reale in reception" data-en="Real-time requests at reception" data-fr="Demandes en temps réel à la réception" data-de="Anfragen in Echtzeit an der Rezeption"></li>
-        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar"></li>
-        <li data-it="Nessun download richiesto per l'ospite" data-en="No download required for the guest" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Gast nötig"></li>
-        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe"></li>
+        <li data-it="Catalogo digitale multilingua (IT/EN/FR/DE)" data-en="Multilingual digital catalogue (IT/EN/FR/DE)" data-fr="Catalogue numérique multilingue (IT/EN/FR/DE)" data-de="Mehrsprachiger digitaler Katalog (IT/EN/FR/DE)">Catalogo digitale multilingua (IT/EN/FR/DE)</li>
+        <li data-it="QR in camera + link pre-arrivo" data-en="In-room QR + pre-arrival link" data-fr="QR en chambre + lien pré-arrivée" data-de="QR im Zimmer + Vor-Ankunfts-Link">QR in camera + link pre-arrivo</li>
+        <li data-it="Richieste in tempo reale in reception" data-en="Real-time requests at reception" data-fr="Demandes en temps réel à la réception" data-de="Anfragen in Echtzeit an der Rezeption">Richieste in tempo reale in reception</li>
+        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar">App iOS e Android per lo staff — disponibile a breve</li>
+        <li data-it="Nessun download richiesto per l'ospite" data-en="No download required for the guest" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Gast nötig">Nessun download richiesto per l'ospite</li>
+        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe">PIN staff illimitati, anche su più strutture</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
@@ -282,21 +298,21 @@
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="59" data-annual="590">59</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);"></li>
-        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate"></li>
-        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart"></li>
-        <li class="pro-only" data-it="Magazzino: scorte per prodotto, scalate alla consegna" data-en="Inventory: stock per product, deducted on delivery" data-fr="Stock : quantités par produit, décomptées à la livraison" data-de="Lager: Bestand pro Produkt, bei Lieferung abgezogen"></li>
-        <li class="pro-only" data-it="Capacità a data: escursioni, noleggi, servizi su prenotazione" data-en="Capacity by date: tours, rentals, bookable services" data-fr="Capacité par date : excursions, locations, services sur réservation" data-de="Kapazität nach Datum: Ausflüge, Verleih, buchbare Leistungen"></li>
-        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload"></li>
+        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);">Tutto quello incluso in Base, più:</li>
+        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate">Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno</li>
+        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart">Storico incassi e transazioni, con il metodo di pagamento</li>
+        <li class="pro-only" data-it="Magazzino: scorte per prodotto, scalate alla consegna" data-en="Inventory: stock per product, deducted on delivery" data-fr="Stock : quantités par produit, décomptées à la livraison" data-de="Lager: Bestand pro Produkt, bei Lieferung abgezogen">Magazzino: scorte per prodotto, scalate alla consegna</li>
+        <li class="pro-only" data-it="Capacità a data: escursioni, noleggi, servizi su prenotazione" data-en="Capacity by date: tours, rentals, bookable services" data-fr="Capacité par date : excursions, locations, services sur réservation" data-de="Kapazität nach Datum: Ausflüge, Verleih, buchbare Leistungen">Capacità a data: escursioni, noleggi, servizi su prenotazione</li>
+        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload">Import catalogo via CSV e caricamento da foto</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
 
   </div>
-  <p class="pricing-note" data-it="Prezzo per struttura, non per camera. Vale per hotel, B&amp;B, agriturismi, campeggi e affini." data-en="Price per business, not per room. Applies to hotels, B&amp;Bs, farm stays, campsites and similar." data-fr="Prix par établissement, pas par chambre. Valable pour hôtels, B&amp;B, fermes-auberges, campings et similaires." data-de="Preis pro Betrieb, nicht pro Zimmer. Gilt für Hotels, B&amp;Bs, Ferienhöfe, Campingplätze und Ähnliches."></p>
+  <p class="pricing-note" data-it="Prezzo per struttura, non per camera. Vale per hotel, B&amp;B, agriturismi, campeggi e affini." data-en="Price per business, not per room. Applies to hotels, B&amp;Bs, farm stays, campsites and similar." data-fr="Prix par établissement, pas par chambre. Valable pour hôtels, B&amp;B, fermes-auberges, campings et similaires." data-de="Preis pro Betrieb, nicht pro Zimmer. Gilt für Hotels, B&amp;Bs, Ferienhöfe, Campingplätze und Ähnliches.">Prezzo per struttura, non per camera. Vale per hotel, B&amp;B, agriturismi, campeggi e affini.</p>
 </div>
 
 <!-- ═══════ RISTORANTE ═══════ -->
@@ -306,15 +322,15 @@
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE">BASE</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390">39</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Menù digitale multilingua (IT/EN/FR/DE)" data-en="Multilingual digital menu (IT/EN/FR/DE)" data-fr="Menu numérique multilingue (IT/EN/FR/DE)" data-de="Mehrsprachige digitale Speisekarte (IT/EN/FR/DE)"></li>
-        <li data-it="QR al tavolo, ordine cameriere o autonomo" data-en="QR at the table, waiter or self-ordering" data-fr="QR à table, commande serveur ou autonome" data-de="QR am Tisch, Bestellung per Kellner oder selbst"></li>
-        <li data-it="Comande in tempo reale in cucina" data-en="Real-time orders in the kitchen" data-fr="Commandes en temps réel en cuisine" data-de="Bestellungen in Echtzeit in der Küche"></li>
-        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar"></li>
-        <li data-it="Nessun download richiesto per il cliente" data-en="No download required for the customer" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Kunden nötig"></li>
-        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe"></li>
+        <li data-it="Menù digitale multilingua (IT/EN/FR/DE)" data-en="Multilingual digital menu (IT/EN/FR/DE)" data-fr="Menu numérique multilingue (IT/EN/FR/DE)" data-de="Mehrsprachige digitale Speisekarte (IT/EN/FR/DE)">Menù digitale multilingua (IT/EN/FR/DE)</li>
+        <li data-it="QR al tavolo, ordine cameriere o autonomo" data-en="QR at the table, waiter or self-ordering" data-fr="QR à table, commande serveur ou autonome" data-de="QR am Tisch, Bestellung per Kellner oder selbst">QR al tavolo, ordine cameriere o autonomo</li>
+        <li data-it="Comande in tempo reale in cucina" data-en="Real-time orders in the kitchen" data-fr="Commandes en temps réel en cuisine" data-de="Bestellungen in Echtzeit in der Küche">Comande in tempo reale in cucina</li>
+        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar">App iOS e Android per lo staff — disponibile a breve</li>
+        <li data-it="Nessun download richiesto per il cliente" data-en="No download required for the customer" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Kunden nötig">Nessun download richiesto per il cliente</li>
+        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe">PIN staff illimitati, anche su più strutture</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
@@ -323,20 +339,20 @@
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="69" data-annual="690">69</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);"></li>
-        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate"></li>
-        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart"></li>
-        <li class="pro-only" data-it="Capacità a data: serate e menù a posti limitati" data-en="Capacity by date: events and limited-seat menus" data-fr="Capacité par date : soirées et menus à places limitées" data-de="Kapazität nach Datum: Events und Menüs mit begrenzten Plätzen"></li>
-        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload"></li>
+        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);">Tutto quello incluso in Base, più:</li>
+        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate">Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno</li>
+        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart">Storico incassi e transazioni, con il metodo di pagamento</li>
+        <li class="pro-only" data-it="Capacità a data: serate e menù a posti limitati" data-en="Capacity by date: events and limited-seat menus" data-fr="Capacité par date : soirées et menus à places limitées" data-de="Kapazität nach Datum: Events und Menüs mit begrenzten Plätzen">Capacità a data: serate e menù a posti limitati</li>
+        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload">Import catalogo via CSV e caricamento da foto</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
 
   </div>
-  <p class="pricing-note" data-it="Prezzo per locale, non per tavolo. Include sia il flusso cameriere sia l'ordine autonomo del cliente." data-en="Price per venue, not per table. Includes both the waiter-led flow and guest self-ordering." data-fr="Prix par établissement, pas par table. Inclut le service par le serveur et la commande autonome du client." data-de="Preis pro Lokal, nicht pro Tisch. Umfasst sowohl den Kellner-Ablauf als auch die Selbstbestellung des Gasts."></p>
+  <p class="pricing-note" data-it="Prezzo per locale, non per tavolo. Include sia il flusso cameriere sia l'ordine autonomo del cliente." data-en="Price per venue, not per table. Includes both the waiter-led flow and guest self-ordering." data-fr="Prix par établissement, pas par table. Inclut le service par le serveur et la commande autonome du client." data-de="Preis pro Lokal, nicht pro Tisch. Umfasst sowohl den Kellner-Ablauf als auch die Selbstbestellung des Gasts.">Prezzo per locale, non per tavolo. Include sia il flusso cameriere sia l'ordine autonomo del cliente.</p>
 </div>
 
 <!-- ═══════ NEGOZIO ═══════ -->
@@ -346,15 +362,15 @@
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE">BASE</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="29" data-annual="290">29</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Catalogo prodotti multilingua (IT/EN/FR/DE)" data-en="Multilingual product catalogue (IT/EN/FR/DE)" data-fr="Catalogue produits multilingue (IT/EN/FR/DE)" data-de="Mehrsprachiger Produktkatalog (IT/EN/FR/DE)"></li>
-        <li data-it="QR in vetrina, funziona anche a negozio chiuso" data-en="QR in the window, works even when closed" data-fr="QR en vitrine, fonctionne même magasin fermé" data-de="QR im Schaufenster, auch bei geschlossenem Laden"></li>
-        <li data-it="Lista personale da mostrare al banco" data-en="Personal list to show at the counter" data-fr="Liste personnelle à présenter au comptoir" data-de="Persönliche Liste zum Vorzeigen an der Theke"></li>
-        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar"></li>
-        <li data-it="Nessun download richiesto per il cliente" data-en="No download required for the customer" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Kunden nötig"></li>
-        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe"></li>
+        <li data-it="Catalogo prodotti multilingua (IT/EN/FR/DE)" data-en="Multilingual product catalogue (IT/EN/FR/DE)" data-fr="Catalogue produits multilingue (IT/EN/FR/DE)" data-de="Mehrsprachiger Produktkatalog (IT/EN/FR/DE)">Catalogo prodotti multilingua (IT/EN/FR/DE)</li>
+        <li data-it="QR in vetrina, funziona anche a negozio chiuso" data-en="QR in the window, works even when closed" data-fr="QR en vitrine, fonctionne même magasin fermé" data-de="QR im Schaufenster, auch bei geschlossenem Laden">QR in vetrina, funziona anche a negozio chiuso</li>
+        <li data-it="Lista personale da mostrare al banco" data-en="Personal list to show at the counter" data-fr="Liste personnelle à présenter au comptoir" data-de="Persönliche Liste zum Vorzeigen an der Theke">Lista personale da mostrare al banco</li>
+        <li data-it="App iOS e Android per lo staff — disponibile a breve" data-en="iOS and Android staff app — available soon" data-fr="Application iOS et Android pour le personnel — bientôt disponible" data-de="iOS- und Android-App für das Personal — in Kürze verfügbar">App iOS e Android per lo staff — disponibile a breve</li>
+        <li data-it="Nessun download richiesto per il cliente" data-en="No download required for the customer" data-fr="Aucun téléchargement requis pour le client" data-de="Kein Download für den Kunden nötig">Nessun download richiesto per il cliente</li>
+        <li data-it="PIN staff illimitati, anche su più strutture" data-en="Unlimited staff PINs, across multiple properties" data-fr="PIN personnel illimités, sur plusieurs établissements" data-de="Unbegrenzte Mitarbeiter-PINs, auch für mehrere Betriebe">PIN staff illimitati, anche su più strutture</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
@@ -363,21 +379,21 @@
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO">PRO</div>
       <div class="pricing-amount"><span class="price-val" data-monthly="49" data-annual="490">49</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt."></span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt."></span></div>
-      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis"></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt.">al mese +IVA</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt.">all'anno +IVA</span></div>
+      <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis">Equivale a 2 mesi gratis</div>
       <ul class="pricing-features">
-        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);"></li>
-        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate"></li>
-        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart"></li>
-        <li class="pro-only" data-it="Magazzino: scorte per taglia e colore, scalate alla consegna" data-en="Inventory: stock by size and colour, deducted on delivery" data-fr="Stock : quantités par taille et couleur, décomptées à la livraison" data-de="Lager: Bestand nach Größe und Farbe, bei Lieferung abgezogen"></li>
-        <li class="pro-only" data-it="Capacità a data: posti e servizi su prenotazione" data-en="Capacity by date: slots and bookable services" data-fr="Capacité par date : places et services sur réservation" data-de="Kapazität nach Datum: Plätze und buchbare Leistungen"></li>
-        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload"></li>
+        <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" style="border-bottom:none;color:var(--cream);">Tutto quello incluso in Base, più:</li>
+        <li class="pro-only" data-it="Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno" data-en="Advanced statistics: trends, peak hours, average spend, best sellers, return rate" data-fr="Statistiques avancées : tendances, heures de pointe, panier moyen, meilleures ventes, taux de retour" data-de="Erweiterte Statistiken: Trends, Stoßzeiten, Durchschnittsbon, Bestseller, Wiederkehrrate">Statistiche avanzate: trend, orari di punta, incasso medio, prodotti più venduti, tasso di ritorno</li>
+        <li class="pro-only" data-it="Storico incassi e transazioni, con il metodo di pagamento" data-en="Revenue and transaction history, with payment method" data-fr="Historique des recettes et transactions, avec le mode de paiement" data-de="Umsatz- und Transaktionsverlauf, mit Zahlungsart">Storico incassi e transazioni, con il metodo di pagamento</li>
+        <li class="pro-only" data-it="Magazzino: scorte per taglia e colore, scalate alla consegna" data-en="Inventory: stock by size and colour, deducted on delivery" data-fr="Stock : quantités par taille et couleur, décomptées à la livraison" data-de="Lager: Bestand nach Größe und Farbe, bei Lieferung abgezogen">Magazzino: scorte per taglia e colore, scalate alla consegna</li>
+        <li class="pro-only" data-it="Capacità a data: posti e servizi su prenotazione" data-en="Capacity by date: slots and bookable services" data-fr="Capacité par date : places et services sur réservation" data-de="Kapazität nach Datum: Plätze und buchbare Leistungen">Capacità a data: posti e servizi su prenotazione</li>
+        <li class="pro-only" data-it="Import catalogo via CSV e caricamento da foto" data-en="Catalogue import via CSV and upload from photo" data-fr="Import du catalogue via CSV et import depuis une photo" data-de="Katalog-Import per CSV und Foto-Upload">Import catalogo via CSV e caricamento da foto</li>
       </ul>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
 
   </div>
-  <p class="pricing-note" data-it="Prezzo per negozio, non per vetrina o categoria. Nessun checkout online: il cliente mostra la lista al banco." data-en="Price per shop, not per window or category. No online checkout: the guest shows the list at the counter." data-fr="Prix par boutique, pas par vitrine ou catégorie. Aucun paiement en ligne : le client montre la liste au comptoir." data-de="Preis pro Geschäft, nicht pro Schaufenster oder Kategorie. Kein Online-Checkout: der Gast zeigt die Liste an der Theke."></p>
+  <p class="pricing-note" data-it="Prezzo per negozio, non per vetrina o categoria. Nessun checkout online: il cliente mostra la lista al banco." data-en="Price per shop, not per window or category. No online checkout: the guest shows the list at the counter." data-fr="Prix par boutique, pas par vitrine ou catégorie. Aucun paiement en ligne : le client montre la liste au comptoir." data-de="Preis pro Geschäft, nicht pro Schaufenster oder Kategorie. Kein Online-Checkout: der Gast zeigt die Liste an der Theke.">Prezzo per negozio, non per vetrina o categoria. Nessun checkout online: il cliente mostra la lista al banco.</p>
 </div>
 
 <p class="onboarding-note" data-it="Prima di qualsiasi pagamento c'è una demo gratuita di 30 giorni: <strong>provi il prodotto vero</strong>, non una versione ridotta, poi decidi se continuare. Nessun pagamento automatico — l'attivazione a pagamento avviene solo dopo, con un breve onboarding personale." data-en="Before any payment there's a free 30-day demo: <strong>you try the real product</strong>, not a limited version, then decide whether to continue. No automatic billing — paid activation only happens afterwards, through a short personal onboarding." data-fr="Avant tout paiement, il y a une démo gratuite de 30 jours : <strong>vous essayez le vrai produit</strong>, pas une version limitée, puis vous décidez de continuer ou non. Aucun paiement automatique — l'activation payante n'a lieu qu'ensuite, via un court accompagnement personnel." data-de="Vor jeder Zahlung gibt es eine kostenlose 30-Tage-Demo: <strong>Sie testen das echte Produkt</strong>, keine eingeschränkte Version, und entscheiden dann, ob Sie fortfahren möchten. Keine automatische Abrechnung — die kostenpflichtige Aktivierung erfolgt erst danach, im Rahmen eines kurzen persönlichen Onboardings."></p>

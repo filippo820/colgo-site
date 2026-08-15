@@ -217,6 +217,51 @@
 
   .btn-primary, .btn-ghost { font-size: 12px; padding: 17px 32px; }
 }
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 13px; }
+footer, .footer-links a, .footer-copy { font-size: 13px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.venue-type, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 12px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 13px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 16px; }
+  .lang-btn { font-size: 15px; }
+}
 </style>
 </head>
 <body>
@@ -266,7 +311,7 @@
       <rect x="150" y="10" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="166" y="18" width="568" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="ADMIN — PASSWORD PERSONALE" data-en="ADMIN — PERSONAL PASSWORD" data-fr="ADMIN — MOT DE PASSE PERSONNEL" data-de="ADMIN — PERSÖNLICHES PASSWORT">ADMIN — PASSWORD PERSONALE</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="ADMIN — PASSWORD PERSONALE" data-en="ADMIN — PERSONAL PASSWORD" data-fr="ADMIN — MOT DE PASSE PERSONNEL" data-de="ADMIN — PERSÖNLICHES PASSWORT">ADMIN — PASSWORD PERSONALE</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Accesso completo: configurazione, catalogo, prezzi, statistiche, account" data-en="Full access: configuration, catalogue, prices, statistics, account" data-fr="Accès complet : configuration, catalogue, prix, statistiques, compte" data-de="Vollzugriff: Konfiguration, Katalog, Preise, Statistiken, Konto">Accesso completo: configurazione, catalogo, prezzi, statistiche, account</div>
         </div>
       </foreignObject>
@@ -275,7 +320,7 @@
       <rect x="100" y="110" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="116" y="118" width="668" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="SUPERVISORE — PIN ACCOUNT" data-en="SUPERVISOR — ACCOUNT PIN" data-fr="SUPERVISEUR — PIN DE COMPTE" data-de="SUPERVISOR — KONTO-PIN">SUPERVISORE — PIN ACCOUNT</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="SUPERVISORE — PIN ACCOUNT" data-en="SUPERVISOR — ACCOUNT PIN" data-fr="SUPERVISEUR — PIN DE COMPTE" data-de="SUPERVISOR — KONTO-PIN">SUPERVISORE — PIN ACCOUNT</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="PIN che bypassa i codici struttura — utile per assistenza rapida senza condividere la password" data-en="PIN that bypasses structure codes — useful for quick support without sharing the password" data-fr="PIN qui contourne les codes d'établissement — utile pour une assistance rapide sans partager le mot de passe" data-de="PIN, das Betriebscodes umgeht — nützlich für schnelle Hilfe ohne Passwortweitergabe">PIN che bypassa i codici struttura — utile per assistenza rapida senza condividere la password</div>
         </div>
       </foreignObject>
@@ -284,7 +329,7 @@
       <rect x="50" y="210" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="66" y="218" width="768" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RECEPTION — CODICE STRUTTURA" data-en="RECEPTION — STRUCTURE CODE" data-fr="RÉCEPTION — CODE ÉTABLISSEMENT" data-de="REZEPTION — BETRIEBSCODE">RECEPTION — CODICE STRUTTURA</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RECEPTION — CODICE STRUTTURA" data-en="RECEPTION — STRUCTURE CODE" data-fr="RÉCEPTION — CODE ÉTABLISSEMENT" data-de="REZEPTION — BETRIEBSCODE">RECEPTION — CODICE STRUTTURA</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Accesso al pannello richieste di una sede specifica — vede e gestisce tutte le richieste in arrivo" data-en="Access to one venue's request panel — sees and manages all incoming requests" data-fr="Accès au panneau de demandes d'un établissement — voit et gère toutes les demandes entrantes" data-de="Zugriff auf das Anfragen-Panel eines Betriebs — sieht und verwaltet alle eingehenden Anfragen">Accesso al pannello richieste di una sede specifica — vede e gestisce tutte le richieste in arrivo</div>
         </div>
       </foreignObject>
@@ -293,7 +338,7 @@
       <rect x="0" y="310" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="16" y="318" width="868" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="CAMERIERE — PIN SINGOLO" data-en="WAITER — SINGLE PIN" data-fr="SERVEUR — PIN UNIQUE" data-de="KELLNER — EINZELNER PIN">CAMERIERE — PIN SINGOLO</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="CAMERIERE — PIN SINGOLO" data-en="WAITER — SINGLE PIN" data-fr="SERVEUR — PIN UNIQUE" data-de="KELLNER — EINZELNER PIN">CAMERIERE — PIN SINGOLO</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Accesso minimo: solo invio e gestione degli ordini al tavolo, nient'altro" data-en="Minimal access: only sending and managing table orders, nothing else" data-fr="Accès minimal : uniquement envoi et gestion des commandes de table, rien d'autre" data-de="Minimaler Zugriff: nur Senden und Verwalten von Tischbestellungen, sonst nichts">Accesso minimo: solo invio e gestione degli ordini al tavolo, nient'altro</div>
         </div>
       </foreignObject>
@@ -352,7 +397,7 @@
       <rect x="30" y="110" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="46" y="118" width="158" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;text-align:center;align-items:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="PIN UNICO" data-en="SINGLE PIN" data-fr="PIN UNIQUE" data-de="EINZELNER PIN">PIN UNICO</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="PIN UNICO" data-en="SINGLE PIN" data-fr="PIN UNIQUE" data-de="EINZELNER PIN">PIN UNICO</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Assegnato a un membro dello staff" data-en="Assigned to one staff member" data-fr="Attribué à un membre du personnel" data-de="Einem Teammitglied zugewiesen">Assegnato a un membro dello staff</div>
         </div>
       </foreignObject>
@@ -361,7 +406,7 @@
       <rect x="420" y="30" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="38" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="HOTEL CENTRALE" data-en="HOTEL CENTRALE" data-fr="HOTEL CENTRALE" data-de="HOTEL CENTRALE">HOTEL CENTRALE</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="HOTEL CENTRALE" data-en="HOTEL CENTRALE" data-fr="HOTEL CENTRALE" data-de="HOTEL CENTRALE">HOTEL CENTRALE</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Prima sede coperta dal PIN" data-en="First venue covered by the PIN" data-fr="Premier établissement couvert par le PIN" data-de="Erster vom PIN abgedeckter Betrieb">Prima sede coperta dal PIN</div>
         </div>
       </foreignObject>
@@ -370,7 +415,7 @@
       <rect x="420" y="110" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="118" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RISTORANTE ANNESSO" data-en="ANNEX RESTAURANT" data-fr="RESTAURANT ANNEXE" data-de="ANGESCHLOSSENES RESTAURANT">RISTORANTE ANNESSO</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RISTORANTE ANNESSO" data-en="ANNEX RESTAURANT" data-fr="RESTAURANT ANNEXE" data-de="ANGESCHLOSSENES RESTAURANT">RISTORANTE ANNESSO</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Seconda sede coperta dal PIN" data-en="Second venue covered by the PIN" data-fr="Deuxième établissement couvert par le PIN" data-de="Zweiter vom PIN abgedeckter Betrieb">Seconda sede coperta dal PIN</div>
         </div>
       </foreignObject>
@@ -379,7 +424,7 @@
       <rect x="420" y="190" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="198" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="BEACH BAR" data-en="BEACH BAR" data-fr="BEACH BAR" data-de="BEACH BAR">BEACH BAR</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="BEACH BAR" data-en="BEACH BAR" data-fr="BEACH BAR" data-de="BEACH BAR">BEACH BAR</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Terza sede coperta dal PIN" data-en="Third venue covered by the PIN" data-fr="Troisième établissement couvert par le PIN" data-de="Dritter vom PIN abgedeckter Betrieb">Terza sede coperta dal PIN</div>
         </div>
       </foreignObject>
@@ -395,7 +440,7 @@
     <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:760px;display:block;margin:0 auto;overflow:visible;">
   <!-- Colonna sinistra: disattivi il padre -->
   <foreignObject x="20" y="0" width="400" height="30">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;color:#AEB8AE;text-align:center;" data-it="SE DISATTIVI IL PADRE" data-en="IF YOU DEACTIVATE THE PARENT" data-fr="SI VOUS DÉSACTIVEZ LE PARENT" data-de="WENN SIE DAS ÜBERGEORDNETE DEAKTIVIEREN">SE DISATTIVI IL PADRE</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:2px;color:#AEB8AE;text-align:center;" data-it="SE DISATTIVI IL PADRE" data-en="IF YOU DEACTIVATE THE PARENT" data-fr="SI VOUS DÉSACTIVEZ LE PARENT" data-de="WENN SIE DAS ÜBERGEORDNETE DEAKTIVIEREN">SE DISATTIVI IL PADRE</div>
   </foreignObject>
 
   <g stroke="#AEB8AE" stroke-width="1" opacity="0.35" fill="none">
@@ -406,20 +451,20 @@
 
   <rect x="120" y="40" width="200" height="40" rx="4" fill="#5a1f1f" opacity="0.4" stroke="#c94f4f" stroke-width="1" stroke-opacity="0.5"/>
   <foreignObject x="130" y="46" width="180" height="30">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:11px;color:#F5F1E8;text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Categoria — OFF" data-en="Category — OFF" data-fr="Catégorie — OFF" data-de="Kategorie — OFF">Categoria — OFF</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:13px;color:#F5F1E8;text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Categoria — OFF" data-en="Category — OFF" data-fr="Catégorie — OFF" data-de="Kategorie — OFF">Categoria — OFF</div>
   </foreignObject>
 
   <rect x="30" y="150" width="120" height="34" rx="4" fill="#2a2a2a" opacity="0.6" stroke="#666" stroke-width="1" stroke-opacity="0.4"/>
   <rect x="170" y="150" width="120" height="34" rx="4" fill="#2a2a2a" opacity="0.6" stroke="#666" stroke-width="1" stroke-opacity="0.4"/>
   <rect x="310" y="150" width="120" height="34" rx="4" fill="#2a2a2a" opacity="0.6" stroke="#666" stroke-width="1" stroke-opacity="0.4"/>
   <foreignObject x="30" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
   </foreignObject>
   <foreignObject x="170" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
   </foreignObject>
   <foreignObject x="310" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce (nascosta)" data-en="Item (hidden)" data-fr="Article (masqué)" data-de="Eintrag (versteckt)">Voce (nascosta)</div>
   </foreignObject>
 
   <foreignObject x="20" y="200" width="400" height="60">
@@ -431,7 +476,7 @@
 
   <!-- Colonna destra: disattivi una voce figlia -->
   <foreignObject x="480" y="0" width="400" height="30">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;color:#AEB8AE;text-align:center;" data-it="SE DISATTIVI UNA VOCE FIGLIA" data-en="IF YOU DEACTIVATE ONE CHILD ITEM" data-fr="SI VOUS DÉSACTIVEZ UN ARTICLE ENFANT" data-de="WENN SIE EINEN UNTERGEORDNETEN EINTRAG DEAKTIVIEREN">SE DISATTIVI UNA VOCE FIGLIA</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:2px;color:#AEB8AE;text-align:center;" data-it="SE DISATTIVI UNA VOCE FIGLIA" data-en="IF YOU DEACTIVATE ONE CHILD ITEM" data-fr="SI VOUS DÉSACTIVEZ UN ARTICLE ENFANT" data-de="WENN SIE EINEN UNTERGEORDNETEN EINTRAG DEAKTIVIEREN">SE DISATTIVI UNA VOCE FIGLIA</div>
   </foreignObject>
 
   <g stroke="#AEB8AE" stroke-width="1" opacity="0.35" fill="none">
@@ -442,20 +487,20 @@
 
   <rect x="580" y="40" width="200" height="40" rx="4" fill="#1E3A35" opacity="0.5" stroke="#C8922A" stroke-width="1" stroke-opacity="0.5"/>
   <foreignObject x="590" y="46" width="180" height="30">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:11px;color:#F5F1E8;text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Categoria — resta ON" data-en="Category — stays ON" data-fr="Catégorie — reste ON" data-de="Kategorie — bleibt ON">Categoria — resta ON</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:13px;color:#F5F1E8;text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Categoria — resta ON" data-en="Category — stays ON" data-fr="Catégorie — reste ON" data-de="Kategorie — bleibt ON">Categoria — resta ON</div>
   </foreignObject>
 
   <rect x="490" y="150" width="120" height="34" rx="4" fill="#2a2a2a" opacity="0.6" stroke="#666" stroke-width="1" stroke-opacity="0.4"/>
   <rect x="630" y="150" width="120" height="34" rx="4" fill="#1E3A35" opacity="0.5" stroke="#C8922A" stroke-width="1" stroke-opacity="0.4"/>
   <rect x="770" y="150" width="120" height="34" rx="4" fill="#1E3A35" opacity="0.5" stroke="#C8922A" stroke-width="1" stroke-opacity="0.4"/>
   <foreignObject x="490" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — OFF" data-en="Item — OFF" data-fr="Article — OFF" data-de="Eintrag — OFF">Voce — OFF</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.5);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — OFF" data-en="Item — OFF" data-fr="Article — OFF" data-de="Eintrag — OFF">Voce — OFF</div>
   </foreignObject>
   <foreignObject x="630" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.85);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — visibile" data-en="Item — visible" data-fr="Article — visible" data-de="Eintrag — sichtbar">Voce — visibile</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.85);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — visibile" data-en="Item — visible" data-fr="Article — visible" data-de="Eintrag — sichtbar">Voce — visibile</div>
   </foreignObject>
   <foreignObject x="770" y="153" width="120" height="28">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(245,241,232,0.85);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — visibile" data-en="Item — visible" data-fr="Article — visible" data-de="Eintrag — sichtbar">Voce — visibile</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;color:rgba(245,241,232,0.85);text-align:center;display:flex;align-items:center;justify-content:center;height:100%;" data-it="Voce — visibile" data-en="Item — visible" data-fr="Article — visible" data-de="Eintrag — sichtbar">Voce — visibile</div>
   </foreignObject>
 
   <foreignObject x="480" y="200" width="400" height="60">
@@ -522,7 +567,7 @@
       <rect x="30" y="110" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="46" y="118" width="158" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;text-align:center;align-items:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="UN ACCOUNT" data-en="ONE ACCOUNT" data-fr="UN COMPTE" data-de="EIN KONTO">UN ACCOUNT</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="UN ACCOUNT" data-en="ONE ACCOUNT" data-fr="UN COMPTE" data-de="EIN KONTO">UN ACCOUNT</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Stessa email amministratore per tutte le sedi" data-en="Same admin email for every venue" data-fr="Même e-mail admin pour tous les établissements" data-de="Dieselbe Admin-E-Mail für alle Standorte">Stessa email amministratore per tutte le sedi</div>
         </div>
       </foreignObject>
@@ -537,7 +582,7 @@
       <rect x="420" y="30" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="38" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="HOTEL PRÀ DE LA FAM" data-en="HOTEL PRÀ DE LA FAM" data-fr="HOTEL PRÀ DE LA FAM" data-de="HOTEL PRÀ DE LA FAM">HOTEL PRÀ DE LA FAM</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="HOTEL PRÀ DE LA FAM" data-en="HOTEL PRÀ DE LA FAM" data-fr="HOTEL PRÀ DE LA FAM" data-de="HOTEL PRÀ DE LA FAM">HOTEL PRÀ DE LA FAM</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Struttura principale" data-en="Main venue" data-fr="Établissement principal" data-de="Hauptbetrieb">Struttura principale</div>
         </div>
       </foreignObject>
@@ -546,7 +591,7 @@
       <rect x="420" y="110" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="118" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RISTORANTE DEL LAGO" data-en="LAKESIDE RESTAURANT" data-fr="RESTAURANT DU LAC" data-de="SEE-RESTAURANT">RISTORANTE DEL LAGO</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="RISTORANTE DEL LAGO" data-en="LAKESIDE RESTAURANT" data-fr="RESTAURANT DU LAC" data-de="SEE-RESTAURANT">RISTORANTE DEL LAGO</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Seconda sede, stesso account" data-en="Second venue, same account" data-fr="Deuxième établissement, même compte" data-de="Zweiter Standort, gleiches Konto">Seconda sede, stesso account</div>
         </div>
       </foreignObject>
@@ -555,13 +600,13 @@
       <rect x="420" y="190" width="4" height="80" fill="#C8922A"/>
       <foreignObject x="436" y="198" width="188" height="64">
         <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;color:#F5F1E8;height:100%;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="BOUTIQUE VENDITA" data-en="BOUTIQUE SHOP" data-fr="BOUTIQUE" data-de="BOUTIQUE-GESCHÄFT">BOUTIQUE VENDITA</div>
+          <div style="font-size:13px;letter-spacing:2px;color:#C8922A;margin-bottom:6px;" data-it="BOUTIQUE VENDITA" data-en="BOUTIQUE SHOP" data-fr="BOUTIQUE" data-de="BOUTIQUE-GESCHÄFT">BOUTIQUE VENDITA</div>
           <div style="font-size:12px;line-height:1.5;color:rgba(245,241,232,0.75);" data-it="Terza sede, un tap per passare" data-en="Third venue, one tap to switch" data-fr="Troisième établissement, un tap pour changer" data-de="Dritter Standort, ein Tap zum Wechseln">Terza sede, un tap per passare</div>
         </div>
       </foreignObject>
 
   <foreignObject x="680" y="10" width="200" height="20">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;color:#AEB8AE;text-align:right;" data-it="SWITCHER IN ALTO" data-en="SWITCHER AT THE TOP" data-fr="SÉLECTEUR EN HAUT" data-de="WECHSLER OBEN">SWITCHER IN ALTO</div>
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:2px;color:#AEB8AE;text-align:right;" data-it="SWITCHER IN ALTO" data-en="SWITCHER AT THE TOP" data-fr="SÉLECTEUR EN HAUT" data-de="WECHSLER OBEN">SWITCHER IN ALTO</div>
   </foreignObject>
 </svg>
   </div>

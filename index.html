@@ -896,6 +896,51 @@
   .ring-wrap{animation:none;opacity:1;}
   .seg .arc,.lbl{transition:none;}
 }
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 13px; }
+footer, .footer-links a, .footer-copy { font-size: 13px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.venue-type, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 12px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 13px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 16px; }
+  .lang-btn { font-size: 15px; }
+}
 </style>
 </head>
 <body>
@@ -1172,7 +1217,7 @@
       <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S'INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
     </div>
-    <p style="font-size:11px;letter-spacing:1px;color:rgba(245,241,232,0.35);margin-top:20px;" data-it="Nessuna registrazione richiesta &middot; 30 secondi" data-en="No signup required &middot; 30 seconds" data-fr="Aucune inscription requise &middot; 30 secondes" data-de="Keine Registrierung nötig &middot; 30 Sekunden">Nessuna registrazione richiesta &middot; 30 secondi</p>
+    <p style="font-size:13px;letter-spacing:1px;color:rgba(245,241,232,0.35);margin-top:20px;" data-it="Nessuna registrazione richiesta &middot; 30 secondi" data-en="No signup required &middot; 30 seconds" data-fr="Aucune inscription requise &middot; 30 secondes" data-de="Keine Registrierung nötig &middot; 30 Sekunden">Nessuna registrazione richiesta &middot; 30 secondi</p>
   </div>
 
   <!-- FOOTER -->
@@ -1216,9 +1261,9 @@
 
       <!-- Link legali -->
       <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-        <a href="mailto:colgoapp@gmail.com" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;">colgoapp@gmail.com</a>
-        <a href="/privacy.html" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
-        <a href="/privacy.html#cookie" style="font-size:10px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie">Cookie Policy</a>
+        <a href="mailto:colgoapp@gmail.com" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;">colgoapp@gmail.com</a>
+        <a href="/privacy.html" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
+        <a href="/privacy.html#cookie" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie">Cookie Policy</a>
       </div>
 
       <div class="footer-copy">© 2026 COLGO · COLGO.APP</div>

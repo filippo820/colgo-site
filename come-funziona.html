@@ -269,6 +269,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -445,32 +456,32 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <p class="section-sub" data-it="Colgo è progettato per essere semplice da usare, non per impressionare con funzionalità che non userai mai." data-en="Colgo is designed to be simple to use, not to impress with features you will never use." data-fr="Colgo est conçu pour être simple à utiliser, pas pour impressionner avec des fonctionnalités que vous n'utiliserez jamais." data-de="Colgo ist auf einfache Bedienung ausgelegt, nicht darauf, mit nie genutzten Funktionen zu beeindrucken.">Colgo è progettato per essere semplice da usare, non per impressionare con funzionalità che non userai mai.</p>
   <div class="tech-grid">
     <div class="tech-card">
-      <div class="tech-card-icon">🌍</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg></div>
       <div class="tech-card-title" data-it="4 LINGUE" data-en="4 LANGUAGES" data-fr="4 LANGUES" data-de="4 SPRACHEN">4 LINGUE</div>
       <div class="tech-card-desc" data-it="IT · EN · DE · FR. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR. Automatic translation on publish. Zero manual work." data-fr="IT · EN · DE · FR. Traduction automatique à la publication. Zéro travail manuel." data-de="IT · EN · DE · FR. Automatische Übersetzung bei Veröffentlichung. Kein manueller Aufwand.">IT · EN · DE · FR. Traduzione automatica alla pubblicazione. Zero lavoro manuale.</div>
     </div>
     <div class="tech-card">
-      <div class="tech-card-icon">📱</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2"/><path d="M10.5 18.7h3"/></svg></div>
       <div class="tech-card-title" data-it="ZERO DOWNLOAD" data-en="ZERO DOWNLOAD" data-fr="ZÉRO TÉLÉCHARGEMENT" data-de="KEIN DOWNLOAD">ZERO DOWNLOAD</div>
       <div class="tech-card-desc" data-it="Web app — si apre nel browser. Niente App Store, niente registrazione per l'ospite." data-en="Web app — opens in the browser. No App Store, no registration for the guest." data-fr="Application web — s'ouvre dans le navigateur. Pas d'App Store, pas d'inscription pour le client." data-de="Web-App — öffnet sich im Browser. Kein App Store, keine Registrierung für den Gast.">Web app — si apre nel browser. Niente App Store, niente registrazione per l'ospite.</div>
     </div>
     <div class="tech-card">
-      <div class="tech-card-icon">⚡</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg></div>
       <div class="tech-card-title" data-it="TEMPO REALE" data-en="REAL TIME" data-fr="TEMPS RÉEL" data-de="ECHTZEIT">TEMPO REALE</div>
       <div class="tech-card-desc" data-it="Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale." data-en="Requests arrive at reception immediately. No delay, no manual refresh." data-fr="Les demandes arrivent immédiatement à la réception. Aucun délai, aucun rafraîchissement manuel." data-de="Anfragen kommen sofort an der Rezeption an. Keine Verzögerung, kein manuelles Neuladen.">Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale.</div>
     </div>
     <div class="tech-card">
-      <div class="tech-card-icon">🕐</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.3l3.4 2"/></svg></div>
       <div class="tech-card-title" data-it="ORARI SMART" data-en="SMART HOURS" data-fr="HORAIRES INTELLIGENTS" data-de="INTELLIGENTE ZEITEN">ORARI SMART</div>
       <div class="tech-card-desc" data-it="Fasce orarie, pause, servizi prenotabili in anticipo. Il catalogo si gestisce da solo." data-en="Time slots, breaks, services bookable in advance. The catalogue manages itself." data-fr="Plages horaires, pauses, services réservables à l'avance. Le catalogue se gère tout seul." data-de="Zeitfenster, Pausen, im Voraus buchbare Leistungen. Der Katalog verwaltet sich von selbst.">Fasce orarie, pause, servizi prenotabili in anticipo. Il catalogo si gestisce da solo.</div>
     </div>
     <div class="tech-card">
-      <div class="tech-card-icon">✈️</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.2l6.4 2.4L11.8 20z"/><path d="M21 4 9.4 13.6"/></svg></div>
       <div class="tech-card-title" data-it="PRE-ARRIVO" data-en="PRE-ARRIVAL" data-fr="PRÉ-ARRIVÉE" data-de="VOR ANKUNFT">PRE-ARRIVO</div>
       <div class="tech-card-desc" data-it="Invii il link prima del check-in. L'ospite pianifica il soggiorno prima di arrivare." data-en="Send the link before check-in. The guest plans their stay before arriving." data-fr="Vous envoyez le lien avant le check-in. Le client planifie son séjour avant d'arriver." data-de="Sie senden den Link vor dem Check-in. Der Gast plant den Aufenthalt vor der Ankunft.">Invii il link prima del check-in. L'ospite pianifica il soggiorno prima di arrivare.</div>
     </div>
     <div class="tech-card">
-      <div class="tech-card-icon">🔧</div>
+      <div class="tech-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3.5a4.5 4.5 0 0 0-5.8 5.8L3 16v5h5l6.7-6.7a4.5 4.5 0 0 0 5.8-5.8L18 11l-3-3z"/></svg></div>
       <div class="tech-card-title" data-it="ADMIN PANEL" data-en="ADMIN PANEL" data-fr="PANNEAU ADMIN" data-de="ADMIN-PANEL">ADMIN PANEL</div>
       <div class="tech-card-desc" data-it="Modifica prezzi, aggiungi servizi — tutto online in pochi secondi dal telefono o dal computer." data-en="Change prices, add services — everything live in seconds from your phone or computer." data-fr="Modifiez les prix, ajoutez des services — tout en ligne en quelques secondes depuis votre téléphone ou ordinateur." data-de="Preise ändern, Leistungen hinzufügen — alles in Sekunden online, vom Handy oder Computer.">Modifica prezzi, aggiungi servizi — tutto online in pochi secondi dal telefono o dal computer.</div>
     </div>

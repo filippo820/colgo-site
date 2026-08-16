@@ -258,6 +258,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -294,7 +305,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <div class="page-label" data-it="PER STRUTTURE RICETTIVE" data-en="FOR ACCOMMODATION" data-fr="POUR HÉBERGEMENTS" data-de="FÜR UNTERKÜNFTE">PER STRUTTURE RICETTIVE</div>
   <h1 class="page-title" data-it="L'ospitalità che <em>non fa aspettare</em>." data-en="Hospitality that <em>doesn't make people wait</em>." data-fr="L'hospitalité qui <em>ne fait pas attendre</em>." data-de="Gastfreundschaft, die <em>nicht warten lässt</em>.">L'ospitalità che <em>non fa aspettare</em>.</h1>
   <p class="page-sub" data-it="Il tuo ospite riceve il link prima di arrivare, o scansiona il QR in camera. Trova colazione, spa, noleggio bici e info locali — nella sua lingua, sempre aggiornati." data-en="Your guest gets the link before arrival, or scans the QR in the room. They find breakfast, spa, bike rental and local info — in their language, always up to date." data-fr="Votre client reçoit le lien avant son arrivée, ou scanne le QR dans la chambre. Il trouve petit-déjeuner, spa, location de vélos et infos locales — dans sa langue, toujours à jour." data-de="Ihr Gast erhält den Link vor der Ankunft oder scannt den QR im Zimmer. Er findet Frühstück, Spa, Fahrradverleih und lokale Infos — in seiner Sprache, immer aktuell.">Il tuo ospite riceve il link prima di arrivare, o scansiona il QR in camera. Trova colazione, spa, noleggio bici e info locali — nella sua lingua, sempre aggiornati.</p>
-  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</div>
+  <div class="zero-barrier-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg><span data-it="Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</span></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -459,17 +470,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <h2 class="section-title" data-it="Le domande che senti <em>ogni giorno.</em>" data-en="The questions you hear <em>every day.</em>" data-fr="Les questions que vous entendez <em>chaque jour.</em>" data-de="Die Fragen, die Sie <em>jeden Tag hören.</em>">Le domande che senti <em>ogni giorno.</em></h2>
   <div class="pain-grid">
     <div class="pain-card">
-      <div class="pain-icon">📞</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3.4l1.7 4.2-2.1 1.6a12 12 0 0 0 6.2 6.2l1.6-2.1L21 14.6V18a2.5 2.5 0 0 1-2.7 2.5A16.5 16.5 0 0 1 3.5 5.7 2.5 2.5 0 0 1 6 3z"/></svg></div>
       <h3 class="pain-title" data-it="Il telefono che non si ferma" data-en="The phone that never stops" data-fr="Le téléphone qui ne s'arrête jamais" data-de="Das Telefon, das nie stillsteht">Il telefono che non si ferma</h3>
       <p class="pain-desc" data-it="&quot;A che ora è la colazione?&quot; &quot;Fate massaggi?&quot; — le stesse domande, dieci volte al giorno, in lingue diverse." data-en="&quot;What time is breakfast?&quot; &quot;Do you offer massages?&quot; — the same questions, ten times a day, in different languages." data-fr="« À quelle heure est le petit-déjeuner ? » « Faites-vous des massages ? » — les mêmes questions, dix fois par jour, en plusieurs langues." data-de="„Wann gibt es Frühstück?“ „Bieten Sie Massagen an?“ — dieselben Fragen, zehnmal täglich, in verschiedenen Sprachen.">&quot;A che ora è la colazione?&quot; &quot;Fate massaggi?&quot; — le stesse domande, dieci volte al giorno, in lingue diverse.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">📋</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v1H9z"/><path d="M8.5 10.5h7"/><path d="M8.5 14.5h5"/></svg></div>
       <h3 class="pain-title" data-it="La brochure sempre vecchia" data-en="The brochure that's always outdated" data-fr="La brochure toujours dépassée" data-de="Die immer veraltete Broschüre">La brochure sempre vecchia</h3>
       <p class="pain-desc" data-it="Cambi un prezzo, un orario — e devi ristampare tutto. Nel frattempo l'ospite legge ancora l'informazione sbagliata." data-en="You change a price, a schedule — and have to reprint everything. Meanwhile the guest is still reading outdated info." data-fr="Vous changez un prix, un horaire — et devez tout réimprimer. Pendant ce temps, le client lit encore l'ancienne info." data-de="Sie ändern einen Preis, eine Zeit — und müssen alles neu drucken. Der Gast liest inzwischen noch die alte Info.">Cambi un prezzo, un orario — e devi ristampare tutto. Nel frattempo l'ospite legge ancora l'informazione sbagliata.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">🌐</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg></div>
       <h3 class="pain-title" data-it="La lingua che non parli" data-en="The language you don't speak" data-fr="La langue que vous ne parlez pas" data-de="Die Sprache, die Sie nicht sprechen">La lingua che non parli</h3>
       <p class="pain-desc" data-it="L'ospite giapponese, coreano o olandese non capisce il menù della spa scritto solo in italiano." data-en="Your Japanese, Korean or Dutch guest doesn't understand the spa menu written only in Italian." data-fr="Votre client japonais, coréen ou néerlandais ne comprend pas le menu du spa écrit seulement en italien." data-de="Ihr japanischer, koreanischer oder niederländischer Gast versteht die nur auf Italienisch verfasste Spa-Karte nicht.">L'ospite giapponese, coreano o olandese non capisce il menù della spa scritto solo in italiano.</p>
     </div>

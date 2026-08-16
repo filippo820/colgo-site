@@ -992,6 +992,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 .storia-contatto { font-size: 15px; line-height: 1.8; color: var(--white-dim); margin-top: 26px; }
 .storia-contatto a { color: var(--ochre); text-decoration: none; border-bottom: 1px solid rgba(200,146,42,0.35); }
 .storia-contatto a:hover { border-bottom-color: var(--ochre); }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -1089,7 +1100,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
       <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>." data-fr="Vos clients méritent mieux qu'une <em>feuille plastifiée</em>." data-de="Ihre Gäste verdienen mehr als ein <em>laminiertes Blatt</em>.">I tuoi clienti meritano più di un <em>foglio plastificato</em>.</span>
     </h1>
     <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages." data-fr="Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, en quatre langues." data-de="Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in vier Sprachen.">Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue.</p>
-    <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</div>
+    <div class="zero-barrier-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg><span data-it="Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</span></div>
     <div class="hero-cta">
       <a href="https://app.colgo.app/demo" target="_blank" class="btn-primary" data-it="GUARDA LA DEMO" data-en="SEE THE DEMO" data-fr="VOIR LA DÉMO" data-de="DEMO ANSEHEN">GUARDA LA DEMO</a>
       <a href="https://app.colgo.app/registrati" target="_blank" class="btn-ghost" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
@@ -1204,19 +1215,19 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     <div class="verticals-label" data-it="IL TUO SETTORE" data-en="YOUR BUSINESS" data-fr="VOTRE SECTEUR" data-de="IHR BEREICH">IL TUO SETTORE</div>
     <div class="verticals-grid">
       <a href="/hotel.html" class="vertical-card">
-        <span class="vertical-icon">🏨</span>
+        <span class="vertical-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19V6"/><path d="M3.5 12.5h12a4.5 4.5 0 0 1 4.5 4.5V19"/><path d="M3.5 19h16.5"/><circle cx="7.6" cy="9.6" r="1.9"/></svg></span>
         <h3 data-it="Struttura ricettiva" data-en="Accommodation" data-fr="Hébergement" data-de="Unterkunft">Struttura ricettiva</h3>
         <p data-it="Hotel, B&B, campeggi, agriturismi" data-en="Hotels, B&Bs, campsites, farm stays" data-fr="Hôtels, B&B, campings, fermes-auberges" data-de="Hotels, B&Bs, Campingplätze, Ferienhöfe">Hotel, B&B, campeggi, agriturismi</p>
         <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →">SCOPRI →</span>
       </a>
       <a href="/ristorante.html" class="vertical-card">
-        <span class="vertical-icon">🍽️</span>
+        <span class="vertical-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v4.2a2.2 2.2 0 0 0 4.4 0V3"/><path d="M9.2 9.4V21"/><path d="M16.6 21v-8.6"/><path d="M16.6 12.4c1.8 0 2.8-1.4 2.8-3.6 0-2.6-1-4.8-2.8-5.8v9.4z"/></svg></span>
         <h3 data-it="Ristorante" data-en="Restaurant" data-fr="Restaurant" data-de="Restaurant">Ristorante</h3>
         <p data-it="Cameriere o cliente, l'ordine arriva in cucina" data-en="Waiter or guest, the order reaches the kitchen" data-fr="Serveur ou client, la commande arrive en cuisine" data-de="Kellner oder Gast, die Bestellung erreicht die Küche">Cameriere o cliente, l'ordine arriva in cucina</p>
         <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →">SCOPRI →</span>
       </a>
       <a href="/negozio.html" class="vertical-card">
-        <span class="vertical-icon">🛍️</span>
+        <span class="vertical-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 9.6 5 4h14l2.2 5.6z"/><path d="M4.6 9.6V20h14.8V9.6"/><path d="M9.6 20v-5.4h4.8V20"/></svg></span>
         <h3 data-it="Negozio" data-en="Shop" data-fr="Boutique" data-de="Geschäft">Negozio</h3>
         <p data-it="Vetrina digitale sempre aperta, senza checkout" data-en="A digital window display, always open, no checkout" data-fr="Vitrine numérique toujours ouverte, sans paiement" data-de="Digitales Schaufenster, immer geöffnet, ohne Kasse">Vetrina digitale sempre aperta, senza checkout</p>
         <span class="vertical-more" data-it="SCOPRI →" data-en="EXPLORE →" data-fr="DÉCOUVRIR →" data-de="ENTDECKEN →">SCOPRI →</span>
@@ -1232,22 +1243,22 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 
     <div class="problem-grid">
       <div class="problem-card">
-        <span class="problem-icon">📄</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 13h7"/><path d="M8.5 16.5h4"/></svg></span>
         <div class="problem-title" data-it="Il foglio stampato" data-en="The printed sheet" data-fr="La feuille imprimée" data-de="Das gedruckte Blatt">Il foglio stampato</div>
         <p class="problem-desc" data-it="Si sporca, si perde, va ristampato ogni volta che cambia qualcosa. Non parla la lingua del tuo cliente." data-en="Gets dirty, gets lost, needs reprinting every time something changes. Doesn't speak your customer's language." data-fr="Elle se salit, se perd, doit être réimprimée à chaque changement. Elle ne parle pas la langue de votre client." data-de="Wird schmutzig, geht verloren, muss bei jeder Änderung neu gedruckt werden. Spricht nicht die Sprache Ihres Gastes.">Si sporca, si perde, va ristampato ogni volta che cambia qualcosa. Non parla la lingua del tuo cliente.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🛎️</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 14 18 9z"/><path d="M10.3 19.5a2 2 0 0 0 3.4 0"/></svg></span>
         <div class="problem-title" data-it="Le stesse domande ogni giorno" data-en="The same questions every day" data-fr="Les mêmes questions chaque jour" data-de="Die gleichen Fragen jeden Tag">Le stesse domande ogni giorno</div>
         <p class="problem-desc" data-it="Orari, prezzi, disponibilità — il tuo staff risponde dieci volte al giorno alle stesse cose. Tempo sprecato per tutti." data-en="Hours, prices, availability — your staff answers the same things ten times a day. Time wasted for everyone." data-fr="Horaires, prix, disponibilité — votre personnel répond dix fois par jour aux mêmes questions. Du temps perdu pour tout le monde." data-de="Öffnungszeiten, Preise, Verfügbarkeit — Ihr Personal beantwortet zehnmal am Tag dieselben Fragen. Verschwendete Zeit für alle.">Orari, prezzi, disponibilità — il tuo staff risponde dieci volte al giorno alle stesse cose. Tempo sprecato per tutti.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">📱</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2"/><path d="M10.5 18.7h3"/></svg></span>
         <div class="problem-title" data-it="Il QR code che non porta da nessuna parte" data-en="The QR code that leads nowhere useful" data-fr="Le QR code qui ne mène nulle part" data-de="Der QR-Code, der ins Leere führt">Il QR code che non porta da nessuna parte</div>
         <p class="problem-desc" data-it="Porta a un PDF o a una pagina pubblica generica. Nessuno lo aggiorna. Non è pensato per il cliente che hai davanti." data-en="Links to a PDF or a generic public page. Nobody keeps it updated. Not built for the customer in front of you." data-fr="Il mène à un PDF ou une page publique générique. Personne ne la met à jour. Pas pensé pour le client en face de vous." data-de="Führt zu einem PDF oder einer generischen öffentlichen Seite. Niemand aktualisiert sie. Nicht für den Gast vor Ort gedacht.">Porta a un PDF o a una pagina pubblica generica. Nessuno lo aggiorna. Non è pensato per il cliente che hai davanti.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🌐</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg></span>
         <div class="problem-title" data-it="Il sito web" data-en="The website" data-fr="Le site web" data-de="Die Webseite">Il sito web</div>
         <p class="problem-desc" data-it="È pubblico, pensato per chi deve ancora venire — non per chi è già lì. Aggiornarlo richiede tempo e spesso qualcun altro." data-en="Public, built for people who haven't arrived yet — not for those already there. Updating it takes time and often someone else." data-fr="Il est public, pensé pour ceux qui doivent encore venir — pas pour ceux qui sont déjà là. Le mettre à jour prend du temps et souvent quelqu'un d'autre." data-de="Sie ist öffentlich, für die gedacht, die erst noch kommen — nicht für die, die schon da sind. Aktualisieren kostet Zeit und oft jemand anderen.">È pubblico, pensato per chi deve ancora venire — non per chi è già lì. Aggiornarlo richiede tempo e spesso qualcun altro.</p>
       </div>
@@ -1294,22 +1305,22 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 
     <div class="problem-grid">
       <div class="problem-card">
-        <span class="problem-icon">🏨</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19V6"/><path d="M3.5 12.5h12a4.5 4.5 0 0 1 4.5 4.5V19"/><path d="M3.5 19h16.5"/><circle cx="7.6" cy="9.6" r="1.9"/></svg></span>
         <div class="problem-title" data-it="Hotel, B&B, agriturismi" data-en="Hotels, B&Bs, farm stays" data-fr="Hôtels, B&B, fermes-auberges" data-de="Hotels, B&Bs, Ferienhöfe">Hotel, B&B, agriturismi</div>
         <p class="problem-desc" data-it="Il cliente riceve il link prima dell'arrivo, esplora i servizi, si organizza il soggiorno. In camera scansiona il QR e trova tutto quello che offri." data-en="The guest gets the link before arrival, explores services, plans their stay. In the room they scan the QR and find everything you offer." data-fr="Le client reçoit le lien avant son arrivée, explore les services, organise son séjour. Dans la chambre, il scanne le QR et trouve tout ce que vous offrez." data-de="Der Gast erhält den Link vor der Ankunft, sieht sich die Leistungen an, plant den Aufenthalt. Im Zimmer scannt er den QR und findet alles, was Sie anbieten.">Il cliente riceve il link prima dell'arrivo, esplora i servizi, si organizza il soggiorno. In camera scansiona il QR e trova tutto quello che offri.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">⛺</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 20h18z"/><path d="M12 3v17"/><path d="M12 20l-3.5-6"/><path d="M12 20l3.5-6"/></svg></span>
         <div class="problem-title" data-it="Campeggi e villaggi" data-en="Campsites and holiday villages" data-fr="Campings et villages vacances" data-de="Campingplätze und Feriendörfer">Campeggi e villaggi</div>
         <p class="problem-desc" data-it="Il QR è sulla piazzola. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch. The customer knows what services are available, bar hours, activities — without getting up or calling." data-fr="Le QR est sur l'emplacement. Le client sait quels services sont disponibles, les horaires du bar, les activités — sans se déplacer ni appeler." data-de="Der QR ist am Stellplatz. Der Gast kennt die Leistungen, Öffnungszeiten der Bar, Aktivitäten — ohne aufzustehen oder anzurufen.">Il QR è sulla piazzola. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🍽️</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v4.2a2.2 2.2 0 0 0 4.4 0V3"/><path d="M9.2 9.4V21"/><path d="M16.6 21v-8.6"/><path d="M16.6 12.4c1.8 0 2.8-1.4 2.8-3.6 0-2.6-1-4.8-2.8-5.8v9.4z"/></svg></span>
         <div class="problem-title" data-it="Ristoranti" data-en="Restaurants" data-fr="Restaurants" data-de="Restaurants">Ristoranti</div>
         <p class="problem-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal." data-fr="Le serveur scanne le QR de la table et envoie la commande directement en cuisine. Le client ne touche à rien — le flux est entièrement interne." data-de="Der Kellner scannt den Tisch-QR und sendet die Bestellung direkt in die Küche. Der Gast berührt nichts — der Ablauf ist rein intern.">Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno.</p>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🏪</span>
+        <span class="problem-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 9.6 5 4h14l2.2 5.6z"/><path d="M4.6 9.6V20h14.8V9.6"/><path d="M9.6 20v-5.4h4.8V20"/></svg></span>
         <div class="problem-title" data-it="Negozi e vetrine" data-en="Shops and storefronts" data-fr="Boutiques et vitrines" data-de="Geschäfte und Schaufenster">Negozi e vetrine</div>
         <p class="problem-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona da casa, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans from home, browses the catalogue, prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne depuis chez lui, parcourt le catalogue, prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt von zu Hause, blättert im Katalog, macht seine Liste — und weiß beim Betreten schon, was er will.">Il QR è sulla vetrina. Il cliente scansiona da casa, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole.</p>
       </div>

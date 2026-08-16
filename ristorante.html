@@ -258,6 +258,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -294,7 +305,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <div class="page-label" data-it="PER RISTORAZIONE" data-en="FOR FOOD SERVICE" data-fr="POUR LA RESTAURATION" data-de="FÜR GASTRONOMIE">PER RISTORAZIONE</div>
   <h1 class="page-title" data-it="Il menù che <em>non si sporca mai.</em>" data-en="The menu that <em>never gets dirty.</em>" data-fr="Le menu qui <em>ne se salit jamais.</em>" data-de="Die Speisekarte, die <em>nie schmutzig wird.</em>">Il menù che <em>non si sporca mai.</em></h1>
   <p class="page-sub" data-it="Il QR è sul tavolo. Il cliente sfoglia il menù nella sua lingua — e l'ordine arriva in cucina sia che lo invii tu, sia che lo invii direttamente lui." data-en="The QR is on the table. The customer browses the menu in their language — and the order reaches the kitchen whether you send it or they send it themselves." data-fr="Le QR est sur la table. Le client parcourt le menu dans sa langue — et la commande arrive en cuisine que ce soit vous ou lui qui l'envoie." data-de="Der QR ist auf dem Tisch. Der Gast blättert in seiner Sprache durch die Karte — und die Bestellung erreicht die Küche, egal ob Sie oder er sie sendet.">Il QR è sul tavolo. Il cliente sfoglia il menù nella sua lingua — e l'ordine arriva in cucina sia che lo invii tu, sia che lo invii direttamente lui.</p>
-  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</div>
+  <div class="zero-barrier-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg><span data-it="Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</span></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -451,12 +462,12 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <h2 class="section-title" data-it="I problemi di ogni <em>servizio.</em>" data-en="The problems of every <em>shift.</em>" data-fr="Les problèmes de chaque <em>service.</em>" data-de="Die Probleme jeder <em>Schicht.</em>">I problemi di ogni <em>servizio.</em></h2>
   <div class="pain-grid">
     <div class="pain-card">
-      <div class="pain-icon">✍️</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5 20.5 7.5 8 20H4v-4z"/><path d="M14.5 5.5 18.5 9.5"/></svg></div>
       <h3 class="pain-title" data-it="Comande scritte a mano" data-en="Handwritten orders" data-fr="Commandes écrites à la main" data-de="Handgeschriebene Bestellungen">Comande scritte a mano</h3>
       <p class="pain-desc" data-it="Grafia illeggibile, errori di trascrizione, il foglietto che si perde tra il tavolo e la cucina." data-en="Illegible handwriting, transcription errors, the slip of paper lost between the table and the kitchen." data-fr="Écriture illisible, erreurs de transcription, le papier perdu entre la table et la cuisine." data-de="Unleserliche Handschrift, Übertragungsfehler, der Zettel, der zwischen Tisch und Küche verloren geht.">Grafia illeggibile, errori di trascrizione, il foglietto che si perde tra il tavolo e la cucina.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">🗣️</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></div>
       <h3 class="pain-title" data-it="La barriera linguistica" data-en="The language barrier" data-fr="La barrière linguistique" data-de="Die Sprachbarriere">La barriera linguistica</h3>
       <p class="pain-desc" data-it="Spiegare un piatto a un turista che non parla italiano, a gesti, mentre il locale è pieno." data-en="Explaining a dish to a tourist who doesn't speak Italian, with gestures, while the place is packed." data-fr="Expliquer un plat à un touriste qui ne parle pas italien, par gestes, pendant que la salle est pleine." data-de="Einem Touristen, der kein Italienisch spricht, ein Gericht mit Gesten erklären, während das Lokal voll ist.">Spiegare un piatto a un turista che non parla italiano, a gesti, mentre il locale è pieno.</p>
     </div>
@@ -476,12 +487,12 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 
   <div class="pain-grid" style="margin-top:48px;">
     <div class="pain-card">
-      <div class="pain-icon">🧑‍🍳</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20h11v-6.5H6.5z"/><path d="M6.5 13.5a4 4 0 1 1 1.6-7.7a4.2 4.2 0 0 1 7.8 0a4 4 0 1 1 1.6 7.7"/></svg></div>
       <h3 class="pain-title" data-it="Gestito dal cameriere" data-en="Waiter-managed" data-fr="Géré par le serveur" data-de="Vom Kellner verwaltet">Gestito dal cameriere</h3>
       <p class="pain-desc" data-it="Il cameriere accede alla sua pagina personale con un PIN dedicato, prende la comanda a voce e la invia lui alla cucina. Il modello classico italiano — il cliente non tocca il telefono." data-en="The waiter logs into their own personal page with a dedicated PIN, takes the order verbally and sends it to the kitchen. The classic Italian model — the customer never touches a phone." data-fr="Le serveur accède à sa page personnelle avec un code PIN dédié, prend la commande oralement et l'envoie en cuisine. Le modèle classique italien — le client ne touche jamais un téléphone." data-de="Der Kellner meldet sich mit einer eigenen PIN auf seiner persönlichen Seite an, nimmt die Bestellung mündlich auf und sendet sie an die Küche. Das klassische italienische Modell — der Gast berührt nie ein Handy.">Il cameriere accede alla sua pagina personale con un PIN dedicato, prende la comanda a voce e la invia lui alla cucina. Il modello classico italiano — il cliente non tocca il telefono.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">📲</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="6" width="11" height="15.5" rx="2"/><path d="M10.5 19h3"/><path d="M12 2.5v6"/><path d="M9.5 5 12 2.5 14.5 5"/></svg></div>
       <h3 class="pain-title" data-it="Il cliente ordina da solo" data-en="Guest self-orders" data-fr="Le client commande seul" data-de="Gast bestellt selbst">Il cliente ordina da solo</h3>
       <p class="pain-desc" data-it="Il cliente scansiona lui stesso il QR, sfoglia il menù, aggiunge al carrello e invia l'ordine direttamente — nessuna attesa, nessun cameriere necessario. Diffuso in molti paesi asiatici, ancora raro in Italia." data-en="The customer scans the QR themselves, browses the menu, adds to cart and sends the order directly — no waiting, no waiter needed. Common across much of Asia, still rare in Italy." data-fr="Le client scanne lui-même le QR, parcourt le menu, ajoute au panier et envoie la commande directement — aucune attente, aucun serveur nécessaire. Répandu dans une grande partie de l'Asie, encore rare en Italie." data-de="Der Gast scannt den QR selbst, blättert im Menü, legt in den Warenkorb und sendet die Bestellung direkt — kein Warten, kein Kellner nötig. In weiten Teilen Asiens verbreitet, in Italien noch selten.">Il cliente scansiona lui stesso il QR, sfoglia il menù, aggiunge al carrello e invia l'ordine direttamente — nessuna attesa, nessun cameriere necessario. Diffuso in molti paesi asiatici, ancora raro in Italia.</p>
     </div>

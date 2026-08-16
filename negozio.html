@@ -258,6 +258,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -294,7 +305,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <div class="page-label" data-it="PER NEGOZI E BOUTIQUE" data-en="FOR SHOPS & BOUTIQUES" data-fr="POUR BOUTIQUES" data-de="FÜR GESCHÄFTE">PER NEGOZI E BOUTIQUE</div>
   <h1 class="page-title" data-it="La vetrina che <em>lavora anche di notte.</em>" data-en="The window display that <em>works even at night.</em>" data-fr="La vitrine qui <em>travaille même la nuit.</em>" data-de="Das Schaufenster, das <em>auch nachts arbeitet.</em>">La vetrina che <em>lavora anche di notte.</em></h1>
   <p class="page-sub" data-it="Il QR è in vetrina. Il cliente scansiona anche a negozio chiuso, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans it even when the shop is closed, browses the catalogue, prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne même magasin fermé, parcourt le catalogue, prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt auch bei geschlossenem Geschäft, blättert im Katalog, macht seine Liste — und weiß beim Betreten schon, was er will.">Il QR è in vetrina. Il cliente scansiona anche a negozio chiuso, sfoglia il catalogo, prepara la sua lista — e quando entra sa già cosa vuole.</p>
-  <div class="zero-barrier-badge" data-it="⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="⚡ Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="⚡ Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="⚡ Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">⚡ Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</div>
+  <div class="zero-barrier-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg><span data-it="Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.">Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser.</span></div>
 </div>
 
 <div style="padding:20px 32px 0;">
@@ -435,17 +446,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <h2 class="section-title" data-it="Il negozio quando <em>non c'è nessuno.</em>" data-en="The shop when <em>no one's there.</em>" data-fr="La boutique quand <em>personne n'est là.</em>" data-de="Das Geschäft, wenn <em>niemand da ist.</em>">Il negozio quando <em>non c'è nessuno.</em></h2>
   <div class="pain-grid">
     <div class="pain-card">
-      <div class="pain-icon">🔒</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
       <h3 class="pain-title" data-it="Chiuso vuol dire invisibile" data-en="Closed means invisible" data-fr="Fermé veut dire invisible" data-de="Geschlossen heißt unsichtbar">Chiuso vuol dire invisibile</h3>
       <p class="pain-desc" data-it="Fuori orario, il tuo negozio non comunica nulla — nemmeno cosa vendi." data-en="Outside opening hours, your shop communicates nothing — not even what you sell." data-fr="Hors horaires, votre boutique ne communique rien — pas même ce que vous vendez." data-de="Außerhalb der Öffnungszeiten kommuniziert Ihr Geschäft nichts — nicht einmal, was Sie verkaufen.">Fuori orario, il tuo negozio non comunica nulla — nemmeno cosa vendi.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">❓</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.3a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.3-2.6 4"/><path d="M12 17.6h.01"/></svg></div>
       <h3 class="pain-title" data-it="&quot;Avete questo prodotto?&quot;" data-en="&quot;Do you have this product?&quot;" data-fr="« Avez-vous ce produit ? »" data-de="„Haben Sie dieses Produkt?“">&quot;Avete questo prodotto?&quot;</h3>
       <p class="pain-desc" data-it="Il cliente entra, chiede, tu cerchi — a volte per niente. Tempo perso per entrambi." data-en="The customer walks in, asks, you search — sometimes for nothing. Wasted time for both." data-fr="Le client entre, demande, vous cherchez — parfois pour rien. Du temps perdu pour les deux." data-de="Der Kunde kommt herein, fragt, Sie suchen — manchmal umsonst. Verlorene Zeit für beide.">Il cliente entra, chiede, tu cerchi — a volte per niente. Tempo perso per entrambi.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">📦</div>
+      <div class="pain-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
       <h3 class="pain-title" data-it="Il catalogo che non hai" data-en="The catalogue you don't have" data-fr="Le catalogue que vous n'avez pas" data-de="Der Katalog, den Sie nicht haben">Il catalogo che non hai</h3>
       <p class="pain-desc" data-it="Senza e-commerce, il cliente non può vedere cosa vendi prima di decidere se venire." data-en="Without e-commerce, the customer can't see what you sell before deciding to visit." data-fr="Sans e-commerce, le client ne peut pas voir ce que vous vendez avant de décider de venir." data-de="Ohne E-Commerce sieht der Kunde nicht, was Sie verkaufen, bevor er sich entscheidet zu kommen.">Senza e-commerce, il cliente non può vedere cosa vendi prima di decidere se venire.</p>
     </div>

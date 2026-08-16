@@ -249,6 +249,17 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .nav-links a { font-size: 16px; }
   .lang-btn { font-size: 15px; }
 }
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
 </style>
 </head>
 <body>
@@ -292,7 +303,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <div class="venues-grid">
 
     <div class="venue-card">
-      <div class="venue-icon">🏨</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19V6"/><path d="M3.5 12.5h12a4.5 4.5 0 0 1 4.5 4.5V19"/><path d="M3.5 19h16.5"/><circle cx="7.6" cy="9.6" r="1.9"/></svg></div>
       <div class="venue-type" data-it="STRUTTURA RICETTIVA" data-en="ACCOMMODATION" data-fr="HÉBERGEMENT" data-de="UNTERKUNFT">STRUTTURA RICETTIVA</div>
       <h2 class="venue-title" data-it="Hotel, B&B, <em>agriturismi</em>" data-en="Hotels, B&Bs, <em>farm stays</em>" data-fr="Hôtels, B&B, <em>fermes-auberges</em>" data-de="Hotels, B&Bs, <em>Ferienhöfe</em>">Hotel, B&B, <em>agriturismi</em></h2>
       <p class="venue-desc" data-it="L'ospite riceve il link prima dell'arrivo e pianifica il soggiorno. In camera scansiona il QR e trova servizi, info locali e orari. Le richieste arrivano in reception in tempo reale." data-en="The guest gets the link before arrival and plans their stay. In the room they scan the QR and find services, local info and hours. Requests arrive at reception in real time." data-fr="Le client reçoit le lien avant son arrivée et planifie son séjour. Dans la chambre, il scanne le QR et trouve services, infos locales et horaires. Les demandes arrivent à la réception en temps réel." data-de="Der Gast erhält den Link vor der Ankunft und plant den Aufenthalt. Im Zimmer scannt er den QR und findet Leistungen, lokale Infos und Zeiten. Anfragen kommen in Echtzeit an der Rezeption an.">L'ospite riceve il link prima dell'arrivo e pianifica il soggiorno. In camera scansiona il QR e trova servizi, info locali e orari. Le richieste arrivano in reception in tempo reale.</p>
@@ -305,7 +316,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
 
     <div class="venue-card">
-      <div class="venue-icon">⛺</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 20h18z"/><path d="M12 3v17"/><path d="M12 20l-3.5-6"/><path d="M12 20l3.5-6"/></svg></div>
       <div class="venue-type" data-it="OUTDOOR" data-en="OPEN-AIR" data-fr="PLEIN AIR" data-de="OUTDOOR">OUTDOOR</div>
       <h2 class="venue-title" data-it="Campeggi, villaggi e <em>porti turistici</em>" data-en="Campsites, villages and <em>tourist marinas</em>" data-fr="Campings, villages et <em>ports de plaisance</em>" data-de="Campingplätze, Feriendörfer und <em>Yachthäfen</em>">Campeggi, villaggi e <em>porti turistici</em></h2>
       <p class="venue-desc" data-it="Il QR è sulla piazzola, sul bungalow o sull'ormeggio. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare." data-en="The QR is on the pitch, bungalow or berth. The customer knows what services are available, bar hours, activities — without getting up or calling." data-fr="Le QR est sur l'emplacement, le bungalow ou le ponton. Le client sait quels services sont disponibles, les horaires du bar, les activités — sans se déplacer ni appeler." data-de="Der QR ist am Stellplatz, Bungalow oder Liegeplatz. Der Gast kennt die Leistungen, Bar-Öffnungszeiten, Aktivitäten — ohne aufzustehen oder anzurufen.">Il QR è sulla piazzola, sul bungalow o sull'ormeggio. Il cliente sa quali servizi ci sono, gli orari del bar, le attività disponibili — senza alzarsi e senza chiamare.</p>
@@ -316,7 +327,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
 
     <div class="venue-card">
-      <div class="venue-icon">🍽️</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v4.2a2.2 2.2 0 0 0 4.4 0V3"/><path d="M9.2 9.4V21"/><path d="M16.6 21v-8.6"/><path d="M16.6 12.4c1.8 0 2.8-1.4 2.8-3.6 0-2.6-1-4.8-2.8-5.8v9.4z"/></svg></div>
       <div class="venue-type" data-it="RISTORAZIONE" data-en="FOOD SERVICE" data-fr="RESTAURATION" data-de="GASTRONOMIE">RISTORAZIONE</div>
       <h2 class="venue-title" data-it="Ristoranti, bar, <em>stabilimenti balneari</em>" data-en="Restaurants, bars, <em>beach clubs</em>" data-fr="Restaurants, bars, <em>établissements balnéaires</em>" data-de="Restaurants, Bars, <em>Strandbäder</em>">Ristoranti, bar, <em>stabilimenti balneari</em></h2>
       <p class="venue-desc" data-it="Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno." data-en="The waiter scans the table QR and sends the order directly to the kitchen. The customer touches nothing — the flow is entirely internal." data-fr="Le serveur scanne le QR de la table et envoie la commande directement en cuisine. Le client ne touche à rien — le flux est entièrement interne." data-de="Der Kellner scannt den Tisch-QR und sendet die Bestellung direkt in die Küche. Der Gast berührt nichts — der Ablauf ist rein intern.">Il cameriere scansiona il QR del tavolo e invia l'ordine direttamente alla cucina. Il cliente non tocca nulla — il flusso è tutto interno.</p>
@@ -328,7 +339,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
 
     <div class="venue-card">
-      <div class="venue-icon">🏪</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 9.6 5 4h14l2.2 5.6z"/><path d="M4.6 9.6V20h14.8V9.6"/><path d="M9.6 20v-5.4h4.8V20"/></svg></div>
       <div class="venue-type" data-it="RETAIL" data-en="RETAIL" data-fr="COMMERCE" data-de="EINZELHANDEL">RETAIL</div>
       <h2 class="venue-title" data-it="Negozi, boutique e <em>showroom</em>" data-en="Shops, boutiques and <em>showrooms</em>" data-fr="Boutiques, magasins et <em>showrooms</em>" data-de="Geschäfte, Boutiquen und <em>Showrooms</em>">Negozi, boutique e <em>showroom</em></h2>
       <p class="venue-desc" data-it="Il QR è sulla vetrina. Il cliente scansiona il QR dalla vetrina, anche a negozio chiuso, sfoglia il catalogo e prepara la sua lista — e quando entra sa già cosa vuole." data-en="The QR is on the window. The customer scans the QR from the window, even outside opening hours, browses the catalogue and prepares their list — and when they walk in they already know what they want." data-fr="Le QR est en vitrine. Le client scanne le QR depuis la vitrine, même magasin fermé, parcourt le catalogue et prépare sa liste — et quand il entre, il sait déjà ce qu'il veut." data-de="Der QR ist im Schaufenster. Der Kunde scannt ihn auch bei geschlossenem Geschäft, blättert im Katalog und macht seine Liste — und weiß beim Betreten schon, was er will.">Il QR è sulla vetrina. Il cliente scansiona il QR dalla vetrina, anche a negozio chiuso, sfoglia il catalogo e prepara la sua lista — e quando entra sa già cosa vuole.</p>
@@ -340,7 +351,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
 
     <div class="venue-card">
-      <div class="venue-icon">🌊</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0"/><path d="M2.5 13.5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0"/><path d="M2.5 18.5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0"/></svg></div>
       <div class="venue-type" data-it="BENESSERE" data-en="WELLNESS" data-fr="BIEN-ÊTRE" data-de="WELLNESS">BENESSERE</div>
       <h2 class="venue-title" data-it="Spa, centri benessere e <em>centri sportivi</em>" data-en="Spa, wellness centres and <em>sports clubs</em>" data-fr="Spas, centres de bien-être et <em>centres sportifs</em>" data-de="Spas, Wellnesszentren und <em>Sportzentren</em>">Spa, centri benessere e <em>centri sportivi</em></h2>
       <p class="venue-desc" data-it="Trattamenti, orari, info — tutto accessibile via QR in sala d'attesa o reception. Il cliente sceglie e chiede. Lo staff riceve senza interruzioni continue al banco." data-en="Treatments, hours, info — all accessible via QR in the waiting room or reception. The customer chooses, sends a request or books. Staff receive requests without constant interruptions." data-fr="Soins, horaires, infos — tout accessible via QR en salle d'attente ou réception. Le client choisit et demande. Le personnel reçoit sans interruptions constantes au comptoir." data-de="Behandlungen, Zeiten, Infos — alles per QR im Wartezimmer oder an der Rezeption zugänglich. Der Gast wählt und fragt an. Das Personal empfängt ohne ständige Unterbrechungen am Schalter.">Trattamenti, orari, info — tutto accessibile via QR in sala d'attesa o reception. Il cliente sceglie e chiede. Lo staff riceve senza interruzioni continue al banco.</p>
@@ -351,7 +362,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
 
     <div class="venue-card">
-      <div class="venue-icon">🏖️</div>
+      <div class="venue-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M3.5 11a8.5 8.5 0 0 1 17 0z"/><path d="M12 21c0-1.5 1.6-2.5 3.5-2.5"/></svg></div>
       <div class="venue-type" data-it="TURISMO" data-en="TOURISM" data-fr="TOURISME" data-de="TOURISMUS">TURISMO</div>
       <h2 class="venue-title" data-it="Stabilimenti balneari, <em>porti turistici</em>" data-en="Beach clubs, <em>tourist marinas</em>" data-fr="Établissements balnéaires, <em>ports de plaisance</em>" data-de="Strandbäder, <em>Yachthäfen</em>">Stabilimenti balneari, <em>porti turistici</em></h2>
       <p class="venue-desc" data-it="L'ombrellone, la barca, il posto in spiaggia — ognuno con il suo QR. Il cliente ordina, lo staff riceve tutto sul telefono senza correre avanti e indietro." data-en="The sun lounger, boat, beach spot — each with its own QR. The customer orders, staff receive everything on their phone without running back and forth." data-fr="Le parasol, le bateau, la place sur la plage — chacun avec son QR. Le client commande, le personnel reçoit tout sur son téléphone sans courir partout." data-de="Sonnenschirm, Boot, Strandplatz — jeder mit eigenem QR. Der Gast bestellt, das Personal empfängt alles auf dem Handy, ohne hin und her zu laufen.">L'ombrellone, la barca, il posto in spiaggia — ognuno con il suo QR. Il cliente ordina, lo staff riceve tutto sul telefono senza correre avanti e indietro.</p>

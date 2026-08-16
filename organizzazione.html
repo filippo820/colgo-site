@@ -96,7 +96,7 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Come è organizzato Colgo — PIN, accessi, catalogo, multi-struttura</title>
+  <title>Accessi e catalogo — chi vede cosa in Colgo, e come si governa il catalogo</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
        WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
@@ -105,15 +105,15 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Colgo" />
   <meta property="og:locale" content="it_IT" />
-  <meta property="og:title" content="Come è organizzato Colgo — PIN, accessi, catalogo, multi-struttura" />
-  <meta property="og:description" content="Come funzionano i PIN di accesso, la visibilità del catalogo e la gestione multi-struttura in Colgo — spiegato con schemi visivi." />
+  <meta property="og:title" content="Accessi e catalogo — chi vede cosa in Colgo" />
+  <meta property="og:description" content="Sei schemi: i livelli di accesso dal titolare al cameriere, la coda delle richieste allo staff, un PIN per pi&ugrave; sedi, la visibilit&agrave; del catalogo, l&#39;editor e il multi-sede." />
   <meta property="og:url" content="https://colgo.app/organizzazione.html" />
   <meta property="og:image" content="https://colgo.app/colgo-og.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Come è organizzato Colgo — PIN, accessi, catalogo, multi-struttura" />
+  <meta name="twitter:title" content="Accessi e catalogo — chi vede cosa in Colgo" />
   <meta name="twitter:description" content="Come funzionano i PIN di accesso, la visibilità del catalogo e la gestione multi-struttura in Colgo — spiegato con schemi visivi." />
   <meta name="twitter:image" content="https://colgo.app/colgo-og.png" />
-  <meta name="description" content="Come funzionano i PIN di accesso, la visibilità del catalogo e la gestione multi-struttura in Colgo — spiegato con schemi visivi." />
+  <meta name="description" content="Sei schemi: i livelli di accesso dal titolare al cameriere, la coda delle richieste allo staff, un PIN per pi&ugrave; sedi, la visibilit&agrave; del catalogo, l&#39;editor e il multi-sede." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
@@ -288,6 +288,58 @@ body::after {
   .nav-logo-full { display: none; }
   .nav-logo-mini { display: block; }
 }
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 12px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* Indice di cio' che la pagina contiene: senza, il titolo dice il tema
+       ma non da' motivo di scendere. */
+    .page-indice { list-style: none; max-width: 560px; margin: 30px auto 0; padding: 0;
+      text-align: left; display: grid; gap: 9px; position: relative; z-index: 1; }
+    .page-indice li { font-size: 14px; line-height: 1.6; letter-spacing: 0.4px;
+      color: rgba(245,241,232,0.5); padding-left: 22px; position: relative; }
+    .page-indice li::before { content: '·'; position: absolute; left: 6px;
+      color: var(--ochre); font-size: 18px; line-height: 1.3; }
+    @media (max-width: 700px) { .page-indice { max-width: 330px; } .page-indice li { font-size: 13px; } }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
 </style>
 </head>
 <body>
@@ -317,7 +369,7 @@ body::after {
       <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
       <a href="/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS">CHI SIAMO</a>
         <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
-      <a href="/organizzazione.html" class="active" data-it="DETTAGLI" data-en="DETAILS" data-fr="DÉTAILS" data-de="DETAILS">DETTAGLI</a>
+      <a href="/organizzazione.html" class="active" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
@@ -334,9 +386,17 @@ body::after {
 
 <div class="page-hero">
   <div class="page-hero-glow"></div>
-  <div class="page-label" data-it="COME È ORGANIZZATO" data-en="HOW IT'S ORGANISED" data-fr="COMMENT C'EST ORGANISÉ" data-de="WIE ES ORGANISIERT IST">COME È ORGANIZZATO</div>
-  <h1 class="page-title" data-it="PIN, accessi, catalogo.<br/><em>Spiegati con uno schema.</em>" data-en="PINs, access, catalogue.<br/><em>Explained with a diagram.</em>" data-fr="PIN, accès, catalogue.<br/><em>Expliqués en schéma.</em>" data-de="PINs, Zugriffe, Katalog.<br/><em>Mit Schema erklärt.</em>">PIN, accessi, catalogo.<br/><em>Spiegati con uno schema.</em></h1>
-  <p class="page-sub" data-it="Alcuni meccanismi di Colgo — PIN, accessi, catalogo, multi-struttura — sono più facili da capire con uno schema che con mille parole." data-en="Some of Colgo's mechanisms — PINs, access levels, catalogue, multi-venue — are easier to understand with a diagram than a thousand words." data-fr="Certains mécanismes de Colgo — PIN, accès, catalogue, multi-établissement — se comprennent mieux avec un schéma qu'avec mille mots." data-de="Manche Mechanismen von Colgo — PINs, Zugriffsrechte, Katalog, Multi-Standort — versteht man mit einem Schema besser als mit tausend Worten.">Alcuni meccanismi di Colgo — PIN, accessi, catalogo, multi-struttura — sono più facili da capire con uno schema che con mille parole.</p>
+  <div class="page-label" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</div>
+  <h1 class="page-title" data-it="Chi vede cosa. <em>E come governi il catalogo.</em>" data-en="Who sees what. <em>And how you run the catalogue.</em>" data-fr="Qui voit quoi. <em>Et comment vous g&eacute;rez le catalogue.</em>" data-de="Wer was sieht. <em>Und wie Sie den Katalog steuern.</em>">Chi vede cosa. <em>E come governi il catalogo.</em></h1>
+  <p class="page-sub" data-it="Sei meccanismi di Colgo che con uno schema si capiscono in un minuto, e a parole no." data-en="Six mechanisms in Colgo that a diagram explains in a minute, and words don&#39;t." data-fr="Six m&eacute;canismes de Colgo qu&#39;un sch&eacute;ma explique en une minute, et pas les mots." data-de="Sechs Mechanismen in Colgo, die ein Schaubild in einer Minute erkl&auml;rt — Worte nicht.">Sei meccanismi di Colgo che con uno schema si capiscono in un minuto, e a parole no.</p>
+  <ul class="page-indice">
+    <li data-it="Chi vede cosa: dal titolare al singolo cameriere" data-en="Who sees what: from the owner to the individual waiter" data-fr="Qui voit quoi : du propri&eacute;taire au serveur" data-de="Wer was sieht: vom Inhaber bis zum einzelnen Kellner">Chi vede cosa: dal titolare al singolo cameriere</li>
+    <li data-it="La coda delle richieste che arriva allo staff" data-en="The queue of requests that reaches your staff" data-fr="La file des demandes qui arrive au personnel" data-de="Die Warteschlange der Anfragen f&uuml;r Ihr Personal">La coda delle richieste che arriva allo staff</li>
+    <li data-it="Un PIN solo per chi lavora su pi&ugrave; sedi" data-en="A single PIN for people working across several sites" data-fr="Un seul PIN pour qui travaille sur plusieurs sites" data-de="Eine PIN f&uuml;r alle, die an mehreren Standorten arbeiten">Un PIN solo per chi lavora su pi&ugrave; sedi</li>
+    <li data-it="Cosa succede davvero quando spegni una categoria" data-en="What really happens when you switch a category off" data-fr="Ce qui se passe vraiment quand vous d&eacute;sactivez une cat&eacute;gorie" data-de="Was wirklich passiert, wenn Sie eine Kategorie ausschalten">Cosa succede davvero quando spegni una categoria</li>
+    <li data-it="L&#39;editor del catalogo, dal telefono" data-en="The catalogue editor, from your phone" data-fr="L&#39;&eacute;diteur du catalogue, depuis le t&eacute;l&eacute;phone" data-de="Der Katalog-Editor, vom Handy aus">L&#39;editor del catalogo, dal telefono</li>
+    <li data-it="Pi&ugrave; sedi con un accesso solo" data-en="Several sites with a single login" data-fr="Plusieurs sites avec un seul acc&egrave;s" data-de="Mehrere Standorte mit einem Zugang">Pi&ugrave; sedi con un accesso solo</li>
+  </ul>
 </div>
 
 <div class="concept-section">
@@ -653,9 +713,16 @@ body::after {
 
 <div class="cta-section">
   <h2 class="cta-headline" data-it="Curioso di vedere il resto?" data-en="Curious to see the rest?" data-fr="Curieux de voir le reste ?" data-de="Neugierig auf den Rest?">Curioso di vedere il resto?</h2>
-  <div class="cta-buttons">
-    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S'INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
-    <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
+  <div class="cta-choice">
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S&#39;INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
+      <p class="cta-opt-note" data-it="Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati." data-en="You go straight into a ready-made sample business. No email, no details." data-fr="Vous entrez directement dans un &eacute;tablissement d&#39;essai d&eacute;j&agrave; pr&ecirc;t. Aucun e-mail, aucune donn&eacute;e." data-de="Sie steigen direkt in einen fertigen Beispielbetrieb ein. Keine E-Mail, keine Daten.">Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati.</p>
+    </div>
+    <div class="cta-or" data-it="oppure" data-en="or" data-fr="ou" data-de="oder">oppure</div>
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
+      <p class="cta-opt-note" data-it="La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito." data-en="Your real business, your services, your QR codes. No credit card." data-fr="Votre &eacute;tablissement r&eacute;el, vos services, vos QR. Aucune carte bancaire." data-de="Ihr echter Betrieb, Ihre Leistungen, Ihre QR-Codes. Keine Kreditkarte.">La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito.</p>
+    </div>
   </div>
 </div>
 
@@ -666,7 +733,7 @@ body::after {
     <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
         <a href="/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise">Prezzi</a>
     <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
-    <a href="/organizzazione.html" data-it="Dettagli" data-en="Details" data-fr="Détails" data-de="Details">Dettagli</a>
+    <a href="/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Accessi e catalogo</a>
     <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>

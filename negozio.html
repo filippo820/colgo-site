@@ -295,6 +295,48 @@ body::after {
   .nav-logo-full { display: none; }
   .nav-logo-mini { display: block; }
 }
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 12px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
 </style>
 </head>
 <body>
@@ -323,7 +365,7 @@ body::after {
       <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
       <a href="/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS">CHI SIAMO</a>
         <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
-      <a href="/organizzazione.html" data-it="DETTAGLI" data-en="DETAILS" data-fr="DÉTAILS" data-de="DETAILS">DETTAGLI</a>
+      <a href="/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
@@ -459,9 +501,9 @@ body::after {
         <p class="screen-caption" data-it="E prepara la lista per il banco" data-en="And builds the list for the counter" data-fr="Et prépare la liste pour le comptoir" data-de="Und stellt die Liste für die Theke zusammen">E prepara la lista per il banco</p>
       </div>
     </div>
-  </div>
-  <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →">← SCORRI →</div>
+    <div class="screens-hint" data-it="← SCORRI →" data-en="← SWIPE →" data-fr="← GLISSEZ →" data-de="← WISCHEN →">← SCORRI →</div>
 </div>
+
 
 <div class="pain-section">
   <div class="gold-line"></div>
@@ -510,9 +552,16 @@ body::after {
 
 <div class="cta-section">
   <h2 class="cta-headline" data-it="La tua vetrina merita <em>di più.</em>" data-en="Your storefront deserves <em>more.</em>" data-fr="Votre vitrine mérite <em>mieux.</em>" data-de="Ihr Schaufenster verdient <em>mehr.</em>">La tua vetrina merita <em>di più.</em></h2>
-  <div class="cta-buttons">
-    <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S'INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
-    <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
+  <div class="cta-choice">
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S&#39;INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
+      <p class="cta-opt-note" data-it="Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati." data-en="You go straight into a ready-made sample business. No email, no details." data-fr="Vous entrez directement dans un &eacute;tablissement d&#39;essai d&eacute;j&agrave; pr&ecirc;t. Aucun e-mail, aucune donn&eacute;e." data-de="Sie steigen direkt in einen fertigen Beispielbetrieb ein. Keine E-Mail, keine Daten.">Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati.</p>
+    </div>
+    <div class="cta-or" data-it="oppure" data-en="or" data-fr="ou" data-de="oder">oppure</div>
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
+      <p class="cta-opt-note" data-it="La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito." data-en="Your real business, your services, your QR codes. No credit card." data-fr="Votre &eacute;tablissement r&eacute;el, vos services, vos QR. Aucune carte bancaire." data-de="Ihr echter Betrieb, Ihre Leistungen, Ihre QR-Codes. Keine Kreditkarte.">La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito.</p>
+    </div>
   </div>
 </div>
 
@@ -523,7 +572,7 @@ body::after {
     <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
         <a href="/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise">Prezzi</a>
     <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
-    <a href="/organizzazione.html" data-it="Dettagli" data-en="Details" data-fr="Détails" data-de="Details">Dettagli</a>
+    <a href="/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Accessi e catalogo</a>
     <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>

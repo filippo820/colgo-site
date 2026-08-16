@@ -123,6 +123,7 @@
       --black:         #0D0D0D;   /* near-black — profondità, overlay */
       --petrol:        #1E3A35;   /* petrol green — sfondo dark, header */
       --petrol-deep:   #10231F;   /* verde profondo — sfumature dark */
+      --ground:        #10231F;   /* terreno della pagina — prima era il nero puro */
       --petrol-deeper: #142C27;   /* verde più profondo — gradienti */
       --ochre:         #C8922A;   /* oro caldo — accento principale */
       --ochre-dark:    #9E6F1F;   /* bronzo — ombre ochre */
@@ -149,7 +150,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
+      background: var(--ground);
       color: var(--cream);
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 300;
@@ -178,7 +179,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 28px 48px;
-      background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+      background: linear-gradient(to bottom, rgba(16,35,31,0.95), transparent);
     }
 
     .nav-logo {
@@ -772,7 +773,7 @@
     @media (max-width: 700px) {
       nav { padding: 20px 24px; }
       .nav-toggle{display:flex;}
-      .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--black);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}
+      .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--ground);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}
       .nav-links.open{transform:translateX(0);}
       .problem-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
@@ -970,7 +971,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
    sezione e' la voce del fondatore, in prima persona, e chiude il
    carosello: "sono la nostra struttura" funziona solo dopo che le
    schermate sono state viste. */
-.storia { padding: 100px 32px; background: var(--black); }
+.storia { padding: 100px 32px; background: var(--ground); }
 .storia-inner { max-width: 720px; margin: 0 auto; }
 .storia .section-label { margin-bottom: 20px; }
 .storia-titolo { font-family:'Cormorant Garamond',serif; font-weight:300;

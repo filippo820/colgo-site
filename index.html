@@ -963,6 +963,31 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
 .screen-item img { width:100%; border-radius:24px; border:1px solid rgba(200,146,42,0.25);
   box-shadow:0 20px 50px rgba(0,0,0,0.55); display:block; }
 @media (max-width:700px){ .screen-item { width:170px; } }
+
+/* ── Chi c'è dietro (16/08/2026) ──────────────────────────────────────
+   Il vuoto piu' visibile del sito rispetto ai concorrenti era l'assenza
+   di chiunque: nessun nome, nessuna struttura, nessuna prova. Questa
+   sezione e' la voce del fondatore, in prima persona, e chiude il
+   carosello: "sono la nostra struttura" funziona solo dopo che le
+   schermate sono state viste. */
+.storia { padding: 100px 32px; background: var(--black); }
+.storia-inner { max-width: 720px; margin: 0 auto; }
+.storia .section-label { margin-bottom: 20px; }
+.storia-titolo { font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size: clamp(28px,4vw,46px); line-height:1.18; margin-bottom: 30px; }
+.storia-titolo em { font-style: italic; color: var(--ochre-l, #d4a84b); }
+.storia-p { font-size: 17px; line-height: 1.85; color: var(--white-dim); margin-bottom: 20px; }
+.storia-p strong { color: var(--cream); font-weight: 600; }
+.storia-tesi { font-size: 19px; color: var(--cream); border-left: 2px solid var(--ochre);
+  padding-left: 20px; margin: 30px 0; }
+.storia-tesi em { font-style: italic; color: var(--ochre-l, #d4a84b); }
+.storia-firma { margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(245,241,232,0.1);
+  font-size: 13px; letter-spacing: 1.5px; color: rgba(245,241,232,0.5); }
+@media (max-width: 700px) {
+  .storia { padding: 70px 22px; }
+  .storia-p { font-size: 16px; }
+  .storia-tesi { font-size: 17px; padding-left: 16px; }
+}
 </style>
 </head>
 <body>
@@ -1129,6 +1154,22 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
     </div>
     <p class="screens-hint" data-it="SCORRI PER VEDERE" data-en="SWIPE TO SEE MORE" data-fr="FAITES DÉFILER" data-de="ZUM ANSEHEN WISCHEN">SCORRI PER VEDERE</p>
   </div>
+
+  <!-- ═══ CHI C'E' DIETRO — la storia vera, in prima persona. Sta DOPO il
+       carosello di proposito: l'ultima riga ("sono la nostra struttura")
+       si appoggia alle schermate che il lettore ha appena visto. ═══ -->
+  <section class="storia">
+    <div class="storia-inner">
+      <div class="section-label" data-it="CHI C&#39;È DIETRO" data-en="WHO IS BEHIND IT" data-fr="QUI EST DERRIÈRE" data-de="WER DAHINTER STEHT">CHI C&#39;È DIETRO</div>
+      <h2 class="storia-titolo" data-it="Colgo nasce in una <em>struttura di famiglia</em>." data-en="Colgo was born in a <em>family business</em>." data-fr="Colgo est né dans une <em>structure familiale</em>." data-de="Colgo ist in einem <em>Familienbetrieb</em> entstanden.">Colgo nasce in una <em>struttura di famiglia</em>.</h2>
+      <p class="storia-p" data-it="Prà de la Fam, sul lago di Garda. La gestisco io — non fisicamente, quello lo fa mio fratello. Io lavoro da un computer: sono in carrozzina, e la struttura la vivo così. Contabilità, gestionale, tutto quello che non richiede di essere lì di persona." data-en="Prà de la Fam, on Lake Garda. I run it — not physically; my brother does that. I work from a computer: I use a wheelchair, and that&#39;s how I&#39;m part of the place. Accounting, systems, everything that doesn&#39;t require being there in person." data-fr="Prà de la Fam, sur le lac de Garde. C&#39;est moi qui la gère — pas physiquement, ça c&#39;est mon frère. Moi je travaille depuis un ordinateur : je suis en fauteuil roulant, et c&#39;est ainsi que je vis l&#39;établissement. La comptabilité, la gestion, tout ce qui ne demande pas d&#39;être sur place." data-de="Prà de la Fam, am Gardasee. Ich führe ihn — nicht körperlich, das macht mein Bruder. Ich arbeite vom Computer aus: Ich sitze im Rollstuhl, und so bin ich Teil des Betriebs. Buchhaltung, Verwaltung, alles was keine Anwesenheit vor Ort verlangt.">Prà de la Fam, sul lago di Garda. La gestisco io — non fisicamente, quello lo fa mio fratello. Io lavoro da un computer: sono in carrozzina, e la struttura la vivo così. Contabilità, gestionale, tutto quello che non richiede di essere lì di persona.</p>
+      <p class="storia-p" data-it="Il problema non era trovare servizi da offrire. Era che <strong>ogni servizio nuovo è lavoro nuovo</strong>: qualcuno che lo spiega, qualcuno che prende nota, qualcuno che risponde alla stessa domanda per la ventesima volta. E il personale era già al limite." data-en="The problem was never finding services to offer. It was that <strong>every new service is new work</strong>: someone to explain it, someone to take note, someone to answer the same question for the twentieth time. And the staff were already at their limit." data-fr="Le problème n&#39;était pas de trouver des services à proposer. C&#39;était que <strong>chaque nouveau service est du travail en plus</strong> : quelqu&#39;un pour l&#39;expliquer, quelqu&#39;un pour noter, quelqu&#39;un pour répondre vingt fois à la même question. Et le personnel était déjà au maximum." data-de="Das Problem war nie, Leistungen zu finden, die man anbieten kann. Das Problem war: <strong>jede neue Leistung ist neue Arbeit</strong> — jemand muss sie erklären, jemand muss sie notieren, jemand muss dieselbe Frage zum zwanzigsten Mal beantworten. Und das Personal war schon am Limit.">Il problema non era trovare servizi da offrire. Era che <strong>ogni servizio nuovo è lavoro nuovo</strong>: qualcuno che lo spiega, qualcuno che prende nota, qualcuno che risponde alla stessa domanda per la ventesima volta. E il personale era già al limite.</p>
+      <p class="storia-p storia-tesi" data-it="Colgo è nato per quello: rendere i servizi raggiungibili dal cliente <em>senza aggiungere lavoro a chi c&#39;è già</em>." data-en="Colgo was built for that: to put services within the customer&#39;s reach <em>without adding work for the people already there</em>." data-fr="Colgo est né pour ça : rendre les services accessibles au client <em>sans ajouter de travail à ceux qui sont déjà là</em>." data-de="Dafür ist Colgo entstanden: Leistungen für den Gast erreichbar machen, <em>ohne denen Arbeit aufzuladen, die ohnehin schon da sind</em>.">Colgo è nato per quello: rendere i servizi raggiungibili dal cliente <em>senza aggiungere lavoro a chi c&#39;è già</em>.</p>
+      <p class="storia-p" data-it="Le schermate che vedi in questo sito non sono un prototipo. Sono la nostra struttura." data-en="The screenshots on this site aren&#39;t a prototype. They&#39;re our own property." data-fr="Les captures d&#39;écran de ce site ne sont pas une maquette. C&#39;est notre établissement." data-de="Die Screenshots auf dieser Seite sind kein Prototyp. Das ist unser eigener Betrieb.">Le schermate che vedi in questo sito non sono un prototipo. Sono la nostra struttura.</p>
+      <div class="storia-firma" data-it="Filippo Parisini · Prà de la Fam, lago di Garda" data-en="Filippo Parisini · Prà de la Fam, Lake Garda" data-fr="Filippo Parisini · Prà de la Fam, lac de Garde" data-de="Filippo Parisini · Prà de la Fam, Gardasee">Filippo Parisini · Prà de la Fam, lago di Garda</div>
+    </div>
+  </section>
+
 
 
   <!-- VERTICALI -->

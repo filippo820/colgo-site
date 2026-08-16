@@ -275,12 +275,23 @@ body::after {
     radial-gradient(60% 45% at 12% 42%,  rgba(30,58,53,0.30) 0%, transparent 72%),
     radial-gradient(65% 50% at 88% 78%,  rgba(30,58,53,0.34) 0%, transparent 74%);
 }
+
+/* ── Logo compatto su telefono (16/08/2026) ───────────────────────────
+   Il marchio esteso e' largo 157px: su 390px di schermo spingeva il
+   pulsante del menu' a x=432, cioe' FUORI DALLO SCHERMO — e la
+   navigazione diventava irraggiungibile (si tornava indietro solo
+   toccando il logo). Sotto i 700px resta il solo occhio, 38px. */
+.nav-logo-mini { display: none; }
+@media (max-width: 700px) {
+  .nav-logo-full { display: none; }
+  .nav-logo-mini { display: block; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/"><svg class="nav-logo" viewBox="0 0 232 56" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <a href="/"><svg class="nav-logo nav-logo-full" viewBox="0 0 232 56" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
   <text x="2" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">C</text>
   <g transform="translate(52,26)">
     <circle cx="0" cy="0" r="15.5" fill="none" stroke="#C8922A" stroke-width="2.2"/>
@@ -288,6 +299,10 @@ body::after {
     <circle cx="1.2" cy="-1.4" r="2.9" fill="#C8922A"/>
   </g>
   <text x="80" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">LGO</text>
+</svg><svg class="nav-logo nav-logo-mini" viewBox="0 0 40 40" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="16" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+  <path d="M 7.5 20 A 12.5 12.5 0 0 0 26 30.5" fill="none" stroke="#C8922A" stroke-width="1.9" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="21.4" cy="18.4" r="3" fill="#C8922A"/>
 </svg></a>
   <div class="nav-right">
     <div class="nav-links">

@@ -323,13 +323,29 @@ body::after {
 
     /* Indice di cio' che la pagina contiene: senza, il titolo dice il tema
        ma non da' motivo di scendere. */
-    .page-indice { list-style: none; max-width: 560px; margin: 30px auto 0; padding: 0;
-      text-align: left; display: grid; gap: 9px; position: relative; z-index: 1; }
-    .page-indice li { font-size: 14px; line-height: 1.6; letter-spacing: 0.4px;
-      color: rgba(245,241,232,0.5); padding-left: 22px; position: relative; }
-    .page-indice li::before { content: '·'; position: absolute; left: 6px;
-      color: var(--ochre); font-size: 18px; line-height: 1.3; }
-    @media (max-width: 700px) { .page-indice { max-width: 330px; } .page-indice li { font-size: 13px; } }
+    /* Indice vero: ogni riga porta al suo capitolo. Prima erano sei righe
+       che li elencavano soltanto — chi voleva la quarta doveva cercarsela,
+       cioe' la fatica che un indice esiste per togliere. */
+    .page-indice { list-style: none; max-width: 580px; margin: 34px auto 0; padding: 0;
+      text-align: left; display: grid; gap: 4px; position: relative; z-index: 1; }
+    .page-indice li { position: relative; }
+    .page-indice a { display: flex; align-items: center; gap: 12px; min-height: 46px;
+      padding: 9px 14px 9px 10px; font-size: 16px; line-height: 1.5; letter-spacing: 0.3px;
+      color: rgba(245,241,232,0.72); text-decoration: none; border-radius: 3px;
+      border: 1px solid transparent; transition: color .15s, background .15s, border-color .15s; }
+    .page-indice a::before { content: counter(cap); counter-increment: cap;
+      flex-shrink: 0; width: 24px; text-align: center; font-size: 12px; letter-spacing: 1px;
+      color: var(--ochre); opacity: .75; }
+    .page-indice { counter-reset: cap; }
+    .page-indice a:hover, .page-indice a:focus-visible { color: var(--cream);
+      background: rgba(200,146,42,0.09); border-color: rgba(200,146,42,0.32); outline: none; }
+    /* Senza questo il capitolo finisce sotto la barra fissa e sembra di
+       essere atterrati nel punto sbagliato. */
+    .section-label[id] { scroll-margin-top: 110px; }
+    @media (max-width: 700px) {
+      .page-indice { max-width: 340px; }
+      .page-indice a { font-size: 15px; min-height: 48px; }
+    }
 
     /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
        spaziature per tenerla su una riga, senza toccare la dimensione del
@@ -365,11 +381,11 @@ body::after {
       <a href="/hotel.html" data-it="HOTEL" data-en="HOTEL" data-fr="HÔTEL" data-de="HOTEL">HOTEL</a>
       <a href="/ristorante.html" data-it="RISTORANTE" data-en="RESTAURANT" data-fr="RESTAURANT" data-de="RESTAURANT">RISTORANTE</a>
       <a href="/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT">NEGOZIO</a>
+      <a href="/organizzazione.html" class="active" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</a>
       <a href="/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE">PREZZI</a>
       <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
       <a href="/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS">CHI SIAMO</a>
         <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
-      <a href="/organizzazione.html" class="active" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</a>
     </div>
     <div class="nav-lang">
       <button class="lang-btn active" onclick="setLang('it')">IT</button>
@@ -390,18 +406,18 @@ body::after {
   <h1 class="page-title" data-it="Chi vede cosa. <em>E come governi il catalogo.</em>" data-en="Who sees what. <em>And how you run the catalogue.</em>" data-fr="Qui voit quoi. <em>Et comment vous g&eacute;rez le catalogue.</em>" data-de="Wer was sieht. <em>Und wie Sie den Katalog steuern.</em>">Chi vede cosa. <em>E come governi il catalogo.</em></h1>
   <p class="page-sub" data-it="Sei meccanismi di Colgo che con uno schema si capiscono in un minuto, e a parole no." data-en="Six mechanisms in Colgo that a diagram explains in a minute, and words don&#39;t." data-fr="Six m&eacute;canismes de Colgo qu&#39;un sch&eacute;ma explique en une minute, et pas les mots." data-de="Sechs Mechanismen in Colgo, die ein Schaubild in einer Minute erkl&auml;rt — Worte nicht.">Sei meccanismi di Colgo che con uno schema si capiscono in un minuto, e a parole no.</p>
   <ul class="page-indice">
-    <li data-it="Chi vede cosa: dal titolare al singolo cameriere" data-en="Who sees what: from the owner to the individual waiter" data-fr="Qui voit quoi : du propri&eacute;taire au serveur" data-de="Wer was sieht: vom Inhaber bis zum einzelnen Kellner">Chi vede cosa: dal titolare al singolo cameriere</li>
-    <li data-it="La coda delle richieste che arriva allo staff" data-en="The queue of requests that reaches your staff" data-fr="La file des demandes qui arrive au personnel" data-de="Die Warteschlange der Anfragen f&uuml;r Ihr Personal">La coda delle richieste che arriva allo staff</li>
-    <li data-it="Un PIN solo per chi lavora su pi&ugrave; sedi" data-en="A single PIN for people working across several sites" data-fr="Un seul PIN pour qui travaille sur plusieurs sites" data-de="Eine PIN f&uuml;r alle, die an mehreren Standorten arbeiten">Un PIN solo per chi lavora su pi&ugrave; sedi</li>
-    <li data-it="Cosa succede davvero quando spegni una categoria" data-en="What really happens when you switch a category off" data-fr="Ce qui se passe vraiment quand vous d&eacute;sactivez une cat&eacute;gorie" data-de="Was wirklich passiert, wenn Sie eine Kategorie ausschalten">Cosa succede davvero quando spegni una categoria</li>
-    <li data-it="L&#39;editor del catalogo, dal telefono" data-en="The catalogue editor, from your phone" data-fr="L&#39;&eacute;diteur du catalogue, depuis le t&eacute;l&eacute;phone" data-de="Der Katalog-Editor, vom Handy aus">L&#39;editor del catalogo, dal telefono</li>
-    <li data-it="Pi&ugrave; sedi con un accesso solo" data-en="Several sites with a single login" data-fr="Plusieurs sites avec un seul acc&egrave;s" data-de="Mehrere Standorte mit einem Zugang">Pi&ugrave; sedi con un accesso solo</li>
+    <li><a href="#cap1" data-it="Chi vede cosa: dal titolare al singolo cameriere" data-en="Who sees what: from the owner to the individual waiter" data-fr="Qui voit quoi : du propri&eacute;taire au serveur" data-de="Wer was sieht: vom Inhaber bis zum einzelnen Kellner">Chi vede cosa: dal titolare al singolo cameriere</a></li>
+    <li><a href="#cap2" data-it="La coda delle richieste che arriva allo staff" data-en="The queue of requests that reaches your staff" data-fr="La file des demandes qui arrive au personnel" data-de="Die Warteschlange der Anfragen f&uuml;r Ihr Personal">La coda delle richieste che arriva allo staff</a></li>
+    <li><a href="#cap3" data-it="Un PIN solo per chi lavora su pi&ugrave; sedi" data-en="A single PIN for people working across several sites" data-fr="Un seul PIN pour qui travaille sur plusieurs sites" data-de="Eine PIN f&uuml;r alle, die an mehreren Standorten arbeiten">Un PIN solo per chi lavora su pi&ugrave; sedi</a></li>
+    <li><a href="#cap4" data-it="Cosa succede davvero quando spegni una categoria" data-en="What really happens when you switch a category off" data-fr="Ce qui se passe vraiment quand vous d&eacute;sactivez une cat&eacute;gorie" data-de="Was wirklich passiert, wenn Sie eine Kategorie ausschalten">Cosa succede davvero quando spegni una categoria</a></li>
+    <li><a href="#cap5" data-it="L&#39;editor del catalogo, dal telefono" data-en="The catalogue editor, from your phone" data-fr="L&#39;&eacute;diteur du catalogue, depuis le t&eacute;l&eacute;phone" data-de="Der Katalog-Editor, vom Handy aus">L&#39;editor del catalogo, dal telefono</a></li>
+    <li><a href="#cap6" data-it="Pi&ugrave; sedi con un accesso solo" data-en="Several sites with a single login" data-fr="Plusieurs sites avec un seul acc&egrave;s" data-de="Mehrere Standorte mit einem Zugang">Pi&ugrave; sedi con un accesso solo</a></li>
   </ul>
 </div>
 
 <div class="concept-section">
   <div class="gold-line"></div>
-  <div class="section-label" data-it="LIVELLI DI ACCESSO" data-en="ACCESS LEVELS" data-fr="NIVEAUX D'ACCÈS" data-de="ZUGRIFFSEBENEN">LIVELLI DI ACCESSO</div>
+  <div id="cap1" class="section-label" data-it="LIVELLI DI ACCESSO" data-en="ACCESS LEVELS" data-fr="NIVEAUX D'ACCÈS" data-de="ZUGRIFFSEBENEN">LIVELLI DI ACCESSO</div>
   <h2 class="section-title" data-it="Ogni ruolo vede <em>solo quello che gli serve.</em>" data-en="Every role sees <em>only what it needs.</em>" data-fr="Chaque rôle voit <em>seulement ce dont il a besoin.</em>" data-de="Jede Rolle sieht <em>nur, was sie braucht.</em>">Ogni ruolo vede <em>solo quello che gli serve.</em></h2>
   <p class="section-sub" data-it="Dalla password admin al PIN del singolo cameriere, ogni livello ha un accesso proporzionato al suo ruolo — nessuno vede più di quanto serve." data-en="From the admin password to a single waiter's PIN, every level has access proportional to its role — nobody sees more than they need." data-fr="Du mot de passe admin au PIN d'un seul serveur, chaque niveau a un accès proportionné à son rôle — personne ne voit plus que nécessaire." data-de="Vom Admin-Passwort bis zum PIN eines einzelnen Kellners hat jede Ebene einen ihrer Rolle angemessenen Zugriff — niemand sieht mehr als nötig.">Dalla password admin al PIN del singolo cameriere, ogni livello ha un accesso proporzionato al suo ruolo — nessuno vede più di quanto serve.</p>
   <div class="concept-diagram">
@@ -446,7 +462,7 @@ body::after {
 </div>
 
 <div class="screens-section">
-  <div class="section-label" data-it="STAFF APP · GESTIONE RICHIESTE" data-en="STAFF APP · REQUEST MANAGEMENT" data-fr="APPLI STAFF · GESTION DES DEMANDES" data-de="STAFF-APP · ANFRAGENVERWALTUNG">STAFF APP · GESTIONE RICHIESTE</div>
+  <div id="cap2" class="section-label" data-it="STAFF APP · GESTIONE RICHIESTE" data-en="STAFF APP · REQUEST MANAGEMENT" data-fr="APPLI STAFF · GESTION DES DEMANDES" data-de="STAFF-APP · ANFRAGENVERWALTUNG">STAFF APP · GESTIONE RICHIESTE</div>
   <h2 class="section-title" data-it="La coda delle richieste, <em>in tempo reale.</em>" data-en="The request queue, <em>in real time.</em>" data-fr="La file des demandes, <em>en temps réel.</em>" data-de="Die Anfragewarteschlange, <em>in Echtzeit.</em>">La coda delle richieste, <em>in tempo reale.</em></h2>
   <p class="section-sub" data-it="Ogni PIN vede solo le camere o i tavoli di sua competenza. Nuova, in lavorazione, completata — lo stato è sempre chiaro." data-en="Every PIN only sees the rooms or tables it's responsible for. New, in progress, completed — the status is always clear." data-fr="Chaque PIN ne voit que les chambres ou tables de sa compétence. Nouvelle, en cours, terminée — le statut est toujours clair." data-de="Jedes PIN sieht nur die Zimmer oder Tische, für die es zuständig ist. Neu, in Bearbeitung, abgeschlossen — der Status ist immer klar.">Ogni PIN vede solo le camere o i tavoli di sua competenza. Nuova, in lavorazione, completata — lo stato è sempre chiaro.</p>
   <div class="screens-carousel">
@@ -475,7 +491,7 @@ body::after {
 </div>
 
 <div class="concept-section">
-  <div class="section-label" data-it="PIN MULTI-STRUTTURA" data-en="MULTI-VENUE PIN" data-fr="PIN MULTI-ÉTABLISSEMENT" data-de="MULTI-STANDORT-PIN">PIN MULTI-STRUTTURA</div>
+  <div id="cap3" class="section-label" data-it="PIN MULTI-STRUTTURA" data-en="MULTI-VENUE PIN" data-fr="PIN MULTI-ÉTABLISSEMENT" data-de="MULTI-STANDORT-PIN">PIN MULTI-STRUTTURA</div>
   <h2 class="section-title" data-it="Un PIN. <em>Più sedi coperte.</em>" data-en="One PIN. <em>Multiple venues covered.</em>" data-fr="Un PIN. <em>Plusieurs établissements couverts.</em>" data-de="Ein PIN. <em>Mehrere Standorte abgedeckt.</em>">Un PIN. <em>Più sedi coperte.</em></h2>
   <p class="section-sub" data-it="Se il tuo staff lavora su più sedi, non serve un PIN per ognuna — un unico PIN può dare accesso a tutte quelle scelte da te." data-en="If your staff works across multiple venues, you don't need a PIN for each — a single PIN can grant access to all the ones you choose." data-fr="Si votre personnel travaille sur plusieurs établissements, pas besoin d'un PIN par site — un seul PIN peut donner accès à tous ceux que vous choisissez." data-de="Wenn Ihr Team an mehreren Standorten arbeitet, brauchen Sie nicht für jeden ein eigenes PIN — ein einziges PIN kann Zugriff auf alle von Ihnen gewählten geben.">Se il tuo staff lavora su più sedi, non serve un PIN per ognuna — un unico PIN può dare accesso a tutte quelle scelte da te.</p>
   <div class="concept-diagram">
@@ -532,7 +548,7 @@ body::after {
 </div>
 
 <div class="concept-section">
-  <div class="section-label" data-it="VISIBILITÀ CATALOGO" data-en="CATALOGUE VISIBILITY" data-fr="VISIBILITÉ DU CATALOGUE" data-de="KATALOG-SICHTBARKEIT">VISIBILITÀ CATALOGO</div>
+  <div id="cap4" class="section-label" data-it="VISIBILITÀ CATALOGO" data-en="CATALOGUE VISIBILITY" data-fr="VISIBILITÉ DU CATALOGUE" data-de="KATALOG-SICHTBARKEIT">VISIBILITÀ CATALOGO</div>
   <h2 class="section-title" data-it="Disattivare non è <em>simmetrico.</em>" data-en="Deactivating isn't <em>symmetrical.</em>" data-fr="Désactiver n'est pas <em>symétrique.</em>" data-de="Deaktivieren ist nicht <em>symmetrisch.</em>">Disattivare non è <em>simmetrico.</em></h2>
   <p class="section-sub" data-it="Spegnere una categoria nasconde tutto quello che contiene. Spegnere una singola voce non tocca il resto — così hai controllo fine senza sorprese." data-en="Turning off a category hides everything inside it. Turning off a single item doesn't touch the rest — so you get fine control without surprises." data-fr="Désactiver une catégorie masque tout ce qu'elle contient. Désactiver un seul article ne touche pas le reste — un contrôle précis sans surprises." data-de="Das Deaktivieren einer Kategorie blendet alles darin aus. Das Deaktivieren eines einzelnen Eintrags berührt den Rest nicht — feine Kontrolle ohne Überraschungen.">Spegnere una categoria nasconde tutto quello che contiene. Spegnere una singola voce non tocca il resto — così hai controllo fine senza sorprese.</p>
   <div class="concept-diagram">
@@ -610,7 +626,7 @@ body::after {
 </div>
 
 <div class="screens-section">
-  <div class="section-label" data-it="ADMIN PANEL · EDITOR CATALOGO" data-en="ADMIN PANEL · CATALOGUE EDITOR" data-fr="PANNEAU ADMIN · ÉDITEUR DE CATALOGUE" data-de="ADMIN-PANEL · KATALOG-EDITOR">ADMIN PANEL · EDITOR CATALOGO</div>
+  <div id="cap5" class="section-label" data-it="ADMIN PANEL · EDITOR CATALOGO" data-en="ADMIN PANEL · CATALOGUE EDITOR" data-fr="PANNEAU ADMIN · ÉDITEUR DE CATALOGUE" data-de="ADMIN-PANEL · KATALOG-EDITOR">ADMIN PANEL · EDITOR CATALOGO</div>
   <h2 class="section-title" data-it="L'editor che tieni <em>sempre a portata di mano.</em>" data-en="The editor you always <em>have at hand.</em>" data-fr="L'éditeur toujours <em>à portée de main.</em>" data-de="Der Editor, den Sie <em>immer griffbereit haben.</em>">L'editor che tieni <em>sempre a portata di mano.</em></h2>
   <p class="section-sub" data-it="Categorie, articoli, varianti, prezzi, disponibilità — tutto da telefono o computer, con anteprima esatta di quello che vedrà l'ospite." data-en="Categories, items, variants, prices, availability — all from phone or computer, with an exact preview of what the guest will see." data-fr="Catégories, articles, variantes, prix, disponibilité — tout depuis le téléphone ou l'ordinateur, avec un aperçu exact de ce que verra le client." data-de="Kategorien, Artikel, Varianten, Preise, Verfügbarkeit — alles vom Handy oder Computer aus, mit genauer Vorschau dessen, was der Gast sieht.">Categorie, articoli, varianti, prezzi, disponibilità — tutto da telefono o computer, con anteprima esatta di quello che vedrà l'ospite.</p>
   <div class="screens-carousel">
@@ -651,7 +667,7 @@ body::after {
 </div>
 
 <div class="concept-section">
-  <div class="section-label" data-it="MULTI-STRUTTURA" data-en="MULTI-VENUE" data-fr="MULTI-ÉTABLISSEMENT" data-de="MULTI-STANDORT">MULTI-STRUTTURA</div>
+  <div id="cap6" class="section-label" data-it="MULTI-STRUTTURA" data-en="MULTI-VENUE" data-fr="MULTI-ÉTABLISSEMENT" data-de="MULTI-STANDORT">MULTI-STRUTTURA</div>
   <h2 class="section-title" data-it="Più sedi. <em>Un solo login.</em>" data-en="Multiple venues. <em>One single login.</em>" data-fr="Plusieurs établissements. <em>Une seule connexion.</em>" data-de="Mehrere Standorte. <em>Ein einziger Login.</em>">Più sedi. <em>Un solo login.</em></h2>
   <p class="section-sub" data-it="Gestisci hotel, ristorante e negozio con la stessa email — passi da una sede all'altra con un tap, senza fare logout e login ogni volta." data-en="Manage a hotel, restaurant and shop with the same email — switch between venues with a tap, no logout and login every time." data-fr="Gérez hôtel, restaurant et boutique avec le même e-mail — passez d'un établissement à l'autre en un tap, sans vous déconnecter à chaque fois." data-de="Verwalten Sie Hotel, Restaurant und Geschäft mit derselben E-Mail — wechseln Sie mit einem Tap zwischen Standorten, ohne sich jedes Mal ab- und anzumelden.">Gestisci hotel, ristorante e negozio con la stessa email — passi da una sede all'altra con un tap, senza fare logout e login ogni volta.</p>
   <div class="concept-diagram">

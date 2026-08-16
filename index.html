@@ -988,6 +988,10 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   .storia-p { font-size: 16px; }
   .storia-tesi { font-size: 17px; padding-left: 16px; }
 }
+
+.storia-contatto { font-size: 15px; line-height: 1.8; color: var(--white-dim); margin-top: 26px; }
+.storia-contatto a { color: var(--ochre); text-decoration: none; border-bottom: 1px solid rgba(200,146,42,0.35); }
+.storia-contatto a:hover { border-bottom-color: var(--ochre); }
 </style>
 </head>
 <body>
@@ -999,6 +1003,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
       <div class="nav-links">
         <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
       <a href="/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE">PREZZI</a>
+        <a href="#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS">CHI SIAMO</a>
         <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
         <a href="/organizzazione.html" data-it="DETTAGLI" data-en="DETAILS" data-fr="DÉTAILS" data-de="DETAILS">DETTAGLI</a>
       </div>
@@ -1078,7 +1083,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
         <span data-it="NEGOZIO" data-en="SHOPS" data-fr="BOUTIQUES" data-de="GESCHÄFTE">NEGOZIO</span><span class="arrow">→</span>
       </a>
     </div>
-    <p style="font-size:12px;letter-spacing:4px;color:rgba(200,146,42,0.75);margin-bottom:28px;font-family:'Josefin Sans',sans-serif;font-weight:300;opacity:0;animation:fadeUp 1s ease 0.3s forwards;" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS." data-fr="NUMÉRIQUE LÀ OÙ ÇA AIDE. HUMAIN LÀ OÙ ÇA COMPTE." data-de="DIGITAL WO ES HILFT. MENSCHLICH WO ES ZÄHLT.">DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.</p>
+    <p style="font-size:clamp(15px,2.2vw,20px);letter-spacing:3px;color:rgba(200,146,42,0.75);margin-bottom:28px;font-family:'Josefin Sans',sans-serif;font-weight:300;opacity:0;animation:fadeUp 1s ease 0.3s forwards;" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS." data-fr="NUMÉRIQUE LÀ OÙ ÇA AIDE. HUMAIN LÀ OÙ ÇA COMPTE." data-de="DIGITAL WO ES HILFT. MENSCHLICH WO ES ZÄHLT.">DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS.</p>
     <div class="hero-eyebrow" data-it="CATALOGO DIGITALE · CANALE DI COMUNICAZIONE · PER QUALSIASI STRUTTURA" data-en="DIGITAL CATALOGUE · COMMUNICATION CHANNEL · FOR ANY BUSINESS" data-fr="CATALOGUE NUMÉRIQUE · CANAL DE COMMUNICATION · POUR TOUT ÉTABLISSEMENT" data-de="DIGITALER KATALOG · KOMMUNIKATIONSKANAL · FÜR JEDEN BETRIEB">CATALOGO DIGITALE · CANALE DI COMUNICAZIONE · PER QUALSIASI STRUTTURA</div>
     <h1 class="hero-headline">
       <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>." data-fr="Vos clients méritent mieux qu'une <em>feuille plastifiée</em>." data-de="Ihre Gäste verdienen mehr als ein <em>laminiertes Blatt</em>.">I tuoi clienti meritano più di un <em>foglio plastificato</em>.</span>
@@ -1158,7 +1163,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
   <!-- ═══ CHI C'E' DIETRO — la storia vera, in prima persona. Sta DOPO il
        carosello di proposito: l'ultima riga ("sono la nostra struttura")
        si appoggia alle schermate che il lettore ha appena visto. ═══ -->
-  <section class="storia">
+  <section class="storia" id="storia">
     <div class="storia-inner">
       <div class="section-label" data-it="CHI C&#39;È DIETRO" data-en="WHO IS BEHIND IT" data-fr="QUI EST DERRIÈRE" data-de="WER DAHINTER STEHT">CHI C&#39;È DIETRO</div>
       <h2 class="storia-titolo" data-it="Colgo nasce in una <em>struttura di famiglia</em>." data-en="Colgo was born in a <em>family business</em>." data-fr="Colgo est né dans une <em>structure familiale</em>." data-de="Colgo ist in einem <em>Familienbetrieb</em> entstanden.">Colgo nasce in una <em>struttura di famiglia</em>.</h2>
@@ -1166,6 +1171,7 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
       <p class="storia-p" data-it="Il problema non era trovare servizi da offrire. Era che <strong>ogni servizio nuovo è lavoro nuovo</strong>: qualcuno che lo spiega, qualcuno che prende nota, qualcuno che risponde alla stessa domanda per la ventesima volta. E il personale era già al limite." data-en="The problem was never finding services to offer. It was that <strong>every new service is new work</strong>: someone to explain it, someone to take note, someone to answer the same question for the twentieth time. And the staff were already at their limit." data-fr="Le problème n&#39;était pas de trouver des services à proposer. C&#39;était que <strong>chaque nouveau service est du travail en plus</strong> : quelqu&#39;un pour l&#39;expliquer, quelqu&#39;un pour noter, quelqu&#39;un pour répondre vingt fois à la même question. Et le personnel était déjà au maximum." data-de="Das Problem war nie, Leistungen zu finden, die man anbieten kann. Das Problem war: <strong>jede neue Leistung ist neue Arbeit</strong> — jemand muss sie erklären, jemand muss sie notieren, jemand muss dieselbe Frage zum zwanzigsten Mal beantworten. Und das Personal war schon am Limit.">Il problema non era trovare servizi da offrire. Era che <strong>ogni servizio nuovo è lavoro nuovo</strong>: qualcuno che lo spiega, qualcuno che prende nota, qualcuno che risponde alla stessa domanda per la ventesima volta. E il personale era già al limite.</p>
       <p class="storia-p storia-tesi" data-it="Colgo è nato per quello: rendere i servizi raggiungibili dal cliente <em>senza aggiungere lavoro a chi c&#39;è già</em>." data-en="Colgo was built for that: to put services within the customer&#39;s reach <em>without adding work for the people already there</em>." data-fr="Colgo est né pour ça : rendre les services accessibles au client <em>sans ajouter de travail à ceux qui sont déjà là</em>." data-de="Dafür ist Colgo entstanden: Leistungen für den Gast erreichbar machen, <em>ohne denen Arbeit aufzuladen, die ohnehin schon da sind</em>.">Colgo è nato per quello: rendere i servizi raggiungibili dal cliente <em>senza aggiungere lavoro a chi c&#39;è già</em>.</p>
       <p class="storia-p" data-it="Le schermate che vedi in questo sito non sono un prototipo. Sono la nostra struttura." data-en="The screenshots on this site aren&#39;t a prototype. They&#39;re our own property." data-fr="Les captures d&#39;écran de ce site ne sont pas une maquette. C&#39;est notre établissement." data-de="Die Screenshots auf dieser Seite sind kein Prototyp. Das ist unser eigener Betrieb.">Le schermate che vedi in questo sito non sono un prototipo. Sono la nostra struttura.</p>
+            <p class="storia-contatto" data-it="Hai una struttura e vuoi capire se ti serve? Scrivimi: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-en="Do you run a business and want to know if this is for you? Write to me: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-fr="Vous avez un établissement et vous voulez savoir si cela vous convient ? Écrivez-moi : <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-de="Sie führen einen Betrieb und möchten wissen, ob das etwas für Sie ist? Schreiben Sie mir: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>">Hai una struttura e vuoi capire se ti serve? Scrivimi: <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a></p>
       <div class="storia-firma" data-it="Filippo Parisini · Prà de la Fam, lago di Garda" data-en="Filippo Parisini · Prà de la Fam, Lake Garda" data-fr="Filippo Parisini · Prà de la Fam, lac de Garde" data-de="Filippo Parisini · Prà de la Fam, Gardasee">Filippo Parisini · Prà de la Fam, lago di Garda</div>
     </div>
   </section>
@@ -1336,12 +1342,6 @@ footer, .footer-links a, .footer-copy { font-size: 13px; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
         <!-- YouTube -->
-        <a href="https://youtube.com/@colgo" target="_blank" aria-label="YouTube"
-           style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"
-           onmouseover="this.style.borderColor='#C8922A';this.style.color='#C8922A'"
-           onmouseout="this.style.borderColor='rgba(245,241,232,0.12)';this.style.color='rgba(245,241,232,0.4)'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-        </a>
         <!-- TikTok -->
         <a href="https://www.tiktok.com/@colgoapp" target="_blank" aria-label="TikTok"
            style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,241,232,0.12);display:flex;align-items:center;justify-content:center;color:rgba(245,241,232,0.4);text-decoration:none;font-size:18px;transition:border-color 0.2s,color 0.2s;"

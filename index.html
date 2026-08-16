@@ -818,7 +818,12 @@
   display:flex;align-items:flex-start;justify-content:center;
   opacity:0;animation:fadeUp 1s ease .15s forwards;z-index:1;margin-bottom:26px;}
 .ring-svg{width:340px;height:340px;margin-top:26px;overflow:visible;}
-.seg{position:absolute;inset:0;text-decoration:none;display:block;}
+/* I tre link sono sovrapposti a tutta area (inset:0), quindi l'ultimo del
+   DOM copriva gli altri: passando su RISTORAZIONE rispondeva NEGOZIO.
+   Il contenitore non deve catturare il puntatore — lo fanno solo l'arco
+   (pointer-events:stroke) e la sua etichetta. */
+.seg{position:absolute; inset:0; text-decoration:none; display:block; pointer-events:none;}
+.seg .lbl{pointer-events:auto;}
 .seg > svg{position:absolute;top:26px;left:50%;transform:translateX(-50%);
   width:340px;height:340px;overflow:visible;pointer-events:none;}
 .seg .arc{fill:none;stroke:var(--ochre);stroke-width:2.5;opacity:.28;

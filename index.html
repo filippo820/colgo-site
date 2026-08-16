@@ -1501,6 +1501,7 @@ body::after {
 
 
 
+
 <!-- ══ colgo-assistente ══ generato da widget.py — non modificare a mano -->
 <style>
 /* ══ Assistente e invito fisso (16/08/2026) ═════════════════════════════
@@ -1509,6 +1510,14 @@ body::after {
    chiusa (--colgo-fondo). Se stessero in due blocchi indipendenti finirebbero
    uno sopra l'altro. */
 :root { --colgo-fondo: 24px; }
+/* Difesa: il sito ha regole scritte sui TAG (section{padding:120px} e' quella
+   che mi ha fregato, nav{position:fixed} lo aveva fatto poco prima). Entrano
+   in qualunque elemento nuovo dello stesso tag. Qui si azzera in partenza,
+   cosi' la prossima regola globale non arriva fin dentro. */
+.colgo-fab, .colgo-chat, .colgo-invito, .colgo-barra,
+.colgo-chat *, .colgo-invito *, .colgo-barra * {
+  margin: 0; max-width: none; box-sizing: border-box; }
+.colgo-chat, .colgo-invito, .colgo-barra, .colgo-fab { padding: 0; }
 .colgo-fab { position: fixed; right: 22px; bottom: var(--colgo-fondo); z-index: 300;
   width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
   justify-content: center; cursor: pointer; border: 1px solid rgba(200,146,42,0.55);
@@ -1604,13 +1613,13 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
 @media (max-width: 900px) and (max-height: 620px) { .colgo-chat { height: calc(100vh - 130px); } }
 </style>
 
-<aside class="colgo-invito" id="colgoInvito" aria-hidden="true">
+<div class="colgo-invito" id="colgoInvito" aria-hidden="true">
   <button type="button" class="colgo-x" id="colgoInvitoX" aria-label="Chiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
   <strong data-it="Provalo davvero." data-en="Try it for real." data-fr="Essayez pour de vrai." data-de="Probieren Sie es aus.">Provalo davvero.</strong>
   <p data-it="Una struttura già pronta, senza dare niente." data-en="A ready-made business, without giving anything." data-fr="Un établissement déjà prêt, sans rien donner." data-de="Ein fertiger Betrieb, ohne Angaben.">Una struttura già pronta, senza dare niente.</p>
   <a class="i-demo" href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Guarda la demo" data-en="See the demo" data-fr="Voir la démo" data-de="Demo ansehen">Guarda la demo</a>
   <a class="i-prova" href="https://app.colgo.app/registrati" target="_blank" rel="noopener" data-it="30 giorni gratis" data-en="30 days free" data-fr="30 jours gratuits" data-de="30 Tage gratis">30 giorni gratis</a>
-</aside>
+</div>
 
 <div class="colgo-barra" id="colgoBarra">
   <a href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Provalo senza registrarti" data-en="Try it without signing up" data-fr="Essayer sans s'inscrire" data-de="Ohne Anmeldung testen">Provalo senza registrarti</a>
@@ -1619,7 +1628,7 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
 
 <button type="button" class="colgo-fab" id="colgoFab" aria-expanded="false"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></button>
 
-<section class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
+<div class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
   <div class="colgo-chat-testa">
     <strong id="colgoTit" data-it="Domande su Colgo?" data-en="Questions about Colgo?" data-fr="Des questions sur Colgo ?" data-de="Fragen zu Colgo?">Domande su Colgo?</strong>
     <button type="button" class="colgo-x" id="colgoChiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
@@ -1633,7 +1642,7 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
     </form>
     <p class="colgo-nota" data-it="Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com" data-en="It answers from what's on this site. For anything else: colgoapp@gmail.com" data-fr="Il répond à partir de ce qui est sur ce site. Pour le reste : colgoapp@gmail.com" data-de="Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com">Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com</p>
   </div>
-</section>
+</div>
 
 <script>
 (function () {

@@ -1062,6 +1062,48 @@ body::after {
       .cta-or { padding: 0; }
     }
 
+    /* ── La striscia dei numeri (17/08/2026) ──────────────────────────────
+       Sta DOPO "il problema" di proposito: il lettore ha appena letto che i
+       quattro modi di comunicare oggi non funzionano, e qui trova che non e'
+       una nostra opinione. Piu' in alto arriverebbe prima della domanda a
+       cui risponde.
+       div e non section: `section{padding:120px}` e' scritta sul TAG e
+       entrerebbe qui dentro senza essere stata chiesta (stessa trappola gia'
+       annotata per nav{position:fixed}).
+       Le misure del testo seguono la scala del 16/08: corpo 16, etichette
+       mai sotto i 12. */
+    .numeri { background: var(--petrol); padding: 92px 32px; position: relative; overflow: hidden; }
+    .numeri::before {
+      content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,146,42,0.10) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+    }
+    .numeri-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+    .numeri-label { font-size: 12px; letter-spacing: 4px; color: var(--ochre); margin-bottom: 20px; }
+    .numeri-titolo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(26px, 3.4vw, 44px); line-height: 1.2; margin-bottom: 54px; text-wrap: balance;
+    }
+    .numeri-titolo em { font-style: italic; color: var(--gold-light); }
+    .numeri-griglia { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .numero-cifra {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(40px, 4.6vw, 62px); line-height: 1; color: var(--ochre); margin-bottom: 14px;
+    }
+    .numero-testo { font-size: 16px; line-height: 1.7; color: var(--white-dim); max-width: 230px; margin: 0 auto; text-wrap: pretty; }
+    .numeri-link {
+      display: inline-block; margin-top: 50px; font-size: 13px; letter-spacing: 2px;
+      color: var(--ochre); text-decoration: none;
+      border-bottom: 1px solid rgba(200,146,42,0.35); padding-bottom: 4px; transition: border-color 0.2s;
+    }
+    .numeri-link:hover { border-color: var(--ochre); }
+    @media (max-width: 900px) { .numeri-griglia { grid-template-columns: repeat(2, 1fr); gap: 44px 24px; } }
+    @media (max-width: 520px) {
+      .numeri { padding: 70px 22px; }
+      .numeri-griglia { grid-template-columns: 1fr; gap: 38px; }
+      .numeri-titolo { margin-bottom: 42px; }
+    }
+
     /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
        spaziature per tenerla su una riga, senza toccare la dimensione del
        testo che e' gia' al minimo leggibile. */
@@ -1299,6 +1341,39 @@ body::after {
     </div>
   </section>
 
+  <!-- ═══ I NUMERI — quattro cifre e il link alla pagina che le argomenta.
+       Sono dati di settore, tenuti volutamente arrotondati: una cifra al
+       centesimo che non possiamo linkare vale meno di un ordine di grandezza
+       che regge. Chi li cambia guardi anche kb.json: da li' l'assistente li
+       ripete a voce a ogni visitatore. ═══ -->
+  <div class="numeri">
+    <div class="numeri-inner">
+      <div class="numeri-label" data-it="PERCHÉ DIGITALE" data-en="WHY DIGITAL" data-fr="POURQUOI LE NUMÉRIQUE" data-de="WARUM DIGITAL">PERCHÉ DIGITALE</div>
+      <h2 class="numeri-titolo" data-it="Non è una moda. <em>È già la normalità.</em>" data-en="Not a trend. <em>Already the norm.</em>" data-fr="Pas une mode. <em>Déjà la norme.</em>" data-de="Kein Trend. <em>Längst die Norm.</em>">Non è una moda. <em>È già la normalità.</em></h2>
+
+      <div class="numeri-griglia">
+        <div class="numero">
+          <div class="numero-cifra">5&times;</div>
+          <p class="numero-testo" data-it="le scansioni di QR rispetto al 2021" data-en="as many QR scans as in 2021" data-fr="plus de scans de QR qu&#39;en 2021" data-de="so viele QR-Scans wie 2021">le scansioni di QR rispetto al 2021</p>
+        </div>
+        <div class="numero">
+          <div class="numero-cifra" data-it="9 su 10" data-en="9 in 10" data-fr="9 sur 10" data-de="9 von 10">9 su 10</div>
+          <p class="numero-testo" data-it="ristoranti con servizio al tavolo usano il menù via QR (USA)" data-en="full-service restaurants use a QR menu (US)" data-fr="restaurants avec service à table utilisent un menu QR (États-Unis)" data-de="Full-Service-Restaurants nutzen eine QR-Speisekarte (USA)">ristoranti con servizio al tavolo usano il menù via QR (USA)</p>
+        </div>
+        <div class="numero">
+          <div class="numero-cifra">76%</div>
+          <p class="numero-testo" data-it="dei viaggiatori preferisce essere seguito nella propria lingua" data-en="of travellers prefer to be served in their own language" data-fr="des voyageurs préfèrent être servis dans leur langue" data-de="der Reisenden möchten in ihrer eigenen Sprache betreut werden">dei viaggiatori preferisce essere seguito nella propria lingua</p>
+        </div>
+        <div class="numero">
+          <div class="numero-cifra" data-it="2 su 3" data-en="2 in 3" data-fr="2 sur 3" data-de="2 von 3">2 su 3</div>
+          <p class="numero-testo" data-it="strutture ricettive segnalano di essere a corto di personale" data-en="hotels report they are short of staff" data-fr="hôtels déclarent manquer de personnel" data-de="Hotels melden Personalmangel">strutture ricettive segnalano di essere a corto di personale</p>
+        </div>
+      </div>
+
+      <a class="numeri-link" href="/perche-digitale.html" data-it="Dati di settore. I numeri per esteso →" data-en="Industry data. The full picture →" data-fr="Données du secteur. Tous les chiffres →" data-de="Branchendaten. Alle Zahlen →">Dati di settore. I numeri per esteso →</a>
+    </div>
+  </div>
+
   <!-- COME FUNZIONA -->
   <section id="come-funziona" style="padding-top:0;">
     <div class="gold-line"></div>
@@ -1409,6 +1484,7 @@ body::after {
 
       <!-- Link legali -->
       <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+        <a href="/perche-digitale.html" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital">Perché digitale</a>
         <a href="mailto:colgoapp@gmail.com" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;">colgoapp@gmail.com</a>
         <a href="/privacy.html" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
         <a href="/privacy.html#cookie" style="font-size:12px;letter-spacing:1px;color:rgba(245,241,232,0.25);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie">Cookie Policy</a>

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Google Analytics 4 — Colgo (tracciamento esteso) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+
+    // Lingua scelta dall'utente (il sito cambia lingua senza cambiare URL:
+    // senza questo parametro GA non saprebbe mai in che lingua è stata letta la pagina)
+    var lang = 'it';
+    try { lang = localStorage.getItem('colgo_lang') || document.documentElement.lang || 'it'; } catch(e){}
+
+    // Nome pulito della pagina (home, prezzi, hotel, ristorante...)
+    var slug = location.pathname.replace(/\/+$/,'').split('/').pop() || 'home';
+    slug = slug.replace(/\.html$/,'') || 'home';
+
+    gtag('config', 'G-4JCQ1EGSR9', {
+      colgo_lang: lang,
+      colgo_page: slug
+    });
+
+    var t0 = Date.now(), maxScroll = 0, sent = {};
+    function ev(name, params){ params = params || {}; params.colgo_lang = lang; params.colgo_page = slug; gtag('event', name, params); }
+    function secs(){ return Math.round((Date.now() - t0)/1000); }
+
+    function start(){
+
+      // 1. PROFONDITÀ DI LETTURA — quanto scende nella pagina
+      function onScroll(){
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / h) * 100));
+        if (pct > maxScroll) maxScroll = pct;
+        [25,50,75,90,100].forEach(function(s){
+          if (pct >= s && !sent['s'+s]) { sent['s'+s] = 1; ev('scroll_depth', { percent: s, seconds: secs() }); }
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+
+      // 2. TEMPO SULLA PAGINA — soglie progressive
+      [10,30,60,120,300].forEach(function(s){
+        setTimeout(function(){ if (!document.hidden) ev('time_on_page', { seconds: s }); }, s*1000);
+      });
+
+      // 3. SEZIONI EFFETTIVAMENTE VISTE — dove si è fermato a leggere
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            var name = el.id || (el.querySelector('h1,h2,h3') ? el.querySelector('h1,h2,h3').textContent.trim().slice(0,40) : '');
+            if (!name || sent['sec_'+name]) return;
+            sent['sec_'+name] = 1;
+            ev('section_view', { section: name, seconds: secs() });
+          });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section, header, footer').forEach(function(el){ io.observe(el); });
+      }
+
+      // 4. CLIC — CTA, navigazione, link esterni, email
+      document.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a || !a.href) return;
+        var href = a.href, label = (a.textContent || '').trim().slice(0,50);
+        if (href.indexOf('mailto:') === 0)            ev('click_email',   { link: href });
+        else if (href.indexOf('/demo') > -1)          ev('cta_demo',      { link: href, label: label });
+        else if (href.indexOf('/registrati') > -1)    ev('cta_signup',    { link: href, label: label });
+        else if (href.indexOf(location.hostname) > -1) ev('nav_click',    { link: href, label: label });
+        else                                          ev('click_esterno', { link: href, label: label });
+      }, true);
+
+      // 5. CAMBIO LINGUA
+      if (typeof window.setLang === 'function') {
+        var orig = window.setLang;
+        window.setLang = function(l){ var r = orig.apply(this, arguments); lang = l; ev('lang_switch', { nuova_lingua: l }); return r; };
+      }
+
+      // 6. USCITA — durata reale e punto massimo raggiunto
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState === 'hidden' && !sent.exit) {
+          sent.exit = 1;
+          ev('page_exit', { seconds: secs(), max_scroll: maxScroll });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  })();
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perché digitale — i numeri dietro il catalogo via QR</title>
+
+  <!-- Open Graph — anteprima quando il link viene condiviso su
+       WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
+       JavaScript, quindi leggono solo questi meta e il testo gia' presente
+       nei tag: senza, un link a colgo.app arriva in chat senza titolo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Colgo" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:title" content="Perché digitale — i numeri dietro il catalogo via QR" />
+  <meta property="og:description" content="Adozione dei QR, barriera linguistica, carenza di personale, costo della carta: i dati di settore che spiegano perché un catalogo digitale batte il foglio stampato." />
+  <meta property="og:url" content="https://colgo.app/perche-digitale.html" />
+  <meta property="og:image" content="https://colgo.app/colgo-og.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Perché digitale — i numeri dietro il catalogo via QR" />
+  <meta name="twitter:description" content="Adozione dei QR, barriera linguistica, carenza di personale, costo della carta: i dati di settore che spiegano perché un catalogo digitale batte il foglio stampato." />
+  <meta name="twitter:image" content="https://colgo.app/colgo-og.png" />
+  <meta name="description" content="Adozione dei QR, barriera linguistica, carenza di personale, costo della carta: i dati di settore che spiegano perché un catalogo digitale batte il foglio stampato." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
+<style>
+    :root{
+      --ground: #0A100E;   /* terreno: nero con una punta di verde */--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.8);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;--gold-light:#d4a84b;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ground);color:var(--cream);font-family:'Josefin Sans',sans-serif;font-weight:300;font-size:16px;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;background:linear-gradient(to bottom,rgba(10,16,14,0.95),transparent);}
+    .nav-logo{height:38px;opacity:0.95;}
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:10px;letter-spacing:1.5px;transition:color 0.2s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+    .nav-lang{display:flex;gap:6px;}
+    .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
+    .lang-btn.active,.lang-btn:hover{color:var(--gold);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:4px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--cream);transition:transform .25s,opacity .25s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+    .nav-overlay.open{display:block;}
+    .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
+    .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .page-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
+    .page-title em{font-style:italic;color:var(--ochre-l);}
+    .page-sub{font-size:16px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 64px;}
+    .principle-section{background:var(--petrol);padding:100px 32px;text-align:center;position:relative;overflow:hidden;}
+    .principle-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,146,42,0.08) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+    .section-label{font-size:10px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;}
+    .section-title em{font-style:italic;color:var(--ochre-l);}
+    .section-sub{font-size:14px;color:var(--white-dim);max-width:600px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .cta-section{text-align:center;padding:100px 32px;}
+    .cta-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.2;margin-bottom:40px;}
+    .cta-headline em{font-style:italic;color:var(--ochre-l);}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{display:inline-block;background:var(--ochre);color:var(--black);font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:background 0.25s;}
+    .btn-primary:hover{background:var(--ochre-l);}
+    .btn-ghost{display:inline-block;border:1px solid rgba(200,146,42,0.4);color:var(--ochre);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:border-color 0.25s;}
+    .btn-ghost:hover{border-color:var(--ochre);}
+    footer{text-align:center;padding:48px 32px;border-top:1px solid rgba(245,241,232,0.06);font-size:10px;letter-spacing:2px;color:rgba(245,241,232,0.4);}
+    footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
+    footer a:hover{color:var(--ochre);}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    @media(max-width:700px){nav{padding:20px 24px;}.nav-toggle{display:flex;}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--ground);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}.nav-links.open{transform:translateX(0);}}
+  
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 15px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 14px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 13px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 11px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 11px; }
+  footer, .footer-links a { font-size: 12px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 12px; padding: 17px 32px; }
+}
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 13px; }
+footer, .footer-links a, .footer-copy { font-size: 13px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 12px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 13px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 16px; }
+  .lang-btn { font-size: 15px; }
+}
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
+
+/* ── Nero con riflessi petrolio (16/08/2026) ──────────────────────────
+   Il fondo pieno #10231F era troppo verde ("lo vedevo più scuro"), il nero
+   puro troppo freddo. Qui la base torna quasi nera — con una punta di verde
+   che non si vede ma si sente — e il petrolio diventa un RIFLESSO: due
+   sfumature larghe e morbide dietro tutto il contenuto, fisse, che non
+   intercettano il puntatore. */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(70% 50% at 50% 0%,   rgba(30,58,53,0.55) 0%, transparent 70%),
+    radial-gradient(60% 45% at 12% 42%,  rgba(30,58,53,0.30) 0%, transparent 72%),
+    radial-gradient(65% 50% at 88% 78%,  rgba(30,58,53,0.34) 0%, transparent 74%);
+}
+
+/* ── Logo compatto su telefono (16/08/2026) ───────────────────────────
+   Il marchio esteso e' largo 157px: su 390px di schermo spingeva il
+   pulsante del menu' a x=432, cioe' FUORI DALLO SCHERMO — e la
+   navigazione diventava irraggiungibile (si tornava indietro solo
+   toccando il logo). Sotto i 700px resta il solo occhio, 38px. */
+.nav-logo-mini { display: none; }
+@media (max-width: 700px) {
+  .nav-logo-full { display: none; }
+  .nav-logo-mini { display: block; }
+}
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 12px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
+
+/* ── Pagina «perché digitale» (17/08/2026) ────────────────────────────
+   Sei argomenti, ognuno con le sue cifre e una riga di conseguenza.
+   Le misure seguono la scala del 16/08 (corpo 16, etichette mai sotto i
+   12) e sono scritte qui esplicitamente: le liste di classi piu' in alto
+   non conoscono questi nomi, e affidarsi a loro avrebbe lasciato il testo
+   alla dimensione di partenza senza che nulla lo segnalasse. */
+.pd-nota-alta { max-width: 620px; margin: 28px auto 0; font-size: 14px; line-height: 1.8;
+  color: rgba(245,241,232,0.45); position: relative; z-index: 1; text-wrap: pretty; }
+.pd-corpo { max-width: 900px; margin: 0 auto; padding: 40px 32px 40px; }
+.pd-blocco { padding: 64px 0; border-top: 1px solid rgba(245,241,232,0.07); }
+.pd-blocco:first-child { border-top: none; padding-top: 0; }
+.pd-eyebrow { font-size: 12px; letter-spacing: 4px; color: var(--ochre); margin-bottom: 20px; }
+.pd-titolo { font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 46px); line-height: 1.2; margin-bottom: 40px; text-wrap: balance; }
+.pd-titolo em { font-style: italic; color: var(--ochre-l); }
+
+/* Le cifre: tre o quattro per blocco, che si dispongono da sole.
+   auto-fit e non un numero fisso di colonne — cosi' un blocco con tre
+   cifre e uno con quattro restano entrambi in equilibrio. */
+.pd-numeri { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 34px 24px; margin-bottom: 42px; }
+.pd-n-cifra { font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(32px, 3.4vw, 46px); line-height: 1.05; color: var(--ochre); margin-bottom: 12px; }
+.pd-n-testo { font-size: 15px; line-height: 1.65; color: var(--white-dim); text-wrap: pretty; }
+.pd-testo { font-size: 16px; line-height: 1.85; color: var(--white-dim); margin-bottom: 20px; text-wrap: pretty; }
+
+/* La riga di conseguenza: che cosa vuol dire per chi legge. Il filo d'oro
+   a sinistra la stacca dal ragionamento senza alzare la voce. */
+.pd-quindi { font-size: 17px; line-height: 1.75; color: var(--cream);
+  border-left: 2px solid var(--ochre); padding: 4px 0 4px 22px; margin-top: 30px; text-wrap: pretty; }
+
+/* Il riquadro del capitolo sulle persone: e' l'unica cosa della pagina che
+   non va fraintesa, quindi ha uno sfondo suo. */
+.pd-riquadro { background: var(--petrol); padding: 42px 38px; margin: 42px 0 0; text-align: center; }
+.pd-riquadro-frase { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+  font-size: clamp(21px, 2.6vw, 30px); line-height: 1.35; color: var(--cream); text-wrap: balance; }
+.pd-riquadro-firma { font-size: 12px; letter-spacing: 3px; color: var(--ochre); margin-top: 20px; }
+
+/* La nota sulle fonti chiude la pagina prima degli inviti: dice che cosa
+   regge e che cosa no. Sta scritta piu' in piccolo del corpo perche' e'
+   una nota, ma non sotto i 14: va letta, non solo vista. */
+.pd-fonti { max-width: 900px; margin: 0 auto; padding: 0 32px 90px; }
+.pd-fonti-dentro { border: 1px solid rgba(245,241,232,0.08); background: rgba(245,241,232,0.02); padding: 38px 34px; }
+.pd-fonti-tit { font-size: 12px; letter-spacing: 3px; color: var(--ochre); margin-bottom: 18px; }
+.pd-fonti-testo { font-size: 14px; line-height: 1.85; color: rgba(245,241,232,0.62); text-wrap: pretty; }
+
+@media (max-width: 700px) {
+  .pd-corpo { padding: 24px 22px 20px; }
+  .pd-blocco { padding: 48px 0; }
+  .pd-titolo { margin-bottom: 32px; }
+  .pd-numeri { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+  .pd-n-testo { font-size: 14px; }
+  .pd-testo { font-size: 16px; }
+  .pd-quindi { font-size: 16px; padding-left: 18px; }
+  .pd-riquadro { padding: 34px 24px; }
+  .pd-fonti { padding: 0 22px 70px; }
+  .pd-fonti-dentro { padding: 30px 24px; }
+}
+@media (max-width: 430px) { .pd-numeri { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/"><svg class="nav-logo nav-logo-full" viewBox="0 0 232 56" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <text x="2" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">C</text>
+  <g transform="translate(52,26)">
+    <circle cx="0" cy="0" r="15.5" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+    <path d="M -12 0 A 12 12 0 0 0 5.5 10" fill="none" stroke="#C8922A" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="1.2" cy="-1.4" r="2.9" fill="#C8922A"/>
+  </g>
+  <text x="80" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">LGO</text>
+</svg><svg class="nav-logo nav-logo-mini" viewBox="0 0 40 40" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="16" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+  <path d="M 7.5 20 A 12.5 12.5 0 0 0 26 30.5" fill="none" stroke="#C8922A" stroke-width="1.9" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="21.4" cy="18.4" r="3" fill="#C8922A"/>
+</svg></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT'S">COME FUNZIONA</a>
+      <a href="/hotel.html" data-it="HOTEL" data-en="HOTEL" data-fr="HÔTEL" data-de="HOTEL">HOTEL</a>
+      <a href="/ristorante.html" data-it="RISTORANTE" data-en="RESTAURANT" data-fr="RESTAURANT" data-de="RESTAURANT">RISTORANTE</a>
+      <a href="/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT">NEGOZIO</a>
+      <a href="/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG">ACCESSI E CATALOGO</a>
+      <a href="/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE">PREZZI</a>
+      <a href="/per-chi.html" data-it="PER CHI" data-en="WHO IT'S FOR" data-fr="POUR QUI" data-de="FÜR WEN">PER CHI</a>
+      <a href="/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS">CHI SIAMO</a>
+        <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    </div>
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-overlay" onclick="document.querySelector('.nav-links').classList.remove('open');this.classList.remove('open');document.querySelector('.nav-toggle').classList.remove('open');"></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-label" data-it="PERCHÉ DIGITALE" data-en="WHY DIGITAL" data-fr="POURQUOI LE NUMÉRIQUE" data-de="WARUM DIGITAL">PERCHÉ DIGITALE</div>
+  <h1 class="page-title" data-it="Il telefono ce l'hanno già in mano.<br/><em>Il resto è una tua scelta.</em>" data-en="The phone is already in their hand.<br/><em>The rest is your choice.</em>" data-fr="Le téléphone, ils l'ont déjà en main.<br/><em>Le reste est votre choix.</em>" data-de="Das Handy haben sie längst in der Hand.<br/><em>Der Rest ist Ihre Entscheidung.</em>">Il telefono ce l'hanno già in mano.<br/><em>Il resto è una tua scelta.</em></h1>
+  <p class="page-sub" data-it="Sei argomenti, con i dati di settore che li reggono. Dove il dato è debole lo diciamo: una pagina più corta vale più di una più convincente." data-en="Six arguments, with the industry data behind them. Where the data is weak we say so: a shorter page is worth more than a more persuasive one." data-fr="Six arguments, avec les données du secteur qui les soutiennent. Là où la donnée est fragile, nous le disons : une page plus courte vaut mieux qu'une page plus convaincante." data-de="Sechs Argumente, mit den Branchendaten dahinter. Wo die Daten schwach sind, sagen wir es: Eine kürzere Seite ist mehr wert als eine überzeugendere.">Sei argomenti, con i dati di settore che li reggono. Dove il dato è debole lo diciamo: una pagina più corta vale più di una più convincente.</p>
+  <p class="pd-nota-alta" data-it="Sono dati di settore, aggregati da più fonti e arrotondati di proposito. Valgono come ordini di grandezza: la direzione è netta, la virgola no." data-en="These are industry figures, drawn from several sources and deliberately rounded. They hold as orders of magnitude: the direction is clear, the decimal point is not." data-fr="Ce sont des données de secteur, issues de plusieurs sources et volontairement arrondies. Elles valent comme ordres de grandeur : la direction est nette, la virgule non." data-de="Das sind Branchenzahlen aus mehreren Quellen, bewusst gerundet. Sie gelten als Größenordnungen: Die Richtung ist eindeutig, die Nachkommastelle nicht.">Sono dati di settore, aggregati da più fonti e arrotondati di proposito. Valgono come ordini di grandezza: la direzione è netta, la virgola no.</p>
+</div>
+
+<div class="pd-corpo">
+
+  <!-- 01 — L'ADOZIONE -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="01 · L'ADOZIONE" data-en="01 · ADOPTION" data-fr="01 · L'ADOPTION" data-de="01 · DIE VERBREITUNG">01 · L'ADOZIONE</div>
+    <h2 class="pd-titolo" data-it="Il QR non è più una novità. <em>È un'abitudine.</em>" data-en="The QR code is no longer new. <em>It's a habit.</em>" data-fr="Le QR n'est plus une nouveauté. <em>C'est une habitude.</em>" data-de="Der QR-Code ist keine Neuheit mehr. <em>Er ist Gewohnheit.</em>">Il QR non è più una novità. <em>È un'abitudine.</em></h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra">5&times;</div>
+        <p class="pd-n-testo" data-it="le scansioni di QR rispetto al 2021" data-en="as many QR scans as in 2021" data-fr="plus de scans de QR qu'en 2021" data-de="so viele QR-Scans wie 2021">le scansioni di QR rispetto al 2021</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="9 su 10" data-en="9 in 10" data-fr="9 sur 10" data-de="9 von 10">9 su 10</div>
+        <p class="pd-n-testo" data-it="ristoranti con servizio al tavolo usano il menù via QR (USA)" data-en="full-service restaurants use a QR menu (US)" data-fr="restaurants avec service à table utilisent un menu QR (États-Unis)" data-de="Full-Service-Restaurants nutzen eine QR-Speisekarte (USA)">ristoranti con servizio al tavolo usano il menù via QR (USA)</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="100 mln" data-en="100M" data-fr="100 M" data-de="100 Mio.">100 mln</div>
+        <p class="pd-n-testo" data-it="di persone scansionano QR negli Stati Uniti: nel 2020 erano circa la metà" data-en="people scan QR codes in the United States: in 2020 it was about half that" data-fr="de personnes scannent des QR aux États-Unis : en 2020, elles étaient environ moitié moins" data-de="Menschen scannen QR-Codes in den USA: 2020 war es etwa die Hälfte">di persone scansionano QR negli Stati Uniti: nel 2020 erano circa la metà</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="−15 min" data-en="−15 min" data-fr="−15 min" data-de="−15 Min.">−15 min</div>
+        <p class="pd-n-testo" data-it="circa, per servire un tavolo con il menù via QR" data-en="roughly, to serve a table with a QR menu" data-fr="environ, pour servir une table avec un menu QR" data-de="ungefähr, um einen Tisch mit QR-Karte zu bedienen">circa, per servire un tavolo con il menù via QR</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Nel 2020 spiegare come si inquadra un codice faceva parte del lavoro. Oggi la fotocamera lo riconosce da sola e il cliente non ci pensa: se ne accorge solo quando il codice non c'è." data-en="In 2020, explaining how to scan a code was part of the job. Today the camera recognises it on its own and the customer doesn't think about it: they only notice when the code isn't there." data-fr="En 2020, expliquer comment scanner un code faisait partie du travail. Aujourd'hui l'appareil photo le reconnaît tout seul et le client n'y pense plus : il ne le remarque que lorsque le code n'est pas là." data-de="2020 gehörte es noch zur Arbeit zu erklären, wie man einen Code scannt. Heute erkennt ihn die Kamera von selbst und der Gast denkt nicht darüber nach: Er merkt es nur, wenn der Code fehlt.">Nel 2020 spiegare come si inquadra un codice faceva parte del lavoro. Oggi la fotocamera lo riconosce da sola e il cliente non ci pensa: se ne accorge solo quando il codice non c'è.</p>
+    <p class="pd-testo" data-it="Quasi tutti gli albergatori dichiarano di investire in servizi senza contatto, e la quasi totalità degli ospiti preferisce sbrigare dal telefono quello che dal telefono si può sbrigare — a partire da arrivo e partenza." data-en="Almost every hotelier reports investing in contactless services, and nearly all guests prefer to handle from their phone whatever can be handled from a phone — starting with arrival and departure." data-fr="Presque tous les hôteliers déclarent investir dans les services sans contact, et la quasi-totalité des clients préfèrent régler depuis leur téléphone ce qui peut l'être — à commencer par l'arrivée et le départ." data-de="Fast alle Hoteliers geben an, in kontaktlose Services zu investieren, und nahezu alle Gäste erledigen lieber per Handy, was per Handy erledigt werden kann — angefangen bei An- und Abreise.">Quasi tutti gli albergatori dichiarano di investire in servizi senza contatto, e la quasi totalità degli ospiti preferisce sbrigare dal telefono quello che dal telefono si può sbrigare — a partire da arrivo e partenza.</p>
+
+    <p class="pd-quindi" data-it="Il pezzo difficile — abituare la gente a usarlo — è già successo. E non l'hai pagato tu." data-en="The hard part — getting people used to it — has already happened. And you didn't pay for it." data-fr="Le plus difficile — habituer les gens à s'en servir — a déjà eu lieu. Et ce n'est pas vous qui l'avez payé." data-de="Der schwierige Teil — die Leute daran zu gewöhnen — ist schon passiert. Und bezahlt haben ihn nicht Sie.">Il pezzo difficile — abituare la gente a usarlo — è già successo. E non l'hai pagato tu.</p>
+  </div>
+
+  <!-- 02 — LA LINGUA -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="02 · LA LINGUA" data-en="02 · LANGUAGE" data-fr="02 · LA LANGUE" data-de="02 · DIE SPRACHE">02 · LA LINGUA</div>
+    <h2 class="pd-titolo" data-it="Chi non capisce <em>non chiede.</em>" data-en="Someone who doesn't understand <em>doesn't ask.</em>" data-fr="Celui qui ne comprend pas <em>ne demande pas.</em>" data-de="Wer nicht versteht, <em>fragt nicht.</em>">Chi non capisce <em>non chiede.</em></h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra">76%</div>
+        <p class="pd-n-testo" data-it="dei viaggiatori preferisce essere seguito nella propria lingua" data-en="of travellers prefer to be served in their own language" data-fr="des voyageurs préfèrent être servis dans leur langue" data-de="der Reisenden möchten in ihrer eigenen Sprache betreut werden">dei viaggiatori preferisce essere seguito nella propria lingua</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">84%</div>
+        <p class="pd-n-testo" data-it="fra chi non parla inglese, dove la differenza pesa di più" data-en="among those who don't speak English, where it matters most" data-fr="parmi ceux qui ne parlent pas anglais, où l'écart pèse le plus" data-de="unter denen, die kein Englisch sprechen — dort wiegt es am schwersten">fra chi non parla inglese, dove la differenza pesa di più</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">61%</div>
+        <p class="pd-n-testo" data-it="ordinerebbe più volentieri servizi in camera o attività, potendo farlo nella propria lingua" data-en="would order room service or activities more willingly if they could do it in their own language" data-fr="commanderaient plus volontiers des services en chambre ou des activités s'ils pouvaient le faire dans leur langue" data-de="würden Zimmerservice oder Aktivitäten eher bestellen, wenn sie es in ihrer Sprache könnten">ordinerebbe più volentieri servizi in camera o attività, potendo farlo nella propria lingua</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="3-5×" data-en="3-5×" data-fr="3-5×" data-de="3-5×">3-5&times;</div>
+        <p class="pd-n-testo" data-it="più lente le richieste gestite a voce fra lingue diverse" data-en="slower when requests are handled by voice across languages" data-fr="plus lentes, les demandes gérées à la voix entre langues différentes" data-de="langsamer, wenn Anfragen mündlich über Sprachgrenzen hinweg laufen">più lente le richieste gestite a voce fra lingue diverse</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Un ospite che non capisce non protesta: rinuncia. Non ordina la colazione, non prenota l'escursione, non chiede il transfer. E tu non lo scopri mai, perché una richiesta che non arriva non lascia traccia da nessuna parte." data-en="A guest who doesn't understand doesn't complain: they give up. They don't order breakfast, don't book the excursion, don't ask for the transfer. And you never find out, because a request that never arrives leaves no trace anywhere." data-fr="Un client qui ne comprend pas ne se plaint pas : il renonce. Il ne commande pas le petit-déjeuner, ne réserve pas l'excursion, ne demande pas le transfert. Et vous ne le saurez jamais, car une demande qui n'arrive pas ne laisse aucune trace." data-de="Ein Gast, der nicht versteht, beschwert sich nicht: Er verzichtet. Er bestellt kein Frühstück, bucht keinen Ausflug, fragt nicht nach dem Transfer. Und Sie erfahren es nie, denn eine Anfrage, die nie ankommt, hinterlässt nirgends eine Spur.">Un ospite che non capisce non protesta: rinuncia. Non ordina la colazione, non prenota l'escursione, non chiede il transfer. E tu non lo scopri mai, perché una richiesta che non arriva non lascia traccia da nessuna parte.</p>
+    <p class="pd-testo" data-it="Gli studi indicano che comunicare nella lingua madre dell'ospite alza in modo misurabile la soddisfazione fra i viaggiatori internazionali. Il contrario vale altrettanto: chi si arrangia a gesti si porta a casa un ricordo diverso." data-en="Studies indicate that communicating in a guest's own language measurably raises satisfaction among international travellers. The reverse holds just as well: someone who has to make do with gestures takes home a different memory." data-fr="Les études indiquent que communiquer dans la langue maternelle du client augmente sensiblement la satisfaction des voyageurs internationaux. L'inverse est tout aussi vrai : celui qui se débrouille par gestes en garde un autre souvenir." data-de="Studien zeigen, dass die Kommunikation in der Muttersprache des Gastes die Zufriedenheit internationaler Reisender messbar erhöht. Das Gegenteil gilt genauso: Wer sich mit Gesten behelfen muss, nimmt eine andere Erinnerung mit.">Gli studi indicano che comunicare nella lingua madre dell'ospite alza in modo misurabile la soddisfazione fra i viaggiatori internazionali. Il contrario vale altrettanto: chi si arrangia a gesti si porta a casa un ricordo diverso.</p>
+
+    <p class="pd-quindi" data-it="Colgo traduce il catalogo in italiano, inglese, francese e tedesco. Non è una funzione in più: è la differenza fra un servizio che esiste e un servizio che viene visto." data-en="Colgo translates the catalogue into Italian, English, French and German. It isn't an extra feature: it's the difference between a service that exists and a service that gets seen." data-fr="Colgo traduit le catalogue en italien, anglais, français et allemand. Ce n'est pas une fonction en plus : c'est la différence entre un service qui existe et un service qu'on voit." data-de="Colgo übersetzt den Katalog auf Italienisch, Englisch, Französisch und Deutsch. Das ist keine Zusatzfunktion: Es ist der Unterschied zwischen einer Leistung, die es gibt, und einer, die gesehen wird.">Colgo traduce il catalogo in italiano, inglese, francese e tedesco. Non è una funzione in più: è la differenza fra un servizio che esiste e un servizio che viene visto.</p>
+  </div>
+
+  <!-- 03 — LE PERSONE -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="03 · LE PERSONE" data-en="03 · PEOPLE" data-fr="03 · LES ÉQUIPES" data-de="03 · DIE MENSCHEN">03 · LE PERSONE</div>
+    <h2 class="pd-titolo" data-it="Più servizi. <em>Con le stesse persone.</em>" data-en="More services. <em>With the same people.</em>" data-fr="Plus de services. <em>Avec les mêmes personnes.</em>" data-de="Mehr Leistungen. <em>Mit denselben Leuten.</em>">Più servizi. <em>Con le stesse persone.</em></h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="2 su 3" data-en="2 in 3" data-fr="2 sur 3" data-de="2 von 3">2 su 3</div>
+        <p class="pd-n-testo" data-it="strutture ricettive segnalano di essere a corto di personale" data-en="hotels report they are short of staff" data-fr="hôtels déclarent manquer de personnel" data-de="Hotels melden Personalmangel">strutture ricettive segnalano di essere a corto di personale</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">+20-35%</div>
+        <p class="pd-n-testo" data-it="la produttività indicata dagli studi di settore dove il ripetitivo è automatizzato" data-en="the productivity gain industry studies report where the repetitive work is automated" data-fr="le gain de productivité indiqué par les études du secteur là où le répétitif est automatisé" data-de="der Produktivitätsgewinn laut Branchenstudien, wo Wiederkehrendes automatisiert ist">la produttività indicata dagli studi di settore dove il ripetitivo è automatizzato</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">−30%</div>
+        <p class="pd-n-testo" data-it="le chiamate alla reception, con un canale scritto per le richieste" data-en="calls to reception, with a written channel for requests" data-fr="d'appels à la réception, avec un canal écrit pour les demandes" data-de="weniger Anrufe an der Rezeption, mit einem schriftlichen Kanal für Anfragen">le chiamate alla reception, con un canale scritto per le richieste</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Il circolo è documentato, e chi lavora in struttura lo riconosce senza bisogno di grafici: squadra sotto organico, straordinari, mansioni che si accavallano. Il livello del servizio cala, così si riduce l'offerta — il ristorante chiude un giorno in più, la spa apre a orari ridotti. La reputazione ne risente, e trovare personale diventa ancora più difficile." data-en="The circle is documented, and anyone working in hospitality recognises it without needing charts: understaffed team, overtime, overlapping duties. Service quality drops, so the offer shrinks — the restaurant closes an extra day, the spa opens fewer hours. Reputation suffers, and hiring gets harder still." data-fr="Le cercle est documenté, et ceux qui travaillent dans l'établissement le reconnaissent sans graphiques : équipe en sous-effectif, heures supplémentaires, tâches qui s'accumulent. Le niveau de service baisse, donc l'offre se réduit — le restaurant ferme un jour de plus, le spa ouvre moins longtemps. La réputation en souffre, et recruter devient encore plus difficile." data-de="Der Kreislauf ist dokumentiert, und wer im Betrieb arbeitet, erkennt ihn ohne Diagramme: unterbesetztes Team, Überstunden, Aufgaben, die sich überlagern. Das Serviceniveau sinkt, also wird das Angebot kleiner — das Restaurant schließt einen Tag mehr, die Spa öffnet kürzer. Der Ruf leidet, und Personal zu finden wird noch schwerer.">Il circolo è documentato, e chi lavora in struttura lo riconosce senza bisogno di grafici: squadra sotto organico, straordinari, mansioni che si accavallano. Il livello del servizio cala, così si riduce l'offerta — il ristorante chiude un giorno in più, la spa apre a orari ridotti. La reputazione ne risente, e trovare personale diventa ancora più difficile.</p>
+    <p class="pd-testo" data-it="Gli studi indicano che automatizzare il ripetitivo riduce i carichi operativi fino a un terzo. Ma la parte che i numeri non dicono è un'altra: chi passa la giornata a ripetere a voce gli stessi orari non sta facendo il lavoro per cui è bravo." data-en="Studies indicate that automating the repetitive part cuts operational load by up to a third. But the part the numbers don't capture is a different one: someone who spends the day repeating the same opening hours out loud isn't doing the job they're good at." data-fr="Les études indiquent qu'automatiser le répétitif réduit la charge opérationnelle jusqu'à un tiers. Mais ce que les chiffres ne disent pas est ailleurs : celui qui passe la journée à répéter les mêmes horaires ne fait pas le travail pour lequel il est bon." data-de="Studien zeigen, dass die Automatisierung des Wiederkehrenden die operative Last um bis zu ein Drittel senkt. Doch das Entscheidende steht nicht in den Zahlen: Wer den ganzen Tag dieselben Öffnungszeiten aufsagt, macht nicht die Arbeit, in der er gut ist.">Gli studi indicano che automatizzare il ripetitivo riduce i carichi operativi fino a un terzo. Ma la parte che i numeri non dicono è un'altra: chi passa la giornata a ripetere a voce gli stessi orari non sta facendo il lavoro per cui è bravo.</p>
+
+    <p class="pd-quindi" data-it="E i servizi che oggi nessuno ha il tempo di proporre — la partenza posticipata, la colazione in camera, l'escursione — smettono di dipendere da chi si ricorda di dirlo." data-en="And the services nobody has time to suggest today — late check-out, breakfast in the room, the excursion — stop depending on whoever remembers to mention them." data-fr="Et les services que personne n'a le temps de proposer aujourd'hui — le départ tardif, le petit-déjeuner en chambre, l'excursion — cessent de dépendre de qui pense à en parler." data-de="Und die Leistungen, für deren Angebot heute niemand Zeit hat — später Check-out, Frühstück aufs Zimmer, der Ausflug — hängen nicht mehr davon ab, wer daran denkt, sie zu erwähnen.">E i servizi che oggi nessuno ha il tempo di proporre — la partenza posticipata, la colazione in camera, l'escursione — smettono di dipendere da chi si ricorda di dirlo.</p>
+
+    <div class="pd-riquadro">
+      <p class="pd-riquadro-frase" data-it="Non si tratta di avere meno personale. Si tratta di smettere di sprecare quello che hai." data-en="This isn't about having fewer staff. It's about no longer wasting the staff you have." data-fr="Il ne s'agit pas d'avoir moins de personnel. Il s'agit d'arrêter de gaspiller celui que vous avez." data-de="Es geht nicht darum, weniger Personal zu haben. Es geht darum, das vorhandene nicht mehr zu verschwenden.">Non si tratta di avere meno personale. Si tratta di smettere di sprecare quello che hai.</p>
+      <div class="pd-riquadro-firma" data-it="DIGITALE DOVE SERVE. UMANO DOVE CONTA." data-en="DIGITAL WHERE IT HELPS. HUMAN WHERE IT COUNTS." data-fr="NUMÉRIQUE LÀ OÙ ÇA AIDE. HUMAIN LÀ OÙ ÇA COMPTE." data-de="DIGITAL WO ES HILFT. MENSCHLICH WO ES ZÄHLT.">DIGITALE DOVE SERVE. UMANO DOVE CONTA.</div>
+    </div>
+  </div>
+
+  <!-- 04 — IL COSTO DELLA CARTA -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="04 · IL COSTO DELLA CARTA" data-en="04 · THE COST OF PAPER" data-fr="04 · LE COÛT DU PAPIER" data-de="04 · WAS PAPIER KOSTET">04 · IL COSTO DELLA CARTA</div>
+    <h2 class="pd-titolo" data-it="Il foglio plastificato <em>ha un prezzo.</em> Solo che non è a bilancio." data-en="The laminated sheet <em>has a price.</em> It's just not in the books." data-fr="La feuille plastifiée <em>a un prix.</em> Simplement, il n'est pas au bilan." data-de="Das laminierte Blatt <em>hat einen Preis.</em> Er steht nur nicht in der Bilanz.">Il foglio plastificato <em>ha un prezzo.</em> Solo che non è a bilancio.</h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="migliaia di €" data-en="thousands of €" data-fr="milliers d'€" data-de="Tausende €">migliaia di €</div>
+        <p class="pd-n-testo" data-it="l'anno di sola stampa per un locale di media grandezza, secondo stime di settore" data-en="a year in printing alone for a mid-sized venue, according to industry estimates" data-fr="par an rien qu'en impression pour un établissement de taille moyenne, selon les estimations du secteur" data-de="pro Jahr allein für den Druck in einem mittelgroßen Betrieb, laut Branchenschätzungen">l'anno di sola stampa per un locale di media grandezza, secondo stime di settore</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">−75%</div>
+        <p class="pd-n-testo" data-it="il consumo di carta, passando al digitale" data-en="paper use, moving to digital" data-fr="de consommation de papier, en passant au numérique" data-de="weniger Papierverbrauch beim Umstieg auf digital">il consumo di carta, passando al digitale</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">0</div>
+        <p class="pd-n-testo" data-it="ristampe quando cambia un prezzo, un orario o un fornitore" data-en="reprints when a price, an opening time or a supplier changes" data-fr="réimpression quand un prix, un horaire ou un fournisseur change" data-de="Nachdrucke, wenn sich ein Preis, eine Zeit oder ein Lieferant ändert">ristampe quando cambia un prezzo, un orario o un fornitore</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Il costo vero non è la carta: è il contorno. Qualcuno impagina, qualcuno porta in tipografia, qualcuno plastifica, qualcuno gira per le camere a sostituire. E a ogni cambio si ricomincia da capo — oppure si lascia lì il foglio sbagliato, che costa di più." data-en="The real cost isn't the paper: it's everything around it. Someone lays it out, someone takes it to the printer, someone laminates, someone walks the rooms replacing it. And with every change it starts over — or the wrong sheet stays where it is, which costs more." data-fr="Le vrai coût, ce n'est pas le papier : c'est tout ce qu'il y a autour. Quelqu'un met en page, quelqu'un porte à l'imprimeur, quelqu'un plastifie, quelqu'un fait le tour des chambres pour remplacer. Et à chaque changement, on recommence — ou bien la mauvaise feuille reste en place, ce qui coûte plus cher." data-de="Der wahre Kostenpunkt ist nicht das Papier, sondern alles drumherum. Jemand setzt, jemand bringt es in die Druckerei, jemand laminiert, jemand geht durch die Zimmer und tauscht aus. Und bei jeder Änderung fängt es von vorn an — oder das falsche Blatt bleibt liegen, was teurer ist.">Il costo vero non è la carta: è il contorno. Qualcuno impagina, qualcuno porta in tipografia, qualcuno plastifica, qualcuno gira per le camere a sostituire. E a ogni cambio si ricomincia da capo — oppure si lascia lì il foglio sbagliato, che costa di più.</p>
+    <p class="pd-testo" data-it="Le stime sui costi di stampa circolano soprattutto nei materiali di chi vende software, quindi le teniamo larghe: qualche migliaio di euro l'anno per un locale di media grandezza, senza contare le ore di chi ci lavora attorno." data-en="Estimates of printing costs circulate mostly in material from companies selling software, so we keep them loose: a few thousand euros a year for a mid-sized venue, not counting the hours of the people working around it." data-fr="Les estimations sur les coûts d'impression circulent surtout dans les documents de ceux qui vendent des logiciels, alors nous les gardons larges : quelques milliers d'euros par an pour un établissement de taille moyenne, sans compter les heures des personnes qui s'en occupent." data-de="Schätzungen zu Druckkosten stammen vor allem aus Unterlagen von Softwareanbietern, deshalb halten wir sie weit: einige Tausend Euro im Jahr für einen mittelgroßen Betrieb, ohne die Arbeitsstunden drumherum.">Le stime sui costi di stampa circolano soprattutto nei materiali di chi vende software, quindi le teniamo larghe: qualche migliaio di euro l'anno per un locale di media grandezza, senza contare le ore di chi ci lavora attorno.</p>
+
+    <p class="pd-quindi" data-it="Cambiare un prezzo in Colgo sono trenta secondi, e vale per tutte le unità e in quattro lingue insieme." data-en="Changing a price in Colgo takes thirty seconds, and it applies to every unit and in four languages at once." data-fr="Changer un prix dans Colgo prend trente secondes, et cela vaut pour toutes les unités et dans quatre langues à la fois." data-de="Einen Preis in Colgo zu ändern dauert dreißig Sekunden — für alle Einheiten und in vier Sprachen zugleich.">Cambiare un prezzo in Colgo sono trenta secondi, e vale per tutte le unità e in quattro lingue insieme.</p>
+  </div>
+
+  <!-- 05 — DOVE VA IL MONDO -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="05 · DOVE VA IL MONDO" data-en="05 · WHERE THE WORLD IS GOING" data-fr="05 · OÙ VA LE MONDE" data-de="05 · WOHIN DIE WELT GEHT">05 · DOVE VA IL MONDO</div>
+    <h2 class="pd-titolo" data-it="Dove è già arrivato, <em>non è tornato indietro.</em>" data-en="Where it has already arrived, <em>nobody went back.</em>" data-fr="Là où c'est déjà arrivé, <em>on n'est pas revenu en arrière.</em>" data-de="Wo es schon angekommen ist, <em>ist niemand zurückgegangen.</em>">Dove è già arrivato, <em>non è tornato indietro.</em></h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra">62%</div>
+        <p class="pd-n-testo" data-it="dei consumatori giapponesi ordina da telefono o QR al ristorante: +20% sul 2022" data-en="of Japanese consumers order by phone or QR in restaurants: up 20% on 2022" data-fr="des consommateurs japonais commandent par téléphone ou QR au restaurant : +20 % par rapport à 2022" data-de="der japanischen Verbraucher bestellen im Restaurant per Handy oder QR: 20 % mehr als 2022">dei consumatori giapponesi ordina da telefono o QR al ristorante: +20% sul 2022</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">60%+</div>
+        <p class="pd-n-testo" data-it="dei ristoranti nelle grandi città giapponesi offre l'ordinazione via QR" data-en="of restaurants in major Japanese cities offer QR ordering" data-fr="des restaurants des grandes villes japonaises proposent la commande par QR" data-de="der Restaurants in japanischen Großstädten bieten QR-Bestellung an">dei ristoranti nelle grandi città giapponesi offre l'ordinazione via QR</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">59%</div>
+        <p class="pd-n-testo" data-it="in Francia preferisce il menù via QR a quello di carta" data-en="in France prefer a QR menu to a paper one" data-fr="en France préfèrent le menu par QR au menu papier" data-de="in Frankreich bevorzugen die QR-Karte gegenüber Papier">in Francia preferisce il menù via QR a quello di carta</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="500 mld ¥" data-en="¥500bn" data-fr="500 Mds ¥" data-de="500 Mrd. ¥">500 mld ¥</div>
+        <p class="pd-n-testo" data-it="il mercato giapponese dell'ordinazione autonoma previsto al 2028, secondo proiezioni di settore" data-en="the Japanese self-ordering market projected for 2028, according to industry forecasts" data-fr="le marché japonais de la commande autonome prévu pour 2028, selon les projections du secteur" data-de="der japanische Markt für Selbstbestellung, prognostiziert für 2028 laut Branchenschätzungen">il mercato giapponese dell'ordinazione autonoma previsto al 2028, secondo proiezioni di settore</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Il Giappone è il mercato più avanti, e ci è arrivato dallo stesso problema che abbiamo qui: sei ristoratori su dieci dichiarano di non trovare personale. Non è entusiasmo per la tecnologia, è una risposta a una carenza — la stessa dell'ospitalità italiana." data-en="Japan is the market furthest ahead, and it got there from the same problem we have here: six restaurateurs in ten say they can't find staff. It isn't enthusiasm for technology, it's an answer to a shortage — the same one Italian hospitality has." data-fr="Le Japon est le marché le plus avancé, et il y est arrivé par le même problème qu'ici : six restaurateurs sur dix déclarent ne pas trouver de personnel. Ce n'est pas de l'enthousiasme pour la technologie, c'est une réponse à une pénurie — la même que celle de l'hôtellerie italienne." data-de="Japan ist der am weitesten fortgeschrittene Markt, und dorthin führte dasselbe Problem, das wir hier haben: Sechs von zehn Gastronomen finden kein Personal. Das ist keine Technikbegeisterung, sondern eine Antwort auf einen Mangel — denselben, den die italienische Hotellerie hat.">Il Giappone è il mercato più avanti, e ci è arrivato dallo stesso problema che abbiamo qui: sei ristoratori su dieci dichiarano di non trovare personale. Non è entusiasmo per la tecnologia, è una risposta a una carenza — la stessa dell'ospitalità italiana.</p>
+    <p class="pd-testo" data-it="E l'Europa segue: in Francia il menù via QR è già la preferenza della maggioranza. Le proiezioni parlano di un cambiamento strutturale, non di una moda passeggera." data-en="And Europe follows: in France the QR menu is already the majority preference. Projections point to a structural shift, not a passing fashion." data-fr="Et l'Europe suit : en France, le menu par QR est déjà la préférence de la majorité. Les projections parlent d'un changement structurel, pas d'une mode passagère." data-de="Und Europa folgt: In Frankreich ist die QR-Karte bereits die Präferenz der Mehrheit. Prognosen sprechen von einem strukturellen Wandel, nicht von einer vorübergehenden Mode.">E l'Europa segue: in Francia il menù via QR è già la preferenza della maggioranza. Le proiezioni parlano di un cambiamento strutturale, non di una moda passeggera.</p>
+
+    <p class="pd-quindi" data-it="Nessuno di questi mercati è tornato al menù di carta dopo averlo lasciato. Chi entra adesso entra in tempo." data-en="None of these markets went back to the paper menu after leaving it. Whoever comes in now comes in on time." data-fr="Aucun de ces marchés n'est revenu au menu papier après l'avoir quitté. Celui qui arrive maintenant arrive à temps." data-de="Keiner dieser Märkte ist nach dem Umstieg zur Papierkarte zurückgekehrt. Wer jetzt einsteigt, ist rechtzeitig da.">Nessuno di questi mercati è tornato al menù di carta dopo averlo lasciato. Chi entra adesso entra in tempo.</p>
+  </div>
+
+  <!-- 06 — L'AMBIENTE -->
+  <div class="pd-blocco">
+    <div class="pd-eyebrow" data-it="06 · L'AMBIENTE" data-en="06 · THE ENVIRONMENT" data-fr="06 · L'ENVIRONNEMENT" data-de="06 · DIE UMWELT">06 · L'AMBIENTE</div>
+    <h2 class="pd-titolo" data-it="L'unica scelta verde <em>che non ti chiede di rinunciare a niente.</em>" data-en="The one green choice <em>that asks you to give up nothing.</em>" data-fr="Le seul choix écologique <em>qui ne vous demande de renoncer à rien.</em>" data-de="Die einzige grüne Entscheidung, <em>die keinen Verzicht verlangt.</em>">L'unica scelta verde <em>che non ti chiede di rinunciare a niente.</em></h2>
+
+    <div class="pd-numeri">
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="3,3 kg" data-en="3.3 kg" data-fr="3,3 kg" data-de="3,3 kg">3,3 kg</div>
+        <p class="pd-n-testo" data-it="di CO2 per ogni chilo di carta prodotta" data-en="of CO2 for every kilo of paper produced" data-fr="de CO2 pour chaque kilo de papier produit" data-de="CO2 für jedes Kilo produziertes Papier">di CO2 per ogni chilo di carta prodotta</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra">13-15%</div>
+        <p class="pd-n-testo" data-it="del legno raccolto nel mondo finisce all'industria della carta" data-en="of the wood harvested worldwide goes to the paper industry" data-fr="du bois récolté dans le monde va à l'industrie du papier" data-de="des weltweit geernteten Holzes gehen in die Papierindustrie">del legno raccolto nel mondo finisce all'industria della carta</p>
+      </div>
+      <div class="pd-n">
+        <div class="pd-n-cifra" data-it="5º" data-en="5th" data-fr="5e" data-de="5.">5º</div>
+        <p class="pd-n-testo" data-it="posto fra i consumatori mondiali di energia, per il settore carta e cellulosa" data-en="largest energy consumer in the world, for the pulp and paper sector" data-fr="consommateur mondial d'énergie, pour le secteur papier et cellulose" data-de="größter Energieverbraucher weltweit — der Papier- und Zellstoffsektor">posto fra i consumatori mondiali di energia, per il settore carta e cellulosa</p>
+      </div>
+    </div>
+
+    <p class="pd-testo" data-it="Una struttura da sola non salva una foresta ristampando meno: parliamo di chili, non di tonnellate, e chi ti racconta il contrario ti sta vendendo qualcosa. Il punto è un altro." data-en="A single property doesn't save a forest by reprinting less: we're talking kilos, not tonnes, and anyone telling you otherwise is selling you something. The point is elsewhere." data-fr="Un établissement seul ne sauve pas une forêt en réimprimant moins : on parle de kilos, pas de tonnes, et celui qui vous dit le contraire vous vend quelque chose. Le point est ailleurs." data-de="Ein einzelner Betrieb rettet keinen Wald, indem er weniger nachdruckt: Es geht um Kilo, nicht um Tonnen — und wer Ihnen etwas anderes erzählt, will Ihnen etwas verkaufen. Der Punkt liegt woanders.">Una struttura da sola non salva una foresta ristampando meno: parliamo di chili, non di tonnellate, e chi ti racconta il contrario ti sta vendendo qualcosa. Il punto è un altro.</p>
+    <p class="pd-testo" data-it="Di solito una scelta sostenibile costa di più, richiede più tempo o toglie qualcosa al servizio. Qui no: la scelta più pulita è anche la più economica, la più veloce da aggiornare e quella che il cliente preferisce già. Non c'è nessun compromesso da fare, perché è la stessa identica decisione." data-en="Usually a sustainable choice costs more, takes longer or takes something away from the service. Not here: the cleaner choice is also the cheaper one, the fastest to update, and the one customers already prefer. There is no trade-off to make, because it is the very same decision." data-fr="D'habitude, un choix durable coûte plus cher, prend plus de temps ou retire quelque chose au service. Ici, non : le choix le plus propre est aussi le moins cher, le plus rapide à mettre à jour et celui que le client préfère déjà. Aucun compromis à faire, parce que c'est exactement la même décision." data-de="Normalerweise kostet eine nachhaltige Entscheidung mehr, dauert länger oder nimmt dem Service etwas weg. Hier nicht: Die sauberere Wahl ist zugleich die günstigere, die am schnellsten aktualisierte und die, die Gäste ohnehin bevorzugen. Es gibt keinen Kompromiss, weil es dieselbe Entscheidung ist.">Di solito una scelta sostenibile costa di più, richiede più tempo o toglie qualcosa al servizio. Qui no: la scelta più pulita è anche la più economica, la più veloce da aggiornare e quella che il cliente preferisce già. Non c'è nessun compromesso da fare, perché è la stessa identica decisione.</p>
+    <p class="pd-testo" data-it="E c'è la parte che si dimentica: il foglio plastificato non è carta. È carta e plastica incollate insieme, un materiale composito che il riciclo non separa. Ogni listino ristampato a metà stagione perché è cambiato un prezzo finisce lì — e la carta che finisce in discarica produce metano, molte volte più climalterante della CO2." data-en="And there's the part people forget: a laminated sheet isn't paper. It's paper and plastic bonded together, a composite that recycling can't separate. Every price list reprinted mid-season because a price changed ends up there — and paper in landfill produces methane, many times more warming than CO2." data-fr="Et il y a ce qu'on oublie : la feuille plastifiée n'est pas du papier. C'est du papier et du plastique collés ensemble, un composite que le recyclage ne sépare pas. Chaque carte réimprimée en pleine saison parce qu'un prix a changé finit là — et le papier en décharge produit du méthane, bien plus réchauffant que le CO2." data-de="Und da ist der Teil, den man vergisst: Ein laminiertes Blatt ist kein Papier. Es ist Papier und Kunststoff, fest verbunden — ein Verbundstoff, den das Recycling nicht trennt. Jede Preisliste, die mitten in der Saison wegen einer Preisänderung neu gedruckt wird, landet dort — und Papier auf der Deponie erzeugt Methan, das die Erwärmung um ein Vielfaches stärker antreibt als CO2.">E c'è la parte che si dimentica: il foglio plastificato non è carta. È carta e plastica incollate insieme, un materiale composito che il riciclo non separa. Ogni listino ristampato a metà stagione perché è cambiato un prezzo finisce lì — e la carta che finisce in discarica produce metano, molte volte più climalterante della CO2.</p>
+    <p class="pd-testo" data-it="Poi c'è quello che vede il cliente. Un codice sul tavolo al posto di un menù unto e ripassato dice qualcosa della casa prima che tu apra bocca. È l'unico argomento di questa pagina che si vede da solo, senza che nessuno lo spieghi." data-en="Then there's what the customer sees. A code on the table instead of a greasy, much-handled menu says something about the house before you open your mouth. It's the only argument on this page that shows itself, with nobody explaining it." data-fr="Et puis il y a ce que voit le client. Un code sur la table à la place d'une carte grasse et repassée dit quelque chose de la maison avant que vous n'ouvriez la bouche. C'est le seul argument de cette page qui se voit tout seul, sans que personne l'explique." data-de="Dann ist da, was der Gast sieht. Ein Code auf dem Tisch statt einer speckigen, vielfach angefassten Karte sagt etwas über das Haus, bevor Sie den Mund aufmachen. Es ist das einzige Argument dieser Seite, das man von selbst sieht, ohne dass es jemand erklärt.">Poi c'è quello che vede il cliente. Un codice sul tavolo al posto di un menù unto e ripassato dice qualcosa della casa prima che tu apra bocca. È l'unico argomento di questa pagina che si vede da solo, senza che nessuno lo spieghi.</p>
+
+    <p class="pd-quindi" data-it="Non è il motivo per cui si sceglie Colgo. È il motivo in più per cui, dopo, nessuno torna indietro." data-en="It isn't the reason people choose Colgo. It's the extra reason why, afterwards, nobody goes back." data-fr="Ce n'est pas la raison pour laquelle on choisit Colgo. C'est la raison de plus pour laquelle, ensuite, personne ne revient en arrière." data-de="Es ist nicht der Grund, warum man Colgo wählt. Es ist der zusätzliche Grund, warum danach niemand zurückgeht.">Non è il motivo per cui si sceglie Colgo. È il motivo in più per cui, dopo, nessuno torna indietro.</p>
+  </div>
+
+</div>
+
+<!-- La nota sulle fonti sta PRIMA degli inviti, non dopo: un lettore che ha
+     appena visto ventuno numeri ha il diritto di sapere quali reggono e
+     quali no, prima che gli si chieda qualcosa. -->
+<div class="pd-fonti">
+  <div class="pd-fonti-dentro">
+    <div class="pd-fonti-tit" data-it="UNA NOTA SULLE FONTI" data-en="A NOTE ON SOURCES" data-fr="UNE NOTE SUR LES SOURCES" data-de="EINE ANMERKUNG ZU DEN QUELLEN">UNA NOTA SULLE FONTI</div>
+    <p class="pd-fonti-testo" data-it="I numeri di questa pagina vengono da rilevazioni di settore e da fonti diverse che concordano fra loro; li teniamo arrotondati di proposito. I dati sull'adozione dei QR e sul mercato giapponese sono i più solidi — più fonti indipendenti convergono. Quelli sui costi di stampa e sulla soddisfazione dei clienti circolano soprattutto nei materiali di chi vende software: li abbiamo tenuti solo dove il verso del dato è credibile, e senza cifre al centesimo. Quando un numero non lo possiamo reggere, non lo scriviamo." data-en="The figures on this page come from industry surveys and from several sources that agree with one another; we keep them deliberately rounded. The data on QR adoption and on the Japanese market are the most solid — several independent sources converge. Those on printing costs and customer satisfaction circulate mostly in material from companies selling software: we kept them only where the direction of the figure is credible, and without decimal points. When we can't stand behind a number, we don't write it." data-fr="Les chiffres de cette page proviennent de relevés de secteur et de sources différentes qui concordent ; nous les gardons volontairement arrondis. Les données sur l'adoption des QR et sur le marché japonais sont les plus solides — plusieurs sources indépendantes convergent. Celles sur les coûts d'impression et la satisfaction des clients circulent surtout dans les documents de ceux qui vendent des logiciels : nous ne les avons gardées que là où le sens de la donnée est crédible, et sans chiffres à la virgule. Quand nous ne pouvons pas assumer un chiffre, nous ne l'écrivons pas." data-de="Die Zahlen dieser Seite stammen aus Branchenerhebungen und aus verschiedenen Quellen, die übereinstimmen; wir halten sie bewusst gerundet. Die Daten zur QR-Verbreitung und zum japanischen Markt sind die belastbarsten — mehrere unabhängige Quellen stimmen überein. Die zu Druckkosten und Kundenzufriedenheit stammen vor allem aus Unterlagen von Softwareanbietern: Wir haben sie nur dort behalten, wo die Richtung glaubwürdig ist, und ohne Nachkommastellen. Wenn wir für eine Zahl nicht geradestehen können, schreiben wir sie nicht.">I numeri di questa pagina vengono da rilevazioni di settore e da fonti diverse che concordano fra loro; li teniamo arrotondati di proposito. I dati sull'adozione dei QR e sul mercato giapponese sono i più solidi — più fonti indipendenti convergono. Quelli sui costi di stampa e sulla soddisfazione dei clienti circolano soprattutto nei materiali di chi vende software: li abbiamo tenuti solo dove il verso del dato è credibile, e senza cifre al centesimo. Quando un numero non lo possiamo reggere, non lo scriviamo.</p>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 class="cta-headline" data-it="Il resto lo vedi <em>in trenta secondi.</em>" data-en="The rest you can see <em>in thirty seconds.</em>" data-fr="Le reste, vous le voyez <em>en trente secondes.</em>" data-de="Den Rest sehen Sie <em>in dreißig Sekunden.</em>">Il resto lo vedi <em>in trenta secondi.</em></h2>
+  <div class="cta-choice">
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/demo" target="_blank" class="btn-ghost" data-it="PROVA SENZA REGISTRAZIONE" data-en="TRY WITHOUT SIGNING UP" data-fr="ESSAYER SANS S&#39;INSCRIRE" data-de="OHNE ANMELDUNG TESTEN">PROVA SENZA REGISTRAZIONE</a>
+      <p class="cta-opt-note" data-it="Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati." data-en="You go straight into a ready-made sample business. No email, no details." data-fr="Vous entrez directement dans un &eacute;tablissement d&#39;essai d&eacute;j&agrave; pr&ecirc;t. Aucun e-mail, aucune donn&eacute;e." data-de="Sie steigen direkt in einen fertigen Beispielbetrieb ein. Keine E-Mail, keine Daten.">Entri subito in una struttura di prova gi&agrave; pronta. Niente email, niente dati.</p>
+    </div>
+    <div class="cta-or" data-it="oppure" data-en="or" data-fr="ou" data-de="oder">oppure</div>
+    <div class="cta-opt">
+      <a href="https://app.colgo.app/registrati" target="_blank" class="btn-primary" data-it="PROVA GRATIS 30 GIORNI" data-en="TRY FREE FOR 30 DAYS" data-fr="ESSAI GRATUIT 30 JOURS" data-de="30 TAGE KOSTENLOS TESTEN">PROVA GRATIS 30 GIORNI</a>
+      <p class="cta-opt-note" data-it="La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito." data-en="Your real business, your services, your QR codes. No credit card." data-fr="Votre &eacute;tablissement r&eacute;el, vos services, vos QR. Aucune carte bancaire." data-de="Ihr echter Betrieb, Ihre Leistungen, Ihre QR-Codes. Keine Kreditkarte.">La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite">Home</a>
+    <a href="/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert's">Come funziona</a>
+    <a href="/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen">Per chi</a>
+        <a href="/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise">Prezzi</a>
+    <a href="/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
+    <a href="/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Accessi e catalogo</a>
+    <a href="/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital">Perché digitale</a>
+    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
+    <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+  </div>
+  © 2026 COLGO · COLGO.APP
+</footer>
+
+<script>
+  let currentLang = 'it';
+  function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en') || el.getAttribute('data-it');
+        if (!text) return;
+        if (el.querySelector('span[data-it]')) return;
+        el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('colgo_lang', lang); } catch (e) {}
+    }
+  (function () {
+        var supported = ['it', 'en', 'fr', 'de'];
+        var saved = null;
+        try { saved = localStorage.getItem('colgo_lang'); } catch (e) {}
+        var initial;
+        if (saved && supported.indexOf(saved) !== -1) {
+          initial = saved;
+        } else {
+          var nav = ((navigator.language || navigator.userLanguage || 'it') + '').slice(0, 2).toLowerCase();
+          initial = supported.indexOf(nav) !== -1 ? nav : 'it';
+        }
+        setLang(initial);
+      })();
+</script>
+
+
+
+
+
+<!-- ══ colgo-assistente ══ generato da widget.py — non modificare a mano -->
+<style>
+/* ══ Assistente e invito fisso (16/08/2026) ═════════════════════════════
+   Vivono nello stesso angolo, quindi si conoscono: sul telefono il pulsante
+   dell'assistente sale quando c'e' la barra d'invito e riscende quando viene
+   chiusa (--colgo-fondo). Se stessero in due blocchi indipendenti finirebbero
+   uno sopra l'altro. */
+:root { --colgo-fondo: 24px; }
+/* Difesa: il sito ha regole scritte sui TAG (section{padding:120px} e' quella
+   che mi ha fregato, nav{position:fixed} lo aveva fatto poco prima). Entrano
+   in qualunque elemento nuovo dello stesso tag. Qui si azzera in partenza,
+   cosi' la prossima regola globale non arriva fin dentro. */
+.colgo-fab, .colgo-chat, .colgo-invito, .colgo-barra,
+.colgo-chat *, .colgo-invito *, .colgo-barra * {
+  margin: 0; max-width: none; box-sizing: border-box; }
+.colgo-chat, .colgo-invito, .colgo-barra, .colgo-fab { padding: 0; }
+.colgo-fab { position: fixed; right: 22px; bottom: var(--colgo-fondo); z-index: 300;
+  width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; border: 1px solid rgba(200,146,42,0.55);
+  background: rgba(15,24,21,0.92); color: var(--ochre); box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+  transition: bottom .25s ease, transform .18s ease, border-color .18s ease; }
+.colgo-fab:hover { transform: translateY(-2px); border-color: var(--ochre); }
+.colgo-fab .ci { width: 24px; height: 24px; }
+.colgo-fab[hidden] { display: none; }
+
+.colgo-chat { position: fixed; right: 22px; bottom: calc(var(--colgo-fondo) + 68px); z-index: 301;
+  width: 370px; max-width: calc(100vw - 44px); height: auto; min-height: 260px;
+  max-height: calc(100vh - 150px);
+  display: none; flex-direction: column; border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 4px; background: rgba(13,20,18,0.985); box-shadow: 0 18px 60px rgba(0,0,0,0.65);
+  overflow: hidden; transition: bottom .25s ease; }
+.colgo-chat.aperta { display: flex; }
+.colgo-chat-testa { display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid rgba(245,241,232,0.1); flex-shrink: 0; }
+.colgo-chat-testa strong { font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 19px; color: var(--cream); letter-spacing: 0.3px; }
+.colgo-x { background: none; border: none; color: rgba(245,241,232,0.5); cursor: pointer;
+  padding: 6px; display: flex; border-radius: 50%; }
+.colgo-x:hover { color: var(--cream); }
+.colgo-x .ci { width: 18px; height: 18px; }
+.colgo-corpo { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.colgo-riga { max-width: 86%; font-size: 14px; line-height: 1.65; letter-spacing: 0.2px;
+  padding: 11px 14px; border-radius: 3px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.colgo-riga.da-lui { align-self: flex-start; background: rgba(245,241,232,0.06); color: var(--cream); }
+.colgo-riga.da-te  { align-self: flex-end; background: rgba(200,146,42,0.16); color: var(--cream);
+  border: 1px solid rgba(200,146,42,0.3); }
+.colgo-attesa { align-self: flex-start; display: flex; gap: 5px; padding: 13px 14px; }
+.colgo-attesa i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre);
+  opacity: 0.4; animation: colgoPuls 1.1s infinite; }
+.colgo-attesa i:nth-child(2) { animation-delay: .18s; }
+.colgo-attesa i:nth-child(3) { animation-delay: .36s; }
+@keyframes colgoPuls { 0%,60%,100% { opacity:.25; transform:translateY(0);} 30% { opacity:1; transform:translateY(-3px);} }
+.colgo-spunti { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; }
+.colgo-spunto { font-family: 'Josefin Sans', sans-serif; font-size: 12px; letter-spacing: 0.5px;
+  color: var(--ochre); background: none; border: 1px solid rgba(200,146,42,0.35);
+  padding: 7px 12px; border-radius: 3px; cursor: pointer; }
+.colgo-spunto:hover { background: rgba(200,146,42,0.12); }
+.colgo-piede { border-top: 1px solid rgba(245,241,232,0.1); padding: 12px 14px 10px; flex-shrink: 0; }
+.colgo-form { display: flex; gap: 8px; align-items: center; }
+.colgo-input { flex: 1; font-family: 'Josefin Sans', sans-serif; font-size: 15px; color: var(--cream);
+  background: rgba(245,241,232,0.05); border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 3px; padding: 11px 12px; outline: none; min-width: 0; }
+.colgo-input:focus { border-color: rgba(200,146,42,0.6); }
+.colgo-input::placeholder { color: rgba(245,241,232,0.35); }
+.colgo-invia { background: var(--ochre); border: none; color: #0D0D0D; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 3px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; }
+.colgo-invia:disabled { opacity: .4; cursor: default; }
+.colgo-invia .ci { width: 19px; height: 19px; }
+.colgo-nota { font-size: 10.5px; line-height: 1.5; letter-spacing: 0.3px;
+  color: rgba(245,241,232,0.3); margin-top: 9px; text-align: center; }
+
+/* invito fisso — riquadro a lato sul computer */
+.colgo-invito { position: fixed; right: 22px; top: 50%; transform: translateY(-50%) translateX(14px);
+  z-index: 290; width: 232px; padding: 20px 18px 18px; border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 4px; background: rgba(15,24,21,0.94); box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
+.colgo-invito.si-vede { opacity: 1; transform: translateY(-50%) translateX(0); pointer-events: auto; }
+/* Con la conversazione aperta l'invito starebbe dietro al pannello, visibile
+   in trasparenza: si fa da parte finche' e' aperta. */
+body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(14px); }
+.colgo-invito strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 21px; color: var(--cream); margin-bottom: 8px; }
+.colgo-invito p { font-size: 12px; line-height: 1.6; color: rgba(245,241,232,0.45); margin-bottom: 15px; }
+.colgo-invito a { display: block; text-align: center; font-size: 11px; letter-spacing: 1.6px;
+  text-decoration: none; padding: 11px 8px; margin-bottom: 8px; }
+.colgo-invito .i-demo { color: var(--ochre); border: 1px solid rgba(200,146,42,0.45); }
+.colgo-invito .i-demo:hover { background: rgba(200,146,42,0.12); }
+.colgo-invito .i-prova { color: #0D0D0D; background: var(--ochre); margin-bottom: 0; }
+.colgo-invito .colgo-x { position: absolute; top: 6px; right: 6px; }
+.colgo-invito .colgo-x .ci { width: 14px; height: 14px; }
+
+/* invito fisso — barra in fondo sul telefono */
+.colgo-barra { display: none; }
+@media (max-width: 900px) {
+  .colgo-invito { display: none; }
+  .colgo-barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 290;
+    align-items: center; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10,16,14,0.97); border-top: 1px solid rgba(200,146,42,0.28);
+    transform: translateY(105%); transition: transform .35s ease; }
+  .colgo-barra.si-vede { transform: translateY(0); }
+  .colgo-barra a { flex: 1; text-align: center; font-size: 11px; letter-spacing: 1.4px;
+    text-decoration: none; color: #0D0D0D; background: var(--ochre); padding: 12px 8px; }
+  .colgo-barra .colgo-x { flex-shrink: 0; }
+  body.colgo-con-barra { --colgo-fondo: 88px; }
+  .colgo-fab { right: 16px; width: 50px; height: 50px; }
+  .colgo-chat { right: 12px; left: 12px; width: auto; max-width: none;
+    max-height: calc(100vh - 190px); bottom: calc(var(--colgo-fondo) + 62px); }
+}
+@media (max-width: 900px) and (max-height: 620px) { .colgo-chat { max-height: calc(100vh - 130px); } }
+</style>
+
+<div class="colgo-invito" id="colgoInvito" aria-hidden="true">
+  <button type="button" class="colgo-x" id="colgoInvitoX" aria-label="Chiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <strong data-it="Provalo davvero." data-en="Try it for real." data-fr="Essayez pour de vrai." data-de="Probieren Sie es aus.">Provalo davvero.</strong>
+  <p data-it="Una struttura già pronta, senza dare niente." data-en="A ready-made business, without giving anything." data-fr="Un établissement déjà prêt, sans rien donner." data-de="Ein fertiger Betrieb, ohne Angaben.">Una struttura già pronta, senza dare niente.</p>
+  <a class="i-demo" href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Guarda la demo" data-en="See the demo" data-fr="Voir la démo" data-de="Demo ansehen">Guarda la demo</a>
+  <a class="i-prova" href="https://app.colgo.app/registrati" target="_blank" rel="noopener" data-it="30 giorni gratis" data-en="30 days free" data-fr="30 jours gratuits" data-de="30 Tage gratis">30 giorni gratis</a>
+</div>
+
+<div class="colgo-barra" id="colgoBarra">
+  <a href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Provalo senza registrarti" data-en="Try it without signing up" data-fr="Essayer sans s'inscrire" data-de="Ohne Anmeldung testen">Provalo senza registrarti</a>
+  <button type="button" class="colgo-x" id="colgoBarraX"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+</div>
+
+<button type="button" class="colgo-fab" id="colgoFab" aria-expanded="false"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></button>
+
+<div class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
+  <div class="colgo-chat-testa">
+    <strong id="colgoTit" data-it="Domande su Colgo?" data-en="Questions about Colgo?" data-fr="Des questions sur Colgo ?" data-de="Fragen zu Colgo?">Domande su Colgo?</strong>
+    <button type="button" class="colgo-x" id="colgoChiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  </div>
+  <div class="colgo-corpo" id="colgoCorpo" aria-live="polite"></div>
+  <div class="colgo-spunti" id="colgoSpunti"><button type="button" class="colgo-spunto" data-it="Quanto costa?" data-en="How much does it cost?" data-fr="Combien ça coûte ?" data-de="Was kostet es?">Quanto costa?</button><button type="button" class="colgo-spunto" data-it="I clienti devono scaricare un'app?" data-en="Do customers need an app?" data-fr="Faut-il une appli ?" data-de="Brauchen Gäste eine App?">I clienti devono scaricare un'app?</button><button type="button" class="colgo-spunto" data-it="Come inizio?" data-en="How do I start?" data-fr="Comment commencer ?" data-de="Wie fange ich an?">Come inizio?</button></div>
+  <div class="colgo-piede">
+    <form class="colgo-form" id="colgoForm">
+      <input class="colgo-input" id="colgoInput" type="text" autocomplete="off" maxlength="500" />
+      <button class="colgo-invia" id="colgoInvia" type="submit"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></button>
+    </form>
+    <p class="colgo-nota" data-it="Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com" data-en="It answers from what's on this site. For anything else: colgoapp@gmail.com" data-fr="Il répond à partir de ce qui est sur ce site. Pour le reste : colgoapp@gmail.com" data-de="Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com">Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = 'https://app.colgo.app/api/site-chat';
+  var T = {
+    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten."],
+    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…"],
+    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen"],
+    chiudi: ["Chiudi", "Close", "Fermer", "Schließen"],
+    invia:  ["Invia", "Send", "Envoyer", "Senden"],
+    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com."]
+  };
+  var L = ['it','en','fr','de'];
+  function lang() {
+    var l = document.documentElement.lang || 'it';
+    return L.indexOf(l) > -1 ? l : 'it';
+  }
+  function dice(k) { return T[k][L.indexOf(lang())] || T[k][0]; }
+
+  var fab = document.getElementById('colgoFab');
+  var chat = document.getElementById('colgoChat');
+  var corpo = document.getElementById('colgoCorpo');
+  var spunti = document.getElementById('colgoSpunti');
+  var form = document.getElementById('colgoForm');
+  var input = document.getElementById('colgoInput');
+  var invia = document.getElementById('colgoInvia');
+  var invito = document.getElementById('colgoInvito');
+  var barra = document.getElementById('colgoBarra');
+  if (!fab || !chat) return;
+
+  // ── etichette che dipendono dalla lingua e non stanno in data-* ──
+  // (segnaposto del campo e descrizioni per il lettore vocale)
+  function etichette() {
+    input.placeholder = dice('scrivi');
+    fab.setAttribute('aria-label', dice('apri'));
+    invia.setAttribute('aria-label', dice('invia'));
+    document.getElementById('colgoChiudi').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoBarraX').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoInvitoX').setAttribute('aria-label', dice('chiudi'));
+  }
+  // setLang non sa di queste: gli si sta accanto invece di modificarlo
+  var origSetLang = window.setLang;
+  if (typeof origSetLang === 'function') {
+    window.setLang = function (l) {
+      var r = origSetLang.apply(this, arguments);
+      etichette();
+      // Il saluto non e' un messaggio scambiato, e' un'etichetta: finche' non
+      // si e' chiesto nulla deve seguire la lingua. I messaggi veri no —
+      // riscrivere quello che qualcuno ha gia' letto sarebbe peggio.
+      if (!storia.length && corpo.firstChild) corpo.firstChild.textContent = dice('benv');
+      return r;
+    };
+  }
+
+  // ── conversazione ──
+  var storia = [];      // {ruolo, testo} — senza data-*, non si traduce
+  var occupato = false;
+
+  function riga(cls, testo) {
+    var d = document.createElement('div');
+    d.className = 'colgo-riga ' + cls;
+    d.textContent = testo;          // testo, mai HTML: la risposta e' di un modello
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+  function attesa() {
+    var d = document.createElement('div');
+    d.className = 'colgo-attesa';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+
+  function chiedi(testo) {
+    if (occupato || !testo.trim()) return;
+    occupato = true; invia.disabled = true;
+    spunti.style.display = 'none';
+    riga('da-te', testo);
+    storia.push({ ruolo: 'persona', testo: testo });
+    var att = attesa();
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lingua: lang(), messaggi: storia.slice(-12) })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        att.remove();
+        var t = (d && d.risposta) ? d.risposta : dice('err');
+        riga('da-lui', t);
+        storia.push({ ruolo: 'assistente', testo: t });
+      })
+      .catch(function () { att.remove(); riga('da-lui', dice('err')); })
+      .then(function () { occupato = false; invia.disabled = false; input.focus(); });
+  }
+
+  function apri() {
+    chat.classList.add('aperta');
+    document.body.classList.add('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'true');
+    if (!corpo.children.length) riga('da-lui', dice('benv'));
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  function chiudiChat() {
+    chat.classList.remove('aperta');
+    document.body.classList.remove('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+  fab.addEventListener('click', function () {
+    chat.classList.contains('aperta') ? chiudiChat() : apri();
+  });
+  document.getElementById('colgoChiudi').addEventListener('click', chiudiChat);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && chat.classList.contains('aperta')) { chiudiChat(); fab.focus(); }
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); var v = input.value; input.value = ''; chiedi(v);
+  });
+  spunti.addEventListener('click', function (e) {
+    var b = e.target.closest('.colgo-spunto'); if (b) chiedi(b.textContent.trim());
+  });
+
+  // ── invito fisso: compare dopo un po' di lettura, e si puo' zittire ──
+  var CHIAVE = 'colgo_invito_chiuso';
+  var zitto = false;
+  try { zitto = localStorage.getItem(CHIAVE) === '1'; } catch (e) {}
+
+  function mostraInvito(si) {
+    if (zitto) si = false;
+    invito.classList.toggle('si-vede', si);
+    invito.setAttribute('aria-hidden', si ? 'false' : 'true');
+    barra.classList.toggle('si-vede', si);
+    document.body.classList.toggle('colgo-con-barra', si);
+  }
+  function spegni() {
+    zitto = true;
+    try { localStorage.setItem(CHIAVE, '1'); } catch (e) {}
+    mostraInvito(false);
+  }
+  document.getElementById('colgoInvitoX').addEventListener('click', spegni);
+  document.getElementById('colgoBarraX').addEventListener('click', spegni);
+
+  var ultimo = null;
+  function guarda() {
+    // Compare dopo 700px di lettura, e sparisce vicino al fondo pagina, dove
+    // l'invito grande c'e' gia': due inviti identici a un dito di distanza
+    // sarebbero solo rumore.
+    var y = window.scrollY;
+    var vicinoFondo = (y + window.innerHeight) > (document.documentElement.scrollHeight - 700);
+    var si = y > 700 && !vicinoFondo;
+    if (si !== ultimo) { ultimo = si; mostraInvito(si); }
+  }
+  window.addEventListener('scroll', guarda, { passive: true });
+  window.addEventListener('resize', guarda);
+  // setLang traduce l'intero documento, ma viene chiamato al caricamento —
+  // e il mio blocco sta in fondo alla pagina, quindi allora non esisteva
+  // ancora: le sue scritte restavano nella lingua scritta nel file. Al primo
+  // giro le traduco qui, con la stessa regola.
+  function traduci() {
+    var l = lang();
+    [chat, invito, barra, fab].forEach(function (radice) {
+      if (!radice) return;
+      var tutti = radice.querySelectorAll('[data-it]');
+      (radice.hasAttribute && radice.hasAttribute('data-it') ? [radice] : []).concat([].slice.call(tutti))
+        .forEach(function (el) {
+          var t = el.getAttribute('data-' + l) || el.getAttribute('data-en') || el.getAttribute('data-it');
+          if (t) el.innerHTML = t;
+        });
+    });
+  }
+  traduci();
+  etichette();
+  guarda();
+})();
+</script>
+</body>
+</html>

@@ -328,6 +328,60 @@ body::after {
       .nav-links { gap: 11px; }
       .nav-links a { letter-spacing: 1.1px; }
     }
+
+/* ── Leggibilita' sul telefono (17/08/2026) ────────────────────────────
+   Misurato a 390px sul sito vero, non a occhio: 96 blocchi di testo vanno a
+   capo con meno di 6px fra una riga e l'altra. Il peggiore e' l'occhiello
+   della home — 12px di corpo, 4px di spaziatura fra le lettere, tre righe e
+   2,4px d'aria: sembra un blocco compatto invece di tre righe.
+   Le maiuscole molto spaziate hanno bisogno di PIU' interlinea, non di meno:
+   la riga e' piu' larga e l'occhio, tornando a capo, sbaglia riga.
+   Si tocca solo il telefono: sul desktop queste stesse scritte stanno su una
+   riga sola e l'interlinea non le riguarda. */
+@media (max-width: 700px) {
+  /* etichette maiuscole spaziate — le piu' schiacciate */
+  .hero-eyebrow, .section-label, .page-label, .demo-label, .verticals-label,
+  .venue-type, .pricing-name, .feat-title, .tech-card-title, .step-label,
+  .faq-category, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+  .tab-btn, .pd-eyebrow, .pd-riquadro-firma, .numeri-label, .screens-hint,
+  .cta-or, .storia-firma, .lbl { line-height: 1.6; }
+
+  /* bottoni: "PROVA SENZA REGISTRAZIONE" va a capo dentro il bottone */
+  .btn-primary, .btn-ghost, .btn-demo,
+  .venue-more, .vertical-more, .numeri-link { line-height: 1.45; }
+
+  /* il piede: undici righe di link, tutte attaccate */
+  footer, .footer-links, .footer-copy { line-height: 1.7; }
+
+  /* titoli: 36px su cinque righe con 5,4px d'aria */
+  h1, h2, .hero-headline, .page-title, .section-title, .cta-headline,
+  .demo-title, .storia-titolo, .venue-title, .problem-title, .step-title,
+  .numeri-titolo, .pd-titolo { line-height: 1.28; }
+
+  /* Corti ma su due righe lo stesso: il badge sotto il titolo, le didascalie
+     del carosello, lo slogan (che non ha classe: sta come figlio dell'eroe) e
+     le domande delle FAQ, che sono testo da leggere, non titoli. */
+  .zero-barrier-badge, .zero-barrier-badge span, .screen-caption,
+  .hero > p, .faq-q { line-height: 1.5; }
+}
+
+/* ── Contrasto: opacita' troppo basse (17/08/2026) ─────────────────────
+   Rapporti calcolati sul fondo REALE, campionato dai pixel: la pagina ha due
+   sfumature fisse (body::after) e una velatura di rumore, quindi il colore
+   dichiarato nel CSS non e' quello che l'occhio riceve. Soglia 4,5 per il
+   testo sotto i 18px, che qui e' tutto. */
+.cta-or        { color: rgba(245,241,232,0.60); font-size: 12px; }  /* 2,54 → 6,36 */
+.cta-opt-note  { color: rgba(245,241,232,0.62); }                   /* 3,68 → 6,45 */
+.demo-note     { color: rgba(245,241,232,0.68); }                   /* 3,99 → 5,93 */
+.pd-nota-alta  { color: rgba(245,241,232,0.60); }                   /* 4,13 → 6,54 */
+.pd-fonti-testo{ color: rgba(245,241,232,0.72); }
+
+/* L'oro pieno su fondo petrolio si ferma a 3,99-4,43: sotto la soglia per una
+   scritta di 12px. Su quei fondi (e SOLO su quelli) passa l'oro chiaro, che e'
+   gia' nella palette come --gold-light. */
+.demo .demo-label, .demo .section-label,
+.principle-section .section-label,
+.tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
 </style>
 </head>
 <body>

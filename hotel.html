@@ -96,6 +96,11 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://colgo.app/hotel" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
   <title>Colgo per Hotel, B&B e Agriturismi — Catalogo digitale per ospiti</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
@@ -107,7 +112,7 @@
   <meta property="og:locale" content="it_IT" />
   <meta property="og:title" content="Colgo per Hotel, B&amp;B e Agriturismi — Catalogo digitale per ospiti" />
   <meta property="og:description" content="Colgo per l'ospitalità: gli ospiti scansionano il QR in camera o ricevono il link prima dell'arrivo, esplorano servizi e inviano richieste in tempo reale alla reception." />
-  <meta property="og:url" content="https://colgo.app/hotel.html" />
+  <meta property="og:url" content="https://colgo.app/hotel" />
   <meta property="og:image" content="https://colgo.app/colgo-og.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Colgo per Hotel, B&amp;B e Agriturismi — Catalogo digitale per ospiti" />
@@ -391,6 +396,15 @@ body::after {
 .demo .demo-label, .demo .section-label,
 .principle-section .section-label,
 .tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
 </style>
 </head>
 <body>
@@ -539,19 +553,19 @@ body::after {
   <h2 class="section-title" data-it="Cosa vede <em>il tuo ospite</em>." data-en="What <em>your guest</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Gast</em> sieht.">Cosa vede <em>il tuo ospite</em>.</h2>
   <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-hotel-01-accesso.jpg" alt="Inquadra il QR in camera" loading="lazy">
+        <img src="screenshots/it-hotel-01-accesso.jpg" alt="Inquadra il QR in camera" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Inquadra il QR in camera" data-en="Scans the QR in the room" data-fr="Scanne le QR en chambre" data-de="Scannt den QR im Zimmer">Inquadra il QR in camera</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-02-catalogo.jpg" alt="Trova i servizi della struttura" loading="lazy">
+        <img src="screenshots/it-hotel-02-catalogo.jpg" alt="Trova i servizi della struttura" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova i servizi della struttura" data-en="Finds the property's services" data-fr="Trouve les services de l'établissement" data-de="Findet die Leistungen des Hauses">Trova i servizi della struttura</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-03-trasporti.jpg" alt="Transfer e noleggi, con i prezzi" loading="lazy">
+        <img src="screenshots/it-hotel-03-trasporti.jpg" alt="Transfer e noleggi, con i prezzi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Transfer e noleggi, con i prezzi" data-en="Transfers and rentals, with prices" data-fr="Transferts et locations, avec les prix" data-de="Transfers und Verleih, mit Preisen">Transfer e noleggi, con i prezzi</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-04-spa.jpg" alt="Spa e benessere" loading="lazy">
+        <img src="screenshots/it-hotel-04-spa.jpg" alt="Spa e benessere" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Spa e benessere" data-en="Spa and wellness" data-fr="Spa et bien-être" data-de="Spa und Wellness">Spa e benessere</p>
       </div>
     </div>
@@ -564,19 +578,19 @@ body::after {
   <h2 class="section-title" data-it="L&#39;ospite arriva <em>già informato</em>." data-en="The guest arrives <em>already informed</em>." data-fr="Le client arrive <em>déjà informé</em>." data-de="Der Gast kommt <em>schon informiert</em> an.">L&#39;ospite arriva <em>già informato</em>.</h2>
   <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-hotel-05-prearrivo.jpg" alt="Entra dal link, prima di partire" loading="lazy">
+        <img src="screenshots/it-hotel-05-prearrivo.jpg" alt="Entra dal link, prima di partire" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Entra dal link, prima di partire" data-en="Enters via the link, before setting off" data-fr="Entre par le lien, avant de partir" data-de="Über den Link, schon vor der Abreise">Entra dal link, prima di partire</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-06-prearrivo-servizi.jpg" alt="Prenota i servizi in anticipo" loading="lazy">
+        <img src="screenshots/it-hotel-06-prearrivo-servizi.jpg" alt="Prenota i servizi in anticipo" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Prenota i servizi in anticipo" data-en="Books services in advance" data-fr="Réserve les services à l'avance" data-de="Bucht Leistungen im Voraus">Prenota i servizi in anticipo</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy">
+        <img src="screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova come arrivare e il Wi-Fi" data-en="Finds directions and the Wi-Fi" data-fr="Trouve l'itinéraire et le Wi-Fi" data-de="Findet Anfahrt und WLAN">Trova come arrivare e il Wi-Fi</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-08-chat.jpg" alt="E scrive alla reception" loading="lazy">
+        <img src="screenshots/it-hotel-08-chat.jpg" alt="E scrive alla reception" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="E scrive alla reception" data-en="And writes to reception" data-fr="Et écrit à la réception" data-de="Und schreibt der Rezeption">E scrive alla reception</p>
       </div>
   </div>

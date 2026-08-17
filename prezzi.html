@@ -96,6 +96,11 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://colgo.app/prezzi" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
   <title>Prezzi — Colgo</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
@@ -107,7 +112,7 @@
   <meta property="og:locale" content="it_IT" />
   <meta property="og:title" content="Prezzi — Colgo" />
   <meta property="og:description" content="Prezzi Colgo per hotel, ristoranti e negozi. Un prezzo per struttura, non per camera o tavolo. Mensile o annuale." />
-  <meta property="og:url" content="https://colgo.app/prezzi.html" />
+  <meta property="og:url" content="https://colgo.app/prezzi" />
   <meta property="og:image" content="https://colgo.app/colgo-og.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Prezzi — Colgo" />
@@ -413,6 +418,15 @@ body::after {
 .demo .demo-label, .demo .section-label,
 .principle-section .section-label,
 .tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
 </style>
 </head>
 <body>
@@ -608,15 +622,15 @@ body::after {
     <h2 class="section-title" data-it="Non un abbonamento al buio." data-en="Not a subscription in the dark." data-fr="Pas un abonnement à l'aveugle." data-de="Kein Abo im Blindflug.">Non un abbonamento al buio.</h2>
     <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-rist-02-menu.jpg" alt="Trova il menù nella sua lingua" loading="lazy">
+        <img src="screenshots/it-rist-02-menu.jpg" alt="Trova il menù nella sua lingua" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova il menù nella sua lingua" data-en="Finds the menu in their language" data-fr="Trouve le menu dans sa langue" data-de="Findet die Karte in seiner Sprache">Trova il menù nella sua lingua</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-rist-05-riepilogo.jpg" alt="Controlla il totale prima di inviare" loading="lazy">
+        <img src="screenshots/it-rist-05-riepilogo.jpg" alt="Controlla il totale prima di inviare" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Controlla il totale prima di inviare" data-en="Checks the total before sending" data-fr="Vérifie le total avant d'envoyer" data-de="Prüft die Summe vor dem Senden">Controlla il totale prima di inviare</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy">
+        <img src="screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova come arrivare e il Wi-Fi" data-en="Finds directions and the Wi-Fi" data-fr="Trouve l'itinéraire et le Wi-Fi" data-de="Findet Anfahrt und WLAN">Trova come arrivare e il Wi-Fi</p>
       </div>
     </div>

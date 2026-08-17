@@ -96,6 +96,11 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://colgo.app/come-funziona" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
   <title>Come funziona Colgo — Catalogo digitale per strutture ricettive</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
@@ -107,7 +112,7 @@
   <meta property="og:locale" content="it_IT" />
   <meta property="og:title" content="Come funziona Colgo — Catalogo digitale per strutture ricettive" />
   <meta property="og:description" content="Scopri come funziona Colgo: QR code in camera, catalogo multilingua automatico, richieste in tempo reale alla reception. Niente app, niente download." />
-  <meta property="og:url" content="https://colgo.app/come-funziona.html" />
+  <meta property="og:url" content="https://colgo.app/come-funziona" />
   <meta property="og:image" content="https://colgo.app/colgo-og.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Come funziona Colgo — Catalogo digitale per strutture ricettive" />
@@ -402,6 +407,15 @@ body::after {
 .demo .demo-label, .demo .section-label,
 .principle-section .section-label,
 .tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
 </style>
 </head>
 <body>

@@ -96,6 +96,11 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://colgo.app/negozio" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
   <title>Colgo per Negozi e Boutique — Catalogo digitale in vetrina</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
@@ -107,7 +112,7 @@
   <meta property="og:locale" content="it_IT" />
   <meta property="og:title" content="Colgo per Negozi e Boutique — Catalogo digitale in vetrina" />
   <meta property="og:description" content="Colgo per il retail: il cliente scansiona il QR in vetrina, anche a negozio chiuso, sfoglia il catalogo e prepara la sua lista prima ancora di entrare." />
-  <meta property="og:url" content="https://colgo.app/negozio.html" />
+  <meta property="og:url" content="https://colgo.app/negozio" />
   <meta property="og:image" content="https://colgo.app/colgo-og.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Colgo per Negozi e Boutique — Catalogo digitale in vetrina" />
@@ -391,6 +396,15 @@ body::after {
 .demo .demo-label, .demo .section-label,
 .principle-section .section-label,
 .tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
 </style>
 </head>
 <body>
@@ -539,19 +553,19 @@ body::after {
   <h2 class="section-title" data-it="Cosa vede <em>il tuo cliente</em>." data-en="What <em>your customer</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Kunde</em> sieht.">Cosa vede <em>il tuo cliente</em>.</h2>
   <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-shop-01-accesso.jpg" alt="Inquadra il QR in vetrina" loading="lazy">
+        <img src="screenshots/it-shop-01-accesso.jpg" alt="Inquadra il QR in vetrina" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Inquadra il QR in vetrina" data-en="Scans the QR in the window" data-fr="Scanne le QR en vitrine" data-de="Scannt den QR im Schaufenster">Inquadra il QR in vetrina</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-shop-02-catalogo.jpg" alt="Sfoglia il catalogo, anche a negozio chiuso" loading="lazy">
+        <img src="screenshots/it-shop-02-catalogo.jpg" alt="Sfoglia il catalogo, anche a negozio chiuso" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Sfoglia il catalogo, anche a negozio chiuso" data-en="Browses the catalogue, even when closed" data-fr="Parcourt le catalogue, même fermé" data-de="Blättert im Katalog, auch bei geschlossenem Laden">Sfoglia il catalogo, anche a negozio chiuso</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-shop-03-abbigliamento.jpg" alt="Vede i prodotti con i prezzi" loading="lazy">
+        <img src="screenshots/it-shop-03-abbigliamento.jpg" alt="Vede i prodotti con i prezzi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Vede i prodotti con i prezzi" data-en="Sees products with prices" data-fr="Voit les produits avec les prix" data-de="Sieht Produkte mit Preisen">Vede i prodotti con i prezzi</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-shop-04-sportmare.jpg" alt="E prepara la lista per il banco" loading="lazy">
+        <img src="screenshots/it-shop-04-sportmare.jpg" alt="E prepara la lista per il banco" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="E prepara la lista per il banco" data-en="And builds the list for the counter" data-fr="Et prépare la liste pour le comptoir" data-de="Und stellt die Liste für die Theke zusammen">E prepara la lista per il banco</p>
       </div>
     </div>

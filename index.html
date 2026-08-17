@@ -96,6 +96,11 @@
   })();
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://colgo.app/" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
   <title>Colgo — Il catalogo digitale per qualsiasi struttura</title>
 
   <!-- Open Graph — anteprima quando il link viene condiviso su
@@ -1167,6 +1172,15 @@ body::after {
 .demo .demo-label, .demo .section-label,
 .principle-section .section-label,
 .tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
 </style>
 </head>
 <body>
@@ -1320,19 +1334,19 @@ body::after {
     <h2 class="section-title" data-it="Il pannello che <em>gestisci tu</em>." data-en="The panel <em>you manage</em>." data-fr="Le panneau que <em>vous gérez</em>." data-de="Das Panel, das <em>Sie steuern</em>.">Il pannello che <em>gestisci tu</em>.</h2>
     <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-adm-01-struttura.jpg" alt="Configuri la struttura" loading="lazy">
+        <img src="screenshots/it-adm-01-struttura.jpg" alt="Configuri la struttura" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Configuri la struttura" data-en="You set up the property" data-fr="Vous configurez l'établissement" data-de="Sie richten den Betrieb ein">Configuri la struttura</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-adm-02-catalogo.jpg" alt="Costruisci il catalogo" loading="lazy">
+        <img src="screenshots/it-adm-02-catalogo.jpg" alt="Costruisci il catalogo" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Costruisci il catalogo" data-en="You build the catalogue" data-fr="Vous construisez le catalogue" data-de="Sie bauen den Katalog auf">Costruisci il catalogo</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-adm-03-link-qr.jpg" alt="Stampi i QR per le tue unità" loading="lazy">
+        <img src="screenshots/it-adm-03-link-qr.jpg" alt="Stampi i QR per le tue unità" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Stampi i QR per le tue unità" data-en="You print the QR codes for your units" data-fr="Vous imprimez les QR de vos unités" data-de="Sie drucken die QR-Codes für Ihre Einheiten">Stampi i QR per le tue unità</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-adm-04-altro.jpg" alt="E tieni d'occhio scorte e noleggi" loading="lazy">
+        <img src="screenshots/it-adm-04-altro.jpg" alt="E tieni d'occhio scorte e noleggi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="E tieni d'occhio scorte e noleggi" data-en="And you keep an eye on stock and rentals" data-fr="Et vous surveillez stocks et locations" data-de="Und Sie behalten Bestand und Verleih im Blick">E tieni d'occhio scorte e noleggi</p>
       </div>
     </div>
@@ -1508,7 +1522,7 @@ body::after {
     <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%;">
 
       <!-- Logo -->
-      <img src="colgo-logo.png" alt="Colgo" class="footer-logo" />
+      <img src="colgo-logo.png" alt="Colgo" class="footer-logo" / width="160" height="160">
 
       <!-- Social -->
       <div style="display:flex; gap:16px; align-items:center;">

@@ -1,0 +1,8 @@
+# colgo.app — sito di presentazione
+User-agent: *
+Allow: /
+
+# Le stesse pagine rispondono anche con .html in coda: l'indirizzo buono e'
+# quello dichiarato nel <link rel="canonical"> di ogni pagina, senza .html.
+
+Sitemap: https://colgo.app/sitemap.xml

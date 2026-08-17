@@ -3,20 +3,62 @@
 > Documento fornito dall'utente il **16/08/2026**. Riportato integralmente qui sotto
 > (sezione «Documento originale»). Sopra, solo lo stato di ciò che è già stato fatto,
 > perché una parte era già in produzione quando il documento è arrivato.
->
-> **Da fare: il piano va mostrato PRIMA di applicare qualsiasi modifica** (richiesta
-> esplicita dell'utente, in fondo al documento).
 
 ---
 
-## Stato al 16/08/2026
+## Stato al 17/08/2026 — tutto fatto e in produzione
 
 | pezzo del documento | stato |
 |---|---|
-| Striscia numeri in `index.html` | ⬜ **da fare** |
-| Pagina `perche-digitale.html` | ⬜ **da fare** |
-| Link nel piede (non nel menu) | ⬜ **da fare** |
-| Chatbot sul sito | ✅ **fatto e in produzione** — vedi sotto |
+| Striscia numeri in `index.html` | ✅ **in produzione** (17/08) |
+| Pagina `perche-digitale.html` | ✅ **in produzione** (17/08) |
+| Link nel piede (non nel menu) | ✅ **in produzione** (17/08), su 10 pagine |
+| Chatbot sul sito | ✅ fatto il 16/08 — vedi sotto |
+
+### Com'è stata realizzata (17/08)
+
+**Striscia in home** — dopo la sezione IL PROBLEMA, non più in alto: lì il lettore ha
+appena letto che i quattro modi di comunicare non funzionano, e la striscia è la prova
+che non è un'opinione nostra. Quattro numeri scelti dall'utente: 5× scansioni QR dal
+2021 · 9 su 10 ristoranti full-service (USA) · 76% dei viaggiatori nella propria lingua
+· 2 su 3 hotel a corto di personale.
+
+**Pagina** — sei blocchi in ordine di lettura (adozione → lingua → persone → costo della
+carta → dove va il mondo → ambiente), ognuno con le sue cifre e una riga di conseguenza
+per chi legge. Il riquadro col framing «più servizi con le stesse persone» sta nel
+blocco sulle persone. La nota sulle fonti sta **prima** degli inviti finali: chi ha
+appena letto ventuno numeri ha diritto di sapere quali reggono, prima che gli si chieda
+qualcosa.
+
+**Regola sulle fonti applicata alla lettera.** Tolti: il nome Four Seasons e quello di
+McKinsey (non li possiamo linkare), il +25% di soddisfazione e il +12-18% di ricavi —
+sono la promessa che, se non si avvera, costa il cliente. Smussati: i costi di stampa
+(«qualche migliaio di euro l'anno, secondo stime di settore», detto in chiaro che la
+stima viene da chi vende software) e i ~14 minuti.
+
+**Due cose emerse verificando, che nel documento non c'erano:**
+
+1. **I due dati sulla CO2 si contraddicono fra loro.** «2,5 g per foglio» e «3,3 kg per
+   kg di carta» non stanno insieme: un A4 da 80 g/m² pesa 5 g, quindi il secondo ne
+   darebbe ~16 g, sei volte tanto. Sulla pagina ne è rimasto **uno solo**, quello per
+   chilo, senza equivalenze per foglio che il lettore possa rifare a mente.
+2. **L'argomento ecologico, fatto onestamente, è piccolo** alla scala di una singola
+   struttura: chili, non tonnellate. Su richiesta dell'utente («deve convincere») il
+   blocco è stato scritto per convincere **cambiando perno, non gonfiando le cifre**:
+   è l'unica scelta ambientale che non chiede di rinunciare a niente (la più pulita è
+   anche la più economica e la più veloce da aggiornare); il foglio plastificato non è
+   carta ma un composito che il riciclo non separa; ed è l'unico argomento della pagina
+   che il cliente vede da solo. La frase «una struttura da sola non salva una foresta»
+   è rimasta apposta: è quella che rende credibile il resto.
+
+**`kb.json`** — la pagina è stata aggiunta al materiale dell'assistente in tutte e
+quattro le lingue, con un nuovo `scripts/kb-pagina.py` che **resta nel repo** (il
+generatore precedente viveva in una cartella temporanea ed è andato perduto). Aggiorna
+una sola pagina per volta e si ferma da solo se qualcos'altro nel file si è mosso.
+
+⚠️ La voce `home` di `kb.json` è ferma alle 18:11 del 16/08 e non è stata rigenerata:
+riscriverla cambierebbe l'intera voce. I quattro numeri della striscia l'assistente li
+conosce comunque, perché arrivano dalla pagina nuova.
 
 ### Il chatbot è già in piedi, e coincide quasi del tutto con la specifica
 

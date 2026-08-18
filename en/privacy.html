@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+  <!-- Google Analytics 4 — Colgo (tracciamento esteso) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+
+    // Lingua scelta dall'utente (il sito cambia lingua senza cambiare URL:
+    // senza questo parametro GA non saprebbe mai in che lingua è stata letta la pagina)
+    var lang = 'it';
+    try { lang = localStorage.getItem('colgo_lang') || document.documentElement.lang || 'it'; } catch(e){}
+
+    // Nome pulito della pagina (home, prezzi, hotel, ristorante...)
+    var slug = location.pathname.replace(/\/+$/,'').split('/').pop() || 'home';
+    slug = slug.replace(/\.html$/,'') || 'home';
+
+    gtag('config', 'G-4JCQ1EGSR9', {
+      colgo_lang: lang,
+      colgo_page: slug
+    });
+
+    var t0 = Date.now(), maxScroll = 0, sent = {};
+    function ev(name, params){ params = params || {}; params.colgo_lang = lang; params.colgo_page = slug; gtag('event', name, params); }
+    function secs(){ return Math.round((Date.now() - t0)/1000); }
+
+    function start(){
+
+      // 1. PROFONDITÀ DI LETTURA — quanto scende nella pagina
+      function onScroll(){
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / h) * 100));
+        if (pct > maxScroll) maxScroll = pct;
+        [25,50,75,90,100].forEach(function(s){
+          if (pct >= s && !sent['s'+s]) { sent['s'+s] = 1; ev('scroll_depth', { percent: s, seconds: secs() }); }
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+
+      // 2. TEMPO SULLA PAGINA — soglie progressive
+      [10,30,60,120,300].forEach(function(s){
+        setTimeout(function(){ if (!document.hidden) ev('time_on_page', { seconds: s }); }, s*1000);
+      });
+
+      // 3. SEZIONI EFFETTIVAMENTE VISTE — dove si è fermato a leggere
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            var name = el.id || (el.querySelector('h1,h2,h3') ? el.querySelector('h1,h2,h3').textContent.trim().slice(0,40) : '');
+            if (!name || sent['sec_'+name]) return;
+            sent['sec_'+name] = 1;
+            ev('section_view', { section: name, seconds: secs() });
+          });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section, header, footer').forEach(function(el){ io.observe(el); });
+      }
+
+      // 4. CLIC — CTA, navigazione, link esterni, email
+      document.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a || !a.href) return;
+        var href = a.href, label = (a.textContent || '').trim().slice(0,50);
+        if (href.indexOf('mailto:') === 0)            ev('click_email',   { link: href });
+        else if (href.indexOf('/demo') > -1)          ev('cta_demo',      { link: href, label: label });
+        else if (href.indexOf('/registrati') > -1)    ev('cta_signup',    { link: href, label: label });
+        else if (href.indexOf(location.hostname) > -1) ev('nav_click',    { link: href, label: label });
+        else                                          ev('click_esterno', { link: href, label: label });
+      }, true);
+
+      // 5. CAMBIO LINGUA
+      if (typeof window.setLang === 'function') {
+        var orig = window.setLang;
+        window.setLang = function(l){ var r = orig.apply(this, arguments); lang = l; ev('lang_switch', { nuova_lingua: l }); return r; };
+      }
+
+      // 6. USCITA — durata reale e punto massimo raggiunto
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState === 'hidden' && !sent.exit) {
+          sent.exit = 1;
+          ev('page_exit', { seconds: secs(), max_scroll: maxScroll });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  })();
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="alternate" hreflang="it" href="https://colgo.app/privacy" />
+  <link rel="alternate" hreflang="en" href="https://colgo.app/en/privacy" />
+  <link rel="alternate" hreflang="fr" href="https://colgo.app/fr/privacy" />
+  <link rel="alternate" hreflang="de" href="https://colgo.app/de/privacy" />
+  <link rel="alternate" hreflang="x-default" href="https://colgo.app/privacy" />
+  <link rel="canonical" href="https://colgo.app/en/privacy" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
+<title>Privacy Policy — Colgo</title>
+
+  <!-- Open Graph — anteprima quando il link viene condiviso su
+       WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
+       JavaScript, quindi leggono solo questi meta e il testo gia' presente
+       nei tag: senza, un link a colgo.app arriva in chat senza titolo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Colgo" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content="Privacy Policy — Colgo" />
+  <meta property="og:description" content="Il catalogo digitale per qualsiasi struttura. Configurabile, sempre aggiornato, in quattro lingue." />
+  <meta property="og:url" content="https://colgo.app/en/privacy" />
+  <meta property="og:image" content="https://colgo.app/colgo-og.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Privacy Policy — Colgo" />
+  <meta name="twitter:description" content="Il catalogo digitale per qualsiasi struttura. Configurabile, sempre aggiornato, in quattro lingue." />
+  <meta name="twitter:image" content="https://colgo.app/colgo-og.png" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+      --ground: #0A100E;   /* terreno: nero con una punta di verde */
+    --black: #0D0D0D;
+    --petrol: #1E3A35;
+    --ochre: #C8922A;
+    --cream: #F5F1E8;
+    --grey: #AEB8AE;
+  }
+  body {
+    background: var(--ground);
+    color: var(--cream);
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0;
+    margin: 0;
+  }
+  header {
+    background: var(--petrol);
+    padding: 48px 40px 40px;
+    border-bottom: 1px solid rgba(200,146,42,0.2);
+  }
+  header .logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--ochre);
+    margin-bottom: 24px;
+  }
+  header h1 {
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  header .date {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--grey);
+  }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 40px;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ochre);
+    letter-spacing: 1px;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,146,42,0.2);
+  }
+  p {
+    margin-bottom: 16px;
+    color: rgba(245,241,232,0.8);
+  }
+  ul {
+    margin: 0 0 16px 24px;
+    color: rgba(245,241,232,0.8);
+  }
+  ul li {
+    margin-bottom: 8px;
+  }
+  a {
+    color: var(--ochre);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .highlight {
+    background: rgba(30,58,53,0.4);
+    border-left: 3px solid var(--ochre);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--grey);
+    font-size: 13px;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(200,146,42,0.1);
+  }
+
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 15px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 14px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 13px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .venue-tag { font-size: 11px; letter-spacing: 1.5px; }
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 11px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 11px; }
+  footer, .footer-links a { font-size: 12px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 12px; padding: 17px 32px; }
+}
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 13px; }
+footer, .footer-links a, .footer-copy { font-size: 13px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.venue-type, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 12px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 13px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 16px; }
+  .lang-btn { font-size: 15px; }
+}
+
+/* ── Nero con riflessi petrolio (16/08/2026) ──────────────────────────
+   Il fondo pieno #10231F era troppo verde ("lo vedevo più scuro"), il nero
+   puro troppo freddo. Qui la base torna quasi nera — con una punta di verde
+   che non si vede ma si sente — e il petrolio diventa un RIFLESSO: due
+   sfumature larghe e morbide dietro tutto il contenuto, fisse, che non
+   intercettano il puntatore. */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(70% 50% at 50% 0%,   rgba(30,58,53,0.55) 0%, transparent 70%),
+    radial-gradient(60% 45% at 12% 42%,  rgba(30,58,53,0.30) 0%, transparent 72%),
+    radial-gradient(65% 50% at 88% 78%,  rgba(30,58,53,0.34) 0%, transparent 74%);
+}
+
+/* ── Logo compatto su telefono (16/08/2026) ───────────────────────────
+   Il marchio esteso e' largo 157px: su 390px di schermo spingeva il
+   pulsante del menu' a x=432, cioe' FUORI DALLO SCHERMO — e la
+   navigazione diventava irraggiungibile (si tornava indietro solo
+   toccando il logo). Sotto i 700px resta il solo occhio, 38px. */
+.nav-logo-mini { display: none; }
+@media (max-width: 700px) {
+  .nav-logo-full { display: none; }
+  .nav-logo-mini { display: block; }
+}
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 12px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
+
+/* ── Leggibilita' sul telefono (17/08/2026) ────────────────────────────
+   Misurato a 390px sul sito vero, non a occhio: 96 blocchi di testo vanno a
+   capo con meno di 6px fra una riga e l'altra. Il peggiore e' l'occhiello
+   della home — 12px di corpo, 4px di spaziatura fra le lettere, tre righe e
+   2,4px d'aria: sembra un blocco compatto invece di tre righe.
+   Le maiuscole molto spaziate hanno bisogno di PIU' interlinea, non di meno:
+   la riga e' piu' larga e l'occhio, tornando a capo, sbaglia riga.
+   Si tocca solo il telefono: sul desktop queste stesse scritte stanno su una
+   riga sola e l'interlinea non le riguarda. */
+@media (max-width: 700px) {
+  /* etichette maiuscole spaziate — le piu' schiacciate */
+  .hero-eyebrow, .section-label, .page-label, .demo-label, .verticals-label,
+  .venue-type, .pricing-name, .feat-title, .tech-card-title, .step-label,
+  .faq-category, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+  .tab-btn, .pd-eyebrow, .pd-riquadro-firma, .numeri-label, .screens-hint,
+  .cta-or, .storia-firma, .lbl { line-height: 1.6; }
+
+  /* bottoni: "PROVA SENZA REGISTRAZIONE" va a capo dentro il bottone */
+  .btn-primary, .btn-ghost, .btn-demo,
+  .venue-more, .vertical-more, .numeri-link { line-height: 1.45; }
+
+  /* il piede: undici righe di link, tutte attaccate */
+  footer, .footer-links, .footer-copy { line-height: 1.7; }
+
+  /* titoli: 36px su cinque righe con 5,4px d'aria */
+  h1, h2, .hero-headline, .page-title, .section-title, .cta-headline,
+  .demo-title, .storia-titolo, .venue-title, .problem-title, .step-title,
+  .numeri-titolo, .pd-titolo { line-height: 1.28; }
+
+  /* Corti ma su due righe lo stesso: il badge sotto il titolo, le didascalie
+     del carosello, lo slogan (che non ha classe: sta come figlio dell'eroe) e
+     le domande delle FAQ, che sono testo da leggere, non titoli. */
+  .zero-barrier-badge, .zero-barrier-badge span, .screen-caption,
+  .hero > p, .faq-q { line-height: 1.5; }
+}
+
+/* ── Contrasto: opacita' troppo basse (17/08/2026) ─────────────────────
+   Rapporti calcolati sul fondo REALE, campionato dai pixel: la pagina ha due
+   sfumature fisse (body::after) e una velatura di rumore, quindi il colore
+   dichiarato nel CSS non e' quello che l'occhio riceve. Soglia 4,5 per il
+   testo sotto i 18px, che qui e' tutto. */
+.cta-or        { color: rgba(245,241,232,0.60); font-size: 12px; }  /* 2,54 → 6,36 */
+.cta-opt-note  { color: rgba(245,241,232,0.62); }                   /* 3,68 → 6,45 */
+.demo-note     { color: rgba(245,241,232,0.68); }                   /* 3,99 → 5,93 */
+.pd-nota-alta  { color: rgba(245,241,232,0.60); }                   /* 4,13 → 6,54 */
+.pd-fonti-testo{ color: rgba(245,241,232,0.72); }
+
+/* L'oro pieno su fondo petrolio si ferma a 3,99-4,43: sotto la soglia per una
+   scritta di 12px. Su quei fondi (e SOLO su quelli) passa l'oro chiaro, che e'
+   gia' nella palette come --gold-light. */
+.demo .demo-label, .demo .section-label,
+.principle-section .section-label,
+.tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
+
+/* Selettore della lingua (17/08/2026): questa pagina non ne aveva, e le sue
+   traduzioni restavano quindi irraggiungibili. Stesse misure e stesso oro delle
+   altre pagine, ma qui l'intestazione e' centrata. */
+.privacy-lang { display: flex; gap: 6px; justify-content: center; margin: 14px 0 10px; }
+.lang-btn { background: none; border: none; color: rgba(245,241,232,0.55);
+  font-family: 'Josefin Sans', sans-serif; font-size: 13px; letter-spacing: 2px;
+  cursor: pointer; padding: 4px 8px; transition: color 0.2s; }
+.lang-btn.active, .lang-btn:hover { color: #C8922A; }
+.lang-btn:not(:last-child)::after { content: '/'; margin-left: 6px; color: rgba(245,241,232,0.15); }
+
+/* La riga "fa fede l'italiano" compare solo nelle versioni tradotte, ma lo stile
+   sta qui: le copie ereditano il CSS della sorgente. */
+.privacy-prevale { max-width: 620px; margin: 16px auto 0; font-size: 13px; line-height: 1.6;
+  color: rgba(245,241,232,0.45); font-style: italic; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">COLGO</div>
+  <h1 data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</h1>
+  <div class="privacy-lang">
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('de')">DE</button>
+  </div>
+  <div class="date" data-it="Ultimo aggiornamento: Giugno 2026" data-en="Last updated: June 2026" data-fr="Dernière mise à jour : juin 2026" data-de="Letzte Aktualisierung: Juni 2026">Last updated: June 2026</div>
+  <div class="privacy-prevale">This is a translation for convenience. In case of any discrepancy, the Italian version prevails.</div>
+</header>
+
+<main>
+
+  <div class="highlight" data-it="La presente Privacy Policy descrive come Colgo raccoglie, utilizza e protegge i dati personali degli utenti del sito web <strong>colgo.app</strong> e dell'applicazione web <strong>app.colgo.app</strong>, in conformità al Regolamento (UE) 2016/679 (GDPR)." data-en="This Privacy Policy describes how Colgo collects, uses and protects the personal data of users of the website <strong>colgo.app</strong> and the web application <strong>app.colgo.app</strong>, in accordance with Regulation (EU) 2016/679 (GDPR)." data-fr="La présente politique de confidentialité décrit comment Colgo collecte, utilise et protège les données personnelles des utilisateurs du site <strong>colgo.app</strong> et de l'application web <strong>app.colgo.app</strong>, conformément au règlement (UE) 2016/679 (RGPD)." data-de="Diese Datenschutzerklärung beschreibt, wie Colgo die personenbezogenen Daten der Nutzer der Website <strong>colgo.app</strong> und der Web-Anwendung <strong>app.colgo.app</strong> erhebt, verwendet und schützt, im Einklang mit der Verordnung (EU) 2016/679 (DSGVO).">This Privacy Policy describes how Colgo collects, uses and protects the personal data of users of the website <strong>colgo.app</strong> and the web application <strong>app.colgo.app</strong>, in accordance with Regulation (EU) 2016/679 (GDPR).</div>
+
+  <h2 data-it="1. Titolare del trattamento" data-en="1. Data controller" data-fr="1. Responsable du traitement" data-de="1. Verantwortlicher">1. Data controller</h2>
+  <p data-it="Il titolare del trattamento dei dati personali è:" data-en="The controller of personal data is:" data-fr="Le responsable du traitement des données personnelles est :" data-de="Verantwortlicher für die Verarbeitung personenbezogener Daten ist:">The controller of personal data is:</p>
+  <p data-it="<strong>Filippo Parisini</strong><br/>
+    Gargnano (BS)<br/>
+    Email: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-en="<strong>Filippo Parisini</strong><br/>Gargnano (BS), Italy<br/>Email: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-fr="<strong>Filippo Parisini</strong><br/>Gargnano (BS), Italie<br/>E-mail : <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-de="<strong>Filippo Parisini</strong><br/>Gargnano (BS), Italien<br/>E-Mail: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>"><strong>Filippo Parisini</strong><br/>Gargnano (BS), Italy<br/>Email: <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a></p>
+
+  <h2 data-it="2. Dati raccolti" data-en="2. Data collected" data-fr="2. Données collectées" data-de="2. Erhobene Daten">2. Data collected</h2>
+  <p data-it="Colgo raccoglie esclusivamente le seguenti categorie di dati:" data-en="Colgo collects only the following categories of data:" data-fr="Colgo collecte exclusivement les catégories de données suivantes :" data-de="Colgo erhebt ausschließlich die folgenden Datenkategorien:">Colgo collects only the following categories of data:</p>
+
+  <p data-it="<strong>a) Dati di navigazione e statistici</strong>" data-en="<strong>a) Browsing and statistical data</strong>" data-fr="<strong>a) Données de navigation et statistiques</strong>" data-de="<strong>a) Navigations- und Statistikdaten</strong>"><strong>a) Browsing and statistical data</strong></p>
+  <p data-it="Attraverso Google Analytics 4, raccogliamo dati anonimi e aggregati relativi all'utilizzo del sito e dell'applicazione, tra cui:" data-en="Through Google Analytics 4 we collect anonymous, aggregated data about the use of the site and the application, including:" data-fr="Via Google Analytics 4, nous collectons des données anonymes et agrégées sur l'utilisation du site et de l'application, notamment :" data-de="Über Google Analytics 4 erheben wir anonyme, aggregierte Daten zur Nutzung der Website und der Anwendung, darunter:">Through Google Analytics 4 we collect anonymous, aggregated data about the use of the site and the application, including:</p>
+  <ul>
+    <li data-it="Paese o area geografica di provenienza (geolocalizzazione a livello nazionale, non precisa)" data-en="Country or geographic area of origin (country-level geolocation, not precise)" data-fr="Pays ou zone géographique d'origine (géolocalisation au niveau national, non précise)" data-de="Land oder geografisches Gebiet der Herkunft (Geolokalisierung auf Landesebene, nicht genau)">Country or geographic area of origin (country-level geolocation, not precise)</li>
+    <li data-it="Tipo di dispositivo e browser utilizzato" data-en="Type of device and browser used" data-fr="Type d'appareil et de navigateur utilisé" data-de="Art des verwendeten Geräts und Browsers">Type of device and browser used</li>
+    <li data-it="Pagine visitate e durata della sessione" data-en="Pages visited and session duration" data-fr="Pages visitées et durée de la session" data-de="Besuchte Seiten und Sitzungsdauer">Pages visited and session duration</li>
+    <li data-it="Fonte di traffico" data-en="Traffic source" data-fr="Source de trafic" data-de="Zugriffsquelle">Traffic source</li>
+  </ul>
+  <p data-it="Questi dati sono anonimi e non permettono di identificare il singolo utente." data-en="This data is anonymous and does not allow individual users to be identified." data-fr="Ces données sont anonymes et ne permettent pas d'identifier l'utilisateur." data-de="Diese Daten sind anonym und lassen keine Identifizierung einzelner Nutzer zu.">This data is anonymous and does not allow individual users to be identified.</p>
+
+  <p data-it="<strong>b) Dati forniti alla registrazione</strong>" data-en="<strong>b) Data provided at registration</strong>" data-fr="<strong>b) Données fournies lors de l'inscription</strong>" data-de="<strong>b) Bei der Registrierung angegebene Daten</strong>"><strong>b) Data provided at registration</strong></p>
+  <p data-it="Quando crei un account su <strong>app.colgo.app/registrati</strong> per attivare la prova gratuita di 30 giorni, raccogliamo:" data-en="When you create an account at <strong>app.colgo.app/registrati</strong> to start the 30-day free trial, we collect:" data-fr="Lorsque vous créez un compte sur <strong>app.colgo.app/registrati</strong> pour activer l'essai gratuit de 30 jours, nous collectons :" data-de="Wenn Sie unter <strong>app.colgo.app/registrati</strong> ein Konto erstellen, um die 30-tägige kostenlose Testphase zu starten, erheben wir:">When you create an account at <strong>app.colgo.app/registrati</strong> to start the 30-day free trial, we collect:</p>
+  <ul>
+    <li data-it="Indirizzo email e password (gestiti dal sistema di autenticazione Supabase; la password non è mai leggibile da Colgo)" data-en="Email address and password (handled by the Supabase authentication system; the password is never readable by Colgo)" data-fr="Adresse e-mail et mot de passe (gérés par le système d'authentification Supabase ; le mot de passe n'est jamais lisible par Colgo)" data-de="E-Mail-Adresse und Passwort (verwaltet vom Authentifizierungssystem Supabase; das Passwort ist für Colgo nie lesbar)">Email address and password (handled by the Supabase authentication system; the password is never readable by Colgo)</li>
+    <li data-it="Nome della struttura e tipologia di attività (hotel, ristorante o negozio)" data-en="Business name and type of activity (hotel, restaurant or shop)" data-fr="Nom de l'établissement et type d'activité (hôtel, restaurant ou boutique)" data-de="Name des Betriebs und Art der Tätigkeit (Hotel, Restaurant oder Geschäft)">Business name and type of activity (hotel, restaurant or shop)</li>
+    <li data-it="Un codice di accesso per lo staff, generato automaticamente e conservato solo in forma crittografata (hash), mai in chiaro" data-en="A staff access code, generated automatically and stored only in encrypted form (hash), never in plain text" data-fr="Un code d'accès pour le personnel, généré automatiquement et conservé uniquement sous forme chiffrée (hachage), jamais en clair" data-de="Ein Zugangscode für das Personal, automatisch erzeugt und nur verschlüsselt (Hash) gespeichert, nie im Klartext">A staff access code, generated automatically and stored only in encrypted form (hash), never in plain text</li>
+    <li data-it="Paese e città approssimativi, derivati dall'indirizzo IP al momento della registrazione (nessun servizio di geolocalizzazione esterno)" data-en="Approximate country and city, derived from the IP address at the time of registration (no external geolocation service)" data-fr="Pays et ville approximatifs, dérivés de l'adresse IP au moment de l'inscription (aucun service de géolocalisation externe)" data-de="Ungefähres Land und Stadt, abgeleitet aus der IP-Adresse bei der Registrierung (kein externer Geolokalisierungsdienst)">Approximate country and city, derived from the IP address at the time of registration (no external geolocation service)</li>
+  </ul>
+  <p data-it="È inoltre disponibile una <strong>modalità demo</strong> (app.colgo.app/demo) che non richiede un indirizzo email reale: viene generato un identificativo tecnico interno, e vengono raccolti dati aggregati sulla provenienza (fonte di traffico, paese, dispositivo) per scopi statistici." data-en="A <strong>demo mode</strong> is also available (app.colgo.app/demo) which does not require a real email address: an internal technical identifier is generated, and aggregated data about the source (traffic source, country, device) is collected for statistical purposes." data-fr="Un <strong>mode démo</strong> est également disponible (app.colgo.app/demo) et ne nécessite pas d'adresse e-mail réelle : un identifiant technique interne est généré, et des données agrégées sur la provenance (source de trafic, pays, appareil) sont collectées à des fins statistiques." data-de="Verfügbar ist außerdem ein <strong>Demo-Modus</strong> (app.colgo.app/demo), der keine echte E-Mail-Adresse erfordert: Es wird eine interne technische Kennung erzeugt, und es werden aggregierte Daten zur Herkunft (Zugriffsquelle, Land, Gerät) zu statistischen Zwecken erhoben.">A <strong>demo mode</strong> is also available (app.colgo.app/demo) which does not require a real email address: an internal technical identifier is generated, and aggregated data about the source (traffic source, country, device) is collected for statistical purposes.</p>
+
+  <p data-it="<strong>c) Dati nell'applicazione</strong>" data-en="<strong>c) Data within the application</strong>" data-fr="<strong>c) Données dans l'application</strong>" data-de="<strong>c) Daten in der Anwendung</strong>"><strong>c) Data within the application</strong></p>
+  <p data-it="L'applicazione <strong>app.colgo.app</strong> non richiede registrazione agli utenti finali (ospiti). Raccogliamo esclusivamente:" data-en="The application <strong>app.colgo.app</strong> does not require end users (guests) to register. We collect only:" data-fr="L'application <strong>app.colgo.app</strong> ne demande aucune inscription aux utilisateurs finaux (clients). Nous collectons uniquement :" data-de="Die Anwendung <strong>app.colgo.app</strong> verlangt von Endnutzern (Gästen) keine Registrierung. Wir erheben ausschließlich:">The application <strong>app.colgo.app</strong> does not require end users (guests) to register. We collect only:</p>
+  <ul>
+    <li data-it="Un <strong>nickname</strong> scelto liberamente dall'ospite (non verificato, può essere qualsiasi nome)" data-en="A <strong>nickname</strong> freely chosen by the guest (not verified, it can be any name)" data-fr="Un <strong>pseudonyme</strong> librement choisi par le client (non vérifié, ce peut être n'importe quel nom)" data-de="Einen vom Gast frei gewählten <strong>Spitznamen</strong> (nicht überprüft, es kann jeder Name sein)">A <strong>nickname</strong> freely chosen by the guest (not verified, it can be any name)</li>
+    <li data-it="Il <strong>numero di camera o unità</strong> (camera, tavolo, vetrina) associato alla sessione" data-en="The <strong>room or unit number</strong> (room, table, window) linked to the session" data-fr="Le <strong>numéro de chambre ou d'unité</strong> (chambre, table, vitrine) associé à la session" data-de="Die <strong>Zimmer- oder Einheitennummer</strong> (Zimmer, Tisch, Schaufenster), die der Sitzung zugeordnet ist">The <strong>room or unit number</strong> (room, table, window) linked to the session</li>
+    <li data-it="I <strong>messaggi</strong> inviati alla reception o allo staff della struttura" data-en="The <strong>messages</strong> sent to reception or to the venue staff" data-fr="Les <strong>messages</strong> envoyés à la réception ou au personnel de l'établissement" data-de="Die <strong>Nachrichten</strong> an die Rezeption oder das Personal des Betriebs">The <strong>messages</strong> sent to reception or to the venue staff</li>
+    <li data-it="Gli <strong>ordini</strong> effettuati tramite l'applicazione" data-en="The <strong>orders</strong> placed through the application" data-fr="Les <strong>commandes</strong> passées via l'application" data-de="Die <strong>Bestellungen</strong> über die Anwendung">The <strong>orders</strong> placed through the application</li>
+  </ul>
+  <p data-it="Questi dati sono temporanei, gestiti dalla struttura ricettiva che ha sottoscritto il servizio Colgo, e vengono eliminati automaticamente alla scadenza della sessione. Colgo agisce in qualità di <strong>responsabile del trattamento</strong> per conto della struttura (titolare del trattamento nei confronti dei propri ospiti)." data-en="This data is temporary, managed by the business that subscribed to Colgo, and is deleted automatically when the session expires. Colgo acts as <strong>data processor</strong> on behalf of the business, which is the controller towards its own guests." data-fr="Ces données sont temporaires, gérées par l'établissement abonné à Colgo, et sont supprimées automatiquement à l'expiration de la session. Colgo agit en qualité de <strong>sous-traitant</strong> pour le compte de l'établissement, qui est le responsable du traitement vis-à-vis de ses propres clients." data-de="Diese Daten sind vorübergehend, werden vom Betrieb verwaltet, der Colgo abonniert hat, und werden beim Ablauf der Sitzung automatisch gelöscht. Colgo handelt als <strong>Auftragsverarbeiter</strong> im Auftrag des Betriebs, der gegenüber seinen eigenen Gästen Verantwortlicher ist.">This data is temporary, managed by the business that subscribed to Colgo, and is deleted automatically when the session expires. Colgo acts as <strong>data processor</strong> on behalf of the business, which is the controller towards its own guests.</p>
+
+  <h2 data-it="3. Finalità del trattamento" data-en="3. Purposes of processing" data-fr="3. Finalités du traitement" data-de="3. Zwecke der Verarbeitung">3. Purposes of processing</h2>
+  <p data-it="I dati vengono trattati per le seguenti finalità:" data-en="Data is processed for the following purposes:" data-fr="Les données sont traitées aux fins suivantes :" data-de="Die Daten werden zu folgenden Zwecken verarbeitet:">Data is processed for the following purposes:</p>
+  <ul>
+    <li data-it="<strong>Erogazione del servizio:</strong> consentire agli ospiti di comunicare con la struttura e inviare richieste/ordini" data-en="<strong>Providing the service:</strong> allowing guests to communicate with the business and send requests/orders" data-fr="<strong>Fourniture du service :</strong> permettre aux clients de communiquer avec l'établissement et d'envoyer des demandes/commandes" data-de="<strong>Erbringung des Dienstes:</strong> Gästen ermöglichen, mit dem Betrieb zu kommunizieren und Anfragen/Bestellungen zu senden"><strong>Providing the service:</strong> allowing guests to communicate with the business and send requests/orders</li>
+    <li data-it="<strong>Statistiche di utilizzo:</strong> comprendere come gli utenti interagiscono con il sito e l'applicazione, con dati anonimi e aggregati" data-en="<strong>Usage statistics:</strong> understanding how users interact with the site and the application, using anonymous and aggregated data" data-fr="<strong>Statistiques d'utilisation :</strong> comprendre comment les utilisateurs interagissent avec le site et l'application, à partir de données anonymes et agrégées" data-de="<strong>Nutzungsstatistiken:</strong> verstehen, wie Nutzer mit Website und Anwendung umgehen, anhand anonymer und aggregierter Daten"><strong>Usage statistics:</strong> understanding how users interact with the site and the application, using anonymous and aggregated data</li>
+    <li data-it="<strong>Prova gratuita:</strong> creare e attivare l'account della struttura per il periodo di prova di 30 giorni" data-en="<strong>Free trial:</strong> creating and activating the business account for the 30-day trial period" data-fr="<strong>Essai gratuit :</strong> créer et activer le compte de l'établissement pour la période d'essai de 30 jours" data-de="<strong>Kostenlose Testphase:</strong> Erstellen und Aktivieren des Betriebskontos für die 30-tägige Testphase"><strong>Free trial:</strong> creating and activating the business account for the 30-day trial period</li>
+    <li data-it="<strong>Miglioramento del servizio:</strong> ottimizzare le funzionalità dell'applicazione" data-en="<strong>Service improvement:</strong> optimising the features of the application" data-fr="<strong>Amélioration du service :</strong> optimiser les fonctionnalités de l'application" data-de="<strong>Verbesserung des Dienstes:</strong> Optimierung der Funktionen der Anwendung"><strong>Service improvement:</strong> optimising the features of the application</li>
+  </ul>
+
+  <h2 data-it="4. Base giuridica del trattamento" data-en="4. Legal basis for processing" data-fr="4. Base juridique du traitement" data-de="4. Rechtsgrundlage der Verarbeitung">4. Legal basis for processing</h2>
+  <ul>
+    <li data-it="<strong>Esecuzione di un contratto</strong> (art. 6 par. 1 lett. b GDPR): per i dati di registrazione e di sessione nell'applicazione, necessari all'attivazione della prova gratuita e all'erogazione del servizio richiesto dalla struttura" data-en="<strong>Performance of a contract</strong> (Art. 6(1)(b) GDPR): for registration and session data in the application, needed to activate the free trial and provide the service requested by the business" data-fr="<strong>Exécution d'un contrat</strong> (art. 6, § 1, b du RGPD) : pour les données d'inscription et de session dans l'application, nécessaires à l'activation de l'essai gratuit et à la fourniture du service demandé par l'établissement" data-de="<strong>Erfüllung eines Vertrags</strong> (Art. 6 Abs. 1 lit. b DSGVO): für Registrierungs- und Sitzungsdaten in der Anwendung, die zur Aktivierung der Testphase und zur Erbringung des vom Betrieb angeforderten Dienstes erforderlich sind"><strong>Performance of a contract</strong> (Art. 6(1)(b) GDPR): for registration and session data in the application, needed to activate the free trial and provide the service requested by the business</li>
+    <li data-it="<strong>Consenso</strong> (art. 6 par. 1 lett. a GDPR): per i soli cookie analitici" data-en="<strong>Consent</strong> (Art. 6(1)(a) GDPR): for analytics cookies only" data-fr="<strong>Consentement</strong> (art. 6, § 1, a du RGPD) : pour les seuls cookies analytiques" data-de="<strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO): ausschließlich für Analyse-Cookies"><strong>Consent</strong> (Art. 6(1)(a) GDPR): for analytics cookies only</li>
+    <li data-it="<strong>Legittimo interesse</strong> (art. 6 par. 1 lett. f GDPR): per le statistiche anonime di utilizzo del servizio" data-en="<strong>Legitimate interest</strong> (Art. 6(1)(f) GDPR): for anonymous statistics on the use of the service" data-fr="<strong>Intérêt légitime</strong> (art. 6, § 1, f du RGPD) : pour les statistiques anonymes d'utilisation du service" data-de="<strong>Berechtigtes Interesse</strong> (Art. 6 Abs. 1 lit. f DSGVO): für anonyme Statistiken zur Nutzung des Dienstes"><strong>Legitimate interest</strong> (Art. 6(1)(f) GDPR): for anonymous statistics on the use of the service</li>
+  </ul>
+
+  <h2 data-it="5. Cookie" data-en="5. Cookies" data-fr="5. Cookies" data-de="5. Cookies">5. Cookies</h2>
+  <p data-it="Colgo utilizza le seguenti tipologie di cookie:" data-en="Colgo uses the following types of cookies:" data-fr="Colgo utilise les types de cookies suivants :" data-de="Colgo verwendet die folgenden Arten von Cookies:">Colgo uses the following types of cookies:</p>
+  <ul>
+    <li data-it="<strong>Cookie tecnici:</strong> necessari al funzionamento del sito e dell'applicazione. Non richiedono consenso." data-en="<strong>Technical cookies:</strong> necessary for the site and the application to work. They do not require consent." data-fr="<strong>Cookies techniques :</strong> nécessaires au fonctionnement du site et de l'application. Ils ne requièrent pas de consentement." data-de="<strong>Technische Cookies:</strong> für den Betrieb der Website und der Anwendung erforderlich. Sie erfordern keine Einwilligung."><strong>Technical cookies:</strong> necessary for the site and the application to work. They do not require consent.</li>
+    <li data-it="<strong>Cookie analitici (Google Analytics 4):</strong> utilizzati per raccogliere dati statistici anonimi sull'utilizzo. Richiedono il tuo consenso." data-en="<strong>Analytics cookies (Google Analytics 4):</strong> used to collect anonymous statistical data on usage. They require your consent." data-fr="<strong>Cookies analytiques (Google Analytics 4) :</strong> utilisés pour collecter des données statistiques anonymes sur l'utilisation. Ils requièrent votre consentement." data-de="<strong>Analyse-Cookies (Google Analytics 4):</strong> zur Erhebung anonymer Nutzungsstatistiken. Sie erfordern Ihre Einwilligung."><strong>Analytics cookies (Google Analytics 4):</strong> used to collect anonymous statistical data on usage. They require your consent.</li>
+  </ul>
+  <p data-it="Puoi gestire le tue preferenze sui cookie tramite il banner presente al primo accesso, oppure modificarle in qualsiasi momento dalle impostazioni del browser." data-en="You can manage your cookie preferences through the banner shown on your first visit, or change them at any time in your browser settings." data-fr="Vous pouvez gérer vos préférences en matière de cookies via la bannière affichée lors de la première visite, ou les modifier à tout moment dans les paramètres de votre navigateur." data-de="Sie können Ihre Cookie-Einstellungen über das Banner beim ersten Besuch verwalten oder jederzeit in den Browsereinstellungen ändern.">You can manage your cookie preferences through the banner shown on your first visit, or change them at any time in your browser settings.</p>
+
+  <h2 data-it="6. Terze parti" data-en="6. Third parties" data-fr="6. Tiers" data-de="6. Dritte">6. Third parties</h2>
+  <p data-it="Colgo si avvale dei seguenti servizi di terze parti:" data-en="Colgo relies on the following third-party services:" data-fr="Colgo fait appel aux services tiers suivants :" data-de="Colgo nutzt die folgenden Dienste Dritter:">Colgo relies on the following third-party services:</p>
+  <ul>
+    <li data-it="<strong>Google Analytics 4</strong> (Google LLC) — analisi del traffico. Privacy Policy: <a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;>policies.google.com/privacy</a>" data-en="<strong>Google Analytics 4</strong> (Google LLC) — traffic analysis. Privacy Policy: <a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;>policies.google.com/privacy</a>" data-fr="<strong>Google Analytics 4</strong> (Google LLC) — analyse du trafic. Politique de confidentialité : <a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;>policies.google.com/privacy</a>" data-de="<strong>Google Analytics 4</strong> (Google LLC) — Traffic-Analyse. Datenschutzerklärung: <a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;>policies.google.com/privacy</a>"><strong>Google Analytics 4</strong> (Google LLC) — traffic analysis. Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
+    <li data-it="<strong>Resend</strong> — invio di email transazionali (es. notifica interna di nuova registrazione)" data-en="<strong>Resend</strong> — sending transactional emails (e.g. internal notification of a new registration)" data-fr="<strong>Resend</strong> — envoi d'e-mails transactionnels (par ex. notification interne d'une nouvelle inscription)" data-de="<strong>Resend</strong> — Versand von Transaktions-E-Mails (z. B. interne Benachrichtigung über eine neue Registrierung)"><strong>Resend</strong> — sending transactional emails (e.g. internal notification of a new registration)</li>
+    <li data-it="<strong>Stripe</strong> — gestione dei pagamenti per l'abbonamento Pro. I dati della carta vengono inseriti direttamente su una pagina ospitata da Stripe e non transitano mai sui server di Colgo. Privacy Policy: <a href=&quot;https://stripe.com/privacy&quot; target=&quot;_blank&quot;>stripe.com/privacy</a>" data-en="<strong>Stripe</strong> — payment handling for the Pro subscription. Card details are entered directly on a page hosted by Stripe and never pass through Colgo servers. Privacy Policy: <a href=&quot;https://stripe.com/privacy&quot; target=&quot;_blank&quot;>stripe.com/privacy</a>" data-fr="<strong>Stripe</strong> — gestion des paiements pour l'abonnement Pro. Les données de carte sont saisies directement sur une page hébergée par Stripe et ne transitent jamais par les serveurs de Colgo. Politique de confidentialité : <a href=&quot;https://stripe.com/privacy&quot; target=&quot;_blank&quot;>stripe.com/privacy</a>" data-de="<strong>Stripe</strong> — Zahlungsabwicklung für das Pro-Abonnement. Kartendaten werden direkt auf einer von Stripe gehosteten Seite eingegeben und laufen nie über Colgo-Server. Datenschutzerklärung: <a href=&quot;https://stripe.com/privacy&quot; target=&quot;_blank&quot;>stripe.com/privacy</a>"><strong>Stripe</strong> — payment handling for the Pro subscription. Card details are entered directly on a page hosted by Stripe and never pass through Colgo servers. Privacy Policy: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a></li>
+    <li data-it="<strong>Supabase</strong> — database e autenticazione per l'applicazione. I dati sono conservati in data center europei." data-en="<strong>Supabase</strong> — database and authentication for the application. Data is stored in European data centres." data-fr="<strong>Supabase</strong> — base de données et authentification pour l'application. Les données sont conservées dans des centres de données européens." data-de="<strong>Supabase</strong> — Datenbank und Authentifizierung für die Anwendung. Die Daten werden in europäischen Rechenzentren gespeichert."><strong>Supabase</strong> — database and authentication for the application. Data is stored in European data centres.</li>
+    <li data-it="<strong>Vercel</strong> — hosting dell'applicazione web" data-en="<strong>Vercel</strong> — hosting of the web application" data-fr="<strong>Vercel</strong> — hébergement de l'application web" data-de="<strong>Vercel</strong> — Hosting der Web-Anwendung"><strong>Vercel</strong> — hosting of the web application</li>
+    <li data-it="<strong>Netlify</strong> — hosting del sito marketing" data-en="<strong>Netlify</strong> — hosting of the marketing site" data-fr="<strong>Netlify</strong> — hébergement du site vitrine" data-de="<strong>Netlify</strong> — Hosting der Marketing-Website"><strong>Netlify</strong> — hosting of the marketing site</li>
+    <li data-it="<strong>Anthropic (Claude API)</strong> — traduzione automatica dei contenuti del catalogo. I testi del catalogo vengono elaborati in modo anonimo senza dati personali degli ospiti." data-en="<strong>Anthropic (Claude API)</strong> — automatic translation of catalogue content. Catalogue texts are processed anonymously, without guests' personal data." data-fr="<strong>Anthropic (Claude API)</strong> — traduction automatique du contenu du catalogue. Les textes du catalogue sont traités de manière anonyme, sans données personnelles des clients." data-de="<strong>Anthropic (Claude API)</strong> — automatische Übersetzung der Kataloginhalte. Katalogtexte werden anonym verarbeitet, ohne personenbezogene Daten der Gäste."><strong>Anthropic (Claude API)</strong> — automatic translation of catalogue content. Catalogue texts are processed anonymously, without guests' personal data.</li>
+  </ul>
+
+  <h2 data-it="7. Conservazione dei dati" data-en="7. Data retention" data-fr="7. Conservation des données" data-de="7. Speicherdauer">7. Data retention</h2>
+  <ul>
+    <li data-it="<strong>Dati analitici:</strong> conservati per 14 mesi (impostazione predefinita di Google Analytics 4)" data-en="<strong>Analytics data:</strong> kept for 14 months (Google Analytics 4 default setting)" data-fr="<strong>Données analytiques :</strong> conservées 14 mois (paramètre par défaut de Google Analytics 4)" data-de="<strong>Analysedaten:</strong> 14 Monate gespeichert (Standardeinstellung von Google Analytics 4)"><strong>Analytics data:</strong> kept for 14 months (Google Analytics 4 default setting)</li>
+    <li data-it="<strong>Dati struttura e account:</strong> conservati per la durata di utilizzo del servizio (prova gratuita o abbonamento attivo), cancellabili su richiesta scrivendo a colgoapp@gmail.com" data-en="<strong>Business and account data:</strong> kept for as long as the service is used (free trial or active subscription), deletable on request by writing to colgoapp@gmail.com" data-fr="<strong>Données de l'établissement et du compte :</strong> conservées pendant la durée d'utilisation du service (essai gratuit ou abonnement actif), supprimables sur demande en écrivant à colgoapp@gmail.com" data-de="<strong>Betriebs- und Kontodaten:</strong> für die Dauer der Nutzung des Dienstes gespeichert (Testphase oder aktives Abonnement), auf Anfrage löschbar per E-Mail an colgoapp@gmail.com"><strong>Business and account data:</strong> kept for as long as the service is used (free trial or active subscription), deletable on request by writing to colgoapp@gmail.com</li>
+    <li data-it="<strong>Dati di sessione dell'applicazione</strong> (nickname, camera, messaggi, ordini): eliminati automaticamente alla scadenza della sessione o su richiesta della struttura" data-en="<strong>Application session data</strong> (nickname, room, messages, orders): deleted automatically when the session expires or at the request of the business" data-fr="<strong>Données de session de l'application</strong> (pseudonyme, chambre, messages, commandes) : supprimées automatiquement à l'expiration de la session ou à la demande de l'établissement" data-de="<strong>Sitzungsdaten der Anwendung</strong> (Spitzname, Zimmer, Nachrichten, Bestellungen): automatisch beim Ablauf der Sitzung oder auf Wunsch des Betriebs gelöscht"><strong>Application session data</strong> (nickname, room, messages, orders): deleted automatically when the session expires or at the request of the business</li>
+  </ul>
+
+  <h2 data-it="8. Diritti dell'interessato" data-en="8. Rights of the data subject" data-fr="8. Droits de la personne concernée" data-de="8. Rechte der betroffenen Person">8. Rights of the data subject</h2>
+  <p data-it="In conformità al GDPR, hai il diritto di:" data-en="Under the GDPR, you have the right to:" data-fr="Conformément au RGPD, vous avez le droit de :" data-de="Nach der DSGVO haben Sie das Recht auf:">Under the GDPR, you have the right to:</p>
+  <ul>
+    <li data-it="<strong>Accesso:</strong> ottenere conferma del trattamento e copia dei tuoi dati" data-en="<strong>Access:</strong> obtain confirmation of processing and a copy of your data" data-fr="<strong>Accès :</strong> obtenir la confirmation du traitement et une copie de vos données" data-de="<strong>Auskunft:</strong> eine Bestätigung der Verarbeitung und eine Kopie Ihrer Daten erhalten"><strong>Access:</strong> obtain confirmation of processing and a copy of your data</li>
+    <li data-it="<strong>Rettifica:</strong> correggere dati inesatti" data-en="<strong>Rectification:</strong> correct inaccurate data" data-fr="<strong>Rectification :</strong> corriger des données inexactes" data-de="<strong>Berichtigung:</strong> unrichtige Daten korrigieren"><strong>Rectification:</strong> correct inaccurate data</li>
+    <li data-it="<strong>Cancellazione:</strong> richiedere la cancellazione dei tuoi dati (&quot;diritto all'oblio&quot;)" data-en="<strong>Erasure:</strong> request deletion of your data (the &quot;right to be forgotten&quot;)" data-fr="<strong>Effacement :</strong> demander la suppression de vos données (« droit à l'oubli »)" data-de="<strong>Löschung:</strong> die Löschung Ihrer Daten verlangen („Recht auf Vergessenwerden“)"><strong>Erasure:</strong> request deletion of your data (the "right to be forgotten")</li>
+    <li data-it="<strong>Limitazione:</strong> richiedere la limitazione del trattamento" data-en="<strong>Restriction:</strong> request restriction of processing" data-fr="<strong>Limitation :</strong> demander la limitation du traitement" data-de="<strong>Einschränkung:</strong> die Einschränkung der Verarbeitung verlangen"><strong>Restriction:</strong> request restriction of processing</li>
+    <li data-it="<strong>Portabilità:</strong> ricevere i tuoi dati in formato strutturato" data-en="<strong>Portability:</strong> receive your data in a structured format" data-fr="<strong>Portabilité :</strong> recevoir vos données dans un format structuré" data-de="<strong>Datenübertragbarkeit:</strong> Ihre Daten in einem strukturierten Format erhalten"><strong>Portability:</strong> receive your data in a structured format</li>
+    <li data-it="<strong>Opposizione:</strong> opporti al trattamento basato su legittimo interesse" data-en="<strong>Objection:</strong> object to processing based on legitimate interest" data-fr="<strong>Opposition :</strong> vous opposer au traitement fondé sur l'intérêt légitime" data-de="<strong>Widerspruch:</strong> der auf berechtigtem Interesse beruhenden Verarbeitung widersprechen"><strong>Objection:</strong> object to processing based on legitimate interest</li>
+    <li data-it="<strong>Revoca del consenso:</strong> revocare in qualsiasi momento il consenso prestato" data-en="<strong>Withdrawal of consent:</strong> withdraw your consent at any time" data-fr="<strong>Retrait du consentement :</strong> retirer à tout moment le consentement donné" data-de="<strong>Widerruf der Einwilligung:</strong> die erteilte Einwilligung jederzeit widerrufen"><strong>Withdrawal of consent:</strong> withdraw your consent at any time</li>
+  </ul>
+  <p data-it="Per esercitare i tuoi diritti, scrivi a: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-en="To exercise your rights, write to: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-fr="Pour exercer vos droits, écrivez à : <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>" data-de="Um Ihre Rechte auszuüben, schreiben Sie an: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a>">To exercise your rights, write to: <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a></p>
+  <p data-it="Hai inoltre il diritto di proporre reclamo all'Autorità Garante per la protezione dei dati personali (<a href=&quot;https://www.garanteprivacy.it&quot; target=&quot;_blank&quot;>garanteprivacy.it</a>)." data-en="You also have the right to lodge a complaint with the Italian Data Protection Authority (<a href=&quot;https://www.garanteprivacy.it&quot; target=&quot;_blank&quot;>garanteprivacy.it</a>)." data-fr="Vous avez également le droit d'introduire une réclamation auprès de l'autorité italienne de protection des données (<a href=&quot;https://www.garanteprivacy.it&quot; target=&quot;_blank&quot;>garanteprivacy.it</a>)." data-de="Sie haben außerdem das Recht, bei der italienischen Datenschutzbehörde Beschwerde einzulegen (<a href=&quot;https://www.garanteprivacy.it&quot; target=&quot;_blank&quot;>garanteprivacy.it</a>).">You also have the right to lodge a complaint with the Italian Data Protection Authority (<a href="https://www.garanteprivacy.it" target="_blank">garanteprivacy.it</a>).</p>
+
+  <h2 data-it="9. Trasferimento dati extra-UE" data-en="9. Data transfers outside the EU" data-fr="9. Transfert de données hors UE" data-de="9. Datenübermittlung außerhalb der EU">9. Data transfers outside the EU</h2>
+  <p data-it="Alcuni fornitori (Google, Vercel, Netlify, Anthropic) potrebbero trasferire dati al di fuori dello Spazio Economico Europeo. Tali trasferimenti avvengono nel rispetto delle garanzie previste dal GDPR (Decisioni di adeguatezza, Clausole Contrattuali Standard)." data-en="Some providers (Google, Vercel, Netlify, Anthropic) may transfer data outside the European Economic Area. Such transfers take place under the safeguards provided by the GDPR (adequacy decisions, Standard Contractual Clauses)." data-fr="Certains fournisseurs (Google, Vercel, Netlify, Anthropic) peuvent transférer des données en dehors de l'Espace économique européen. Ces transferts sont encadrés par les garanties prévues par le RGPD (décisions d'adéquation, clauses contractuelles types)." data-de="Einige Anbieter (Google, Vercel, Netlify, Anthropic) können Daten außerhalb des Europäischen Wirtschaftsraums übermitteln. Solche Übermittlungen erfolgen unter den in der DSGVO vorgesehenen Garantien (Angemessenheitsbeschlüsse, Standardvertragsklauseln).">Some providers (Google, Vercel, Netlify, Anthropic) may transfer data outside the European Economic Area. Such transfers take place under the safeguards provided by the GDPR (adequacy decisions, Standard Contractual Clauses).</p>
+
+  <h2 data-it="10. Modifiche alla Privacy Policy" data-en="10. Changes to this Privacy Policy" data-fr="10. Modifications de la politique de confidentialité" data-de="10. Änderungen dieser Datenschutzerklärung">10. Changes to this Privacy Policy</h2>
+  <p data-it="Colgo si riserva il diritto di aggiornare la presente Privacy Policy. Le modifiche sostanziali saranno comunicate tramite avviso sul sito. La data di ultimo aggiornamento è indicata in cima a questa pagina." data-en="Colgo reserves the right to update this Privacy Policy. Substantial changes will be announced by notice on the site. The date of the last update is shown at the top of this page." data-fr="Colgo se réserve le droit de mettre à jour la présente politique de confidentialité. Les modifications substantielles seront annoncées par un avis sur le site. La date de dernière mise à jour figure en haut de cette page." data-de="Colgo behält sich das Recht vor, diese Datenschutzerklärung zu aktualisieren. Wesentliche Änderungen werden durch einen Hinweis auf der Website bekannt gegeben. Das Datum der letzten Aktualisierung steht oben auf dieser Seite.">Colgo reserves the right to update this Privacy Policy. Substantial changes will be announced by notice on the site. The date of the last update is shown at the top of this page.</p>
+
+  <h2 data-it="11. Contatti" data-en="11. Contact" data-fr="11. Contacts" data-de="11. Kontakt">11. Contact</h2>
+  <p data-it="Per qualsiasi domanda relativa alla presente Privacy Policy:" data-en="For any question about this Privacy Policy:" data-fr="Pour toute question concernant la présente politique de confidentialité :" data-de="Bei Fragen zu dieser Datenschutzerklärung:">For any question about this Privacy Policy:</p>
+  <p data-it="Email: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a><br/>
+  Sito: <a href=&quot;https://colgo.app&quot; target=&quot;_blank&quot;>colgo.app</a>" data-en="Email: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a><br/>Website: <a href=&quot;https://colgo.app&quot; target=&quot;_blank&quot;>colgo.app</a>" data-fr="E-mail : <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a><br/>Site : <a href=&quot;https://colgo.app&quot; target=&quot;_blank&quot;>colgo.app</a>" data-de="E-Mail: <a href=&quot;mailto:colgoapp@gmail.com&quot;>colgoapp@gmail.com</a><br/>Website: <a href=&quot;https://colgo.app&quot; target=&quot;_blank&quot;>colgo.app</a>">Email: <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a><br/>Website: <a href="https://colgo.app" target="_blank">colgo.app</a></p>
+
+</main>
+
+<footer>
+  © 2026 Colgo · <a href="https://colgo.app">colgo.app</a> · <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+</footer>
+
+<script>
+    // Ogni lingua ha il suo indirizzo (/en /fr /de): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
+    function setLang(l) {
+      var supp = ['it','en','fr','de'];
+      if (supp.indexOf(l) === -1) return;
+      try { localStorage.setItem('colgo_lang', l); } catch (e) {}
+      var p = location.pathname.replace(/^\/(en|fr|de)(?=\/|$)/, '');
+      if (!p || p === '/') p = '/';
+      location.href = (l === 'it' ? '' : '/' + l) + (p === '/' ? '/' : p) + location.hash;
+    }
+</script>
+
+
+
+
+
+
+
+
+<!-- ══ colgo-assistente ══ generato da widget.py — non modificare a mano -->
+<style>
+/* ══ Assistente e invito fisso (16/08/2026) ═════════════════════════════
+   Vivono nello stesso angolo, quindi si conoscono: sul telefono il pulsante
+   dell'assistente sale quando c'e' la barra d'invito e riscende quando viene
+   chiusa (--colgo-fondo). Se stessero in due blocchi indipendenti finirebbero
+   uno sopra l'altro. */
+:root { --colgo-fondo: 24px; }
+/* Difesa: il sito ha regole scritte sui TAG (section{padding:120px} e' quella
+   che mi ha fregato, nav{position:fixed} lo aveva fatto poco prima). Entrano
+   in qualunque elemento nuovo dello stesso tag. Qui si azzera in partenza,
+   cosi' la prossima regola globale non arriva fin dentro. */
+.colgo-fab, .colgo-chat, .colgo-invito, .colgo-barra,
+.colgo-chat *, .colgo-invito *, .colgo-barra * {
+  margin: 0; max-width: none; box-sizing: border-box; }
+.colgo-chat, .colgo-invito, .colgo-barra, .colgo-fab { padding: 0; }
+.colgo-fab { position: fixed; right: 22px; bottom: var(--colgo-fondo); z-index: 300;
+  width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; border: 1px solid rgba(200,146,42,0.55);
+  background: rgba(15,24,21,0.92); color: var(--ochre); box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+  transition: bottom .25s ease, transform .18s ease, border-color .18s ease; }
+.colgo-fab:hover { transform: translateY(-2px); border-color: var(--ochre); }
+.colgo-fab .ci { width: 24px; height: 24px; }
+.colgo-fab[hidden] { display: none; }
+
+.colgo-chat { position: fixed; right: 22px; bottom: calc(var(--colgo-fondo) + 68px); z-index: 301;
+  width: 370px; max-width: calc(100vw - 44px); height: auto; min-height: 260px;
+  max-height: calc(100vh - 150px);
+  display: none; flex-direction: column; border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 4px; background: rgba(13,20,18,0.985); box-shadow: 0 18px 60px rgba(0,0,0,0.65);
+  overflow: hidden; transition: bottom .25s ease; }
+.colgo-chat.aperta { display: flex; }
+.colgo-chat-testa { display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid rgba(245,241,232,0.1); flex-shrink: 0; }
+.colgo-chat-testa strong { font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 19px; color: var(--cream); letter-spacing: 0.3px; }
+.colgo-x { background: none; border: none; color: rgba(245,241,232,0.5); cursor: pointer;
+  padding: 6px; display: flex; border-radius: 50%; }
+.colgo-x:hover { color: var(--cream); }
+.colgo-x .ci { width: 18px; height: 18px; }
+.colgo-corpo { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.colgo-riga { max-width: 86%; font-size: 14px; line-height: 1.65; letter-spacing: 0.2px;
+  padding: 11px 14px; border-radius: 3px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.colgo-riga.da-lui { align-self: flex-start; background: rgba(245,241,232,0.06); color: var(--cream); }
+.colgo-riga.da-te  { align-self: flex-end; background: rgba(200,146,42,0.16); color: var(--cream);
+  border: 1px solid rgba(200,146,42,0.3); }
+.colgo-attesa { align-self: flex-start; display: flex; gap: 5px; padding: 13px 14px; }
+.colgo-attesa i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre);
+  opacity: 0.4; animation: colgoPuls 1.1s infinite; }
+.colgo-attesa i:nth-child(2) { animation-delay: .18s; }
+.colgo-attesa i:nth-child(3) { animation-delay: .36s; }
+@keyframes colgoPuls { 0%,60%,100% { opacity:.25; transform:translateY(0);} 30% { opacity:1; transform:translateY(-3px);} }
+.colgo-spunti { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; }
+.colgo-spunto { font-family: 'Josefin Sans', sans-serif; font-size: 12px; letter-spacing: 0.5px;
+  color: var(--ochre); background: none; border: 1px solid rgba(200,146,42,0.35);
+  padding: 7px 12px; border-radius: 3px; cursor: pointer; }
+.colgo-spunto:hover { background: rgba(200,146,42,0.12); }
+.colgo-piede { border-top: 1px solid rgba(245,241,232,0.1); padding: 12px 14px 10px; flex-shrink: 0; }
+.colgo-form { display: flex; gap: 8px; align-items: center; }
+.colgo-input { flex: 1; font-family: 'Josefin Sans', sans-serif; font-size: 15px; color: var(--cream);
+  background: rgba(245,241,232,0.05); border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 3px; padding: 11px 12px; outline: none; min-width: 0; }
+.colgo-input:focus { border-color: rgba(200,146,42,0.6); }
+.colgo-input::placeholder { color: rgba(245,241,232,0.35); }
+.colgo-invia { background: var(--ochre); border: none; color: #0D0D0D; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 3px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; }
+.colgo-invia:disabled { opacity: .4; cursor: default; }
+.colgo-invia .ci { width: 19px; height: 19px; }
+.colgo-nota { font-size: 10.5px; line-height: 1.5; letter-spacing: 0.3px;
+  color: rgba(245,241,232,0.3); margin-top: 9px; text-align: center; }
+
+/* invito fisso — riquadro a lato sul computer */
+.colgo-invito { position: fixed; right: 22px; top: 50%; transform: translateY(-50%) translateX(14px);
+  z-index: 290; width: 232px; padding: 20px 18px 18px; border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 4px; background: rgba(15,24,21,0.94); box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
+.colgo-invito.si-vede { opacity: 1; transform: translateY(-50%) translateX(0); pointer-events: auto; }
+/* Con la conversazione aperta l'invito starebbe dietro al pannello, visibile
+   in trasparenza: si fa da parte finche' e' aperta. */
+body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(14px); }
+.colgo-invito strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 21px; color: var(--cream); margin-bottom: 8px; }
+.colgo-invito p { font-size: 12px; line-height: 1.6; color: rgba(245,241,232,0.45); margin-bottom: 15px; }
+.colgo-invito a { display: block; text-align: center; font-size: 11px; letter-spacing: 1.6px;
+  text-decoration: none; padding: 11px 8px; margin-bottom: 8px; }
+.colgo-invito .i-demo { color: var(--ochre); border: 1px solid rgba(200,146,42,0.45); }
+.colgo-invito .i-demo:hover { background: rgba(200,146,42,0.12); }
+.colgo-invito .i-prova { color: #0D0D0D; background: var(--ochre); margin-bottom: 0; }
+.colgo-invito .colgo-x { position: absolute; top: 6px; right: 6px; }
+.colgo-invito .colgo-x .ci { width: 14px; height: 14px; }
+
+/* invito fisso — barra in fondo sul telefono */
+.colgo-barra { display: none; }
+@media (max-width: 900px) {
+  .colgo-invito { display: none; }
+  .colgo-barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 290;
+    align-items: center; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10,16,14,0.97); border-top: 1px solid rgba(200,146,42,0.28);
+    transform: translateY(105%); transition: transform .35s ease; }
+  .colgo-barra.si-vede { transform: translateY(0); }
+  .colgo-barra a { flex: 1; text-align: center; font-size: 11px; letter-spacing: 1.4px;
+    text-decoration: none; color: #0D0D0D; background: var(--ochre); padding: 12px 8px; }
+  .colgo-barra .colgo-x { flex-shrink: 0; }
+  body.colgo-con-barra { --colgo-fondo: 88px; }
+  .colgo-fab { right: 16px; width: 50px; height: 50px; }
+  .colgo-chat { right: 12px; left: 12px; width: auto; max-width: none;
+    max-height: calc(100vh - 190px); bottom: calc(var(--colgo-fondo) + 62px); }
+}
+@media (max-width: 900px) and (max-height: 620px) { .colgo-chat { max-height: calc(100vh - 130px); } }
+</style>
+
+<div class="colgo-invito" id="colgoInvito" aria-hidden="true">
+  <button type="button" class="colgo-x" id="colgoInvitoX" aria-label="Chiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <strong data-it="Provalo davvero." data-en="Try it for real." data-fr="Essayez pour de vrai." data-de="Probieren Sie es aus.">Try it for real.</strong>
+  <p data-it="Una struttura già pronta, senza dare niente." data-en="A ready-made business, without giving anything." data-fr="Un établissement déjà prêt, sans rien donner." data-de="Ein fertiger Betrieb, ohne Angaben.">A ready-made business, without giving anything.</p>
+  <a class="i-demo" href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Guarda la demo" data-en="See the demo" data-fr="Voir la démo" data-de="Demo ansehen">See the demo</a>
+  <a class="i-prova" href="https://app.colgo.app/registrati" target="_blank" rel="noopener" data-it="30 giorni gratis" data-en="30 days free" data-fr="30 jours gratuits" data-de="30 Tage gratis">30 days free</a>
+</div>
+
+<div class="colgo-barra" id="colgoBarra">
+  <a href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Provalo senza registrarti" data-en="Try it without signing up" data-fr="Essayer sans s'inscrire" data-de="Ohne Anmeldung testen">Try it without signing up</a>
+  <button type="button" class="colgo-x" id="colgoBarraX"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+</div>
+
+<button type="button" class="colgo-fab" id="colgoFab" aria-expanded="false"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></button>
+
+<div class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
+  <div class="colgo-chat-testa">
+    <strong id="colgoTit" data-it="Domande su Colgo?" data-en="Questions about Colgo?" data-fr="Des questions sur Colgo ?" data-de="Fragen zu Colgo?">Questions about Colgo?</strong>
+    <button type="button" class="colgo-x" id="colgoChiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  </div>
+  <div class="colgo-corpo" id="colgoCorpo" aria-live="polite"></div>
+  <div class="colgo-spunti" id="colgoSpunti"><button type="button" class="colgo-spunto" data-it="Quanto costa?" data-en="How much does it cost?" data-fr="Combien ça coûte ?" data-de="Was kostet es?">How much does it cost?</button><button type="button" class="colgo-spunto" data-it="I clienti devono scaricare un'app?" data-en="Do customers need an app?" data-fr="Faut-il une appli ?" data-de="Brauchen Gäste eine App?">Do customers need an app?</button><button type="button" class="colgo-spunto" data-it="Come inizio?" data-en="How do I start?" data-fr="Comment commencer ?" data-de="Wie fange ich an?">How do I start?</button></div>
+  <div class="colgo-piede">
+    <form class="colgo-form" id="colgoForm">
+      <input class="colgo-input" id="colgoInput" type="text" autocomplete="off" maxlength="500" />
+      <button class="colgo-invia" id="colgoInvia" type="submit"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></button>
+    </form>
+    <p class="colgo-nota" data-it="Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com" data-en="It answers from what's on this site. For anything else: colgoapp@gmail.com" data-fr="Il répond à partir de ce qui est sur ce site. Pour le reste : colgoapp@gmail.com" data-de="Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com">It answers from what's on this site. For anything else: colgoapp@gmail.com</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = 'https://app.colgo.app/api/site-chat';
+  var T = {
+    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten."],
+    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…"],
+    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen"],
+    chiudi: ["Chiudi", "Close", "Fermer", "Schließen"],
+    invia:  ["Invia", "Send", "Envoyer", "Senden"],
+    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com."]
+  };
+  var L = ['it','en','fr','de'];
+  function lang() {
+    var l = document.documentElement.lang || 'it';
+    return L.indexOf(l) > -1 ? l : 'it';
+  }
+  function dice(k) { return T[k][L.indexOf(lang())] || T[k][0]; }
+
+  var fab = document.getElementById('colgoFab');
+  var chat = document.getElementById('colgoChat');
+  var corpo = document.getElementById('colgoCorpo');
+  var spunti = document.getElementById('colgoSpunti');
+  var form = document.getElementById('colgoForm');
+  var input = document.getElementById('colgoInput');
+  var invia = document.getElementById('colgoInvia');
+  var invito = document.getElementById('colgoInvito');
+  var barra = document.getElementById('colgoBarra');
+  if (!fab || !chat) return;
+
+  // ── etichette che dipendono dalla lingua e non stanno in data-* ──
+  // (segnaposto del campo e descrizioni per il lettore vocale)
+  function etichette() {
+    input.placeholder = dice('scrivi');
+    fab.setAttribute('aria-label', dice('apri'));
+    invia.setAttribute('aria-label', dice('invia'));
+    document.getElementById('colgoChiudi').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoBarraX').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoInvitoX').setAttribute('aria-label', dice('chiudi'));
+  }
+  // setLang non sa di queste: gli si sta accanto invece di modificarlo
+  var origSetLang = window.setLang;
+  if (typeof origSetLang === 'function') {
+    window.setLang = function (l) {
+      var r = origSetLang.apply(this, arguments);
+      etichette();
+      // Il saluto non e' un messaggio scambiato, e' un'etichetta: finche' non
+      // si e' chiesto nulla deve seguire la lingua. I messaggi veri no —
+      // riscrivere quello che qualcuno ha gia' letto sarebbe peggio.
+      if (!storia.length && corpo.firstChild) corpo.firstChild.textContent = dice('benv');
+      return r;
+    };
+  }
+
+  // ── conversazione ──
+  var storia = [];      // {ruolo, testo} — senza data-*, non si traduce
+  var occupato = false;
+
+  function riga(cls, testo) {
+    var d = document.createElement('div');
+    d.className = 'colgo-riga ' + cls;
+    d.textContent = testo;          // testo, mai HTML: la risposta e' di un modello
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+  function attesa() {
+    var d = document.createElement('div');
+    d.className = 'colgo-attesa';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+
+  function chiedi(testo) {
+    if (occupato || !testo.trim()) return;
+    occupato = true; invia.disabled = true;
+    spunti.style.display = 'none';
+    riga('da-te', testo);
+    storia.push({ ruolo: 'persona', testo: testo });
+    var att = attesa();
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lingua: lang(), messaggi: storia.slice(-12) })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        att.remove();
+        var t = (d && d.risposta) ? d.risposta : dice('err');
+        riga('da-lui', t);
+        storia.push({ ruolo: 'assistente', testo: t });
+      })
+      .catch(function () { att.remove(); riga('da-lui', dice('err')); })
+      .then(function () { occupato = false; invia.disabled = false; input.focus(); });
+  }
+
+  function apri() {
+    chat.classList.add('aperta');
+    document.body.classList.add('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'true');
+    if (!corpo.children.length) riga('da-lui', dice('benv'));
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  function chiudiChat() {
+    chat.classList.remove('aperta');
+    document.body.classList.remove('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+  fab.addEventListener('click', function () {
+    chat.classList.contains('aperta') ? chiudiChat() : apri();
+  });
+  document.getElementById('colgoChiudi').addEventListener('click', chiudiChat);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && chat.classList.contains('aperta')) { chiudiChat(); fab.focus(); }
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); var v = input.value; input.value = ''; chiedi(v);
+  });
+  spunti.addEventListener('click', function (e) {
+    var b = e.target.closest('.colgo-spunto'); if (b) chiedi(b.textContent.trim());
+  });
+
+  // ── invito fisso: compare dopo un po' di lettura, e si puo' zittire ──
+  var CHIAVE = 'colgo_invito_chiuso';
+  var zitto = false;
+  try { zitto = localStorage.getItem(CHIAVE) === '1'; } catch (e) {}
+
+  function mostraInvito(si) {
+    if (zitto) si = false;
+    invito.classList.toggle('si-vede', si);
+    invito.setAttribute('aria-hidden', si ? 'false' : 'true');
+    barra.classList.toggle('si-vede', si);
+    document.body.classList.toggle('colgo-con-barra', si);
+  }
+  function spegni() {
+    zitto = true;
+    try { localStorage.setItem(CHIAVE, '1'); } catch (e) {}
+    mostraInvito(false);
+  }
+  document.getElementById('colgoInvitoX').addEventListener('click', spegni);
+  document.getElementById('colgoBarraX').addEventListener('click', spegni);
+
+  var ultimo = null;
+  function guarda() {
+    // Compare dopo 700px di lettura, e sparisce vicino al fondo pagina, dove
+    // l'invito grande c'e' gia': due inviti identici a un dito di distanza
+    // sarebbero solo rumore.
+    var y = window.scrollY;
+    var vicinoFondo = (y + window.innerHeight) > (document.documentElement.scrollHeight - 700);
+    var si = y > 700 && !vicinoFondo;
+    if (si !== ultimo) { ultimo = si; mostraInvito(si); }
+  }
+  window.addEventListener('scroll', guarda, { passive: true });
+  window.addEventListener('resize', guarda);
+  // setLang traduce l'intero documento, ma viene chiamato al caricamento —
+  // e il mio blocco sta in fondo alla pagina, quindi allora non esisteva
+  // ancora: le sue scritte restavano nella lingua scritta nel file. Al primo
+  // giro le traduco qui, con la stessa regola.
+  function traduci() {
+    var l = lang();
+    [chat, invito, barra, fab].forEach(function (radice) {
+      if (!radice) return;
+      var tutti = radice.querySelectorAll('[data-it]');
+      (radice.hasAttribute && radice.hasAttribute('data-it') ? [radice] : []).concat([].slice.call(tutti))
+        .forEach(function (el) {
+          var t = el.getAttribute('data-' + l) || el.getAttribute('data-en') || el.getAttribute('data-it');
+          if (t) el.innerHTML = t;
+        });
+    });
+  }
+  traduci();
+  etichette();
+  guarda();
+})();
+</script>
+</body>
+</html>

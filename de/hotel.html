@@ -405,6 +405,15 @@ body::after {
 /* Le immagini dichiarano le loro misure (per non far saltare il contenuto
    mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
    deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
 img { height: auto; }
 /* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
    quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
@@ -558,19 +567,19 @@ img { height: auto; }
   <h2 class="section-title" data-it="Cosa vede <em>il tuo ospite</em>." data-en="What <em>your guest</em> sees." data-fr="Ce que voit <em>votre client</em>." data-de="Was <em>Ihr Gast</em> sieht.">Was <em>Ihr Gast</em> sieht.</h2>
   <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-hotel-01-accesso.jpg" alt="Inquadra il QR in camera" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-01-accesso.jpg" alt="Inquadra il QR in camera" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Inquadra il QR in camera" data-en="Scans the QR in the room" data-fr="Scanne le QR en chambre" data-de="Scannt den QR im Zimmer">Scannt den QR im Zimmer</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-02-catalogo.jpg" alt="Trova i servizi della struttura" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-02-catalogo.jpg" alt="Trova i servizi della struttura" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova i servizi della struttura" data-en="Finds the property's services" data-fr="Trouve les services de l'établissement" data-de="Findet die Leistungen des Hauses">Findet die Leistungen des Hauses</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-03-trasporti.jpg" alt="Transfer e noleggi, con i prezzi" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-03-trasporti.jpg" alt="Transfer e noleggi, con i prezzi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Transfer e noleggi, con i prezzi" data-en="Transfers and rentals, with prices" data-fr="Transferts et locations, avec les prix" data-de="Transfers und Verleih, mit Preisen">Transfers und Verleih, mit Preisen</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-04-spa.jpg" alt="Spa e benessere" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-04-spa.jpg" alt="Spa e benessere" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Spa e benessere" data-en="Spa and wellness" data-fr="Spa et bien-être" data-de="Spa und Wellness">Spa und Wellness</p>
       </div>
     </div>
@@ -583,19 +592,19 @@ img { height: auto; }
   <h2 class="section-title" data-it="L&#39;ospite arriva <em>già informato</em>." data-en="The guest arrives <em>already informed</em>." data-fr="Le client arrive <em>déjà informé</em>." data-de="Der Gast kommt <em>schon informiert</em> an.">Der Gast kommt <em>schon informiert</em> an.</h2>
   <div class="screens-carousel">
       <div class="screen-item">
-        <img src="screenshots/it-hotel-05-prearrivo.jpg" alt="Entra dal link, prima di partire" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-05-prearrivo.jpg" alt="Entra dal link, prima di partire" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Entra dal link, prima di partire" data-en="Enters via the link, before setting off" data-fr="Entre par le lien, avant de partir" data-de="Über den Link, schon vor der Abreise">Über den Link, schon vor der Abreise</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-06-prearrivo-servizi.jpg" alt="Prenota i servizi in anticipo" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-06-prearrivo-servizi.jpg" alt="Prenota i servizi in anticipo" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Prenota i servizi in anticipo" data-en="Books services in advance" data-fr="Réserve les services à l'avance" data-de="Bucht Leistungen im Voraus">Bucht Leistungen im Voraus</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-07-comearrivare.jpg" alt="Trova come arrivare e il Wi-Fi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Trova come arrivare e il Wi-Fi" data-en="Finds directions and the Wi-Fi" data-fr="Trouve l'itinéraire et le Wi-Fi" data-de="Findet Anfahrt und WLAN">Findet Anfahrt und WLAN</p>
       </div>
       <div class="screen-item">
-        <img src="screenshots/it-hotel-08-chat.jpg" alt="E scrive alla reception" loading="lazy" width="520" height="1125">
+        <img src="/screenshots/it-hotel-08-chat.jpg" alt="E scrive alla reception" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="E scrive alla reception" data-en="And writes to reception" data-fr="Et écrit à la réception" data-de="Und schreibt der Rezeption">Und schreibt der Rezeption</p>
       </div>
   </div>
@@ -671,7 +680,7 @@ img { height: auto; }
     <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     <a href="/de/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Zugriffe & Katalog</a>
     <a href="/de/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital">Warum digital</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Datenschutzerklärung</a>
+    <a href="/de/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Datenschutzerklärung</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -679,8 +688,10 @@ img { height: auto; }
 
 <script>
   let currentLang = 'it';
-    // Pagine generate per lingua: qui il selettore NAVIGA, non riscrive. Ogni
-    // lingua ha il suo indirizzo, e l'indirizzo deve dire il vero.
+    // Ogni lingua ha il suo indirizzo (/en /fr /de): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
     function setLang(l) {
       var supp = ['it','en','fr','de'];
       if (supp.indexOf(l) === -1) return;

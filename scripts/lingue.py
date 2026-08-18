@@ -26,12 +26,18 @@ RADICE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LINGUE = ('en', 'fr', 'de')
 SITO = 'https://colgo.app'
 
-# privacy.html NON viene tradotta: il corpo dell'informativa e' testo legale
-# scritto in italiano, e solo dieci etichette hanno i data-*. Tradurne meta'
-# sarebbe peggio che tenerla in una lingua sola — e un'informativa approssimata
-# e' un rischio, non un dettaglio. Resta a /privacy per tutti, e nessuna pagina
-# dichiara che ne esiste una versione inglese: perche' non esiste.
-SOLO_ITALIANO = {'privacy.html'}
+# Il 17/08 l'informativa e' stata tradotta per intero (899 parole, terminologia
+# GDPR ufficiale nelle tre lingue) e quindi entra anche lei. Le versioni tradotte
+# portano una riga in piu': in caso di discrepanza fa fede l'italiano. E' la
+# prassi per i documenti legali tradotti, e qui e' anche vera — la traduzione e'
+# di lavoro, non asseverata.
+SOLO_ITALIANO = set()
+
+PREVALE_ITALIANO = {
+ 'en': 'This is a translation for convenience. In case of any discrepancy, the Italian version prevails.',
+ 'fr': 'Ceci est une traduction de courtoisie. En cas de divergence, la version italienne prévaut.',
+ 'de': 'Dies ist eine Übersetzung zur Erleichterung. Bei Abweichungen ist die italienische Fassung maßgeblich.',
+}
 
 PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio.html',
           'organizzazione.html', 'per-chi.html', 'perche-digitale.html', 'prezzi.html',
@@ -215,7 +221,7 @@ def rifai_link(html, lingua):
 # Nelle pagine tradotte i pulsanti della lingua non riscrivono il testo: portano
 # all'indirizzo di quella lingua. E' l'unico comportamento coerente con l'avere
 # un indirizzo per lingua — altrimenti si potrebbe leggere l'inglese a /fr/.
-NAVIGA = """
+NAVIGA_NON_PIU_USATA = """
     // Pagine generate per lingua: qui il selettore NAVIGA, non riscrive. Ogni
     // lingua ha il suo indirizzo, e l'indirizzo deve dire il vero.
     function setLang(l) {
@@ -258,16 +264,23 @@ def genera(pagina, lingua):
 
     s = rifai_link(s, lingua)
 
+    # Le immagini hanno percorsi RELATIVI ("screenshots/…", "colgo-logo.png"):
+    # da /en/index.html puntano a /en/screenshots/… che non esiste. In una
+    # sottocartella vanno resi assoluti, o la pagina tradotta e' senza immagini —
+    # ed e' un difetto che si vede solo caricandole davvero, non leggendo il
+    # markup.
+    s = re.sub(r'(src|href)="(?!/|https?:|mailto:|#|data:)([^"]+)"', r'\1="/\2"', s)
+
     # il selettore attivo e' quello della lingua che si sta leggendo
     s = s.replace('<button class="lang-btn active" onclick="setLang(\'it\')">IT</button>',
                   '<button class="lang-btn" onclick="setLang(\'it\')">IT</button>')
     s = s.replace(f'<button class="lang-btn" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>',
                   f'<button class="lang-btn active" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>')
 
-    # via la vecchia setLang (riscrive il testo) e l'avvio automatico, che qui
-    # manderebbe l'utente altrove appena arrivato
-    s = re.sub(r'\n\s*function setLang\(lang\) \{.*?\n\s{4}\}\n', NAVIGA, s, count=1, flags=re.S)
-    s = re.sub(r'\n\s*\(function \(\) \{\s*\n\s*var supported = \[.*?setLang\(initial\);\s*\n\s*\}\)\(\);', '', s, flags=re.S)
+    # la riga sul valore legale, solo nelle versioni tradotte dell'informativa
+    if pagina == 'privacy.html':
+        s = s.replace('</header>',
+                      f'  <div class="privacy-prevale">{PREVALE_ITALIANO[lingua]}</div>\n</header>', 1)
 
     return s, p.tradotti
 

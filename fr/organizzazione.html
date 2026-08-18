@@ -424,6 +424,15 @@ body::after {
 /* Le immagini dichiarano le loro misure (per non far saltare il contenuto
    mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
    deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
 img { height: auto; }
 /* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
    quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
@@ -540,23 +549,23 @@ img { height: auto; }
   <p class="section-sub" data-it="Ogni PIN vede solo le camere o i tavoli di sua competenza. Nuova, in lavorazione, completata — lo stato è sempre chiaro." data-en="Every PIN only sees the rooms or tables it's responsible for. New, in progress, completed — the status is always clear." data-fr="Chaque PIN ne voit que les chambres ou tables de sa compétence. Nouvelle, en cours, terminée — le statut est toujours clair." data-de="Jedes PIN sieht nur die Zimmer oder Tische, für die es zuständig ist. Neu, in Bearbeitung, abgeschlossen — der Status ist immer klar.">Chaque PIN ne voit que les chambres ou tables de sa compétence. Nouvelle, en cours, terminée — le statut est toujours clair.</p>
   <div class="screens-carousel">
     <div class="screen-item">
-      <img src="screenshots/staff-01-dashboard.jpg" alt="La bacheca: le camere e quante richieste hanno" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/staff-01-dashboard.jpg" alt="La bacheca: le camere e quante richieste hanno" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="La bacheca: le camere e quante richieste hanno" data-en="The board: rooms and how many requests each has" data-fr="Le tableau : les chambres et le nombre de demandes" data-de="Die Tafel: Zimmer und wie viele Anfragen offen sind">Le tableau : les chambres et le nombre de demandes</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/staff-02-nuove.jpg" alt="Dentro una camera: la richiesta, voce per voce" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/staff-02-nuove.jpg" alt="Dentro una camera: la richiesta, voce per voce" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Dentro una camera: la richiesta, voce per voce" data-en="Inside a room: the request, item by item" data-fr="Dans une chambre : la demande, article par article" data-de="Im Zimmer: die Anfrage, Position für Position">Dans une chambre : la demande, article par article</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/staff-03-inlavorazione.jpg" alt="Presa in carico, e si incassa alla consegna" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/staff-03-inlavorazione.jpg" alt="Presa in carico, e si incassa alla consegna" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Presa in carico, e si incassa alla consegna" data-en="Taken in hand, and paid on delivery" data-fr="Prise en charge, et payée à la livraison" data-de="Übernommen, und bei der Übergabe kassiert">Prise en charge, et payée à la livraison</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/staff-04-completate.jpg" alt="Chiusa: resta nello storico della camera" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/staff-04-completate.jpg" alt="Chiusa: resta nello storico della camera" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Chiusa: resta nello storico della camera" data-en="Closed: it stays in the room&#39;s history" data-fr="Clôturée : elle reste dans l&#39;historique de la chambre" data-de="Abgeschlossen: bleibt in der Zimmer-Historie">Clôturée : elle reste dans l'historique de la chambre</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/staff-05-dashboard2.jpg" alt="Colpo d&#39;occhio su tutte le camere" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/staff-05-dashboard2.jpg" alt="Colpo d&#39;occhio su tutte le camere" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Colpo d&#39;occhio su tutte le camere" data-en="All rooms at a glance" data-fr="Toutes les chambres en un coup d&#39;œil" data-de="Alle Zimmer auf einen Blick">Toutes les chambres en un coup d'œil</p>
     </div>
   </div>
@@ -704,35 +713,35 @@ img { height: auto; }
   <p class="section-sub" data-it="Categorie, articoli, varianti, prezzi, disponibilità — tutto da telefono o computer, con anteprima esatta di quello che vedrà l'ospite." data-en="Categories, items, variants, prices, availability — all from phone or computer, with an exact preview of what the guest will see." data-fr="Catégories, articles, variantes, prix, disponibilité — tout depuis le téléphone ou l'ordinateur, avec un aperçu exact de ce que verra le client." data-de="Kategorien, Artikel, Varianten, Preise, Verfügbarkeit — alles vom Handy oder Computer aus, mit genauer Vorschau dessen, was der Gast sieht.">Catégories, articles, variantes, prix, disponibilité — tout depuis le téléphone ou l'ordinateur, avec un aperçu exact de ce que verra le client.</p>
   <div class="screens-carousel">
     <div class="screen-item">
-      <img src="screenshots/admin-01-categorie.jpg" alt="Le categorie del catalogo, riordinabili" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-01-categorie.jpg" alt="Le categorie del catalogo, riordinabili" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Le categorie del catalogo, riordinabili" data-en="The catalogue categories, reorderable" data-fr="Les catégories du catalogue, réordonnables" data-de="Die Katalog-Kategorien, frei sortierbar">Les catégories du catalogue, réordonnables</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-02-categoria.jpg" alt="Dentro una categoria: le sue voci e i prezzi" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-02-categoria.jpg" alt="Dentro una categoria: le sue voci e i prezzi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Dentro una categoria: le sue voci e i prezzi" data-en="Inside a category: its items and prices" data-fr="Dans une catégorie : ses articles et les prix" data-de="In einer Kategorie: ihre Einträge und Preise">Dans une catégorie : ses articles et les prix</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-03-articoli.jpg" alt="Tutte le voci in un elenco solo" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-03-articoli.jpg" alt="Tutte le voci in un elenco solo" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Tutte le voci in un elenco solo" data-en="Every item in a single list" data-fr="Tous les articles dans une seule liste" data-de="Alle Einträge in einer Liste">Tous les articles dans une seule liste</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-04-editstep1.jpg" alt="Titolo, icona, descrizione, foto" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-04-editstep1.jpg" alt="Titolo, icona, descrizione, foto" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Titolo, icona, descrizione, foto" data-en="Title, icon, description, photos" data-fr="Titre, icône, description, photos" data-de="Titel, Symbol, Beschreibung, Fotos">Titre, icône, description, photos</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-05-editstep1b.jpg" alt="Prezzo, disponibilità, stato, visibilità" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-05-editstep1b.jpg" alt="Prezzo, disponibilità, stato, visibilità" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Prezzo, disponibilità, stato, visibilità" data-en="Price, availability, status, visibility" data-fr="Prix, disponibilité, statut, visibilité" data-de="Preis, Verfügbarkeit, Status, Sichtbarkeit">Prix, disponibilité, statut, visibilité</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-06-editstep2.jpg" alt="Taglie e colori: gli attributi" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-06-editstep2.jpg" alt="Taglie e colori: gli attributi" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Taglie e colori: gli attributi" data-en="Sizes and colours: the attributes" data-fr="Tailles et couleurs : les attributs" data-de="Größen und Farben: die Attribute">Tailles et couleurs : les attributs</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-07-combinazioni.jpg" alt="Le combinazioni, generate da sole" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-07-combinazioni.jpg" alt="Le combinazioni, generate da sole" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="Le combinazioni, generate da sole" data-en="The combinations, generated for you" data-fr="Les combinaisons, générées toutes seules" data-de="Die Kombinationen, automatisch erzeugt">Les combinaisons, générées toutes seules</p>
     </div>
     <div class="screen-item">
-      <img src="screenshots/admin-08-anteprima.jpg" alt="L&#39;anteprima esatta di ciò che vede il cliente" loading="lazy" width="520" height="1125">
+      <img src="/screenshots/admin-08-anteprima.jpg" alt="L&#39;anteprima esatta di ciò che vede il cliente" loading="lazy" width="520" height="1125">
         <p class="screen-caption" data-it="L&#39;anteprima esatta di ciò che vede il cliente" data-en="The exact preview of what the customer sees" data-fr="L&#39;aperçu exact de ce que voit le client" data-de="Die exakte Vorschau dessen, was der Kunde sieht">L'aperçu exact de ce que voit le client</p>
     </div>
   </div>
@@ -824,7 +833,7 @@ img { height: auto; }
     <a href="/fr/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     <a href="/fr/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Accès et catalogue</a>
     <a href="/fr/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital">Pourquoi le numérique</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Politique de confidentialité</a>
+    <a href="/fr/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Politique de confidentialité</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -832,8 +841,10 @@ img { height: auto; }
 
 <script>
   let currentLang = 'it';
-    // Pagine generate per lingua: qui il selettore NAVIGA, non riscrive. Ogni
-    // lingua ha il suo indirizzo, e l'indirizzo deve dire il vero.
+    // Ogni lingua ha il suo indirizzo (/en /fr /de): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
     function setLang(l) {
       var supp = ['it','en','fr','de'];
       if (supp.indexOf(l) === -1) return;

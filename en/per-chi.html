@@ -396,6 +396,15 @@ body::after {
 /* Le immagini dichiarano le loro misure (per non far saltare il contenuto
    mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
    deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
 img { height: auto; }
 /* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
    quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
@@ -558,7 +567,7 @@ img { height: auto; }
     <a href="/en/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ">FAQ</a>
     <a href="/en/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog">Access & catalogue</a>
     <a href="/en/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital">Why digital</a>
-    <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
+    <a href="/en/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP
@@ -566,8 +575,10 @@ img { height: auto; }
 
 <script>
   let currentLang = 'it';
-    // Pagine generate per lingua: qui il selettore NAVIGA, non riscrive. Ogni
-    // lingua ha il suo indirizzo, e l'indirizzo deve dire il vero.
+    // Ogni lingua ha il suo indirizzo (/en /fr /de): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
     function setLang(l) {
       var supp = ['it','en','fr','de'];
       if (supp.indexOf(l) === -1) return;

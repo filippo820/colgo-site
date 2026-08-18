@@ -404,6 +404,39 @@
   <url>
     <loc>https://colgo.app/privacy</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/privacy"/>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/privacy"/>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/fr/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/privacy"/>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/de/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/privacy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/privacy"/>
     <lastmod>2026-08-17</lastmod>
     <priority>0.3</priority>

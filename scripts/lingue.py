@@ -271,6 +271,16 @@ def genera(pagina, lingua):
     # markup.
     s = re.sub(r'(src|href)="(?!/|https?:|mailto:|#|data:)([^"]+)"', r'\1="/\2"', s)
 
+    # Le schermate dell'app esistono anche nella lingua della pagina: chi legge
+    # /de deve vedere l'app in tedesco, non in italiano. Dove la versione
+    # tradotta NON esiste ancora si tiene quella italiana — meglio una lingua
+    # sola che due mescolate nella stessa immagine.
+    def tradotta(m):
+        nome = m.group(2)
+        return f'src="/screenshots/{lingua}/{nome}"' if os.path.exists(
+            os.path.join(RADICE, 'screenshots', lingua, nome)) else m.group(0)
+    s = re.sub(r'src="/screenshots/([a-z]{2}/)?([^"/]+)"', tradotta, s)
+
     # il selettore attivo e' quello della lingua che si sta leggendo
     s = s.replace('<button class="lang-btn active" onclick="setLang(\'it\')">IT</button>',
                   '<button class="lang-btn" onclick="setLang(\'it\')">IT</button>')

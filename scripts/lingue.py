@@ -23,7 +23,7 @@ import io, os, re, shutil, sys
 from html.parser import HTMLParser
 
 RADICE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LINGUE = ('en', 'fr', 'de')
+LINGUE = ('en', 'fr', 'de', 'es')
 SITO = 'https://colgo.app'
 
 # Il 17/08 l'informativa e' stata tradotta per intero (899 parole, terminologia
@@ -37,13 +37,14 @@ PREVALE_ITALIANO = {
  'en': 'This is a translation for convenience. In case of any discrepancy, the Italian version prevails.',
  'fr': 'Ceci est une traduction de courtoisie. En cas de divergence, la version italienne prévaut.',
  'de': 'Dies ist eine Übersetzung zur Erleichterung. Bei Abweichungen ist die italienische Fassung maßgeblich.',
+ 'es': 'Esta es una traducción de cortesía. En caso de discrepancia, prevalece la versión italiana.',
 }
 
 PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio.html',
           'organizzazione.html', 'per-chi.html', 'perche-digitale.html', 'prezzi.html',
           'privacy.html', 'ristorante.html']
 
-LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE'}
+LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
 # Titolo e descrizione non stanno negli attributi data-*: sono l'unica cosa che
 # va tradotta a mano. Sono anche cio' che si legge nei risultati di ricerca.
@@ -54,71 +55,93 @@ META = {
   'fr': ("Colgo — Le catalogue numérique pour tout établissement",
          "Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, sans complications."),
   'de': ("Colgo — Der digitale Katalog für jeden Betrieb",
-         "Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, ohne Komplikationen.")},
+         "Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, ohne Komplikationen."),
+  'es': ("Colgo — El catálogo digital para cualquier negocio",
+         "Colgo lleva tu catálogo al teléfono de tus clientes. Configurable, siempre al día, sin complicaciones.")},
  'come-funziona.html': {
   'en': ("How Colgo works — Digital catalogue for hospitality",
          "See how Colgo works: QR code in the room, automatic multilingual catalogue, real-time requests to reception. No app, no downloads."),
   'fr': ("Comment fonctionne Colgo — Catalogue numérique pour l'hébergement",
          "Découvrez comment fonctionne Colgo : QR code en chambre, catalogue multilingue automatique, demandes en temps réel à la réception. Aucune application, aucun téléchargement."),
   'de': ("So funktioniert Colgo — Digitaler Katalog für Beherbergungsbetriebe",
-         "So funktioniert Colgo: QR-Code im Zimmer, automatisch mehrsprachiger Katalog, Anfragen in Echtzeit an die Rezeption. Keine App, kein Download.")},
+         "So funktioniert Colgo: QR-Code im Zimmer, automatisch mehrsprachiger Katalog, Anfragen in Echtzeit an die Rezeption. Keine App, kein Download."),
+  'es': ("Cómo funciona Colgo — Catálogo digital para el sector hotelero",
+         "Mira cómo funciona Colgo: código QR en la habitación, catálogo multiidioma automático, solicitudes en tiempo real a recepción. Sin app, sin descargas.")},
  'faq.html': {
   'en': ("FAQ — Colgo", "Frequently asked questions about Colgo. Everything you want to know before you start."),
   'fr': ("FAQ — Colgo", "Questions fréquentes sur Colgo. Tout ce que vous voulez savoir avant de commencer."),
-  'de': ("FAQ — Colgo", "Häufige Fragen zu Colgo. Alles, was Sie vor dem Start wissen möchten.")},
+  'de': ("FAQ — Colgo", "Häufige Fragen zu Colgo. Alles, was Sie vor dem Start wissen möchten."),
+  'es': ("Preguntas frecuentes — Colgo",
+         "Respuestas a las dudas más comunes sobre Colgo: precios, idiomas, configuración, pagos y seguridad de los datos.")},
  'hotel.html': {
   'en': ("Colgo for hotels, B&Bs and farm stays — Digital catalogue for guests",
          "Colgo for hospitality: guests scan the QR in the room or get the link before arrival, explore services and send requests to reception in real time."),
   'fr': ("Colgo pour hôtels, B&B et fermes-auberges — Catalogue numérique pour les clients",
          "Colgo pour l'hôtellerie : les clients scannent le QR en chambre ou reçoivent le lien avant l'arrivée, explorent les services et envoient des demandes en temps réel à la réception."),
   'de': ("Colgo für Hotels, B&Bs und Ferienhöfe — Digitaler Katalog für Gäste",
-         "Colgo für die Hotellerie: Gäste scannen den QR im Zimmer oder erhalten den Link vor der Anreise, entdecken Leistungen und senden Anfragen in Echtzeit an die Rezeption.")},
+         "Colgo für die Hotellerie: Gäste scannen den QR im Zimmer oder erhalten den Link vor der Anreise, entdecken Leistungen und senden Anfragen in Echtzeit an die Rezeption."),
+  'es': ("Colgo para hoteles, B&B y casas rurales — Catálogo digital para huéspedes",
+         "Colgo para alojamientos: el huésped escanea el QR de la habitación o recibe el enlace antes de llegar, recorre los servicios y envía solicitudes a recepción.")},
  'negozio.html': {
   'en': ("Colgo for shops and boutiques — Digital catalogue in the window",
          "Colgo for retail: customers scan the QR in the window, even when the shop is closed, browse the catalogue and prepare their list before walking in."),
   'fr': ("Colgo pour boutiques et magasins — Catalogue numérique en vitrine",
          "Colgo pour le commerce : le client scanne le QR en vitrine, même magasin fermé, parcourt le catalogue et prépare sa liste avant même d'entrer."),
   'de': ("Colgo für Geschäfte und Boutiquen — Digitaler Katalog im Schaufenster",
-         "Colgo für den Handel: Kunden scannen den QR im Schaufenster, auch bei geschlossenem Laden, blättern im Katalog und stellen ihre Liste zusammen, bevor sie eintreten.")},
+         "Colgo für den Handel: Kunden scannen den QR im Schaufenster, auch bei geschlossenem Laden, blättern im Katalog und stellen ihre Liste zusammen, bevor sie eintreten."),
+  'es': ("Colgo para tiendas y boutiques — Catálogo digital en la vitrina",
+         "Colgo para comercios: el cliente escanea el QR de la vitrina, incluso con la tienda cerrada, recorre el catálogo y arma su lista para el mostrador.")},
  'organizzazione.html': {
   'en': ("Access and catalogue — who sees what in Colgo, and how you govern it",
          "Six diagrams: access levels from owner to waiter, the request queue for staff, one PIN for several venues, catalogue visibility, the editor and multi-venue."),
   'fr': ("Accès et catalogue — qui voit quoi dans Colgo, et comment le gouverner",
          "Six schémas : les niveaux d'accès du propriétaire au serveur, la file des demandes au personnel, un PIN pour plusieurs sites, la visibilité du catalogue, l'éditeur et le multi-site."),
   'de': ("Zugriffe und Katalog — wer in Colgo was sieht, und wie Sie ihn steuern",
-         "Sechs Schaubilder: Zugriffsebenen vom Inhaber bis zum Kellner, die Anfrage-Warteschlange fürs Personal, eine PIN für mehrere Standorte, Sichtbarkeit des Katalogs, der Editor und Mehrstandort.")},
+         "Sechs Schaubilder: Zugriffsebenen vom Inhaber bis zum Kellner, die Anfrage-Warteschlange fürs Personal, eine PIN für mehrere Standorte, Sichtbarkeit des Katalogs, der Editor und Mehrstandort."),
+  'es': ("Accesos y catálogo — quién ve qué en Colgo, y cómo lo gobiernas",
+         "Seis esquemas: niveles de acceso del titular al mesero, la fila de solicitudes del staff, un PIN para varias sedes, visibilidad del catálogo y editor.")},
  'per-chi.html': {
   'en': ("Who Colgo is for — Hotels, B&Bs, campsites, restaurants, shops",
          "Colgo adapts to hotels, B&Bs, farm stays, campsites, restaurants, beach clubs and shops. One configurable system for any business with a catalogue."),
   'fr': ("Pour qui est Colgo — Hôtels, B&B, campings, restaurants, boutiques",
          "Colgo s'adapte aux hôtels, B&B, fermes-auberges, campings, restaurants, établissements balnéaires et boutiques. Un seul système configurable pour tout établissement avec un catalogue."),
   'de': ("Für wen Colgo ist — Hotels, B&Bs, Campingplätze, Restaurants, Geschäfte",
-         "Colgo passt sich Hotels, B&Bs, Ferienhöfen, Campingplätzen, Restaurants, Strandbädern und Geschäften an. Ein konfigurierbares System für jeden Betrieb mit einem Katalog.")},
+         "Colgo passt sich Hotels, B&Bs, Ferienhöfen, Campingplätzen, Restaurants, Strandbädern und Geschäften an. Ein konfigurierbares System für jeden Betrieb mit einem Katalog."),
+  'es': ("Para quién es Colgo — Hoteles, B&B, campings, restaurantes, tiendas",
+         "Colgo se adapta a hoteles, B&B, casas rurales, campings, restaurantes, balnearios y tiendas. Un solo sistema configurable para cada contexto.")},
  'perche-digitale.html': {
   'en': ("Why digital — the numbers behind the QR catalogue",
          "QR adoption, the language barrier, staff shortages, the cost of paper: the industry data explaining why a digital catalogue beats the printed sheet."),
   'fr': ("Pourquoi le numérique — les chiffres derrière le catalogue par QR",
          "Adoption des QR, barrière de la langue, manque de personnel, coût du papier : les données du secteur qui expliquent pourquoi un catalogue numérique bat la feuille imprimée."),
   'de': ("Warum digital — die Zahlen hinter dem QR-Katalog",
-         "QR-Verbreitung, Sprachbarriere, Personalmangel, Papierkosten: die Branchendaten, die erklären, warum ein digitaler Katalog das gedruckte Blatt schlägt.")},
+         "QR-Verbreitung, Sprachbarriere, Personalmangel, Papierkosten: die Branchendaten, die erklären, warum ein digitaler Katalog das gedruckte Blatt schlägt."),
+  'es': ("Por qué digital — los números detrás del catálogo por QR",
+         "Adopción del QR, la barrera del idioma, la falta de personal, el costo del papel: los datos del sector que explican por qué un catálogo digital ya es lo normal.")},
  'prezzi.html': {
   'en': ("Pricing — Colgo",
          "Colgo pricing for hotels, restaurants and shops. One price per business, not per room or table. Monthly or yearly."),
   'fr': ("Tarifs — Colgo",
          "Tarifs Colgo pour hôtels, restaurants et boutiques. Un prix par établissement, pas par chambre ou par table. Mensuel ou annuel."),
   'de': ("Preise — Colgo",
-         "Colgo-Preise für Hotels, Restaurants und Geschäfte. Ein Preis pro Betrieb, nicht pro Zimmer oder Tisch. Monatlich oder jährlich.")},
+         "Colgo-Preise für Hotels, Restaurants und Geschäfte. Ein Preis pro Betrieb, nicht pro Zimmer oder Tisch. Monatlich oder jährlich."),
+  'es': ("Precios — Colgo",
+         "Precios de Colgo para hoteles, restaurantes y tiendas. Un precio por negocio, no por habitación ni por mesa. Mensual o anual, con 30 días de prueba gratis.")},
  'privacy.html': {
   'en': ("Privacy Policy — Colgo", None),
   'fr': ("Politique de confidentialité — Colgo", None),
-  'de': ("Datenschutzerklärung — Colgo", None)},
+  'de': ("Datenschutzerklärung — Colgo", None),
+  'es': ("Política de Privacidad — Colgo",
+         "Cómo Colgo recoge, usa y protege los datos personales, conforme al RGPD. Datos recogidos, finalidades, terceros, conservación y derechos del interesado.")},
  'ristorante.html': {
   'en': ("Colgo for restaurants and bars — Digital orders from the table",
          "Colgo for food service: the waiter handles orders from their own page, the customer can order by scanning the table QR — the order always goes straight to the kitchen."),
   'fr': ("Colgo pour restaurants et bars — Commandes numériques depuis la table",
          "Colgo pour la restauration : le serveur gère les commandes depuis sa page personnelle, le client peut commander en scannant le QR de la table — la commande arrive toujours directement en cuisine."),
   'de': ("Colgo für Restaurants und Bars — Digitale Bestellungen vom Tisch",
-         "Colgo für die Gastronomie: Der Kellner verwaltet Bestellungen auf seiner eigenen Seite, der Gast kann per Tisch-QR bestellen — die Bestellung geht immer direkt in die Küche.")},
+         "Colgo für die Gastronomie: Der Kellner verwaltet Bestellungen auf seiner eigenen Seite, der Gast kann per Tisch-QR bestellen — die Bestellung geht immer direkt in die Küche."),
+  'es': ("Colgo para restaurantes y bares — Pedidos digitales desde la mesa",
+         "Colgo para gastronomía: el mesero maneja los pedidos desde su propia página, o el cliente pide escaneando el QR de la mesa. El pedido llega a la cocina al instante.")},
 }
 
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
@@ -225,10 +248,10 @@ NAVIGA_NON_PIU_USATA = """
     // Pagine generate per lingua: qui il selettore NAVIGA, non riscrive. Ogni
     // lingua ha il suo indirizzo, e l'indirizzo deve dire il vero.
     function setLang(l) {
-      var supp = ['it','en','fr','de'];
+      var supp = ['it','en','fr','de','es'];
       if (supp.indexOf(l) === -1) return;
       try { localStorage.setItem('colgo_lang', l); } catch (e) {}
-      var p = location.pathname.replace(/^\\/(en|fr|de)(?=\\/|$)/, '');
+      var p = location.pathname.replace(/^\\/(en|fr|de|es)(?=\\/|$)/, '');
       if (!p || p === '/') p = '/';
       location.href = (l === 'it' ? '' : '/' + l) + (p === '/' ? '/' : p) + location.hash;
     }

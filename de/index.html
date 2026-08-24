@@ -1197,6 +1197,44 @@ img { height: auto; }
    dell'attributo e si schiaccia. */
 .footer-logo { width: auto; }
 </style>
+
+<!-- Dati strutturati. Solo fatti che stanno davvero sul sito: nessuna
+     valutazione, nessuna recensione, nessuna P.IVA (non compare da nessuna
+     parte e non si inventa). Neutro rispetto alla lingua: il generatore copia
+     il <head> tale e quale nelle versioni tradotte, quindi qui non ci va
+     niente che cambi da una lingua all'altra. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://colgo.app/#organizzazione",
+      "name": "Colgo",
+      "url": "https://colgo.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://colgo.app/colgo-og.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "email": "colgoapp@gmail.com",
+      "sameAs": [
+        "https://www.instagram.com/colgoapp",
+        "https://www.tiktok.com/@colgoapp"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://colgo.app/#sito",
+      "name": "Colgo",
+      "url": "https://colgo.app/",
+      "publisher": { "@id": "https://colgo.app/#organizzazione" },
+      "inLanguage": ["it", "en", "fr", "de", "es"]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -1305,7 +1343,7 @@ img { height: auto; }
     <h1 class="hero-headline">
       <span data-it="I tuoi clienti meritano più di un <em>foglio plastificato</em>." data-en="Your customers deserve more than a <em>laminated sheet</em>." data-fr="Vos clients méritent mieux qu'une <em>feuille plastifiée</em>." data-de="Ihre Gäste verdienen mehr als ein <em>laminiertes Blatt</em>." data-es="Tus clientes merecen algo más que una <em>hoja plastificada</em>.">Ihre Gäste verdienen mehr als ein <em>laminiertes Blatt</em>.</span>
     </h1>
-    <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in quattro lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in four languages." data-fr="Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, en quatre langues." data-de="Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in vier Sprachen." data-es="Colgo lleva tu catálogo al teléfono de tus clientes. Configurable, siempre al día, en cinco idiomas.">Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in vier Sprachen.</p>
+    <p class="hero-sub" data-it="Colgo porta il tuo catalogo sul telefono dei tuoi clienti. Configurabile, sempre aggiornato, in cinque lingue." data-en="Colgo puts your catalogue on your customers' phones. Configurable, always up to date, in five languages." data-fr="Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, en cinq langues." data-de="Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in fünf Sprachen." data-es="Colgo lleva tu catálogo al teléfono de tus clientes. Configurable, siempre al día, en cinco idiomas.">Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, in fünf Sprachen.</p>
     <div class="zero-barrier-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13.5h5.5L10 22l8-11.5h-5.5L13 2z"/></svg><span data-it="Zero barriere: nessun download richiesto per l'ospite. Funziona subito via browser." data-en="Zero barriers: no download required for the guest. Works instantly in the browser." data-fr="Zéro barrière : aucun téléchargement requis pour le client. Fonctionne directement dans le navigateur." data-de="Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser." data-es="Cero barreras: el huésped no descarga nada. Funciona enseguida desde el navegador.">Keine Hürden: kein Download für den Gast nötig. Funktioniert sofort im Browser.</span></div>
     <div class="hero-cta">
       <a href="https://app.colgo.app/demo" target="_blank" class="btn-primary" data-it="GUARDA LA DEMO" data-en="SEE THE DEMO" data-fr="VOIR LA DÉMO" data-de="DEMO ANSEHEN" data-es="MIRA LA DEMO">DEMO ANSEHEN</a>

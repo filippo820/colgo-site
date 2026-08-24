@@ -48,6 +48,17 @@ LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_
 
 # Titolo e descrizione non stanno negli attributi data-*: sono l'unica cosa che
 # va tradotta a mano. Sono anche cio' che si legge nei risultati di ricerca.
+# Nomi dei tre segmenti dentro il JSON-LD dei prezzi. Stesso schema di META:
+# il blocco viene copiato tale e quale nelle pagine tradotte, quindi senza
+# questa tabella la pagina inglese direbbe "Struttura ricettiva" in italiano.
+# Le CIFRE non si toccano mai: sono le stesse in tutte le lingue.
+OFFERTE = {
+ 'en': {'Struttura ricettiva': 'Accommodation', 'Ristorante': 'Restaurant', 'Negozio': 'Shop'},
+ 'fr': {'Struttura ricettiva': 'Hébergement',   'Ristorante': 'Restaurant', 'Negozio': 'Boutique'},
+ 'de': {'Struttura ricettiva': 'Unterkunft',    'Ristorante': 'Restaurant', 'Negozio': 'Geschäft'},
+ 'es': {'Struttura ricettiva': 'Alojamiento',   'Ristorante': 'Restaurante','Negozio': 'Tienda'},
+}
+
 META = {
  'index.html': {
   'en': ("Colgo — The digital catalogue for any business",
@@ -61,11 +72,11 @@ META = {
  'come-funziona.html': {
   'en': ("How Colgo works — Digital catalogue for hospitality",
          "See how Colgo works: QR code in the room, automatic multilingual catalogue, real-time requests to reception. No app, no downloads."),
-  'fr': ("Comment fonctionne Colgo — Catalogue numérique pour l'hébergement",
-         "Découvrez comment fonctionne Colgo : QR code en chambre, catalogue multilingue automatique, demandes en temps réel à la réception. Aucune application, aucun téléchargement."),
-  'de': ("So funktioniert Colgo — Digitaler Katalog für Beherbergungsbetriebe",
+  'fr': ("Comment fonctionne Colgo — catalogue numérique par QR",
+         "QR code en chambre, catalogue multilingue automatique, demandes en temps réel à la réception. Aucune application, aucun téléchargement."),
+  'de': ("So funktioniert Colgo — digitaler Katalog per QR",
          "So funktioniert Colgo: QR-Code im Zimmer, automatisch mehrsprachiger Katalog, Anfragen in Echtzeit an die Rezeption. Keine App, kein Download."),
-  'es': ("Cómo funciona Colgo — Catálogo digital para el sector hotelero",
+  'es': ("Cómo funciona Colgo — catálogo digital por QR",
          "Mira cómo funciona Colgo: código QR en la habitación, catálogo multiidioma automático, solicitudes en tiempo real a recepción. Sin app, sin descargas.")},
  'faq.html': {
   'en': ("FAQ — Colgo", "Frequently asked questions about Colgo. Everything you want to know before you start."),
@@ -74,50 +85,50 @@ META = {
   'es': ("Preguntas frecuentes — Colgo",
          "Respuestas a las dudas más comunes sobre Colgo: precios, idiomas, configuración, pagos y seguridad de los datos.")},
  'hotel.html': {
-  'en': ("Colgo for hotels, B&Bs and farm stays — Digital catalogue for guests",
+  'en': ("Colgo for hotels, B&Bs and farm stays — digital catalogue",
          "Colgo for hospitality: guests scan the QR in the room or get the link before arrival, explore services and send requests to reception in real time."),
-  'fr': ("Colgo pour hôtels, B&B et fermes-auberges — Catalogue numérique pour les clients",
-         "Colgo pour l'hôtellerie : les clients scannent le QR en chambre ou reçoivent le lien avant l'arrivée, explorent les services et envoient des demandes en temps réel à la réception."),
-  'de': ("Colgo für Hotels, B&Bs und Ferienhöfe — Digitaler Katalog für Gäste",
-         "Colgo für die Hotellerie: Gäste scannen den QR im Zimmer oder erhalten den Link vor der Anreise, entdecken Leistungen und senden Anfragen in Echtzeit an die Rezeption."),
-  'es': ("Colgo para hoteles, B&B y casas rurales — Catálogo digital para huéspedes",
-         "Colgo para alojamientos: el huésped escanea el QR de la habitación o recibe el enlace antes de llegar, recorre los servicios y envía solicitudes a recepción.")},
+  'fr': ("Colgo pour hôtels et fermes-auberges — catalogue numérique",
+         "Les clients scannent le QR en chambre ou reçoivent le lien avant l'arrivée : ils explorent les services et envoient leurs demandes à la réception."),
+  'de': ("Colgo für Hotels, B&Bs und Ferienhöfe — digitaler Katalog",
+         "Gäste scannen den QR im Zimmer oder erhalten den Link vor der Anreise, entdecken Leistungen und senden Anfragen an die Rezeption."),
+  'es': ("Colgo para hoteles, B&B y casas rurales — catálogo digital",
+         "El huésped escanea el QR de la habitación o recibe el enlace antes de llegar, recorre los servicios y envía solicitudes a recepción.")},
  'negozio.html': {
-  'en': ("Colgo for shops and boutiques — Digital catalogue in the window",
+  'en': ("Colgo for shops and boutiques — digital catalogue",
          "Colgo for retail: customers scan the QR in the window, even when the shop is closed, browse the catalogue and prepare their list before walking in."),
-  'fr': ("Colgo pour boutiques et magasins — Catalogue numérique en vitrine",
+  'fr': ("Colgo pour boutiques et magasins — catalogue en vitrine",
          "Colgo pour le commerce : le client scanne le QR en vitrine, même magasin fermé, parcourt le catalogue et prépare sa liste avant même d'entrer."),
-  'de': ("Colgo für Geschäfte und Boutiquen — Digitaler Katalog im Schaufenster",
-         "Colgo für den Handel: Kunden scannen den QR im Schaufenster, auch bei geschlossenem Laden, blättern im Katalog und stellen ihre Liste zusammen, bevor sie eintreten."),
-  'es': ("Colgo para tiendas y boutiques — Catálogo digital en la vitrina",
+  'de': ("Colgo für Geschäfte — digitaler Katalog im Schaufenster",
+         "Kunden scannen den QR im Schaufenster, auch bei geschlossenem Laden, blättern im Katalog und stellen ihre Liste zusammen."),
+  'es': ("Colgo para tiendas y boutiques — catálogo digital",
          "Colgo para comercios: el cliente escanea el QR de la vitrina, incluso con la tienda cerrada, recorre el catálogo y arma su lista para el mostrador.")},
  'organizzazione.html': {
-  'en': ("Access and catalogue — who sees what in Colgo, and how you govern it",
-         "Six diagrams: access levels from owner to waiter, the request queue for staff, one PIN for several venues, catalogue visibility, the editor and multi-venue."),
-  'fr': ("Accès et catalogue — qui voit quoi dans Colgo, et comment le gouverner",
-         "Six schémas : les niveaux d'accès du propriétaire au serveur, la file des demandes au personnel, un PIN pour plusieurs sites, la visibilité du catalogue, l'éditeur et le multi-site."),
-  'de': ("Zugriffe und Katalog — wer in Colgo was sieht, und wie Sie ihn steuern",
-         "Sechs Schaubilder: Zugriffsebenen vom Inhaber bis zum Kellner, die Anfrage-Warteschlange fürs Personal, eine PIN für mehrere Standorte, Sichtbarkeit des Katalogs, der Editor und Mehrstandort."),
-  'es': ("Accesos y catálogo — quién ve qué en Colgo, y cómo lo gobiernas",
+  'en': ("Access and catalogue — who sees what in Colgo",
+         "Six diagrams: access levels from owner to waiter, the request queue for staff, one PIN for several venues, catalogue visibility."),
+  'fr': ("Accès et catalogue — qui voit quoi dans Colgo",
+         "Six schémas : les niveaux d'accès du propriétaire au serveur, la file des demandes au personnel, un PIN pour plusieurs sites, la visibilité du catalogue."),
+  'de': ("Zugriffe und Katalog — wer in Colgo was sieht",
+         "Sechs Schaubilder: Zugriffsebenen vom Inhaber bis zum Kellner, die Anfrage-Warteschlange, eine PIN für mehrere Standorte, Sichtbarkeit des Katalogs."),
+  'es': ("Accesos y catálogo — quién ve qué en Colgo",
          "Seis esquemas: niveles de acceso del titular al mesero, la fila de solicitudes del staff, un PIN para varias sedes, visibilidad del catálogo y editor.")},
  'per-chi.html': {
-  'en': ("Who Colgo is for — Hotels, B&Bs, campsites, restaurants, shops",
+  'en': ("Who Colgo is for — hotels, campsites, restaurants, shops",
          "Colgo adapts to hotels, B&Bs, farm stays, campsites, restaurants, beach clubs and shops. One configurable system for any business with a catalogue."),
-  'fr': ("Pour qui est Colgo — Hôtels, B&B, campings, restaurants, boutiques",
-         "Colgo s'adapte aux hôtels, B&B, fermes-auberges, campings, restaurants, établissements balnéaires et boutiques. Un seul système configurable pour tout établissement avec un catalogue."),
-  'de': ("Für wen Colgo ist — Hotels, B&Bs, Campingplätze, Restaurants, Geschäfte",
-         "Colgo passt sich Hotels, B&Bs, Ferienhöfen, Campingplätzen, Restaurants, Strandbädern und Geschäften an. Ein konfigurierbares System für jeden Betrieb mit einem Katalog."),
-  'es': ("Para quién es Colgo — Hoteles, B&B, campings, restaurantes, tiendas",
+  'fr': ("Pour qui est Colgo — hôtels, campings, restaurants",
+         "Colgo s'adapte aux hôtels, B&B, campings, restaurants, établissements balnéaires et boutiques. Un système configurable pour chaque contexte."),
+  'de': ("Für wen Colgo ist — Hotels, Campingplätze, Restaurants",
+         "Colgo passt sich Hotels, B&Bs, Campingplätzen, Restaurants, Strandbädern und Geschäften an. Ein konfigurierbares System für jeden Betrieb."),
+  'es': ("Para quién es Colgo — hoteles, campings, restaurantes",
          "Colgo se adapta a hoteles, B&B, casas rurales, campings, restaurantes, balnearios y tiendas. Un solo sistema configurable para cada contexto.")},
  'perche-digitale.html': {
   'en': ("Why digital — the numbers behind the QR catalogue",
          "QR adoption, the language barrier, staff shortages, the cost of paper: the industry data explaining why a digital catalogue beats the printed sheet."),
-  'fr': ("Pourquoi le numérique — les chiffres derrière le catalogue par QR",
-         "Adoption des QR, barrière de la langue, manque de personnel, coût du papier : les données du secteur qui expliquent pourquoi un catalogue numérique bat la feuille imprimée."),
+  'fr': ("Pourquoi le numérique — les chiffres du catalogue par QR",
+         "Adoption des QR, barrière de la langue, manque de personnel, coût du papier : les données du secteur derrière le catalogue numérique."),
   'de': ("Warum digital — die Zahlen hinter dem QR-Katalog",
          "QR-Verbreitung, Sprachbarriere, Personalmangel, Papierkosten: die Branchendaten, die erklären, warum ein digitaler Katalog das gedruckte Blatt schlägt."),
   'es': ("Por qué digital — los números detrás del catálogo por QR",
-         "Adopción del QR, la barrera del idioma, la falta de personal, el costo del papel: los datos del sector que explican por qué un catálogo digital ya es lo normal.")},
+         "Adopción del QR, la barrera del idioma, la falta de personal, el costo del papel: los datos del sector detrás del catálogo digital.")},
  'prezzi.html': {
   'en': ("Pricing — Colgo",
          "Colgo pricing for hotels, restaurants and shops. One price per business, not per room or table. Monthly or yearly."),
@@ -128,20 +139,23 @@ META = {
   'es': ("Precios — Colgo",
          "Precios de Colgo para hoteles, restaurantes y tiendas. Un precio por negocio, no por habitación ni por mesa. Mensual o anual, con 30 días de prueba gratis.")},
  'privacy.html': {
-  'en': ("Privacy Policy — Colgo", None),
-  'fr': ("Politique de confidentialité — Colgo", None),
-  'de': ("Datenschutzerklärung — Colgo", None),
+  'en': ("Privacy Policy — Colgo",
+         "Colgo privacy policy: what data we collect, why, how long we keep it and how to exercise your rights."),
+  'fr': ("Politique de confidentialité — Colgo",
+         "Politique de confidentialité de Colgo : quelles données nous collectons, pourquoi, combien de temps et comment exercer vos droits."),
+  'de': ("Datenschutzerklärung — Colgo",
+         "Datenschutzerklärung von Colgo: welche Daten wir erheben, warum, wie lange wir sie speichern und wie Sie Ihre Rechte ausüben."),
   'es': ("Política de Privacidad — Colgo",
          "Cómo Colgo recoge, usa y protege los datos personales, conforme al RGPD. Datos recogidos, finalidades, terceros, conservación y derechos del interesado.")},
  'ristorante.html': {
-  'en': ("Colgo for restaurants and bars — Digital orders from the table",
-         "Colgo for food service: the waiter handles orders from their own page, the customer can order by scanning the table QR — the order always goes straight to the kitchen."),
-  'fr': ("Colgo pour restaurants et bars — Commandes numériques depuis la table",
-         "Colgo pour la restauration : le serveur gère les commandes depuis sa page personnelle, le client peut commander en scannant le QR de la table — la commande arrive toujours directement en cuisine."),
-  'de': ("Colgo für Restaurants und Bars — Digitale Bestellungen vom Tisch",
-         "Colgo für die Gastronomie: Der Kellner verwaltet Bestellungen auf seiner eigenen Seite, der Gast kann per Tisch-QR bestellen — die Bestellung geht immer direkt in die Küche."),
-  'es': ("Colgo para restaurantes y bares — Pedidos digitales desde la mesa",
-         "Colgo para gastronomía: el mesero maneja los pedidos desde su propia página, o el cliente pide escaneando el QR de la mesa. El pedido llega a la cocina al instante.")},
+  'en': ("Colgo for restaurants and bars — orders from the table",
+         "The waiter handles orders from their own page, the customer can order by scanning the table QR. The order always goes straight to the kitchen."),
+  'fr': ("Colgo pour restaurants et bars — commandes à table",
+         "Le serveur gère les commandes depuis sa page personnelle, le client peut commander en scannant le QR de la table. La commande arrive en cuisine."),
+  'de': ("Colgo für Restaurants und Bars — Bestellungen am Tisch",
+         "Der Kellner verwaltet Bestellungen auf seiner eigenen Seite, der Gast bestellt per Tisch-QR. Die Bestellung geht direkt in die Küche."),
+  'es': ("Colgo para restaurantes y bares — pedidos desde la mesa",
+         "El mesero maneja los pedidos desde su propia página, o el cliente pide escaneando el QR de la mesa. El pedido llega a la cocina al instante.")},
 }
 
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
@@ -206,6 +220,85 @@ class Traduci(HTMLParser):
     def unknown_decl(self, d):       self.emetti(f'<![{d}]>')
     def handle_entityref(self, n):   self.emetti(f'&{n};')
     def handle_charref(self, n):     self.emetti(f'&#{n};')
+
+
+def faqpage(html, lingua, url):
+    """Dati strutturati della FAQ, RICAVATI dalla pagina.
+
+    Non una copia scritta a mano: domande e risposte si leggono dagli stessi
+    attributi che producono il testo visibile, quindi il markup non puo' dire
+    una cosa diversa da quella che il lettore vede, ne' contenere domande che
+    nella pagina non ci sono.
+
+    Regola: quello che sta DOPO uno stacco di paragrafo (<br/><br/>) resta
+    fuori. Serve per la domanda sui pagamenti, dove la riga sul lavoro in corso
+    e' testo normale e non deve finire in un blocco che gli assistenti citano
+    come se fosse la risposta.
+
+    ⚠️ Serve un parser, non un regex: gli attributi contengono <br/>, quindi
+    qualsiasi `[^>]*` si ferma DENTRO l'attributo e perde la coppia. Con il
+    regex uscivano 12 domande su 13, e proprio quella dei pagamenti.
+    """
+    import json as _json
+    from html.parser import HTMLParser as _HP
+
+    # ⚠️ Prima si TOGLIE un eventuale blocco gia' presente. Il file italiano lo
+    # contiene (glielo scrive questo stesso script) e la generazione lo copia
+    # dentro le tradotte: senza questa riga la pagina inglese finiva con DUE
+    # FAQPage, il primo dei quali in italiano.
+    html = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)',
+                  '', html, flags=re.S)
+
+    class Raccogli(_HP):
+        def __init__(self):
+            super().__init__(convert_charrefs=False)
+            self.voci = []
+            self.attesa = None
+        def handle_starttag(self, tag, attrs):
+            d = dict(attrs)
+            classe = d.get('class', '')
+            if 'faq-q' in classe:
+                self.attesa = d.get('data-' + lingua)
+            elif 'faq-a' in classe and self.attesa:
+                r = d.get('data-' + lingua)
+                if r:
+                    self.voci.append((self.attesa, r))
+                self.attesa = None
+
+    r = Raccogli()
+    r.feed(html)
+    if not r.voci:
+        return html
+
+    def pulisci(t):
+        t = re.sub(r'<[^>]+>', ' ', t)
+        for a, b in (('&amp;', '&'), ('&quot;', '"'), ('&#39;', "'"),
+                     ('&nbsp;', ' '), ('&ugrave;', 'ù'), ('&eacute;', 'é')):
+            t = t.replace(a, b)
+        return re.sub(r'\s+', ' ', t).strip()
+
+    voci = []
+    for d, risp in r.voci:
+        risp = re.split(r'<br\s*/?>\s*<br\s*/?>', risp)[0]
+        voci.append({
+            "@type": "Question",
+            "name": pulisci(d),
+            "acceptedAnswer": {"@type": "Answer", "text": pulisci(risp)},
+        })
+
+    grafo = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": url + "#faq",
+        "inLanguage": lingua,
+        "mainEntity": voci,
+    }
+    blocco = ('\n<!-- FAQ: generato da scripts/lingue.py leggendo gli attributi della\n'
+              '     pagina. Non si modifica a mano: rispecchia sempre le domande che\n'
+              '     ci sono davvero, nella lingua che si sta leggendo. -->\n'
+              '<script type="application/ld+json">\n'
+              + _json.dumps(grafo, ensure_ascii=False, indent=2) + '\n</script>\n</head>')
+    return html.replace('</head>', blocco, 1)
 
 
 def indirizzo(pagina, lingua):
@@ -310,6 +403,15 @@ def genera(pagina, lingua):
     s = s.replace(f'<button class="lang-btn" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>',
                   f'<button class="lang-btn active" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>')
 
+    if pagina == 'faq.html':
+        s = faqpage(s, lingua, indirizzo(pagina, lingua))
+
+    if pagina == 'prezzi.html':
+        # solo le ETICHETTE dei segmenti: le cifre restano quelle che sono
+        for it_, tr in OFFERTE[lingua].items():
+            s = s.replace('"name": "%s — ' % it_, '"name": "%s — ' % tr)
+            s = s.replace('"category": "%s"' % it_, '"category": "%s"' % tr)
+
     # la riga sul valore legale, solo nelle versioni tradotte dell'informativa
     if pagina == 'privacy.html':
         s = s.replace('</header>',
@@ -338,6 +440,11 @@ def main():
         s = io.open(f, encoding='utf-8').read()
         s = re.sub(r'\n?  <link rel="alternate" hreflang="[^"]*" href="[^"]*" />', '', s)
         s = s.replace('  <link rel="canonical"', alternate(pagina) + '  <link rel="canonical"', 1)
+        # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
+        # strutturati che NON si scrive a mano nel file
+        s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)
+        if pagina == 'faq.html':
+            s = faqpage(s, 'it', indirizzo(pagina, 'it'))
         io.open(f, 'w', encoding='utf-8').write(s)
     print(f'{len(PAGINE)} pagine italiane: aggiunto hreflang')
 

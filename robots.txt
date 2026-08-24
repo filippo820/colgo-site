@@ -1,8 +1,52 @@
 # colgo.app — sito di presentazione
-User-agent: *
-Allow: /
 
 # Le stesse pagine rispondono anche con .html in coda: l'indirizzo buono e'
 # quello dichiarato nel <link rel="canonical"> di ogni pagina, senza .html.
+
+User-agent: *
+Allow: /
+
+# ── Assistenti e motori, nominati uno per uno ──────────────────────────────
+# NB: la regola `*` qui sopra li permetterebbe gia' tutti. Questi blocchi non
+# sbloccano niente: rendono l'intenzione esplicita e fanno si' che, se un
+# giorno `*` viene ristretto, gli assistenti non restino esclusi per sbaglio.
+# Nomi presi dalla documentazione dei fornitori, verificata il 24/08/2026 —
+# nessuno scritto a memoria.
+
+# OpenAI — developers.openai.com/api/docs/bots
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — privacy.claude.com/en/articles/8896518
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity — docs.perplexity.ai/guides/bots
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google — developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+User-agent: Googlebot
+Allow: /
+
+# Google-Extended non e' un crawler: governa se i contenuti gia' raccolti
+# possono essere usati da Gemini. Non influenza il posizionamento su Google.
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://colgo.app/sitemap.xml

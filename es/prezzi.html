@@ -443,6 +443,175 @@ img { height: auto; }
    dell'attributo e si schiaccia. */
 .footer-logo { width: auto; }
 </style>
+
+<!-- Prezzi: le stesse cifre della pagina, IVA esclusa come dichiarato
+     in cima. Sei offerte DISTINTE: 39 EUR ricettiva e 39 EUR ristorante
+     coincidono per caso, non sono la stessa cosa.
+     Nessuna semantica di acquisto immediato (niente availability, niente
+     priceValidUntil, url alla pagina che descrive): il percorso reale e'
+     la prova di 30 giorni, non un carrello.
+     Nessuna valutazione, nessun metodo di pagamento. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://colgo.app/#applicazione",
+  "name": "Colgo",
+  "url": "https://colgo.app/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "publisher": {
+    "@id": "https://colgo.app/#organizzazione"
+  },
+  "inLanguage": [
+    "it",
+    "en",
+    "fr",
+    "de",
+    "es"
+  ],
+  "offers": [
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#ricettiva-base",
+      "name": "Alojamiento — Base",
+      "category": "Alojamiento",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "39.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "390.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#ricettiva-pro",
+      "name": "Alojamiento — Pro",
+      "category": "Alojamiento",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "59.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "590.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#ristorante-base",
+      "name": "Restaurante — Base",
+      "category": "Restaurante",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "39.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "390.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#ristorante-pro",
+      "name": "Restaurante — Pro",
+      "category": "Restaurante",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "69.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "690.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#negozio-base",
+      "name": "Tienda — Base",
+      "category": "Tienda",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "29.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "290.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://colgo.app/prezzi#negozio-pro",
+      "name": "Tienda — Pro",
+      "category": "Tienda",
+      "url": "https://colgo.app/prezzi",
+      "priceSpecification": [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "49.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "MONTH"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "490.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "unitText": "YEAR"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

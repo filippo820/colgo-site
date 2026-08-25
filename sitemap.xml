@@ -497,6 +497,61 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://colgo.app/struttura-stagionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://colgo.app/es/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/struttura-stagionale"/>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/en/struttura-stagionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://colgo.app/es/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/struttura-stagionale"/>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/fr/struttura-stagionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://colgo.app/es/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/struttura-stagionale"/>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/de/struttura-stagionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://colgo.app/es/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/struttura-stagionale"/>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colgo.app/es/struttura-stagionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://colgo.app/fr/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://colgo.app/de/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://colgo.app/es/struttura-stagionale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://colgo.app/struttura-stagionale"/>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://colgo.app/faq</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://colgo.app/faq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://colgo.app/en/faq"/>

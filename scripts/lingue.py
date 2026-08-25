@@ -43,7 +43,8 @@ PREVALE_ITALIANO = {
 PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio.html',
           'organizzazione.html', 'per-chi.html', 'perche-digitale.html', 'prezzi.html',
           'privacy.html', 'ristorante.html',
-           'qr-code-in-camera.html', 'catalogo-complesso.html']
+           'qr-code-in-camera.html', 'catalogo-complesso.html',
+           'struttura-stagionale.html']
 
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
@@ -61,6 +62,15 @@ OFFERTE = {
 }
 
 META = {
+ 'struttura-stagionale.html': {
+  'en': ("Seasonal business: do you pay while closed?",
+         "Eight monthly instalments for seven active months, charged once when you open. During the off months the catalogue pauses but the QR codes stay valid."),
+  'fr': ("Établissement saisonnier : paie-t-on fermé ?",
+         "Huit mensualités pour sept mois actifs, prélevées une fois à l'ouverture. Pendant les mois de repos le catalogue est en pause mais les QR restent valables."),
+  'de': ("Saisonbetrieb: zahlt man auch geschlossen?",
+         "Acht Monatsraten für sieben aktive Monate, einmalig bei Öffnung abgebucht. In den Ruhemonaten pausiert der Katalog, die QR-Codes bleiben gültig."),
+  'es': ("Negocio de temporada: ¿se paga cerrado?",
+         "Ocho mensualidades por siete meses activos, cobradas una vez al abrir. En los meses de descanso el catálogo se pausa pero los QR siguen válidos.")},
  'qr-code-in-camera.html': {
   'en': ("In-room QR codes: what you need to start",
          "What you actually need for an in-room QR code: size, printing, what the guest sees, and what happens if you rename a room."),
@@ -478,7 +488,7 @@ def main():
     PRIO = {'index.html':'1.0','come-funziona.html':'0.9','prezzi.html':'0.9','hotel.html':'0.8',
             'ristorante.html':'0.8','negozio.html':'0.8','perche-digitale.html':'0.8',
             'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3',
-            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8'}
+            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8'}
     voci = []
     for pagina in sorted(PAGINE, key=lambda x: (-float(PRIO[x]), x)):
         lm = lastmod(pagina)

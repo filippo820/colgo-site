@@ -612,6 +612,25 @@ img { height: auto; }
   ]
 }
 </script>
+<style>
+.stag-section{max-width:900px;margin:0 auto;padding:60px 32px 100px;text-align:center;}
+.stag-titolo{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400;color:var(--cream);margin:0 0 18px;}
+.stag-sub{font-size:16px;line-height:1.85;color:rgba(245,241,232,0.82);max-width:640px;margin:0 auto 26px;}
+.stag-nota8{font-size:12px;letter-spacing:3px;color:var(--ochre);margin-bottom:26px;}
+.stag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:14px;}
+.stag-card{border:1px solid rgba(245,241,232,0.12);border-radius:14px;padding:22px 18px;background:rgba(245,241,232,0.03);}
+.stag-nome{font-size:13px;letter-spacing:2px;color:var(--cream);margin-bottom:16px;}
+.stag-riga{display:flex;align-items:baseline;justify-content:space-between;padding:9px 0;border-top:1px solid rgba(245,241,232,0.08);}
+.stag-piano{font-size:12px;letter-spacing:2px;color:rgba(245,241,232,0.6);}
+.stag-prezzo{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--cream);}
+.stag-prezzo sup{font-size:15px;margin-left:2px;}
+.stag-iva{font-size:12px;letter-spacing:2px;color:var(--ochre);opacity:0.85;margin-bottom:34px;}
+.stag-regole{list-style:none;padding:0;margin:0 auto 22px;max-width:660px;text-align:left;}
+.stag-regole li{font-size:15px;line-height:1.8;color:rgba(245,241,232,0.82);padding:13px 0 13px 22px;border-bottom:1px solid rgba(245,241,232,0.08);position:relative;}
+.stag-regole li::before{content:'—';position:absolute;left:0;color:var(--ochre);}
+.stag-req{font-size:13px;color:rgba(245,241,232,0.55);max-width:600px;margin:0 auto;line-height:1.7;}
+@media(max-width:760px){.stag-grid{grid-template-columns:1fr;}.stag-titolo{font-size:27px;}.stag-section{padding:44px 22px 70px;}}
+</style>
 </head>
 <body>
 
@@ -844,6 +863,40 @@ img { height: auto; }
       <p class="cta-opt-note" data-it="La tua struttura vera, i tuoi servizi, i tuoi QR. Nessuna carta di credito." data-en="Your real business, your services, your QR codes. No credit card." data-fr="Votre &eacute;tablissement r&eacute;el, vos services, vos QR. Aucune carte bancaire." data-de="Ihr echter Betrieb, Ihre Leistungen, Ihre QR-Codes. Keine Kreditkarte." data-es="Tu establecimiento real, tus servicios, tus QR. Sin tarjeta de crédito.">Your real business, your services, your QR codes. No credit card.</p>
     </div>
   </div>
+
+<div class="stag-section">
+  <div class="gold-line"></div>
+  <h2 class="stag-titolo" data-it="Chiudi per una parte dell'anno?" data-en="Closed for part of the year?" data-fr="Fermé une partie de l'année ?" data-de="Einen Teil des Jahres geschlossen?" data-es="¿Cierras parte del año?">Closed for part of the year?</h2>
+  <p class="stag-sub" data-it="Scegli i tuoi 7 mesi. Nei mesi di riposo il catalogo si mette in pausa, ma i QR restano validi e l'anteprima resta attiva: prepari tutto con calma. Serve un mese in più? Lo aggiungi quando vuoi." data-en="Choose your 7 months. During the off months the catalogue is paused, but the QR codes stay valid and the preview stays open: you can prepare everything calmly. Need one more month? You add it whenever you like." data-fr="Choisissez vos 7 mois. Pendant les mois de repos le catalogue est en pause, mais les QR restent valables et l'aperçu reste accessible : vous préparez tout tranquillement. Besoin d'un mois de plus ? Vous l'ajoutez quand vous voulez." data-de="Wählen Sie Ihre 7 Monate. In den Ruhemonaten pausiert der Katalog, aber die QR-Codes bleiben gültig und die Vorschau bleibt offen: Sie bereiten alles in Ruhe vor. Ein Monat mehr nötig? Den fügen Sie hinzu, wann Sie wollen." data-es="Elige tus 7 meses. En los meses de descanso el catálogo se pausa, pero los QR siguen válidos y la vista previa sigue activa: preparas todo con calma. ¿Hace falta un mes más? Lo añades cuando quieras.">Choose your 7 months. During the off months the catalogue is paused, but the QR codes stay valid and the preview stays open: you can prepare everything calmly. Need one more month? You add it whenever you like.</p>
+  <div class="stag-nota8" data-it="8 mensilità per 7 mesi attivi" data-en="8 monthly payments for 7 active months" data-fr="8 mensualités pour 7 mois actifs" data-de="8 Monatsraten für 7 aktive Monate" data-es="8 mensualidades por 7 meses activos">8 monthly payments for 7 active months</div>
+  <div class="stag-grid">
+      <div class="stag-card">
+        <div class="stag-nome" data-it="Struttura ricettiva" data-en="Accommodation" data-fr="Hébergement" data-de="Unterkunft" data-es="Alojamiento">Accommodation</div>
+        <div class="stag-riga"><span class="stag-piano">BASE</span><span class="stag-prezzo">310<sup>€</sup></span></div>
+        <div class="stag-riga"><span class="stag-piano">PRO</span><span class="stag-prezzo">470<sup>€</sup></span></div>
+      </div>
+      <div class="stag-card">
+        <div class="stag-nome" data-it="Ristorante" data-en="Restaurant" data-fr="Restaurant" data-de="Restaurant" data-es="Restaurante">Restaurant</div>
+        <div class="stag-riga"><span class="stag-piano">BASE</span><span class="stag-prezzo">310<sup>€</sup></span></div>
+        <div class="stag-riga"><span class="stag-piano">PRO</span><span class="stag-prezzo">550<sup>€</sup></span></div>
+      </div>
+      <div class="stag-card">
+        <div class="stag-nome" data-it="Negozio" data-en="Shop" data-fr="Boutique" data-de="Geschäft" data-es="Tienda">Shop</div>
+        <div class="stag-riga"><span class="stag-piano">BASE</span><span class="stag-prezzo">230<sup>€</sup></span></div>
+        <div class="stag-riga"><span class="stag-piano">PRO</span><span class="stag-prezzo">390<sup>€</sup></span></div>
+      </div>
+  </div>
+  <div class="stag-iva" data-it="TUTTI I PREZZI SONO IVA ESCLUSA" data-en="ALL PRICES EXCLUDE VAT" data-fr="TOUS LES PRIX S'ENTENDENT HORS TAXES" data-de="ALLE PREISE VERSTEHEN SICH ZZGL. MWST." data-es="TODOS LOS PRECIOS SON SIN IVA">ALL PRICES EXCLUDE VAT</div>
+  <ul class="stag-regole">
+        <li data-it="Scegli il mese di apertura e quello di chiusura: il sistema conta 7 mesi attivi ovunque cadano. Si modificano solo prima della riapertura." data-en="You choose your opening and closing month: the system counts 7 active months wherever they fall. They can only be changed before you reopen." data-fr="Vous choisissez le mois d'ouverture et celui de fermeture : le système compte 7 mois actifs où qu'ils tombent. Ils ne se modifient qu'avant la réouverture." data-de="Sie wählen Öffnungs- und Schließmonat: das System zählt 7 aktive Monate, wo immer sie liegen. Ändern lassen sie sich nur vor der Wiedereröffnung." data-es="Eliges el mes de apertura y el de cierre: el sistema cuenta 7 meses activos, caigan donde caigan. Solo se modifican antes de reabrir.">You choose your opening and closing month: the system counts 7 active months wherever they fall. They can only be changed before you reopen.</li>
+        <li data-it="Addebito unico al mese di apertura, non a gennaio." data-en="A single charge in your opening month, not in January." data-fr="Prélèvement unique au mois d'ouverture, pas en janvier." data-de="Eine einzige Abbuchung im Öffnungsmonat, nicht im Januar." data-es="Cobro único en el mes de apertura, no en enero.">A single charge in your opening month, not in January.</li>
+        <li data-it="Nei 5 mesi di riposo il catalogo pubblico è in pausa, ma i QR restano validi, i contenuti restano salvati e il pannello con l'anteprima ospite restano accessibili." data-en="During the 5 off months the public catalogue is paused, but the QR codes stay valid, your content stays saved, and the panel and guest preview stay accessible." data-fr="Pendant les 5 mois de repos le catalogue public est en pause, mais les QR restent valables, les contenus restent enregistrés, et le panneau et l'aperçu client restent accessibles." data-de="In den 5 Ruhemonaten pausiert der öffentliche Katalog, aber die QR-Codes bleiben gültig, die Inhalte bleiben gespeichert, und Panel und Gastvorschau bleiben zugänglich." data-es="En los 5 meses de descanso el catálogo público está en pausa, pero los QR siguen válidos, los contenidos siguen guardados, y el panel y la vista previa del huésped siguen accesibles.">During the 5 off months the public catalogue is paused, but the QR codes stay valid, your content stays saved, and the panel and guest preview stay accessible.</li>
+        <li data-it="Se attivi in anticipo paghi da quando apri, fino a 90 giorni prima." data-en="If you activate early you pay from the day you open, up to 90 days ahead." data-fr="Si vous activez en avance, vous payez à partir de l'ouverture, jusqu'à 90 jours avant." data-de="Bei früher Aktivierung zahlen Sie ab der Öffnung, bis zu 90 Tage im Voraus." data-es="Si activas por adelantado pagas desde que abres, hasta 90 días antes.">If you activate early you pay from the day you open, up to 90 days ahead.</li>
+        <li data-it="Serve un mese in più? Lo aggiungi da solo a tariffa mensile piena, senza contattare nessuno." data-en="Need an extra month? You add it yourself at the full monthly rate, without contacting anyone." data-fr="Besoin d'un mois de plus ? Vous l'ajoutez vous-même au tarif mensuel plein, sans contacter personne." data-de="Ein Monat mehr nötig? Den fügen Sie selbst zum vollen Monatstarif hinzu, ohne jemanden zu kontaktieren." data-es="¿Hace falta un mes más? Lo añades tú al precio mensual completo, sin contactar con nadie.">Need an extra month? You add it yourself at the full monthly rate, without contacting anyone.</li>
+  </ul>
+  <p class="stag-req" data-it="Riservato alle strutture che chiudono completamente per parte dell'anno. Si dichiara all'attivazione." data-en="Reserved for businesses that close completely for part of the year. You declare it when you activate." data-fr="Réservé aux établissements qui ferment complètement une partie de l'année. Cela se déclare à l'activation." data-de="Nur für Betriebe, die einen Teil des Jahres vollständig schließen. Wird bei der Aktivierung angegeben." data-es="Reservado a negocios que cierran por completo parte del año. Se declara al activarlo.">Reserved for businesses that close completely for part of the year. You declare it when you activate.</p>
+</div>
+
 </div>
 
 <footer>
@@ -857,6 +910,7 @@ img { height: auto; }
     <a href="/en/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Why digital</a>
     <a href="/en/qr-code-in-camera.html" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">In-room QR</a>
     <a href="/en/catalogo-complesso.html" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Complex catalogues</a>
+    <a href="/en/struttura-stagionale.html" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Seasonal</a>
     <a href="/en/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Privacy Policy</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>

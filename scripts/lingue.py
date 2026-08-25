@@ -42,7 +42,8 @@ PREVALE_ITALIANO = {
 
 PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio.html',
           'organizzazione.html', 'per-chi.html', 'perche-digitale.html', 'prezzi.html',
-          'privacy.html', 'ristorante.html']
+          'privacy.html', 'ristorante.html',
+           'qr-code-in-camera.html', 'catalogo-complesso.html']
 
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
@@ -60,6 +61,24 @@ OFFERTE = {
 }
 
 META = {
+ 'qr-code-in-camera.html': {
+  'en': ("In-room QR codes: what you need to start",
+         "What you actually need for an in-room QR code: size, printing, what the guest sees, and what happens if you rename a room."),
+  'fr': ("QR en chambre : ce qu'il faut pour démarrer",
+         "Ce qu'il faut vraiment pour un QR en chambre : taille, impression, ce que voit le client et ce qui arrive si vous renommez une chambre."),
+  'de': ("QR im Zimmer: was man zum Start braucht",
+         "Was ein QR-Code im Zimmer wirklich braucht: Größe, Druck, was der Gast sieht und was passiert, wenn Sie ein Zimmer umbenennen."),
+  'es': ("QR en la habitación: qué hace falta para empezar",
+         "Qué hace falta de verdad para un QR en la habitación: tamaño, impresión, qué ve el huésped y qué pasa si cambias el nombre de una habitación.")},
+ 'catalogo-complesso.html': {
+  'en': ("Complex menu: can a digital catalogue cope?",
+         "Nested subcategories, prices per size, hours per category and stock re-checked when the order is sent. With the limits stated: no PMS, no till."),
+  'fr': ("Menu complexe : un catalogue numérique tient-il ?",
+         "Sous-catégories imbriquées, prix par taille, horaires par catégorie et stock revérifié à l'envoi. Avec les limites annoncées : ni PMS ni caisse."),
+  'de': ("Komplexe Karte: hält ein digitaler Katalog das aus?",
+         "Verschachtelte Unterkategorien, Preise je Größe, Zeiten je Kategorie und beim Absenden erneut geprüfter Bestand. Mit den Grenzen: kein PMS, keine Kasse."),
+  'es': ("Menú complejo: ¿aguanta un catálogo digital?",
+         "Subcategorías anidadas, precios por talla, horarios por categoría y stock recomprobado al enviar. Con los límites dichos: ni PMS ni caja.")},
  'index.html': {
   'en': ("Colgo — The digital catalogue for any business",
          "Colgo puts your catalogue on your customers' phones. Configurable, always up to date, without complications."),
@@ -403,7 +422,9 @@ def genera(pagina, lingua):
     s = s.replace(f'<button class="lang-btn" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>',
                   f'<button class="lang-btn active" onclick="setLang(\'{lingua}\')">{lingua.upper()}</button>')
 
-    if pagina == 'faq.html':
+    # ovunque ci siano domande, non solo su faq.html: le pagine costruite
+    # su una domanda hanno il loro blocco in fondo
+    if 'faq-q' in s:
         s = faqpage(s, lingua, indirizzo(pagina, lingua))
 
     if pagina == 'prezzi.html':
@@ -443,7 +464,7 @@ def main():
         # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
         # strutturati che NON si scrive a mano nel file
         s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)
-        if pagina == 'faq.html':
+        if 'faq-q' in s:
             s = faqpage(s, 'it', indirizzo(pagina, 'it'))
         io.open(f, 'w', encoding='utf-8').write(s)
     print(f'{len(PAGINE)} pagine italiane: aggiunto hreflang')
@@ -456,7 +477,8 @@ def main():
         return d or datetime.date.today().isoformat()
     PRIO = {'index.html':'1.0','come-funziona.html':'0.9','prezzi.html':'0.9','hotel.html':'0.8',
             'ristorante.html':'0.8','negozio.html':'0.8','perche-digitale.html':'0.8',
-            'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3'}
+            'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3',
+            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8'}
     voci = []
     for pagina in sorted(PAGINE, key=lambda x: (-float(PRIO[x]), x)):
         lm = lastmod(pagina)

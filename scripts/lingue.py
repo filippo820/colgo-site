@@ -44,7 +44,8 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
           'organizzazione.html', 'per-chi.html', 'perche-digitale.html', 'prezzi.html',
           'privacy.html', 'ristorante.html',
            'qr-code-in-camera.html', 'catalogo-complesso.html',
-           'struttura-stagionale.html']
+           'struttura-stagionale.html',
+           'confronto.html']
 
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
@@ -62,6 +63,15 @@ OFFERTE = {
 }
 
 META = {
+ 'confronto.html': {
+  'en': ("Colgo and the alternatives: the comparison",
+         "Competitor prices read on their own pages on 25/08/2026, with the row where we're behind written first: no property management system integration."),
+  'fr': ("Colgo et les alternatives : le comparatif",
+         "Prix des concurrents relevés sur leurs pages le 25/08/2026, avec la ligne où nous sommes en retard écrite en premier : aucune intégration au logiciel de gestion."),
+  'de': ("Colgo und die Alternativen: der Vergleich",
+         "Wettbewerberpreise, am 25.08.2026 auf deren Seiten gelesen, mit der Zeile, in der wir hinterherhinken, zuerst: keine PMS-Anbindung."),
+  'es': ("Colgo y las alternativas: la comparativa",
+         "Precios de la competencia leídos en sus páginas el 25/08/2026, con la fila donde estamos por detrás escrita primero: sin integración con el sistema de gestión.")},
  'struttura-stagionale.html': {
   'en': ("Seasonal business: do you pay while closed?",
          "Eight monthly instalments for seven active months, charged once when you open. During the off months the catalogue pauses but the QR codes stay valid."),
@@ -488,7 +498,7 @@ def main():
     PRIO = {'index.html':'1.0','come-funziona.html':'0.9','prezzi.html':'0.9','hotel.html':'0.8',
             'ristorante.html':'0.8','negozio.html':'0.8','perche-digitale.html':'0.8',
             'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3',
-            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8'}
+            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8','confronto.html':'0.9'}
     voci = []
     for pagina in sorted(PAGINE, key=lambda x: (-float(PRIO[x]), x)):
         lm = lastmod(pagina)

@@ -820,7 +820,7 @@ img { height: auto; }
   justify-content: center; flex-shrink: 0; }
 .colgo-invia:disabled { opacity: .4; cursor: default; }
 .colgo-invia .ci { width: 19px; height: 19px; }
-.colgo-nota { font-size: 10.5px; line-height: 1.5; letter-spacing: 0.3px;
+.colgo-nota { font-size: 14px; line-height: 1.5; letter-spacing: 0.3px;
   color: rgba(245,241,232,0.3); margin-top: 9px; text-align: center; }
 
 /* invito fisso — riquadro a lato sul computer */
@@ -835,7 +835,7 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
 .colgo-invito strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 400;
   font-size: 21px; color: var(--cream); margin-bottom: 8px; }
 .colgo-invito p { font-size: 14px; line-height: 1.6; color: rgba(245,241,232,0.45); margin-bottom: 15px; }
-.colgo-invito a { display: block; text-align: center; font-size: 13px; letter-spacing: 1.6px;
+.colgo-invito a { display: block; text-align: center; font-size: 15px; letter-spacing: 1.6px;
   text-decoration: none; padding: 11px 8px; margin-bottom: 8px; }
 .colgo-invito .i-demo { color: var(--ochre); border: 1px solid rgba(200,146,42,0.45); }
 .colgo-invito .i-demo:hover { background: rgba(200,146,42,0.12); }
@@ -852,7 +852,7 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
     background: rgba(10,16,14,0.97); border-top: 1px solid rgba(200,146,42,0.28);
     transform: translateY(105%); transition: transform .35s ease; }
   .colgo-barra.si-vede { transform: translateY(0); }
-  .colgo-barra a { flex: 1; text-align: center; font-size: 13px; letter-spacing: 1.4px;
+  .colgo-barra a { flex: 1; text-align: center; font-size: 15px; letter-spacing: 1.4px;
     text-decoration: none; color: #0D0D0D; background: var(--ochre); padding: 12px 8px; }
   .colgo-barra .colgo-x { flex-shrink: 0; }
   body.colgo-con-barra { --colgo-fondo: 88px; }
@@ -898,14 +898,14 @@ body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transfo
 (function () {
   var API = 'https://app.colgo.app/api/site-chat';
   var T = {
-    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten."],
-    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…"],
-    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen"],
-    chiudi: ["Chiudi", "Close", "Fermer", "Schließen"],
-    invia:  ["Invia", "Send", "Envoyer", "Senden"],
-    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com."]
+    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten.", "Hola. Pregúntame lo que quieras saber sobre Colgo: precios, cómo funciona, qué hace falta para empezar."],
+    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…", "Escribe tu pregunta…"],
+    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen", "Haz una pregunta sobre Colgo"],
+    chiudi: ["Chiudi", "Close", "Fermer", "Schließen", "Cerrar"],
+    invia:  ["Invia", "Send", "Envoyer", "Senden", "Enviar"],
+    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com.", "No puedo responder ahora. Escribe a colgoapp@gmail.com."]
   };
-  var L = ['it','en','fr','de'];
+  var L = ['it','en','fr','de','es'];
   function lang() {
     var l = document.documentElement.lang || 'it';
     return L.indexOf(l) > -1 ? l : 'it';

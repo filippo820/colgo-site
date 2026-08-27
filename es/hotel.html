@@ -175,6 +175,10 @@
     footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
     footer a:hover{color:var(--ochre);}
     .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-eyebrow{color:rgba(245,241,232,0.3);letter-spacing:2px;align-self:center;}
+    .footer-approfondimenti{gap:20px;}
+    .footer-legale{gap:20px;margin-top:4px;}
+    .footer-legale a{color:rgba(245,241,232,0.35);}
     
     .pain-section{max-width:1000px;margin:0 auto;padding:80px 32px 40px;}
     .pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:48px;}
@@ -420,6 +424,17 @@ img { height: auto; }
    quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
    dell'attributo e si schiaccia. */
 .footer-logo { width: auto; }
+
+/* «Da leggere anche»: i link contestuali alle pagine che prima stavano solo
+   nel footer, in mezzo ai documenti legali. */
+.altre-letture{max-width:760px;margin:0 auto;padding:0 32px 96px;}
+.altre-letture h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:0 0 18px;font-weight:400;text-transform:uppercase;}
+.altre-letture ul{list-style:none;padding:0;margin:0;}
+.altre-letture li{border-bottom:1px solid rgba(245,241,232,0.08);}
+.altre-letture a{display:block;padding:16px 0 16px 22px;position:relative;font-size:16px;line-height:1.7;color:rgba(245,241,232,0.82);text-decoration:none;transition:color 0.2s;}
+.altre-letture a::before{content:'→';position:absolute;left:0;color:var(--ochre);}
+.altre-letture a:hover{color:var(--ochre);}
+@media(max-width:700px){.altre-letture{padding:0 22px 64px;}.altre-letture a{font-size:15px;}}
 </style>
 </head>
 <body>
@@ -446,6 +461,7 @@ img { height: auto; }
       <a href="/es/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT" data-es="TIENDA">TIENDA</a>
       <a href="/es/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG" data-es="ACCESOS Y CATÁLOGO">ACCESOS Y CATÁLOGO</a>
       <a href="/es/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE" data-es="PRECIOS">PRECIOS</a>
+      <a href="/es/confronto.html" data-it="CONFRONTO" data-en="COMPARISON" data-fr="COMPARATIF" data-de="VERGLEICH" data-es="COMPARATIVA">COMPARATIVA</a>
       <a href="/es/per-chi.html" data-it="PER CHI" data-en="WHO IT&#39;S FOR" data-fr="POUR QUI" data-de="FÜR WEN" data-es="PARA QUIÉN">PARA QUIÉN</a>
       <a href="/es/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS" data-es="QUIÉNES SOMOS">QUIÉNES SOMOS</a>
         <a href="/es/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">PREGUNTAS</a>
@@ -504,7 +520,7 @@ img { height: auto; }
           <line x1="-10" y1="10" x2="-15.5" y2="15.5"/>
         </g>
       </g>
-      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">01</text>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="16" letter-spacing="2">01</text>
     </g>
 
     <!-- Nodo 2 — QR / Link -->
@@ -520,7 +536,7 @@ img { height: auto; }
         <rect x="6" y="12" width="4" height="4" opacity="0.9"/>
         <rect x="12" y="12" width="4" height="4" fill="#C8922A"/>
       </g>
-      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">02</text>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="16" letter-spacing="2">02</text>
     </g>
 
     <!-- Nodo 3 — Guest esplora (telefono) -->
@@ -535,7 +551,7 @@ img { height: auto; }
         <rect x="-8" y="5" width="16" height="3" fill="#F5F1E8" opacity="0.5"/>
         <circle cx="0" cy="17" r="2" fill="#C8922A"/>
       </g>
-      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">03</text>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="16" letter-spacing="2">03</text>
     </g>
 
     <!-- Nodo 4 — Richiesta arriva (campana/notifica) -->
@@ -547,7 +563,7 @@ img { height: auto; }
         <path d="M -5 12 C -5 16, -2 18, 0 18 C 2 18, 5 16, 5 12" fill="none"/>
       </g>
       <circle cx="12" cy="-14" r="5" fill="#C8922A" stroke="#1E3A35" stroke-width="1.5"/>
-      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="12" letter-spacing="2">04</text>
+      <text x="0" y="90" text-anchor="middle" fill="#AEB8AE" font-family="Josefin Sans, sans-serif" font-size="16" letter-spacing="2">04</text>
     </g>
 
     <!-- Frecce tra i nodi (nodi a cx=150,450,750,1050, raggio 46 → bordi a 196/404, 496/704, 796/1004) -->
@@ -648,8 +664,8 @@ img { height: auto; }
       <div class="feat-desc" data-it="Le richieste arrivano in reception immediatamente. Nessun ritardo, nessun refresh manuale." data-en="Requests arrive at reception immediately. No delay, no manual refresh." data-fr="Les demandes arrivent immédiatement à la réception. Aucun délai, aucun rafraîchissement manuel." data-de="Anfragen kommen sofort an der Rezeption an. Keine Verzögerung, kein manuelles Neuladen." data-es="Las solicitudes llegan a recepción al instante. Sin demoras, sin recargar nada a mano.">Las solicitudes llegan a recepción al instante. Sin demoras, sin recargar nada a mano.</div>
     </div>
     <div class="feat-card">
-      <div class="feat-title" data-it="5 LINGUE" data-en="5 LANGUAGES" data-fr="5 LANGUES" data-de="5 SPRACHEN" data-es="5 IDIOMAS" data-es="5 IDIOMAS">5 IDIOMAS</div>
-      <div class="feat-desc" data-it="IT · EN · DE · FR · ES · ES. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR · ES · ES. Automatic translation on publish. Zero manual work." data-fr="IT · EN · DE · FR · ES · ES. Traduction automatique à la publication. Zéro travail manuel." data-de="IT · EN · DE · FR · ES · ES. Automatische Übersetzung bei Veröffentlichung. Kein manueller Aufwand." data-es="IT · EN · DE · FR · ES. Traducción automática al publicar. Cero trabajo manual.">IT · EN · DE · FR · ES. Traducción automática al publicar. Cero trabajo manual.</div>
+      <div class="feat-title" data-it="5 LINGUE" data-en="5 LANGUAGES" data-fr="5 LANGUES" data-de="5 SPRACHEN" data-es="5 IDIOMAS">5 IDIOMAS</div>
+      <div class="feat-desc" data-it="IT · EN · DE · FR · ES. Traduzione automatica alla pubblicazione. Zero lavoro manuale." data-en="IT · EN · DE · FR · ES. Automatic translation on publish. Zero manual work." data-fr="IT · EN · DE · FR · ES. Traduction automatique à la publication. Zéro travail manuel." data-de="IT · EN · DE · FR · ES. Automatische Übersetzung bei Veröffentlichung. Kein manueller Aufwand." data-es="IT · EN · DE · FR · ES. Traducción automática al publicar. Cero trabajo manual.">IT · EN · DE · FR · ES. Traducción automática al publicar. Cero trabajo manual.</div>
     </div>
     <div class="feat-card">
       <div class="feat-title" data-it="MAGAZZINO E POSTI LIMITATI" data-en="STOCK & LIMITED CAPACITY" data-fr="STOCK ET PLACES LIMITÉES" data-de="BESTAND & BEGRENZTE KAPAZITÄT" data-es="INVENTARIO Y LUGARES LIMITADOS">INVENTARIO Y LUGARES LIMITADOS</div>
@@ -673,20 +689,37 @@ img { height: auto; }
   </div>
 </div>
 
+<div class="altre-letture">
+  <h2 data-it="Da leggere anche" data-en="Read next" data-fr="À lire aussi" data-de="Auch lesenswert" data-es="También te puede servir">También te puede servir</h2>
+  <ul>
+    <li><a href="/es/qr-code-in-camera.html" data-it="QR code in camera: cosa serve per partire" data-en="In-room QR codes: what you need to start" data-fr="QR en chambre : ce qu'il faut pour démarrer" data-de="QR im Zimmer: was man zum Start braucht" data-es="QR en la habitación: qué hace falta para empezar">QR en la habitación: qué hace falta para empezar</a></li>
+    <li><a href="/es/confronto.html" data-it="Colgo e le alternative: il confronto" data-en="Colgo and the alternatives: the comparison" data-fr="Colgo et les alternatives : le comparatif" data-de="Colgo und die Alternativen: der Vergleich" data-es="Colgo y las alternativas: la comparativa">Colgo y las alternativas: la comparativa</a></li>
+    <li><a href="/es/struttura-stagionale.html" data-it="Struttura stagionale: si paga da chiusi?" data-en="Seasonal business: do you pay while closed?" data-fr="Établissement saisonnier : paie-t-on fermé ?" data-de="Saisonbetrieb: zahlt man auch geschlossen?" data-es="Negocio de temporada: ¿se paga cerrado?">Negocio de temporada: ¿se paga cerrado?</a></li>
+  </ul>
+</div>
+
 <footer>
   <div class="footer-links">
     <a href="/es/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite" data-es="Inicio">Inicio</a>
     <a href="/es/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert&#39;s" data-es="Cómo funciona">Cómo funciona</a>
     <a href="/es/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen" data-es="Para quién">Para quién</a>
-        <a href="/es/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Precios</a>
-    <a href="/es/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">PREGUNTAS</a>
+    <a href="/es/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Precios</a>
     <a href="/es/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog" data-es="Accesos y catálogo">Accesos y catálogo</a>
+    <a href="/es/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="Preguntas">Preguntas</a>
+  </div>
+  <!-- Approfondimenti: pagine di CONTENUTO, non documenti legali. Stavano
+       mescolate alla privacy e nessuno le trovava. -->
+  <div class="footer-links footer-approfondimenti">
+    <span class="footer-eyebrow" data-it="Approfondimenti" data-en="In depth" data-fr="Pour aller plus loin" data-de="Zum Vertiefen" data-es="Para profundizar">Para profundizar</span>
+    <a href="/es/confronto.html" data-it="Confronto con le alternative" data-en="Compared with the alternatives" data-fr="Comparatif avec les alternatives" data-de="Vergleich mit den Alternativen" data-es="Comparativa con las alternativas">Comparativa con las alternativas</a>
     <a href="/es/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Por qué digital</a>
     <a href="/es/qr-code-in-camera.html" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">QR en la habitación</a>
     <a href="/es/catalogo-complesso.html" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Catálogos complejos</a>
     <a href="/es/struttura-stagionale.html" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">De temporada</a>
-    <a href="/es/confronto.html" data-it="Confronto" data-en="Comparison" data-fr="Comparatif" data-de="Vergleich" data-es="Comparativa">Comparativa</a>
+  </div>
+  <div class="footer-links footer-legale">
     <a href="/es/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Política de Privacidad</a>
+    <a href="/es/privacy.html#cookie" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Política de Cookies</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP

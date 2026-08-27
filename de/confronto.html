@@ -189,6 +189,10 @@
     footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
     footer a:hover{color:var(--ochre);}
     .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-eyebrow{color:rgba(245,241,232,0.3);letter-spacing:2px;align-self:center;}
+    .footer-approfondimenti{gap:20px;}
+    .footer-legale{gap:20px;margin-top:4px;}
+    .footer-legale a{color:rgba(245,241,232,0.35);}
     @media(max-width:700px){nav{padding:20px 24px;}.nav-toggle{display:flex;}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--ground);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}.nav-links.open{transform:translateX(0);}.venues-section{padding:40px 20px 80px;}.venues-grid{grid-template-columns:1fr;}}
   
 /* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
@@ -416,20 +420,28 @@ img { height: auto; }
 <style>
 .q-section{max-width:760px;margin:0 auto;padding:0 32px 40px;}
 .q-lead{font-size:19px;line-height:1.85;color:var(--cream);letter-spacing:0.2px;margin:48px 0 8px;}
-.q-h2{font-size:13px;letter-spacing:4px;color:var(--ochre);margin:56px 0 20px;font-weight:400;text-transform:uppercase;}
+.q-h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:56px 0 20px;font-weight:400;text-transform:uppercase;}
 .q-p{font-size:16px;line-height:1.9;color:rgba(245,241,232,0.82);letter-spacing:0.2px;margin:0 0 20px;}
 .q-limits{list-style:none;padding:0;margin:0;}
 .q-limits li{font-size:16px;line-height:1.85;color:rgba(245,241,232,0.82);padding:14px 0 14px 22px;border-bottom:1px solid rgba(245,241,232,0.08);position:relative;}
 .q-limits li::before{content:'—';position:absolute;left:0;color:var(--ochre);}
-@media(max-width:700px){.q-section{padding:0 22px 32px;}.q-lead{font-size:17px;}.q-p,.q-limits li{font-size:15px;}}
+.q-tab-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 28px;}
+.q-tab{width:100%;min-width:520px;border-collapse:collapse;font-size:15px;line-height:1.65;}
+.q-tab caption{text-align:left;font-size:15px;line-height:1.8;color:rgba(245,241,232,0.6);padding:0 0 18px;}
+.q-tab th[scope=col]{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);font-weight:400;text-align:left;vertical-align:bottom;padding:0 18px 12px 0;border-bottom:1px solid rgba(200,146,42,0.35);}
+.q-tab th[scope=row]{font-size:15px;font-weight:300;text-align:left;color:rgba(245,241,232,0.82);}
+.q-tab th[scope=row],.q-tab td{padding:15px 18px 15px 0;border-bottom:1px solid rgba(245,241,232,0.08);vertical-align:top;color:rgba(245,241,232,0.82);}
+.q-tab tr.q-noi th[scope=row]{color:var(--ochre);}
+.q-tab tr.q-noi td{color:var(--cream);}
+@media(max-width:700px){.q-section{padding:0 22px 32px;}.q-lead{font-size:17px;}.q-p,.q-limits li{font-size:15px;}.q-tab,.q-tab caption,.q-tab th[scope=row]{font-size:14px;}}
 .faq-section{max-width:800px;margin:0 auto;padding:0 32px 120px;}
-    .faq-category{font-size:12px;letter-spacing:4px;color:var(--ochre);margin:64px 0 32px;}
+    .faq-category{letter-spacing:4px;color:var(--ochre);margin:64px 0 32px;}
     .faq-item{border-bottom:1px solid rgba(245,241,232,0.08);padding:28px 0;}
     .faq-q{font-size:15px;letter-spacing:0.5px;color:var(--cream);cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.6;}
     .faq-q::after{content:'+';color:var(--ochre);font-size:20px;font-weight:300;flex-shrink:0;transition:transform 0.3s;}
     .faq-item.open .faq-q::after{transform:rotate(45deg);}
     .faq-a{font-size:15px;color:rgba(245,241,232,0.8);line-height:1.9;letter-spacing:0.3px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;}
-    .faq-item.open .faq-a{max-height:400px;padding-top:20px;}
+    .faq-item.open .faq-a{max-height:560px;padding-top:20px;}
 </style>
 
 <!-- FAQ: generato da scripts/lingue.py leggendo gli attributi della
@@ -473,6 +485,30 @@ img { height: auto; }
         "@type": "Answer",
         "text": "Nein. Mit Colgo stellt der Kunde die Anfrage am Handy zusammen und zahlt an der Rezeption oder an der Kasse wie gewohnt. Es fließt kein Geld über uns: keine Transaktionsgebühren, keine erfassten Zahlungsdaten."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Worin unterscheidet sich Colgo von Gastfreund?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Beim Einstiegstarif: der von Gastfreund, 29 € im Monat, schließt Gästeanfragen aus; Colgo Base, 39 € im Monat, schließt sie ein. Bei Gastfreund bekommt man sie erst in der höheren Stufe, ab 69 € im Monat. Umgekehrt: Gastfreund verbindet sich mit dem PMS, Colgo nicht."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Colgo oder Qromo, für ein Restaurant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wenn Bestellungen gebraucht werden: Colgo Base kostet 39 € im Monat, Qromo nimmt sie ab dem Pro-Tarif — 49 € im Monat bei jährlicher Abrechnung, sonst 59 €. Der 29-€-Tarif von Qromo nimmt keine Bestellungen. Aber Qromo Pro macht auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: wer das braucht, wählt Qromo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Welche Alternativen gibt es zu Colgo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Für Unterkünfte: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Für die Gastronomie: Qromo. Für Geschäfte gibt es fast keine direkten Wettbewerber, und der echte Vergleich ist der mit Instagram, WhatsApp und dem Papierflyer."
+      }
     }
   ]
 }
@@ -502,6 +538,7 @@ img { height: auto; }
       <a href="/de/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT" data-es="TIENDA">GESCHÄFT</a>
       <a href="/de/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG" data-es="ACCESOS Y CATÁLOGO">ZUGRIFFE & KATALOG</a>
       <a href="/de/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE" data-es="PRECIOS">PREISE</a>
+      <a href="/de/confronto.html" class="active" data-it="CONFRONTO" data-en="COMPARISON" data-fr="COMPARATIF" data-de="VERGLEICH" data-es="COMPARATIVA">VERGLEICH</a>
       <a href="/de/per-chi.html" class="active" data-it="PER CHI" data-en="WHO IT&#39;S FOR" data-fr="POUR QUI" data-de="FÜR WEN" data-es="PARA QUIÉN">FÜR WEN</a>
       <a href="/de/#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS" data-es="QUIÉNES SOMOS">ÜBER UNS</a>
         <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">FAQ</a>
@@ -531,11 +568,99 @@ img { height: auto; }
 
   <h2 class="q-h2" data-it="Dove sono avanti loro" data-en="Where they're ahead" data-fr="Où ils sont en avance" data-de="Wo sie voraus sind" data-es="Dónde están por delante">Wo sie voraus sind</h2>
   <p class="q-p" data-it="Questa parte viene prima perché è quella che conta. Quasi tutti i concorrenti si collegano al gestionale della struttura e mandano messaggi automatici; noi no. Chi si integra sa già chi arriva, quando e in che camera, e manda il link da solo. In Colgo quel passaggio lo fa la reception a mano — e con venti arrivi al giorno è l'attrito che fa smettere di usare un prodotto." data-en="This part comes first because it's the one that matters. Most competitors connect to the property management system and send automated messages; we don't. Whoever integrates already knows who is arriving, when and in which room, and sends the link by itself. In Colgo that step is done by hand at the desk — and with twenty arrivals a day that's the friction that makes people stop using a product." data-fr="Cette partie vient en premier parce que c'est celle qui compte. La plupart des concurrents se connectent au logiciel de gestion et envoient des messages automatiques ; nous non. Celui qui s'intègre sait déjà qui arrive, quand et dans quelle chambre, et envoie le lien tout seul. Chez Colgo cette étape se fait à la main à la réception — et avec vingt arrivées par jour, c'est le frottement qui fait abandonner un produit." data-de="Dieser Teil kommt zuerst, weil er der wichtigste ist. Die meisten Wettbewerber verbinden sich mit dem Verwaltungssystem und senden automatische Nachrichten; wir nicht. Wer integriert ist, weiß bereits, wer wann in welchem Zimmer ankommt, und schickt den Link selbst. Bei Colgo macht das die Rezeption von Hand — und bei zwanzig Anreisen am Tag ist genau das die Reibung, an der ein Produkt scheitert." data-es="Esta parte va primero porque es la que importa. Casi todos los competidores se conectan al sistema de gestión y envían mensajes automáticos; nosotros no. Quien se integra ya sabe quién llega, cuándo y en qué habitación, y manda el enlace solo. En Colgo ese paso lo hace la recepción a mano — y con veinte llegadas al día es la fricción que hace abandonar un producto.">Dieser Teil kommt zuerst, weil er der wichtigste ist. Die meisten Wettbewerber verbinden sich mit dem Verwaltungssystem und senden automatische Nachrichten; wir nicht. Wer integriert ist, weiß bereits, wer wann in welchem Zimmer ankommt, und schickt den Link selbst. Bei Colgo macht das die Rezeption von Hand — und bei zwanzig Anreisen am Tag ist genau das die Reibung, an der ein Produkt scheitert.</p>
-  <h2 class="q-h2" data-it="Struttura ricettiva" data-en="Accommodation" data-fr="Hébergement" data-de="Unterkunft" data-es="Alojamiento">Unterkunft</h2>
+  <h2 class="q-h2" data-it="Struttura ricettiva: Colgo, Gastfreund, NAVOO, GASTiNFO" data-en="Accommodation: Colgo, Gastfreund, NAVOO, GASTiNFO" data-fr="Hébergement : Colgo, Gastfreund, NAVOO, GASTiNFO" data-de="Unterkunft: Colgo, Gastfreund, NAVOO, GASTiNFO" data-es="Alojamiento: Colgo, Gastfreund, NAVOO, GASTiNFO">Unterkunft: Colgo, Gastfreund, NAVOO, GASTiNFO</h2>
   <p class="q-p" data-it="Il confronto onesto non è 39 € contro 29 €. Sul listino Gastfreund il piano d'ingresso da 29 € ha le richieste ESCLUSE: per avere quello che Colgo fa nel piano base si passa al piano superiore, da 69 € al mese. E gli altri due che costano meno — NAVOO e GASTiNFO — non hanno un piano superiore che le aggiunge: semplicemente non le fanno, sono guide da leggere." data-en="The honest comparison isn't €39 against €29. On the Gastfreund price list the €29 entry plan EXCLUDES requests: to get what Colgo does in its base plan you move to the higher tier, from €69 a month. And the two cheaper ones — NAVOO and GASTiNFO — have no higher tier that adds them: they simply don't do it, they're guides to read." data-fr="La comparaison honnête n'est pas 39 € contre 29 €. Sur le tarif Gastfreund, la formule d'entrée à 29 € EXCLUT les demandes : pour avoir ce que Colgo fait dans sa formule de base, il faut passer au niveau supérieur, à partir de 69 € par mois. Et les deux moins chers — NAVOO et GASTiNFO — n'ont pas de niveau supérieur qui les ajoute : ils ne le font simplement pas, ce sont des guides à lire." data-de="Der ehrliche Vergleich lautet nicht 39 € gegen 29 €. In der Gastfreund-Preisliste SCHLIESST der Einstiegstarif zu 29 € Anfragen AUS: Um das zu bekommen, was Colgo im Basistarif tut, wechselt man in die höhere Stufe, ab 69 € im Monat. Und die beiden günstigeren — NAVOO und GASTiNFO — haben keine höhere Stufe, die das ergänzt: Sie tun es schlicht nicht, es sind Führer zum Lesen." data-es="La comparación honesta no es 39 € contra 29 €. En la lista de Gastfreund el plan de entrada de 29 € EXCLUYE las solicitudes: para tener lo que Colgo hace en su plan base hay que pasar al nivel superior, desde 69 € al mes. Y los dos más baratos — NAVOO y GASTiNFO — no tienen un nivel superior que las añada: sencillamente no lo hacen, son guías para leer.">Der ehrliche Vergleich lautet nicht 39 € gegen 29 €. In der Gastfreund-Preisliste SCHLIESST der Einstiegstarif zu 29 € Anfragen AUS: Um das zu bekommen, was Colgo im Basistarif tut, wechselt man in die höhere Stufe, ab 69 € im Monat. Und die beiden günstigeren — NAVOO und GASTiNFO — haben keine höhere Stufe, die das ergänzt: Sie tun es schlicht nicht, es sind Führer zum Lesen.</p>
-  <h2 class="q-h2" data-it="Ristorazione" data-en="Food service" data-fr="Restauration" data-de="Gastronomie" data-es="Gastronomía">Gastronomie</h2>
+  <div class="q-tab-wrap">
+    <table class="q-tab">
+      <caption data-it="Colgo si paga per struttura: un prezzo solo, qualunque sia il numero di camere. Diversi concorrenti contano per alloggio, quindi partono più bassi e crescono con la struttura — i piani d'ingresso qui sotto non si paragonano alla pari. Integrazione col gestionale (PMS): Colgo no, quasi tutti i concorrenti sì, ed è la differenza che pesa di più. Prezzi dei concorrenti letti sulle loro pagine il 25 agosto 2026." data-en="Colgo is paid per business: one price, whatever the number of rooms. Several competitors count per accommodation unit, so they start lower and grow with the property — the entry plans below are not like-for-like. Property management system (PMS) integration: Colgo no, almost every competitor yes, and that's the difference that weighs most. Competitor prices read on their own pages on 25 August 2026." data-fr="Colgo se paie par établissement : un seul prix, quel que soit le nombre de chambres. Plusieurs concurrents comptent par hébergement, donc ils partent plus bas et grandissent avec l'établissement — les formules d'entrée ci-dessous ne se comparent pas à armes égales. Intégration au logiciel de gestion (PMS) : Colgo non, presque tous les concurrents oui, et c'est la différence qui pèse le plus. Prix des concurrents relevés sur leurs pages le 25 août 2026." data-de="Colgo wird pro Betrieb bezahlt: ein Preis, unabhängig von der Zahl der Zimmer. Mehrere Wettbewerber rechnen pro Unterkunft ab, starten also niedriger und wachsen mit dem Betrieb — die Einstiegstarife unten sind nicht gleich zu gleich vergleichbar. PMS-Anbindung: Colgo nein, fast alle Wettbewerber ja, und das ist der Unterschied, der am schwersten wiegt. Wettbewerberpreise, am 25. August 2026 auf deren Seiten gelesen." data-es="Colgo se paga por negocio: un solo precio, sea cual sea el número de habitaciones. Varios competidores cuentan por alojamiento, así que parten más bajo y crecen con el establecimiento — los planes de entrada de abajo no se comparan de igual a igual. Integración con el sistema de gestión (PMS): Colgo no, casi todos los competidores sí, y es la diferencia que más pesa. Precios de la competencia leídos en sus páginas el 25 de agosto de 2026.">Colgo wird pro Betrieb bezahlt: ein Preis, unabhängig von der Zahl der Zimmer. Mehrere Wettbewerber rechnen pro Unterkunft ab, starten also niedriger und wachsen mit dem Betrieb — die Einstiegstarife unten sind nicht gleich zu gleich vergleichbar. PMS-Anbindung: Colgo nein, fast alle Wettbewerber ja, und das ist der Unterschied, der am schwersten wiegt. Wettbewerberpreise, am 25. August 2026 auf deren Seiten gelesen.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-it="Prodotto" data-en="Product" data-fr="Produit" data-de="Produkt" data-es="Producto">Produkt</th>
+          <th scope="col" data-it="Piano d'ingresso" data-en="Entry plan" data-fr="Formule d'entrée" data-de="Einstiegstarif" data-es="Plan de entrada">Einstiegstarif</th>
+          <th scope="col" data-it="L'ospite può inviare una richiesta?" data-en="Can the guest send a request?" data-fr="Le client peut-il envoyer une demande ?" data-de="Kann der Gast eine Anfrage senden?" data-es="¿El huésped puede enviar una solicitud?">Kann der Gast eine Anfrage senden?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="q-noi">
+          <th scope="row">Colgo Base</th>
+          <td data-it="39 €/mese" data-en="€39/month" data-fr="39 €/mois" data-de="39 €/Monat" data-es="39 €/mes">39 €/Monat</td>
+          <td data-it="Sì, già dal piano d'ingresso" data-en="Yes, from the entry plan" data-fr="Oui, dès la formule d'entrée" data-de="Ja, schon im Einstiegstarif" data-es="Sí, ya desde el plan de entrada">Ja, schon im Einstiegstarif</td>
+        </tr>
+        <tr>
+          <th scope="row">Gastfreund</th>
+          <td data-it="29 €/mese" data-en="€29/month" data-fr="29 €/mois" data-de="29 €/Monat" data-es="29 €/mes">29 €/Monat</td>
+          <td data-it="No: escluse dal piano d'ingresso" data-en="No: excluded from the entry plan" data-fr="Non : exclues de la formule d'entrée" data-de="Nein: im Einstiegstarif ausgeschlossen" data-es="No: excluidas del plan de entrada">Nein: im Einstiegstarif ausgeschlossen</td>
+        </tr>
+        <tr>
+          <th scope="row" data-it="Gastfreund, piano superiore" data-en="Gastfreund, higher tier" data-fr="Gastfreund, niveau supérieur" data-de="Gastfreund, höhere Stufe" data-es="Gastfreund, nivel superior">Gastfreund, höhere Stufe</th>
+          <td data-it="da 69 €/mese" data-en="from €69/month" data-fr="à partir de 69 €/mois" data-de="ab 69 €/Monat" data-es="desde 69 €/mes">ab 69 €/Monat</td>
+          <td data-it="Sì" data-en="Yes" data-fr="Oui" data-de="Ja" data-es="Sí">Ja</td>
+        </tr>
+        <tr>
+          <th scope="row">NAVOO</th>
+          <td data-it="meno di 29 €/mese" data-en="less than €29/month" data-fr="moins de 29 €/mois" data-de="weniger als 29 €/Monat" data-es="menos de 29 €/mes">weniger als 29 €/Monat</td>
+          <td data-it="No: è una guida da leggere" data-en="No: it's a guide to read" data-fr="Non : c'est un guide à lire" data-de="Nein: ein Führer zum Lesen" data-es="No: es una guía para leer">Nein: ein Führer zum Lesen</td>
+        </tr>
+        <tr>
+          <th scope="row">GASTiNFO</th>
+          <td data-it="meno di 29 €/mese" data-en="less than €29/month" data-fr="moins de 29 €/mois" data-de="weniger als 29 €/Monat" data-es="menos de 29 €/mes">weniger als 29 €/Monat</td>
+          <td data-it="No: è una guida da leggere" data-en="No: it's a guide to read" data-fr="Non : c'est un guide à lire" data-de="Nein: ein Führer zum Lesen" data-es="No: es una guía para leer">Nein: ein Führer zum Lesen</td>
+        </tr>
+        <tr>
+          <th scope="row">DigitalGuest</th>
+          <td data-it="su richiesta" data-en="on request" data-fr="sur demande" data-de="auf Anfrage" data-es="a petición">auf Anfrage</td>
+          <td data-it="non pubblicato" data-en="not published" data-fr="non publié" data-de="nicht veröffentlicht" data-es="no publicado">nicht veröffentlicht</td>
+        </tr>
+        <tr>
+          <th scope="row">Guestnet</th>
+          <td data-it="su richiesta" data-en="on request" data-fr="sur demande" data-de="auf Anfrage" data-es="a petición">auf Anfrage</td>
+          <td data-it="non pubblicato" data-en="not published" data-fr="non publié" data-de="nicht veröffentlicht" data-es="no publicado">nicht veröffentlicht</td>
+        </tr>
+        <tr>
+          <th scope="row">Re:Guest</th>
+          <td data-it="su richiesta" data-en="on request" data-fr="sur demande" data-de="auf Anfrage" data-es="a petición">auf Anfrage</td>
+          <td data-it="non pubblicato" data-en="not published" data-fr="non publié" data-de="nicht veröffentlicht" data-es="no publicado">nicht veröffentlicht</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 class="q-h2" data-it="Ristorazione: Colgo e Qromo" data-en="Food service: Colgo and Qromo" data-fr="Restauration : Colgo et Qromo" data-de="Gastronomie: Colgo und Qromo" data-es="Gastronomía: Colgo y Qromo">Gastronomie: Colgo und Qromo</h2>
   <p class="q-p" data-it="Qui l'unico paragone alla pari è Qromo, e va fatto con il dato giusto: Qromo prende ordini a partire dal piano Pro, 49 € annuale o 59 € mensile, non dal piano da 29 € — quello non li prende. Con le cifre corrette, chi prende ordini davvero costa: Colgo Base 39 €, Qromo Pro 49 €, Colgo Pro 59 €. Ma Qromo Pro fa anche i pagamenti online e si collega a Glovo e Deliveroo: noi no, e a parità di prezzo è una differenza vera." data-en="Here the only like-for-like comparison is Qromo, and it has to be done with the right figure: Qromo takes orders from the Pro plan, €49 annual or €59 monthly, not from the €29 plan — that one doesn't. With the correct numbers, what it costs to actually take orders is: Colgo Base €39, Qromo Pro €49, Colgo Pro €59. But Qromo Pro also does online payments and connects to Glovo and Deliveroo: we don't, and at the same price that's a real difference." data-fr="Ici la seule comparaison à armes égales est Qromo, et elle doit se faire avec le bon chiffre : Qromo prend des commandes à partir de la formule Pro, 49 € en annuel ou 59 € en mensuel, pas à partir de celle à 29 € — celle-là n'en prend pas. Avec les bons chiffres, prendre vraiment des commandes coûte : Colgo Base 39 €, Qromo Pro 49 €, Colgo Pro 59 €. Mais Qromo Pro fait aussi les paiements en ligne et se connecte à Glovo et Deliveroo : nous non, et à prix égal c'est une vraie différence." data-de="Hier ist der einzige Vergleich auf Augenhöhe Qromo, und er muss mit der richtigen Zahl geführt werden: Qromo nimmt Bestellungen ab dem Pro-Tarif entgegen, 49 € jährlich oder 59 € monatlich, nicht ab dem 29-€-Tarif — der tut es nicht. Mit den korrekten Zahlen kostet es, wirklich Bestellungen anzunehmen: Colgo Base 39 €, Qromo Pro 49 €, Colgo Pro 59 €. Aber Qromo Pro macht auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: wir nicht, und bei gleichem Preis ist das ein echter Unterschied." data-es="Aquí la única comparación de igual a igual es Qromo, y hay que hacerla con el dato correcto: Qromo acepta pedidos a partir del plan Pro, 49 € anual o 59 € mensual, no desde el de 29 € — ese no los acepta. Con las cifras correctas, aceptar pedidos de verdad cuesta: Colgo Base 39 €, Qromo Pro 49 €, Colgo Pro 59 €. Pero Qromo Pro también hace pagos en línea y se conecta con Glovo y Deliveroo: nosotros no, y a igual precio es una diferencia real.">Hier ist der einzige Vergleich auf Augenhöhe Qromo, und er muss mit der richtigen Zahl geführt werden: Qromo nimmt Bestellungen ab dem Pro-Tarif entgegen, 49 € jährlich oder 59 € monatlich, nicht ab dem 29-€-Tarif — der tut es nicht. Mit den korrekten Zahlen kostet es, wirklich Bestellungen anzunehmen: Colgo Base 39 €, Qromo Pro 49 €, Colgo Pro 59 €. Aber Qromo Pro macht auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: wir nicht, und bei gleichem Preis ist das ein echter Unterschied.</p>
-  <h2 class="q-h2" data-it="Negozio" data-en="Shop" data-fr="Boutique" data-de="Geschäft" data-es="Tienda">Geschäft</h2>
+  <div class="q-tab-wrap">
+    <table class="q-tab">
+      <caption data-it="A parità di prezzo Qromo Pro fa anche i pagamenti online e si collega a Glovo e Deliveroo: Colgo no. Prezzi dei concorrenti letti sulle loro pagine il 25 agosto 2026." data-en="At the same price Qromo Pro also does online payments and connects to Glovo and Deliveroo: Colgo doesn't. Competitor prices read on their own pages on 25 August 2026." data-fr="À prix égal, Qromo Pro fait aussi les paiements en ligne et se connecte à Glovo et Deliveroo : Colgo non. Prix des concurrents relevés sur leurs pages le 25 août 2026." data-de="Zum gleichen Preis macht Qromo Pro auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: Colgo nicht. Wettbewerberpreise, am 25. August 2026 auf deren Seiten gelesen." data-es="Al mismo precio, Qromo Pro también hace pagos en línea y se conecta con Glovo y Deliveroo: Colgo no. Precios de la competencia leídos en sus páginas el 25 de agosto de 2026.">Zum gleichen Preis macht Qromo Pro auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: Colgo nicht. Wettbewerberpreise, am 25. August 2026 auf deren Seiten gelesen.</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-it="Prodotto" data-en="Product" data-fr="Produit" data-de="Produkt" data-es="Producto">Produkt</th>
+          <th scope="col" data-it="Prezzo" data-en="Price" data-fr="Prix" data-de="Preis" data-es="Precio">Preis</th>
+          <th scope="col" data-it="Prende ordini dal cliente?" data-en="Does it take orders from the customer?" data-fr="Prend-il les commandes du client ?" data-de="Nimmt es Bestellungen vom Gast entgegen?" data-es="¿Acepta pedidos del cliente?">Nimmt es Bestellungen vom Gast entgegen?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="q-noi">
+          <th scope="row">Colgo Base</th>
+          <td data-it="39 €/mese" data-en="€39/month" data-fr="39 €/mois" data-de="39 €/Monat" data-es="39 €/mes">39 €/Monat</td>
+          <td data-it="Sì" data-en="Yes" data-fr="Oui" data-de="Ja" data-es="Sí">Ja</td>
+        </tr>
+        <tr>
+          <th scope="row" data-it="Qromo, piano d'ingresso" data-en="Qromo, entry plan" data-fr="Qromo, formule d'entrée" data-de="Qromo, Einstiegstarif" data-es="Qromo, plan de entrada">Qromo, Einstiegstarif</th>
+          <td data-it="29 €/mese" data-en="€29/month" data-fr="29 €/mois" data-de="29 €/Monat" data-es="29 €/mes">29 €/Monat</td>
+          <td data-it="No" data-en="No" data-fr="Non" data-de="Nein" data-es="No">Nein</td>
+        </tr>
+        <tr>
+          <th scope="row">Qromo Pro</th>
+          <td data-it="49 €/mese con fatturazione annuale, 59 €/mese senza" data-en="€49/month billed annually, €59/month otherwise" data-fr="49 €/mois en facturation annuelle, 59 €/mois sinon" data-de="49 €/Monat bei jährlicher Abrechnung, sonst 59 €/Monat" data-es="49 €/mes con facturación anual, 59 €/mes si no">49 €/Monat bei jährlicher Abrechnung, sonst 59 €/Monat</td>
+          <td data-it="Sì" data-en="Yes" data-fr="Oui" data-de="Ja" data-es="Sí">Ja</td>
+        </tr>
+        <tr class="q-noi">
+          <th scope="row">Colgo Pro</th>
+          <td data-it="59 €/mese" data-en="€59/month" data-fr="59 €/mois" data-de="59 €/Monat" data-es="59 €/mes">59 €/Monat</td>
+          <td data-it="Sì" data-en="Yes" data-fr="Oui" data-de="Ja" data-es="Sí">Ja</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 class="q-h2" data-it="Negozio: perché qui una tabella non si può fare" data-en="Shop: why no table is possible here" data-fr="Boutique : pourquoi aucun tableau n'est possible ici" data-de="Geschäft: warum hier keine Tabelle möglich ist" data-es="Tienda: por qué aquí no se puede hacer una tabla">Geschäft: warum hier keine Tabelle möglich ist</h2>
   <p class="q-p" data-it="Qui una tabella non si può fare, e il motivo è onesto: concorrenti diretti quasi non ce ne sono. Chi in Italia vende «catalogo digitale per negozio» vende quasi sempre un e-commerce completo oppure uno sfogliabile in PDF, che è un'altra cosa. Il confronto vero, per un negozio di paese, è con Instagram, WhatsApp e il volantino di carta — ed è con quelli che conviene misurarsi, non con una tabella che sarebbe formalmente corretta e commercialmente inutile." data-en="Here a table can't be made, and the reason is an honest one: there are almost no direct competitors. In Italy, whoever sells a &quot;digital catalogue for shops&quot; almost always sells a full e-commerce or a flip-through PDF, which is a different thing. The real comparison, for a village shop, is with Instagram, WhatsApp and the paper flyer — and that's what's worth measuring against, not a table that would be formally correct and commercially useless." data-fr="Ici on ne peut pas faire de tableau, et la raison est honnête : il n'y a presque pas de concurrents directs. En Italie, celui qui vend un « catalogue numérique pour boutique » vend presque toujours un e-commerce complet ou un feuilletable en PDF, ce qui est autre chose. La vraie comparaison, pour un commerce de village, c'est Instagram, WhatsApp et le prospectus papier — et c'est à cela qu'il vaut la peine de se mesurer." data-de="Hier lässt sich keine Tabelle machen, und der Grund ist ein ehrlicher: Es gibt fast keine direkten Wettbewerber. Wer in Italien einen „digitalen Katalog für Geschäfte&quot; verkauft, verkauft fast immer einen kompletten Online-Shop oder ein Blätter-PDF, und das ist etwas anderes. Der echte Vergleich für einen Dorfladen ist Instagram, WhatsApp und der Papierprospekt — und daran lohnt es sich zu messen." data-es="Aquí no se puede hacer una tabla, y la razón es honesta: casi no hay competidores directos. Quien en Italia vende «catálogo digital para tienda» casi siempre vende un comercio electrónico completo o un hojeable en PDF, que es otra cosa. La comparación de verdad, para una tienda de pueblo, es con Instagram, WhatsApp y el folleto de papel — y es con eso que conviene medirse.">Hier lässt sich keine Tabelle machen, und der Grund ist ein ehrlicher: Es gibt fast keine direkten Wettbewerber. Wer in Italien einen „digitalen Katalog für Geschäfte" verkauft, verkauft fast immer einen kompletten Online-Shop oder ein Blätter-PDF, und das ist etwas anderes. Der echte Vergleich für einen Dorfladen ist Instagram, WhatsApp und der Papierprospekt — und daran lohnt es sich zu messen.</p>
 
   <h2 class="q-h2" data-it="Come leggere questi numeri" data-en="How to read these numbers" data-fr="Comment lire ces chiffres" data-de="Wie diese Zahlen zu lesen sind" data-es="Cómo leer estos números">Wie diese Zahlen zu lesen sind</h2>
@@ -565,21 +690,41 @@ img { height: auto; }
       <div class="faq-q" data-it="I clienti possono pagare online?" data-en="Can customers pay online?" data-fr="Les clients peuvent-ils payer en ligne ?" data-de="Können Kunden online bezahlen?" data-es="¿Los clientes pueden pagar en línea?">Können Kunden online bezahlen?</div>
       <div class="faq-a" data-it="No. Con Colgo il cliente prepara la richiesta dal telefono e paga in reception o alla cassa come farebbe normalmente. Non passa denaro attraverso di noi: nessuna commissione sulle transazioni, nessun dato di pagamento raccolto." data-en="No. With Colgo the customer prepares the request on their phone and pays at reception or at the till as they normally would. No money passes through us: no transaction fees, no payment data collected." data-fr="Non. Avec Colgo, le client prépare sa demande depuis son téléphone et règle à la réception ou en caisse comme il le ferait normalement. Aucun argent ne transite par nous : aucune commission, aucune donnée de paiement collectée." data-de="Nein. Mit Colgo stellt der Kunde die Anfrage am Handy zusammen und zahlt an der Rezeption oder an der Kasse wie gewohnt. Es fließt kein Geld über uns: keine Transaktionsgebühren, keine erfassten Zahlungsdaten." data-es="No. Con Colgo el cliente prepara la solicitud desde su teléfono y paga en recepción o en la caja como lo haría normalmente. No pasa dinero por nosotros: sin comisiones ni datos de pago recopilados.">Nein. Mit Colgo stellt der Kunde die Anfrage am Handy zusammen und zahlt an der Rezeption oder an der Kasse wie gewohnt. Es fließt kein Geld über uns: keine Transaktionsgebühren, keine erfassten Zahlungsdaten.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="In cosa Colgo è diverso da Gastfreund?" data-en="How is Colgo different from Gastfreund?" data-fr="En quoi Colgo est-il différent de Gastfreund ?" data-de="Worin unterscheidet sich Colgo von Gastfreund?" data-es="¿En qué se diferencia Colgo de Gastfreund?">Worin unterscheidet sich Colgo von Gastfreund?</div>
+      <div class="faq-a" data-it="Sul piano d'ingresso: quello di Gastfreund, 29 € al mese, esclude le richieste dell'ospite; Colgo Base, 39 € al mese, le include. Per averle da Gastfreund si passa al piano superiore, da 69 € al mese. Nella direzione opposta: Gastfreund si collega al gestionale della struttura, Colgo no." data-en="On the entry plan: Gastfreund's, at €29 a month, excludes guest requests; Colgo Base, at €39 a month, includes them. To get them from Gastfreund you move to the higher tier, from €69 a month. In the other direction: Gastfreund connects to the property management system, Colgo doesn't." data-fr="Sur la formule d'entrée : celle de Gastfreund, à 29 € par mois, exclut les demandes du client ; Colgo Base, à 39 € par mois, les inclut. Pour les avoir chez Gastfreund il faut passer au niveau supérieur, à partir de 69 € par mois. Dans l'autre sens : Gastfreund se connecte au logiciel de gestion, Colgo non." data-de="Beim Einstiegstarif: der von Gastfreund, 29 € im Monat, schließt Gästeanfragen aus; Colgo Base, 39 € im Monat, schließt sie ein. Bei Gastfreund bekommt man sie erst in der höheren Stufe, ab 69 € im Monat. Umgekehrt: Gastfreund verbindet sich mit dem PMS, Colgo nicht." data-es="En el plan de entrada: el de Gastfreund, 29 € al mes, excluye las solicitudes del huésped; Colgo Base, 39 € al mes, las incluye. Para tenerlas en Gastfreund hay que pasar al nivel superior, desde 69 € al mes. En sentido contrario: Gastfreund se conecta al sistema de gestión, Colgo no.">Beim Einstiegstarif: der von Gastfreund, 29 € im Monat, schließt Gästeanfragen aus; Colgo Base, 39 € im Monat, schließt sie ein. Bei Gastfreund bekommt man sie erst in der höheren Stufe, ab 69 € im Monat. Umgekehrt: Gastfreund verbindet sich mit dem PMS, Colgo nicht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Colgo o Qromo, per un ristorante?" data-en="Colgo or Qromo, for a restaurant?" data-fr="Colgo ou Qromo, pour un restaurant ?" data-de="Colgo oder Qromo, für ein Restaurant?" data-es="¿Colgo o Qromo, para un restaurante?">Colgo oder Qromo, für ein Restaurant?</div>
+      <div class="faq-a" data-it="Se servono gli ordini: Colgo Base costa 39 € al mese, Qromo li prende dal piano Pro — 49 € al mese con fatturazione annuale, 59 € senza. Il piano Qromo da 29 € gli ordini non li prende. Ma Qromo Pro fa anche i pagamenti online e si collega a Glovo e Deliveroo: se servono quelli, la scelta è Qromo." data-en="If you need orders: Colgo Base costs €39 a month, Qromo takes them from the Pro plan — €49 a month billed annually, €59 otherwise. The €29 Qromo plan doesn't take orders. But Qromo Pro also does online payments and connects to Glovo and Deliveroo: if you need those, the answer is Qromo." data-fr="S'il vous faut les commandes : Colgo Base coûte 39 € par mois, Qromo les prend à partir de la formule Pro — 49 € par mois en facturation annuelle, 59 € sinon. La formule Qromo à 29 € ne prend pas les commandes. Mais Qromo Pro fait aussi les paiements en ligne et se connecte à Glovo et Deliveroo : s'il vous faut cela, le choix est Qromo." data-de="Wenn Bestellungen gebraucht werden: Colgo Base kostet 39 € im Monat, Qromo nimmt sie ab dem Pro-Tarif — 49 € im Monat bei jährlicher Abrechnung, sonst 59 €. Der 29-€-Tarif von Qromo nimmt keine Bestellungen. Aber Qromo Pro macht auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: wer das braucht, wählt Qromo." data-es="Si hacen falta los pedidos: Colgo Base cuesta 39 € al mes, Qromo los acepta desde el plan Pro — 49 € al mes con facturación anual, 59 € si no. El plan de Qromo de 29 € no acepta pedidos. Pero Qromo Pro también hace pagos en línea y se conecta con Glovo y Deliveroo: si hace falta eso, la elección es Qromo.">Wenn Bestellungen gebraucht werden: Colgo Base kostet 39 € im Monat, Qromo nimmt sie ab dem Pro-Tarif — 49 € im Monat bei jährlicher Abrechnung, sonst 59 €. Der 29-€-Tarif von Qromo nimmt keine Bestellungen. Aber Qromo Pro macht auch Online-Zahlungen und verbindet sich mit Glovo und Deliveroo: wer das braucht, wählt Qromo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Quali sono le alternative a Colgo?" data-en="What are the alternatives to Colgo?" data-fr="Quelles sont les alternatives à Colgo ?" data-de="Welche Alternativen gibt es zu Colgo?" data-es="¿Cuáles son las alternativas a Colgo?">Welche Alternativen gibt es zu Colgo?</div>
+      <div class="faq-a" data-it="Per le strutture ricettive: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Per la ristorazione: Qromo. Per i negozi concorrenti diretti quasi non ce ne sono, e il confronto vero è con Instagram, WhatsApp e il volantino di carta." data-en="For accommodation: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. For food service: Qromo. For shops there are almost no direct competitors, and the real comparison is with Instagram, WhatsApp and the paper flyer." data-fr="Pour l'hébergement : Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Pour la restauration : Qromo. Pour les boutiques il n'y a presque pas de concurrents directs, et la vraie comparaison est avec Instagram, WhatsApp et le prospectus papier." data-de="Für Unterkünfte: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Für die Gastronomie: Qromo. Für Geschäfte gibt es fast keine direkten Wettbewerber, und der echte Vergleich ist der mit Instagram, WhatsApp und dem Papierflyer." data-es="Para alojamientos: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Para gastronomía: Qromo. Para tiendas casi no hay competidores directos, y la comparación real es con Instagram, WhatsApp y el volante de papel.">Für Unterkünfte: Gastfreund, NAVOO, GASTiNFO, DigitalGuest, Guestnet, Re:Guest. Für die Gastronomie: Qromo. Für Geschäfte gibt es fast keine direkten Wettbewerber, und der echte Vergleich ist der mit Instagram, WhatsApp und dem Papierflyer.</div>
+    </div>
 </div>
 <footer>
   <div class="footer-links">
     <a href="/de/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite" data-es="Inicio">Startseite</a>
     <a href="/de/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert&#39;s" data-es="Cómo funciona">So funktioniert's</a>
     <a href="/de/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen" data-es="Para quién">Für wen</a>
-        <a href="/de/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Preise</a>
-    <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">FAQ</a>
+    <a href="/de/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Preise</a>
     <a href="/de/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog" data-es="Accesos y catálogo">Zugriffe & Katalog</a>
+    <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="Preguntas">FAQ</a>
+  </div>
+  <!-- Approfondimenti: pagine di CONTENUTO, non documenti legali. Stavano
+       mescolate alla privacy e nessuno le trovava. -->
+  <div class="footer-links footer-approfondimenti">
+    <span class="footer-eyebrow" data-it="Approfondimenti" data-en="In depth" data-fr="Pour aller plus loin" data-de="Zum Vertiefen" data-es="Para profundizar">Zum Vertiefen</span>
+    <a href="/de/confronto.html" data-it="Confronto con le alternative" data-en="Compared with the alternatives" data-fr="Comparatif avec les alternatives" data-de="Vergleich mit den Alternativen" data-es="Comparativa con las alternativas">Vergleich mit den Alternativen</a>
     <a href="/de/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Warum digital</a>
     <a href="/de/qr-code-in-camera.html" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">QR im Zimmer</a>
     <a href="/de/catalogo-complesso.html" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Komplexe Kataloge</a>
     <a href="/de/struttura-stagionale.html" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Saisonbetrieb</a>
-    <a href="/de/confronto.html" data-it="Confronto" data-en="Comparison" data-fr="Comparatif" data-de="Vergleich" data-es="Comparativa">Vergleich</a>
+  </div>
+  <div class="footer-links footer-legale">
     <a href="/de/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Datenschutzerklärung</a>
+    <a href="/de/privacy.html#cookie" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Cookie-Richtlinie</a>
     <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
   </div>
   © 2026 COLGO · COLGO.APP

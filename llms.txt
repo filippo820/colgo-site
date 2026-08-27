@@ -1,0 +1,79 @@
+# Colgo
+
+> Colgo puts a business's catalogue on the customer's phone through a QR code:
+> the guest reads it in their own language and sends a request — an order, a
+> booking, a question — that arrives at reception, at the till or in the
+> kitchen. No app, no download. One price per business, not per room or table.
+
+Colgo is an Italian product. The site is published in five languages,
+each at its own address: Italian at the root, then `/en/`, `/fr/`, `/de/`,
+`/es/`. The Italian pages are the source; the others are complete static
+translations, not machine-translated on the fly. Every page listed below exists
+in all five languages — replace the prefix to get the other ones.
+
+## What Colgo does not do
+
+Stated here because it is the first thing worth knowing, and because a summary
+that leaves it out is wrong:
+
+- **No property management system (PMS) integration.** Orders and requests
+  arrive in Colgo, not in the property's PMS or till. Most competitors do
+  integrate. This is the biggest gap.
+- **No automated messaging.** The pre-arrival link is pasted by reception into
+  the messages the property already sends.
+- **No online payments.** The customer prepares the request on their phone and
+  pays at reception or at the till. In development, and deliberately kept out
+  of the comparison tables until it ships.
+- **No food-delivery platforms.** No Glovo, no Deliveroo.
+
+## Core pages
+
+- [Home](https://colgo.app/): what Colgo is, and the three business types it is
+  configured for.
+- [How it works](https://colgo.app/come-funziona): QR code in the room or on
+  the table, automatic multilingual catalogue, requests in real time.
+- [Pricing](https://colgo.app/prezzi): one price per business. Accommodation
+  and restaurant Base €39/month, Pro €59/month; shop Base €29/month. Yearly is
+  ten months. 30-day free trial.
+- [Compared with the alternatives](https://colgo.app/confronto): competitor
+  prices read on their own pages on 25 August 2026, with the row where Colgo is
+  behind written first. Covers Gastfreund, NAVOO, GASTiNFO, DigitalGuest,
+  Guestnet, Re:Guest (accommodation) and Qromo (food service).
+- [Access and catalogue](https://colgo.app/organizzazione): access levels from
+  owner to waiter, the request queue, one PIN for several venues.
+- [Who it's for](https://colgo.app/per-chi): hotels, B&Bs, farm stays,
+  campsites, restaurants, beach clubs, shops.
+- [FAQ](https://colgo.app/faq).
+
+## By business type
+
+- [Hotels, B&Bs and farm stays](https://colgo.app/hotel)
+- [Restaurants and bars](https://colgo.app/ristorante)
+- [Shops and boutiques](https://colgo.app/negozio)
+
+## Pages built on one question
+
+- [Why digital](https://colgo.app/perche-digitale): QR adoption, the language
+  barrier, staff shortages, the cost of paper — with the industry sources named.
+- [In-room QR codes: what you need to start](https://colgo.app/qr-code-in-camera):
+  size, printing, what the guest sees, what happens when a room is renamed.
+- [Complex menu: can a digital catalogue cope?](https://colgo.app/catalogo-complesso):
+  nested subcategories, prices per size, hours per category, stock re-checked
+  when the order is sent.
+- [Seasonal business: do you pay while closed?](https://colgo.app/struttura-stagionale):
+  eight instalments for seven active months, charged once at opening.
+
+## Optional
+
+- [Privacy and cookie policy](https://colgo.app/privacy)
+- Contact: colgoapp@gmail.com
+- [Sitemap](https://colgo.app/sitemap.xml) — all 75 addresses, five languages.
+
+## Notes for anyone quoting these pages
+
+- Prices on the comparison page were read on the suppliers' own pages on
+  25 August 2026 and are not monitored continuously. Check the supplier's site
+  before repeating them.
+- Figures written "from €X" are minimums, not final prices.
+- Where a competitor does not publish a price, the page says "on request"
+  rather than estimating one.

@@ -1196,6 +1196,17 @@ img { height: auto; }
    quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
    dell'attributo e si schiaccia. */
 .footer-logo { width: auto; }
+
+/* «Da leggere anche»: i link contestuali alle pagine che prima stavano solo
+   nel footer, in mezzo ai documenti legali. */
+.altre-letture{max-width:760px;margin:0 auto;padding:0 32px 96px;}
+.altre-letture h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:0 0 18px;font-weight:400;text-transform:uppercase;}
+.altre-letture ul{list-style:none;padding:0;margin:0;}
+.altre-letture li{border-bottom:1px solid rgba(245,241,232,0.08);}
+.altre-letture a{display:block;padding:16px 0 16px 22px;position:relative;font-size:16px;line-height:1.7;color:rgba(245,241,232,0.82);text-decoration:none;transition:color 0.2s;}
+.altre-letture a::before{content:'→';position:absolute;left:0;color:var(--ochre);}
+.altre-letture a:hover{color:var(--ochre);}
+@media(max-width:700px){.altre-letture{padding:0 22px 64px;}.altre-letture a{font-size:15px;}}
 </style>
 
 <!-- Dati strutturati. Solo fatti che stanno davvero sul sito: nessuna
@@ -1273,6 +1284,7 @@ img { height: auto; }
         <a href="/en/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT&#39;S" data-es="CÓMO FUNCIONA">HOW IT WORKS</a>
       <a href="/en/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG" data-es="ACCESOS Y CATÁLOGO">ACCESS & CATALOGUE</a>
       <a href="/en/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE" data-es="PRECIOS">PRICING</a>
+      <a href="/en/confronto.html" data-it="CONFRONTO" data-en="COMPARISON" data-fr="COMPARATIF" data-de="VERGLEICH" data-es="COMPARATIVA">COMPARISON</a>
         <a href="#storia" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS" data-es="QUIÉNES SOMOS">ABOUT US</a>
         <a href="/en/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">FAQ</a>
       </div>
@@ -1587,6 +1599,14 @@ img { height: auto; }
   </div>
 
   <!-- FOOTER -->
+<div class="altre-letture">
+  <h2 data-it="Da leggere anche" data-en="Read next" data-fr="À lire aussi" data-de="Auch lesenswert" data-es="También te puede servir">Read next</h2>
+  <ul>
+    <li><a href="/en/confronto.html" data-it="Colgo e le alternative: il confronto" data-en="Colgo and the alternatives: the comparison" data-fr="Colgo et les alternatives : le comparatif" data-de="Colgo und die Alternativen: der Vergleich" data-es="Colgo y las alternativas: la comparativa">Colgo and the alternatives: the comparison</a></li>
+    <li><a href="/en/perche-digitale.html" data-it="Perché digitale: i numeri dietro il catalogo via QR" data-en="Why digital: the numbers behind the QR catalogue" data-fr="Pourquoi le numérique : les chiffres du catalogue par QR" data-de="Warum digital: die Zahlen hinter dem QR-Katalog" data-es="Por qué digital: los números detrás del catálogo por QR">Why digital: the numbers behind the QR catalogue</a></li>
+  </ul>
+</div>
+
   <footer>
     <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%;">
 
@@ -1619,16 +1639,22 @@ img { height: auto; }
         </a>
       </div>
 
-      <!-- Link legali -->
+      <!-- Approfondimenti: pagine di CONTENUTO. Stavano sotto un commento che
+           le chiamava "legali", in fila con la privacy: nessuno le trovava. -->
       <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+        <span style="font-size:14px;letter-spacing:2px;color:rgba(245,241,232,0.3);" data-it="Approfondimenti" data-en="In depth" data-fr="Pour aller plus loin" data-de="Zum Vertiefen" data-es="Para profundizar">In depth</span>
+        <a href="/en/confronto.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Confronto con le alternative" data-en="Compared with the alternatives" data-fr="Comparatif avec les alternatives" data-de="Vergleich mit den Alternativen" data-es="Comparativa con las alternativas">Compared with the alternatives</a>
         <a href="/en/perche-digitale.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Why digital</a>
-        <a href="mailto:colgoapp@gmail.com" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;">colgoapp@gmail.com</a>
         <a href="/en/qr-code-in-camera.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">In-room QR</a>
-    <a href="/en/catalogo-complesso.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Complex catalogues</a>
-    <a href="/en/struttura-stagionale.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Seasonal</a>
-    <a href="/en/confronto.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Confronto" data-en="Comparison" data-fr="Comparatif" data-de="Vergleich" data-es="Comparativa">Comparison</a>
-    <a href="/en/privacy.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Privacy Policy</a>
-        <a href="/en/privacy.html#cookie" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Cookie Policy</a>
+        <a href="/en/catalogo-complesso.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Complex catalogues</a>
+        <a href="/en/struttura-stagionale.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.55);text-decoration:none;" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Seasonal</a>
+      </div>
+
+      <!-- Link legali -->
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:6px;">
+        <a href="/en/privacy.html" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.35);text-decoration:none;" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Privacy Policy</a>
+        <a href="/en/privacy.html#cookie" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.35);text-decoration:none;" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Cookie Policy</a>
+        <a href="mailto:colgoapp@gmail.com" style="font-size:14px;letter-spacing:1px;color:rgba(245,241,232,0.35);text-decoration:none;">colgoapp@gmail.com</a>
       </div>
 
       <div class="footer-copy">© 2026 COLGO · COLGO.APP</div>

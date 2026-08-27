@@ -49,4 +49,9 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+# Indice in chiaro per gli assistenti: le stesse pagine del sitemap, ma con
+# una riga che dice di cosa parlano — e i limiti del prodotto scritti in
+# cima, perche' un riassunto che li omette e' sbagliato.
+# https://colgo.app/llms.txt
+
 Sitemap: https://colgo.app/sitemap.xml

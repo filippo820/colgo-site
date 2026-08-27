@@ -166,6 +166,17 @@
     .tab-btn.active,.tab-btn:hover{background:var(--ochre);color:var(--black);border-color:var(--ochre);}
     .billing-tabs{display:flex;justify-content:center;gap:10px;}
     .billing-tabs .tab-btn{font-size:14px;padding:8px 18px;}
+    .billing-tabs{flex-wrap:wrap;}
+    /* Sul telefono i tre non entrano su una riga a larghezza libera (servono
+       326px in 296): tre colonne uguali che riempiono lo spazio. E' anche la
+       forma giusta per un selettore — tre pillole a scaletta sembrano una lista. */
+    @media(max-width:700px){
+      .billing-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+      .billing-tabs .tab-btn{font-size:12px;letter-spacing:0.5px;padding:9px 4px;}}
+    .stag-hint{max-width:560px;margin:16px auto 0;font-size:14px;line-height:1.75;color:rgba(245,241,232,0.72);text-align:center;}
+    .stag-hint a{color:var(--ochre);text-decoration:none;border-bottom:1px solid rgba(200,146,42,0.4);margin-left:6px;white-space:nowrap;}
+    .stag-hint a::after{content:' \2192';}
+    .stag-hint a:hover{border-bottom-color:var(--ochre);}
 
     /* ── PRICING (estende il sistema già definito in index.html) ── */
     .pricing-vertical{padding:0 32px 40px;}
@@ -506,6 +517,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "310.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     },
@@ -529,6 +551,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "470.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     },
@@ -552,6 +585,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "310.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     },
@@ -575,6 +619,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "470.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     },
@@ -598,6 +653,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "230.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     },
@@ -621,6 +687,17 @@ img { height: auto; }
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false,
           "unitText": "YEAR"
+        },
+        {
+          "@type": "UnitPriceSpecification",
+          "price": "390.00",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": false,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 7,
+            "unitCode": "MON"
+          }
         }
       ]
     }
@@ -706,7 +783,15 @@ img { height: auto; }
   </div>
   <div class="billing-tabs">
     <button class="tab-btn active" onclick="setBilling('monthly', this)" data-it="MENSILE" data-en="MONTHLY" data-fr="MENSUEL" data-de="MONATLICH" data-es="MENSUAL">MONTHLY</button>
-    <button class="tab-btn" onclick="setBilling('annual', this)" data-it="ANNUALE · -2 MESI" data-en="ANNUAL · -2 MONTHS" data-fr="ANNUEL · -2 MOIS" data-de="JÄHRLICH · -2 MONATE" data-es="ANUAL · -2 MESES">ANNUAL · -2 MONTHS</button>
+    <button class="tab-btn" onclick="setBilling('annual', this)" data-it="ANNUALE" data-en="ANNUAL" data-fr="ANNUEL" data-de="JÄHRLICH" data-es="ANUAL">ANNUAL</button>
+    <button class="tab-btn" onclick="setBilling('seasonal', this)" data-it="STAGIONALE" data-en="SEASONAL" data-fr="SAISONNIER" data-de="SAISONAL" data-es="TEMPORADA">SEASONAL</button>
+  </div>
+  <!-- Compare solo con STAGIONALE: e' l'unico dei tre periodi che ha bisogno
+       di una frase per essere capito. Il dettaglio resta nel blocco in fondo
+       e su /struttura-stagionale. -->
+  <div class="stag-hint" style="display:none">
+    <span data-it="8 mensilita&#768; per 7 mesi attivi. Nei mesi di riposo i QR restano validi." data-en="Eight monthly instalments for seven active months. During the off months the QR codes stay valid." data-fr="Huit mensualite&#769;s pour sept mois actifs. Pendant les mois de repos les QR restent valables." data-de="Acht Monatsraten fu&#776;r sieben aktive Monate. In den Ruhemonaten bleiben die QR-Codes gu&#776;ltig." data-es="Ocho mensualidades por siete meses activos. En los meses de descanso los QR siguen va&#769;lidos.">Eight monthly instalments for seven active months. During the off months the QR codes stay valid.</span>
+    <a href="/en/struttura-stagionale.html" data-it="Come funziona lo stagionale" data-en="How the seasonal plan works" data-fr="Comment fonctionne le saisonnier" data-de="So funktioniert der Saisontarif" data-es="Co&#769;mo funciona la temporada">How the seasonal plan works</a>
   </div>
 </div>
 
@@ -716,8 +801,8 @@ img { height: auto; }
 
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE" data-es="BASE">BASE</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390">39</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390" data-seasonal="310">39</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Catalogo digitale multilingua (IT/EN/FR/DE/ES)" data-en="Multilingual digital catalogue (IT/EN/FR/DE/ES)" data-fr="Catalogue numérique multilingue (IT/EN/FR/DE/ES)" data-de="Mehrsprachiger digitaler Katalog (IT/EN/FR/DE/ES)" data-es="Catálogo digital multiidioma (IT/EN/FR/DE/ES)">Multilingual digital catalogue (IT/EN/FR/DE/ES)</li>
@@ -733,8 +818,8 @@ img { height: auto; }
     <div class="pricing-card featured">
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="59" data-annual="590">59</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="59" data-annual="590" data-seasonal="470">59</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" data-es="Todo lo del plan Base, más:" style="border-bottom:none;color:var(--cream);">Everything in Base, plus:</li>
@@ -760,8 +845,8 @@ img { height: auto; }
 
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE" data-es="BASE">BASE</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390">39</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="39" data-annual="390" data-seasonal="310">39</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Menù digitale multilingua (IT/EN/FR/DE/ES)" data-en="Multilingual digital menu (IT/EN/FR/DE/ES)" data-fr="Menu numérique multilingue (IT/EN/FR/DE/ES)" data-de="Mehrsprachige digitale Speisekarte (IT/EN/FR/DE/ES)" data-es="Menú digital multiidioma (IT/EN/FR/DE/ES)">Multilingual digital menu (IT/EN/FR/DE/ES)</li>
@@ -777,8 +862,8 @@ img { height: auto; }
     <div class="pricing-card featured">
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="59" data-annual="590">59</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="59" data-annual="590" data-seasonal="470">59</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" data-es="Todo lo del plan Base, más:" style="border-bottom:none;color:var(--cream);">Everything in Base, plus:</li>
@@ -802,8 +887,8 @@ img { height: auto; }
 
     <div class="pricing-card">
       <div class="pricing-name" data-it="BASE" data-en="BASE" data-fr="BASE" data-de="BASE" data-es="BASE">BASE</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="29" data-annual="290">29</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="29" data-annual="290" data-seasonal="230">29</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Catalogo prodotti multilingua (IT/EN/FR/DE/ES)" data-en="Multilingual product catalogue (IT/EN/FR/DE/ES)" data-fr="Catalogue produits multilingue (IT/EN/FR/DE/ES)" data-de="Mehrsprachiger Produktkatalog (IT/EN/FR/DE/ES)" data-es="Catálogo de productos multiidioma (IT/EN/FR/DE/ES)">Multilingual product catalogue (IT/EN/FR/DE/ES)</li>
@@ -819,8 +904,8 @@ img { height: auto; }
     <div class="pricing-card featured">
       <div class="pricing-badge" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
       <div class="pricing-name" data-it="PRO" data-en="PRO" data-fr="PRO" data-de="PRO" data-es="PRO">PRO</div>
-      <div class="pricing-amount"><span class="price-val" data-monthly="49" data-annual="490">49</span><sup>€</sup></div>
-      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span></div>
+      <div class="pricing-amount"><span class="price-val" data-monthly="49" data-annual="490" data-seasonal="390">49</span><sup>€</sup></div>
+      <div class="pricing-period"><span class="pp-m" data-it="al mese +IVA" data-en="per month +VAT" data-fr="par mois HT" data-de="pro Monat zzgl. MwSt." data-es="al mes + IVA">per month +VAT</span><span class="pp-a" style="display:none" data-it="all'anno +IVA" data-en="per year +VAT" data-fr="par an HT" data-de="pro Jahr zzgl. MwSt." data-es="al año + IVA">per year +VAT</span><span class="pp-s" style="display:none" data-it="per 7 mesi +IVA" data-en="for 7 months +VAT" data-fr="pour 7 mois HT" data-de="fu&#776;r 7 Monate zzgl. MwSt." data-es="por 7 meses + IVA">for 7 months +VAT</span></div>
       <div class="pricing-annual-note" style="display:none" data-it="Equivale a 2 mesi gratis" data-en="Equivalent to 2 months free" data-fr="Équivaut à 2 mois offerts" data-de="Entspricht 2 Monaten gratis" data-es="Equivale a 2 meses gratis">Equivalent to 2 months free</div>
       <ul class="pricing-features">
         <li data-it="Tutto quello incluso in Base, più:" data-en="Everything in Base, plus:" data-fr="Tout ce qui est inclus dans Base, plus :" data-de="Alles aus Base, plus:" data-es="Todo lo del plan Base, más:" style="border-bottom:none;color:var(--cream);">Everything in Base, plus:</li>
@@ -880,6 +965,11 @@ img { height: auto; }
     </div>
   </div>
 
+<!-- ⚠️ I SEI PREZZI QUI SOTTO SONO GLI STESSI del terzo stato
+     dell'interruttore in cima (data-seasonal sulle .price-val) e delle
+     referenceQuantity 7 MON nel JSON-LD. Cambiandone uno, cambiali tutti:
+     il 25/08 un prezzo scritto in due posti ha gia' prodotto una card che
+     mostrava 69 con l'attributo a 59. -->
 <div class="stag-section">
   <div class="gold-line"></div>
   <h2 class="stag-titolo" data-it="Chiudi per una parte dell'anno?" data-en="Closed for part of the year?" data-fr="Fermé une partie de l'année ?" data-de="Einen Teil des Jahres geschlossen?" data-es="¿Cierras parte del año?">Closed for part of the year?</h2>
@@ -978,11 +1068,14 @@ img { height: auto; }
     btn.parentElement.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.price-val').forEach(el => {
-      el.textContent = b === 'annual' ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
+      el.textContent = el.getAttribute('data-' + b);
     });
-    document.querySelectorAll('.pp-m').forEach(el => el.style.display = b === 'annual' ? 'none' : 'inline');
-    document.querySelectorAll('.pp-a').forEach(el => el.style.display = b === 'annual' ? 'inline' : 'none');
+    document.querySelectorAll('.pp-m').forEach(el => el.style.display = b === 'monthly'  ? 'inline' : 'none');
+    document.querySelectorAll('.pp-a').forEach(el => el.style.display = b === 'annual'   ? 'inline' : 'none');
+    document.querySelectorAll('.pp-s').forEach(el => el.style.display = b === 'seasonal' ? 'inline' : 'none');
     document.querySelectorAll('.pricing-annual-note').forEach(el => el.style.display = b === 'annual' ? 'block' : 'none');
+    const hint = document.querySelector('.stag-hint');
+    if (hint) hint.style.display = b === 'seasonal' ? 'block' : 'none';
   }
 </script>
 

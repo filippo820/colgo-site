@@ -461,7 +461,36 @@ def genera(pagina, lingua):
     return s, p.tradotti
 
 
+def controlla_voce_attiva():
+    """Ogni pagina puo' evidenziare al massimo la PROPRIA voce di menu.
+
+    Le quattro pagine del 25/08 sono nate copiando per-chi.html e ne hanno
+    ereditato il class="active": confronto evidenziava se stessa E "per chi",
+    le altre tre evidenziavano una pagina in cui non sei. Nessuno se n'e'
+    accorto per due giorni perche' il segno e' solo un colore.
+    Costa niente controllarlo qui, dove passa ogni modifica al sito.
+    """
+    import glob
+    guai = []
+    for f in sorted(glob.glob(os.path.join(RADICE, '*.html'))):
+        nome = os.path.basename(f)
+        s = open(f, encoding='utf-8').read()
+        m = re.search(r'<div class="nav-links">(.*?)</div>', s, re.S)
+        if not m:
+            continue
+        att = [re.search(r'href="([^"]+)"', a).group(1)
+               for a in re.findall(r'<a\b[^>]*>.*?</a>', m.group(1), re.S)
+               if re.search(r'class="[^"]*\bactive\b', a)]
+        if len(att) > 1:
+            guai.append('%s evidenzia %d voci: %s' % (nome, len(att), ', '.join(att)))
+        elif att and att[0].lstrip('/') != nome:
+            guai.append('%s evidenzia %s' % (nome, att[0]))
+    if guai:
+        raise SystemExit('VOCE DI MENU SBAGLIATA:\n  ' + '\n  '.join(guai))
+
+
 def main():
+    controlla_voce_attiva()
     tot = 0
     for l in LINGUE:
         d = os.path.join(RADICE, l)

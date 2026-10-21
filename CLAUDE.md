@@ -128,8 +128,12 @@ piccolo del sito.
   automatici, niente pagamenti, niente Glovo/Deliveroo): un riassunto che li
   omette è sbagliato, e tanto vale scriverli noi.
 
-## Sessione del 21/10/2026 — SEO tecnica, fase 1 (branch `seo-fase-1`, non pubblicato)
+## Sessione del 21/10/2026 — SEO tecnica, fase 1 (branch `seo-fase-1`, pubblicato)
 Partita da un audit. Un commit per punto, niente su `main` finché non c'è l'ok.
+**Pubblicato il 21/10/2026 con il merge `91efaf0`** (`--no-ff`, ramo `seo-fase-1`
+conservato). Verificato in produzione con curl: `/prezzi.html` → 301 → `/prezzi`
+→ 200 (un salto, nessun loop), `/en/xyz` → 404 con la pagina inglese, font
+`immutable` per un anno, schermate 7 giorni, HTML ancora `max-age=0`.
 
 ### 🔴 Title e description: la home non diceva cosa vende
 Home a 113 caratteri di description, prezzi e FAQ con title da 11–14

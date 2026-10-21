@@ -47,7 +47,18 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
            'struttura-stagionale.html',
            'confronto.html']
 
+# Pagine di servizio: generate in ogni lingua ma FUORI da sitemap, hreflang e
+# briciole. Non hanno canonical (una 404 non ha un indirizzo suo), quindi
+# genera() non vi scrive nemmeno gli hreflang. Netlify le usa con le regole
+# "/en/*  /en/404.html  404" di _redirects.
+SERVIZIO = ['404.html']
+
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
+
+# Il testo alternativo dell'anteprima social: l'immagine e' il solo logo, e
+# l'alt dice quello, non uno slogan.
+ALT_OG = {'it': 'Logo di Colgo', 'en': 'Colgo logo', 'fr': 'Logo de Colgo',
+          'de': 'Colgo-Logo', 'es': 'Logo de Colgo'}
 
 # Titolo e descrizione non stanno negli attributi data-*: sono l'unica cosa che
 # va tradotta a mano. Sono anche cio' che si legge nei risultati di ricerca.
@@ -63,11 +74,20 @@ OFFERTE = {
 }
 
 META = {
+ '404.html': {
+  'en': ("Page not found — Colgo",
+         "The page you were looking for isn't here: the address has changed or contains a mistake. Go back to the home page, pricing, the FAQ or try the Colgo demo."),
+  'fr': ("Page introuvable — Colgo",
+         "La page que vous cherchez n'existe pas : l'adresse a changé ou contient une erreur. Revenez à l'accueil, aux tarifs, à la FAQ ou essayez la démo de Colgo."),
+  'de': ("Seite nicht gefunden — Colgo",
+         "Die gesuchte Seite gibt es nicht: Die Adresse hat sich geändert oder enthält einen Fehler. Zurück zur Startseite, zu den Preisen, zur FAQ oder zur Demo."),
+  'es': ("Página no encontrada — Colgo",
+         "La página que buscabas no existe: la dirección cambió o tiene un error. Vuelve al inicio, a los precios, a las preguntas frecuentes o prueba la demo.")},
  'confronto.html': {
   'en': ("Colgo and the alternatives: the comparison",
          "Competitor prices read on their own pages on 25/08/2026, with the row where we're behind written first: no property management system integration."),
   'fr': ("Colgo et les alternatives : le comparatif",
-         "Prix des concurrents relevés sur leurs pages le 25/08/2026, avec la ligne où nous sommes en retard écrite en premier : aucune intégration au logiciel de gestion."),
+         "Prix des concurrents relevés sur leurs pages le 25/08/2026, avec la ligne où nous sommes en retard en premier : aucune intégration au logiciel de gestion."),
   'de': ("Colgo und die Alternativen: der Vergleich",
          "Wettbewerberpreise, am 25.08.2026 auf deren Seiten gelesen, mit der Zeile, in der wir hinterherhinken, zuerst: keine PMS-Anbindung."),
   'es': ("Colgo y las alternativas: la comparativa",
@@ -100,14 +120,14 @@ META = {
   'es': ("Menú complejo: ¿aguanta un catálogo digital?",
          "Subcategorías anidadas, precios por talla, horarios por categoría y stock recomprobado al enviar. Con los límites dichos: ni PMS ni caja.")},
  'index.html': {
-  'en': ("Colgo — The digital catalogue for any business",
-         "Colgo puts your catalogue on your customers' phones. Configurable, always up to date, without complications."),
-  'fr': ("Colgo — Le catalogue numérique pour tout établissement",
-         "Colgo apporte votre catalogue sur le téléphone de vos clients. Configurable, toujours à jour, sans complications."),
-  'de': ("Colgo — Der digitale Katalog für jeden Betrieb",
-         "Colgo bringt Ihren Katalog auf das Handy Ihrer Gäste. Konfigurierbar, immer aktuell, ohne Komplikationen."),
-  'es': ("Colgo — El catálogo digital para cualquier negocio",
-         "Colgo lleva tu catálogo al teléfono de tus clientes. Configurable, siempre al día, sin complicaciones.")},
+  'en': ("Colgo — QR digital catalogue for hotels and restaurants",
+         "QR digital catalogue for hotels, restaurants and shops: customers open it on their phone, in their own language, with no app. Try the demo or 30 days free."),
+  'fr': ("Colgo — Catalogue numérique QR pour hôtels et restaurants",
+         "Catalogue numérique QR pour hôtels, restaurants et boutiques : le client l'ouvre sur son téléphone, dans sa langue, sans appli. Démo ou 30 jours gratuits."),
+  'de': ("Colgo — Digitaler QR-Katalog für Hotels und Restaurants",
+         "Digitaler QR-Katalog für Hotels, Restaurants und Geschäfte: Kunden öffnen ihn am Handy, in ihrer Sprache, ohne App. Demo ansehen oder 30 Tage gratis."),
+  'es': ("Colgo — Catálogo digital por QR para hoteles y restaurantes",
+         "Catálogo digital por QR para hoteles, restaurantes y tiendas: tus clientes lo abren en el teléfono, en su idioma, sin app. Prueba la demo o 30 días gratis.")},
  'come-funziona.html': {
   'en': ("How Colgo works — Digital catalogue for hospitality",
          "See how Colgo works: QR code in the room, automatic multilingual catalogue, real-time requests to reception. No app, no downloads."),
@@ -118,11 +138,14 @@ META = {
   'es': ("Cómo funciona Colgo — catálogo digital por QR",
          "Mira cómo funciona Colgo: código QR en la habitación, catálogo multiidioma automático, solicitudes en tiempo real a recepción. Sin app, sin descargas.")},
  'faq.html': {
-  'en': ("FAQ — Colgo", "Frequently asked questions about Colgo. Everything you want to know before you start."),
-  'fr': ("FAQ — Colgo", "Questions fréquentes sur Colgo. Tout ce que vous voulez savoir avant de commencer."),
-  'de': ("FAQ — Colgo", "Häufige Fragen zu Colgo. Alles, was Sie vor dem Start wissen möchten."),
-  'es': ("Preguntas frecuentes — Colgo",
-         "Respuestas a las dudas más comunes sobre Colgo: precios, idiomas, configuración, pagos y seguridad de los datos.")},
+  'en': ("Colgo FAQ — Questions on digital catalogues and QR codes",
+         "Answers on costs, whether customers need an app, languages, QR codes and setup for hotels, restaurants and shops: what to know before trying Colgo."),
+  'fr': ("FAQ Colgo — Questions sur le catalogue numérique et le QR",
+         "Réponses sur les coûts, l'appli côté clients, les langues, les QR codes et la mise en route pour hôtels, restaurants et boutiques, avant d'essayer Colgo."),
+  'de': ("Colgo FAQ — Fragen zu digitalem Katalog und QR-Code",
+         "Antworten zu Kosten, App für Kunden, Sprachen, QR-Codes und Start für Hotels, Restaurants und Geschäfte: was Sie wissen sollten, bevor Sie Colgo testen."),
+  'es': ("Preguntas frecuentes de Colgo — catálogo digital y QR",
+         "Respuestas sobre costos, app para los clientes, idiomas, códigos QR y puesta en marcha para hoteles, restaurantes y tiendas, antes de probar Colgo.")},
  'hotel.html': {
   'en': ("Colgo for hotels, B&Bs and farm stays — digital catalogue",
          "Colgo for hospitality: guests scan the QR in the room or get the link before arrival, explore services and send requests to reception in real time."),
@@ -169,17 +192,19 @@ META = {
   'es': ("Por qué digital — los números detrás del catálogo por QR",
          "Adopción del QR, la barrera del idioma, la falta de personal, el costo del papel: los datos del sector detrás del catálogo digital.")},
  'prezzi.html': {
-  'en': ("Pricing — Colgo",
-         "Colgo pricing for hotels, restaurants and shops. One price per business, not per room or table. Monthly or yearly."),
-  'fr': ("Tarifs — Colgo",
-         "Tarifs Colgo pour hôtels, restaurants et boutiques. Un prix par établissement, pas par chambre ou par table. Mensuel ou annuel."),
-  'de': ("Preise — Colgo",
-         "Colgo-Preise für Hotels, Restaurants und Geschäfte. Ein Preis pro Betrieb, nicht pro Zimmer oder Tisch. Monatlich oder jährlich."),
-  'es': ("Precios — Colgo",
-         "Precios de Colgo para hoteles, restaurantes y tiendas. Un precio por negocio, no por habitación ni por mesa. Mensual o anual, con 30 días de prueba gratis.")},
+  # Niente cifre qui: un prezzo ripetuto nei meta e' un prezzo che invecchia
+  # in cinque posti alla volta (e' gia' successo con kb.json).
+  'en': ("Colgo pricing — one price per business, not per room",
+         "One price per business, not per room or table, monthly or yearly, with a 30-day free trial. Plans for hotels, restaurants and shops."),
+  'fr': ("Tarifs Colgo — un prix par établissement, pas par chambre",
+         "Un prix par établissement, pas par chambre ni par table, mensuel ou annuel, avec 30 jours d'essai gratuit. Des formules pour hôtels, restaurants et boutiques."),
+  'de': ("Colgo Preise — ein Preis pro Betrieb, nicht pro Zimmer",
+         "Ein Preis pro Betrieb, nicht pro Zimmer oder Tisch, monatlich oder jährlich, mit 30 Tagen kostenlosem Test. Tarife für Hotels, Restaurants und Geschäfte."),
+  'es': ("Precios de Colgo — un precio por negocio, no por habitación",
+         "Un precio por negocio, no por habitación ni por mesa, mensual o anual, con 30 días de prueba gratis. Planes para hoteles, restaurantes y tiendas.")},
  'privacy.html': {
   'en': ("Privacy Policy — Colgo",
-         "Colgo privacy policy: what data we collect, why, how long we keep it and how to exercise your rights."),
+         "Colgo privacy policy: what personal data we collect, why, how long we keep it, which third parties are involved and how to exercise your rights."),
   'fr': ("Politique de confidentialité — Colgo",
          "Politique de confidentialité de Colgo : quelles données nous collectons, pourquoi, combien de temps et comment exercer vos droits."),
   'de': ("Datenschutzerklärung — Colgo",
@@ -195,6 +220,26 @@ META = {
          "Der Kellner verwaltet Bestellungen auf seiner eigenen Seite, der Gast bestellt per Tisch-QR. Die Bestellung geht direkt in die Küche."),
   'es': ("Colgo para restaurantes y bares — pedidos desde la mesa",
          "El mesero maneja los pedidos desde su propia página, o el cliente pide escaneando el QR de la mesa. El pedido llega a la cocina al instante.")},
+}
+
+# Nomi per il BreadcrumbList (Home › pagina). Non sono testo nuovo: sono le
+# etichette che il sito usa gia' nel menu e nel piede, nelle stesse lingue.
+BRICIOLE = {
+ 'index.html':                ('Home', 'Home', 'Accueil', 'Startseite', 'Inicio'),
+ 'come-funziona.html':        ('Come funziona', 'How it works', 'Comment ça marche', "So funktioniert's", 'Cómo funciona'),
+ 'organizzazione.html':       ('Accessi e catalogo', 'Access & catalogue', 'Accès et catalogue', 'Zugriffe & Katalog', 'Accesos y catálogo'),
+ 'prezzi.html':               ('Prezzi', 'Pricing', 'Tarifs', 'Preise', 'Precios'),
+ 'confronto.html':            ('Confronto', 'Comparison', 'Comparatif', 'Vergleich', 'Comparativa'),
+ 'faq.html':                  ('FAQ', 'FAQ', 'FAQ', 'FAQ', 'Preguntas frecuentes'),
+ 'hotel.html':                ('Hotel', 'Hotel', 'Hôtel', 'Hotel', 'Hotel'),
+ 'ristorante.html':           ('Ristorante', 'Restaurant', 'Restaurant', 'Restaurant', 'Restaurante'),
+ 'negozio.html':              ('Negozio', 'Shop', 'Boutique', 'Geschäft', 'Tienda'),
+ 'per-chi.html':              ('Per chi', "Who it's for", 'Pour qui', 'Für wen', 'Para quién'),
+ 'perche-digitale.html':      ('Perché digitale', 'Why digital', 'Pourquoi le numérique', 'Warum digital', 'Por qué digital'),
+ 'privacy.html':              ('Privacy Policy', 'Privacy Policy', 'Politique de confidentialité', 'Datenschutzerklärung', 'Política de Privacidad'),
+ 'qr-code-in-camera.html':    ('QR in camera', 'In-room QR', 'QR en chambre', 'QR im Zimmer', 'QR en la habitación'),
+ 'catalogo-complesso.html':   ('Cataloghi complessi', 'Complex catalogues', 'Catalogues complexes', 'Komplexe Kataloge', 'Catálogos complejos'),
+ 'struttura-stagionale.html': ('Stagionali', 'Seasonal', 'Saisonnier', 'Saisonbetrieb', 'De temporada'),
 }
 
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
@@ -340,6 +385,36 @@ def faqpage(html, lingua, url):
     return html.replace('</head>', blocco, 1)
 
 
+RE_BRICIOLE = re.compile(r'\n<!-- Briciole: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', re.S)
+
+
+def briciole(html, pagina, lingua):
+    """BreadcrumbList Home › pagina, nella lingua che si sta leggendo.
+
+    ⚠️ Il vecchio blocco va tolto con RE_BRICIOLE PRIMA di toccare il FAQPage,
+    e questa si chiama DOPO: la pulizia del FAQPage cerca il suo blocco subito
+    prima di </head>, e con le briciole in mezzo si porterebbe via anche loro."""
+    import json as _json
+    html = RE_BRICIOLE.sub('', html)
+    if pagina == 'index.html' or pagina not in BRICIOLE:
+        return html
+    i = ('it',) + LINGUE
+    grafo = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1,
+             "name": BRICIOLE['index.html'][i.index(lingua)], "item": indirizzo('index.html', lingua)},
+            {"@type": "ListItem", "position": 2,
+             "name": BRICIOLE[pagina][i.index(lingua)], "item": indirizzo(pagina, lingua)},
+        ],
+    }
+    blocco = ('\n<!-- Briciole: generato da scripts/lingue.py. Non si modifica a mano. -->\n'
+              '<script type="application/ld+json">\n'
+              + _json.dumps(grafo, ensure_ascii=False, indent=2) + '\n</script>\n</head>')
+    return html.replace('</head>', blocco, 1)
+
+
 def indirizzo(pagina, lingua):
     base = SITO + ('' if lingua == 'it' else '/' + lingua)
     return base + '/' if pagina == 'index.html' else f'{base}/{pagina[:-5]}'
@@ -352,6 +427,18 @@ def alternate(pagina):
          for l in lingue]
     r.append(f'  <link rel="alternate" hreflang="x-default" href="{indirizzo(pagina, "it")}" />')
     return '\n'.join(r) + '\n'
+
+
+def locali_alternative(html, lingua):
+    """og:locale:alternate per le altre quattro lingue, subito dopo og:locale.
+
+    Prima si tolgono quelle gia' presenti: l'italiano le riceve da qui e la
+    generazione copia il suo <head>, quindi senza la pulizia si raddoppiano."""
+    html = re.sub(r'\n  <meta property="og:locale:alternate" content="[^"]*" />', '', html)
+    righe = ''.join(f'\n  <meta property="og:locale:alternate" content="{LOCALE[l]}" />'
+                    for l in ('it',) + LINGUE if l != lingua)
+    return re.sub(r'(<meta property="og:locale" content="[^"]*" />)', lambda m: m.group(1) + righe,
+                  html, count=1)
 
 
 def rifai_link(html, lingua):
@@ -410,6 +497,9 @@ def genera(pagina, lingua):
 
     s = s.replace(f'<meta property="og:locale" content="it_IT" />',
                   f'<meta property="og:locale" content="{LOCALE[lingua]}" />')
+    s = locali_alternative(s, lingua)
+    s = s.replace(f'<meta property="og:image:alt" content="{ALT_OG["it"]}" />',
+                  f'<meta property="og:image:alt" content="{ALT_OG[lingua]}" />')
 
     url = indirizzo(pagina, lingua)
     s = re.sub(r'\n?  <link rel="alternate" hreflang="[^"]*" href="[^"]*" />', '', s)
@@ -444,8 +534,19 @@ def genera(pagina, lingua):
 
     # ovunque ci siano domande, non solo su faq.html: le pagine costruite
     # su una domanda hanno il loro blocco in fondo
+    s = RE_BRICIOLE.sub('', s)
     if 'faq-q' in s:
         s = faqpage(s, lingua, indirizzo(pagina, lingua))
+    s = briciole(s, pagina, lingua)
+
+    # la description della home sta anche nel JSON-LD (SoftwareApplication):
+    # quella italiana si sostituisce con quella della lingua
+    if pagina == 'index.html':
+        import json as _json
+        it_descr = re.search(r'<meta name="description" content="([^"]*)"', sorgente).group(1)
+        vecchia = '"description": ' + _json.dumps(it_descr, ensure_ascii=False)
+        assert vecchia in s, 'index.html: la description del JSON-LD non e\' quella della pagina'
+        s = s.replace(vecchia, '"description": ' + _json.dumps(descr, ensure_ascii=False))
 
     if pagina == 'prezzi.html':
         # solo le ETICHETTE dei segmenti: le cifre restano quelle che sono
@@ -496,7 +597,7 @@ def main():
         d = os.path.join(RADICE, l)
         if os.path.isdir(d): shutil.rmtree(d)
         os.makedirs(d)
-        for pagina in PAGINE:
+        for pagina in PAGINE + SERVIZIO:
             if pagina in SOLO_ITALIANO: continue
             s, n = genera(pagina, l)
             io.open(os.path.join(d, pagina), 'w', encoding='utf-8').write(s)
@@ -510,11 +611,14 @@ def main():
         s = io.open(f, encoding='utf-8').read()
         s = re.sub(r'\n?  <link rel="alternate" hreflang="[^"]*" href="[^"]*" />', '', s)
         s = s.replace('  <link rel="canonical"', alternate(pagina) + '  <link rel="canonical"', 1)
+        s = locali_alternative(s, 'it')
         # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
         # strutturati che NON si scrive a mano nel file
+        s = RE_BRICIOLE.sub('', s)
         s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)
         if 'faq-q' in s:
             s = faqpage(s, 'it', indirizzo(pagina, 'it'))
+        s = briciole(s, pagina, 'it')
         io.open(f, 'w', encoding='utf-8').write(s)
     print(f'{len(PAGINE)} pagine italiane: aggiunto hreflang')
 

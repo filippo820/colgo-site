@@ -1,6 +1,92 @@
-# Netlify. Pagina non trovata nella lingua che si sta leggendo. Senza '!':
-# i file che esistono hanno la precedenza. L'italiana (/404.html) Netlify la
-# usa da sola per tutto il resto.
+# Netlify. Generato a mano il 21/10/2026 (seo-fase-1): se si aggiunge una pagina,
+# va aggiunta anche qui (le regole sono esplicite, una per pagina).
+#
+# 1) Un solo indirizzo per pagina: /pagina.html -> /pagina, permanente.
+#    Il '!' serve perche' i file .html ESISTONO: senza, Netlify li servirebbe
+#    e la regola non scatterebbe mai.
+
+/index.html  /  301!
+/come-funziona.html  /come-funziona  301!
+/faq.html  /faq  301!
+/hotel.html  /hotel  301!
+/negozio.html  /negozio  301!
+/organizzazione.html  /organizzazione  301!
+/per-chi.html  /per-chi  301!
+/perche-digitale.html  /perche-digitale  301!
+/prezzi.html  /prezzi  301!
+/privacy.html  /privacy  301!
+/ristorante.html  /ristorante  301!
+/qr-code-in-camera.html  /qr-code-in-camera  301!
+/catalogo-complesso.html  /catalogo-complesso  301!
+/struttura-stagionale.html  /struttura-stagionale  301!
+/confronto.html  /confronto  301!
+
+/en/index.html  /en/  301!
+/en/come-funziona.html  /en/come-funziona  301!
+/en/faq.html  /en/faq  301!
+/en/hotel.html  /en/hotel  301!
+/en/negozio.html  /en/negozio  301!
+/en/organizzazione.html  /en/organizzazione  301!
+/en/per-chi.html  /en/per-chi  301!
+/en/perche-digitale.html  /en/perche-digitale  301!
+/en/prezzi.html  /en/prezzi  301!
+/en/privacy.html  /en/privacy  301!
+/en/ristorante.html  /en/ristorante  301!
+/en/qr-code-in-camera.html  /en/qr-code-in-camera  301!
+/en/catalogo-complesso.html  /en/catalogo-complesso  301!
+/en/struttura-stagionale.html  /en/struttura-stagionale  301!
+/en/confronto.html  /en/confronto  301!
+
+/fr/index.html  /fr/  301!
+/fr/come-funziona.html  /fr/come-funziona  301!
+/fr/faq.html  /fr/faq  301!
+/fr/hotel.html  /fr/hotel  301!
+/fr/negozio.html  /fr/negozio  301!
+/fr/organizzazione.html  /fr/organizzazione  301!
+/fr/per-chi.html  /fr/per-chi  301!
+/fr/perche-digitale.html  /fr/perche-digitale  301!
+/fr/prezzi.html  /fr/prezzi  301!
+/fr/privacy.html  /fr/privacy  301!
+/fr/ristorante.html  /fr/ristorante  301!
+/fr/qr-code-in-camera.html  /fr/qr-code-in-camera  301!
+/fr/catalogo-complesso.html  /fr/catalogo-complesso  301!
+/fr/struttura-stagionale.html  /fr/struttura-stagionale  301!
+/fr/confronto.html  /fr/confronto  301!
+
+/de/index.html  /de/  301!
+/de/come-funziona.html  /de/come-funziona  301!
+/de/faq.html  /de/faq  301!
+/de/hotel.html  /de/hotel  301!
+/de/negozio.html  /de/negozio  301!
+/de/organizzazione.html  /de/organizzazione  301!
+/de/per-chi.html  /de/per-chi  301!
+/de/perche-digitale.html  /de/perche-digitale  301!
+/de/prezzi.html  /de/prezzi  301!
+/de/privacy.html  /de/privacy  301!
+/de/ristorante.html  /de/ristorante  301!
+/de/qr-code-in-camera.html  /de/qr-code-in-camera  301!
+/de/catalogo-complesso.html  /de/catalogo-complesso  301!
+/de/struttura-stagionale.html  /de/struttura-stagionale  301!
+/de/confronto.html  /de/confronto  301!
+
+/es/index.html  /es/  301!
+/es/come-funziona.html  /es/come-funziona  301!
+/es/faq.html  /es/faq  301!
+/es/hotel.html  /es/hotel  301!
+/es/negozio.html  /es/negozio  301!
+/es/organizzazione.html  /es/organizzazione  301!
+/es/per-chi.html  /es/per-chi  301!
+/es/perche-digitale.html  /es/perche-digitale  301!
+/es/prezzi.html  /es/prezzi  301!
+/es/privacy.html  /es/privacy  301!
+/es/ristorante.html  /es/ristorante  301!
+/es/qr-code-in-camera.html  /es/qr-code-in-camera  301!
+/es/catalogo-complesso.html  /es/catalogo-complesso  301!
+/es/struttura-stagionale.html  /es/struttura-stagionale  301!
+/es/confronto.html  /es/confronto  301!
+
+# 2) Pagina non trovata nella lingua che si sta leggendo. Senza '!': i file
+#    che esistono hanno la precedenza. L'italiana (/404.html) Netlify la usa da sola.
 /en/*  /en/404.html  404
 /fr/*  /fr/404.html  404
 /de/*  /de/404.html  404

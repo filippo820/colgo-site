@@ -1,0 +1,7 @@
+# Netlify. Pagina non trovata nella lingua che si sta leggendo. Senza '!':
+# i file che esistono hanno la precedenza. L'italiana (/404.html) Netlify la
+# usa da sola per tutto il resto.
+/en/*  /en/404.html  404
+/fr/*  /fr/404.html  404
+/de/*  /de/404.html  404
+/es/*  /es/404.html  404

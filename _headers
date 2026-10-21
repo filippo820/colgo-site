@@ -1,0 +1,13 @@
+# Cache dei file statici (Netlify). Le pagine HTML e i file con un nome che
+# non cambia (colgo-og.png, favicon, logo) restano sul default di Netlify:
+# max-age=0, must-revalidate — una modifica si vede subito.
+
+# I font hanno la versione nel nome del file (…-v21-…, …-v34-…): se cambiano,
+# cambia il nome. Per questo possono essere "immutable" per un anno.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Le schermate dell'app NON hanno versione nel nome e possono essere
+# rifatte: sette giorni, non di piu'.
+/screenshots/*
+  Cache-Control: public, max-age=604800

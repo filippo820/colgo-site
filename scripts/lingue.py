@@ -47,6 +47,12 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
            'struttura-stagionale.html',
            'confronto.html']
 
+# Pagine di servizio: generate in ogni lingua ma FUORI da sitemap, hreflang e
+# briciole. Non hanno canonical (una 404 non ha un indirizzo suo), quindi
+# genera() non vi scrive nemmeno gli hreflang. Netlify le usa con le regole
+# "/en/*  /en/404.html  404" di _redirects.
+SERVIZIO = ['404.html']
+
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
 # Il testo alternativo dell'anteprima social: l'immagine e' il solo logo, e
@@ -68,6 +74,15 @@ OFFERTE = {
 }
 
 META = {
+ '404.html': {
+  'en': ("Page not found — Colgo",
+         "The page you were looking for isn't here: the address has changed or contains a mistake. Go back to the home page, pricing, the FAQ or try the Colgo demo."),
+  'fr': ("Page introuvable — Colgo",
+         "La page que vous cherchez n'existe pas : l'adresse a changé ou contient une erreur. Revenez à l'accueil, aux tarifs, à la FAQ ou essayez la démo de Colgo."),
+  'de': ("Seite nicht gefunden — Colgo",
+         "Die gesuchte Seite gibt es nicht: Die Adresse hat sich geändert oder enthält einen Fehler. Zurück zur Startseite, zu den Preisen, zur FAQ oder zur Demo."),
+  'es': ("Página no encontrada — Colgo",
+         "La página que buscabas no existe: la dirección cambió o tiene un error. Vuelve al inicio, a los precios, a las preguntas frecuentes o prueba la demo.")},
  'confronto.html': {
   'en': ("Colgo and the alternatives: the comparison",
          "Competitor prices read on their own pages on 25/08/2026, with the row where we're behind written first: no property management system integration."),
@@ -381,7 +396,7 @@ def briciole(html, pagina, lingua):
     prima di </head>, e con le briciole in mezzo si porterebbe via anche loro."""
     import json as _json
     html = RE_BRICIOLE.sub('', html)
-    if pagina == 'index.html':
+    if pagina == 'index.html' or pagina not in BRICIOLE:
         return html
     i = ('it',) + LINGUE
     grafo = {
@@ -582,7 +597,7 @@ def main():
         d = os.path.join(RADICE, l)
         if os.path.isdir(d): shutil.rmtree(d)
         os.makedirs(d)
-        for pagina in PAGINE:
+        for pagina in PAGINE + SERVIZIO:
             if pagina in SOLO_ITALIANO: continue
             s, n = genera(pagina, l)
             io.open(os.path.join(d, pagina), 'w', encoding='utf-8').write(s)

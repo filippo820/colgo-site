@@ -1220,7 +1220,9 @@ img { height: auto; }
      valutazione, nessuna recensione, nessuna P.IVA (non compare da nessuna
      parte e non si inventa). Neutro rispetto alla lingua: il generatore copia
      il <head> tale e quale nelle versioni tradotte, quindi qui non ci va
-     niente che cambi da una lingua all'altra.
+     niente che cambi da una lingua all'altra. Unica eccezione la
+     "description", che e' la meta description della pagina: lingue.py la
+     sostituisce con quella della lingua (dal dizionario META).
 
      SoftwareApplication compare anche qui, non solo su /prezzi: la home e' la
      pagina che gli assistenti scaricano per prima. Stesso @id, quindi resta
@@ -1244,7 +1246,8 @@ img { height: auto; }
       "email": "colgoapp@gmail.com",
       "sameAs": [
         "https://www.instagram.com/colgoapp",
-        "https://www.tiktok.com/@colgoapp"
+        "https://www.tiktok.com/@colgoapp",
+        "https://www.linkedin.com/company/colgo-app"
       ]
     },
     {
@@ -1254,6 +1257,7 @@ img { height: auto; }
       "url": "https://colgo.app/",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
+      "description": "Catalogo digitale via QR per hotel, ristoranti e negozi: i clienti lo aprono dal telefono, nella loro lingua, senza app. Prova la demo o 30 giorni gratis.",
       "publisher": { "@id": "https://colgo.app/#organizzazione" },
       "inLanguage": ["it", "en", "fr", "de", "es"]
     },

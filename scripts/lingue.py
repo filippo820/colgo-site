@@ -207,6 +207,26 @@ META = {
          "El mesero maneja los pedidos desde su propia página, o el cliente pide escaneando el QR de la mesa. El pedido llega a la cocina al instante.")},
 }
 
+# Nomi per il BreadcrumbList (Home › pagina). Non sono testo nuovo: sono le
+# etichette che il sito usa gia' nel menu e nel piede, nelle stesse lingue.
+BRICIOLE = {
+ 'index.html':                ('Home', 'Home', 'Accueil', 'Startseite', 'Inicio'),
+ 'come-funziona.html':        ('Come funziona', 'How it works', 'Comment ça marche', "So funktioniert's", 'Cómo funciona'),
+ 'organizzazione.html':       ('Accessi e catalogo', 'Access & catalogue', 'Accès et catalogue', 'Zugriffe & Katalog', 'Accesos y catálogo'),
+ 'prezzi.html':               ('Prezzi', 'Pricing', 'Tarifs', 'Preise', 'Precios'),
+ 'confronto.html':            ('Confronto', 'Comparison', 'Comparatif', 'Vergleich', 'Comparativa'),
+ 'faq.html':                  ('FAQ', 'FAQ', 'FAQ', 'FAQ', 'Preguntas frecuentes'),
+ 'hotel.html':                ('Hotel', 'Hotel', 'Hôtel', 'Hotel', 'Hotel'),
+ 'ristorante.html':           ('Ristorante', 'Restaurant', 'Restaurant', 'Restaurant', 'Restaurante'),
+ 'negozio.html':              ('Negozio', 'Shop', 'Boutique', 'Geschäft', 'Tienda'),
+ 'per-chi.html':              ('Per chi', "Who it's for", 'Pour qui', 'Für wen', 'Para quién'),
+ 'perche-digitale.html':      ('Perché digitale', 'Why digital', 'Pourquoi le numérique', 'Warum digital', 'Por qué digital'),
+ 'privacy.html':              ('Privacy Policy', 'Privacy Policy', 'Politique de confidentialité', 'Datenschutzerklärung', 'Política de Privacidad'),
+ 'qr-code-in-camera.html':    ('QR in camera', 'In-room QR', 'QR en chambre', 'QR im Zimmer', 'QR en la habitación'),
+ 'catalogo-complesso.html':   ('Cataloghi complessi', 'Complex catalogues', 'Catalogues complexes', 'Komplexe Kataloge', 'Catálogos complejos'),
+ 'struttura-stagionale.html': ('Stagionali', 'Seasonal', 'Saisonnier', 'Saisonbetrieb', 'De temporada'),
+}
+
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
          'polygon','polyline','ellipse','use','stop','col','area','feturbulence',
          'fegaussianblur','base','embed','track','wbr'}
@@ -350,6 +370,36 @@ def faqpage(html, lingua, url):
     return html.replace('</head>', blocco, 1)
 
 
+RE_BRICIOLE = re.compile(r'\n<!-- Briciole: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', re.S)
+
+
+def briciole(html, pagina, lingua):
+    """BreadcrumbList Home › pagina, nella lingua che si sta leggendo.
+
+    ⚠️ Il vecchio blocco va tolto con RE_BRICIOLE PRIMA di toccare il FAQPage,
+    e questa si chiama DOPO: la pulizia del FAQPage cerca il suo blocco subito
+    prima di </head>, e con le briciole in mezzo si porterebbe via anche loro."""
+    import json as _json
+    html = RE_BRICIOLE.sub('', html)
+    if pagina == 'index.html':
+        return html
+    i = ('it',) + LINGUE
+    grafo = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1,
+             "name": BRICIOLE['index.html'][i.index(lingua)], "item": indirizzo('index.html', lingua)},
+            {"@type": "ListItem", "position": 2,
+             "name": BRICIOLE[pagina][i.index(lingua)], "item": indirizzo(pagina, lingua)},
+        ],
+    }
+    blocco = ('\n<!-- Briciole: generato da scripts/lingue.py. Non si modifica a mano. -->\n'
+              '<script type="application/ld+json">\n'
+              + _json.dumps(grafo, ensure_ascii=False, indent=2) + '\n</script>\n</head>')
+    return html.replace('</head>', blocco, 1)
+
+
 def indirizzo(pagina, lingua):
     base = SITO + ('' if lingua == 'it' else '/' + lingua)
     return base + '/' if pagina == 'index.html' else f'{base}/{pagina[:-5]}'
@@ -469,8 +519,19 @@ def genera(pagina, lingua):
 
     # ovunque ci siano domande, non solo su faq.html: le pagine costruite
     # su una domanda hanno il loro blocco in fondo
+    s = RE_BRICIOLE.sub('', s)
     if 'faq-q' in s:
         s = faqpage(s, lingua, indirizzo(pagina, lingua))
+    s = briciole(s, pagina, lingua)
+
+    # la description della home sta anche nel JSON-LD (SoftwareApplication):
+    # quella italiana si sostituisce con quella della lingua
+    if pagina == 'index.html':
+        import json as _json
+        it_descr = re.search(r'<meta name="description" content="([^"]*)"', sorgente).group(1)
+        vecchia = '"description": ' + _json.dumps(it_descr, ensure_ascii=False)
+        assert vecchia in s, 'index.html: la description del JSON-LD non e\' quella della pagina'
+        s = s.replace(vecchia, '"description": ' + _json.dumps(descr, ensure_ascii=False))
 
     if pagina == 'prezzi.html':
         # solo le ETICHETTE dei segmenti: le cifre restano quelle che sono
@@ -538,9 +599,11 @@ def main():
         s = locali_alternative(s, 'it')
         # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
         # strutturati che NON si scrive a mano nel file
+        s = RE_BRICIOLE.sub('', s)
         s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)
         if 'faq-q' in s:
             s = faqpage(s, 'it', indirizzo(pagina, 'it'))
+        s = briciole(s, pagina, 'it')
         io.open(f, 'w', encoding='utf-8').write(s)
     print(f'{len(PAGINE)} pagine italiane: aggiunto hreflang')
 

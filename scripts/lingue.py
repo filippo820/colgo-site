@@ -49,6 +49,11 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
 
 LOCALE = {'it': 'it_IT', 'en': 'en_GB', 'fr': 'fr_FR', 'de': 'de_DE', 'es': 'es_419'}
 
+# Il testo alternativo dell'anteprima social: l'immagine e' il solo logo, e
+# l'alt dice quello, non uno slogan.
+ALT_OG = {'it': 'Logo di Colgo', 'en': 'Colgo logo', 'fr': 'Logo de Colgo',
+          'de': 'Colgo-Logo', 'es': 'Logo de Colgo'}
+
 # Titolo e descrizione non stanno negli attributi data-*: sono l'unica cosa che
 # va tradotta a mano. Sono anche cio' che si legge nei risultati di ricerca.
 # Nomi dei tre segmenti dentro il JSON-LD dei prezzi. Stesso schema di META:
@@ -359,6 +364,18 @@ def alternate(pagina):
     return '\n'.join(r) + '\n'
 
 
+def locali_alternative(html, lingua):
+    """og:locale:alternate per le altre quattro lingue, subito dopo og:locale.
+
+    Prima si tolgono quelle gia' presenti: l'italiano le riceve da qui e la
+    generazione copia il suo <head>, quindi senza la pulizia si raddoppiano."""
+    html = re.sub(r'\n  <meta property="og:locale:alternate" content="[^"]*" />', '', html)
+    righe = ''.join(f'\n  <meta property="og:locale:alternate" content="{LOCALE[l]}" />'
+                    for l in ('it',) + LINGUE if l != lingua)
+    return re.sub(r'(<meta property="og:locale" content="[^"]*" />)', lambda m: m.group(1) + righe,
+                  html, count=1)
+
+
 def rifai_link(html, lingua):
     """I collegamenti interni devono restare nella lingua che si sta leggendo.
 
@@ -415,6 +432,9 @@ def genera(pagina, lingua):
 
     s = s.replace(f'<meta property="og:locale" content="it_IT" />',
                   f'<meta property="og:locale" content="{LOCALE[lingua]}" />')
+    s = locali_alternative(s, lingua)
+    s = s.replace(f'<meta property="og:image:alt" content="{ALT_OG["it"]}" />',
+                  f'<meta property="og:image:alt" content="{ALT_OG[lingua]}" />')
 
     url = indirizzo(pagina, lingua)
     s = re.sub(r'\n?  <link rel="alternate" hreflang="[^"]*" href="[^"]*" />', '', s)
@@ -515,6 +535,7 @@ def main():
         s = io.open(f, encoding='utf-8').read()
         s = re.sub(r'\n?  <link rel="alternate" hreflang="[^"]*" href="[^"]*" />', '', s)
         s = s.replace('  <link rel="canonical"', alternate(pagina) + '  <link rel="canonical"', 1)
+        s = locali_alternative(s, 'it')
         # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
         # strutturati che NON si scrive a mano nel file
         s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)

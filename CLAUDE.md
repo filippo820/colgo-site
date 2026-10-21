@@ -127,3 +127,59 @@ piccolo del sito.
 - **`/llms.txt`** con i limiti del prodotto in cima (niente PMS, niente messaggi
   automatici, niente pagamenti, niente Glovo/Deliveroo): un riassunto che li
   omette è sbagliato, e tanto vale scriverli noi.
+
+## Sessione del 21/10/2026 — SEO tecnica, fase 1 (branch `seo-fase-1`, non pubblicato)
+Partita da un audit. Un commit per punto, niente su `main` finché non c'è l'ok.
+
+### 🔴 Title e description: la home non diceva cosa vende
+Home a 113 caratteri di description, prezzi e FAQ con title da 11–14
+(«FAQ — Colgo»). Riscritti in cinque lingue, **senza cifre di prezzo** (un
+prezzo nei meta invecchia in cinque posti alla volta: vedi kb.json il 27/08).
+Ora **tutte le 75** hanno title ≤ 60 e description 120–160; fuori misura c'erano
+anche `/en/privacy` (101) e `/fr/confronto` (161).
+
+### 🔑 L'immagine social è quadrata
+`colgo-og.png` è **1254×1254**, non 1200×630. Non ritagliata: il logo è al
+centro e largo quanto l'immagine, quindi il taglio 1,91:1 di
+`summary_large_image` lo lascia intero. Un'immagine 1200×630 dedicata resta da
+fare. `og:locale:alternate` e l'alt tradotto li scrive `lingue.py`.
+
+### 📐 lingue.py ora genera anche
+- **BreadcrumbList** (Home › pagina) sulle 70 interne, con le etichette che il
+  sito usa già nel menu. ⚠️ Il vecchio blocco si toglie **prima** di toccare il
+  FAQPage: la pulizia del FAQPage cerca il suo blocco attaccato a `</head>`, e
+  con le briciole in mezzo si porterebbe via anche loro.
+- La **description del SoftwareApplication** della home, sostituita per lingua
+  (il blocco JSON-LD viene copiato nelle tradotte).
+- **`404.html` per lingua** (lista `SERVIZIO`: fuori da sitemap, hreflang e
+  briciole). La sorgente è `404.html` italiana, nata dalla testa di `faq.html`.
+
+### 🔑 Netlify
+- `/prezzi` e `/prezzi.html` rispondevano **entrambi 200**. `_redirects` ha 75
+  regole `301!` esplicite. Verificate con **`netlify dev`** (150 casi, nessun
+  loop) — **non** su un deploy vero: per questo sito Netlify non fa deploy dei
+  branch. Sono in un commit a sé: se in produzione danno guai, si reverte solo
+  quello.
+- ⚠️ **I link interni puntano ancora a `/pagina.html`**: con i 301 ogni clic
+  interno fa un salto. Da sistemare (in `lingue.py`/`rifai_link` e nelle
+  sorgenti) prima o insieme alla pubblicazione.
+- `netlify dev` **sovrascrive sempre `cache-control`**: `_headers` lo legge
+  (verificato con un'intestazione di prova) ma la cache lunga si vede solo in
+  produzione.
+
+### 🔑 Font in casa, identici al pixel
+Google serve **font variabili**: 9 file in tutto, non 18 statici. Usati quelli
+(con la versione nel nome, quindi `immutable` è sicuro). Serve anche il
+sottoinsieme **vietnamese**: gli accenti combinanti U+0300/0301 di `prezzi` e
+dello spagnolo arrivano da lì. `privacy.html` non usava font web e non li ha.
+
+### 📐 Da ricordare
+- **Per confrontare screenshot, scattare a fasce scorrendo**, non a pagina
+  intera: lo screenshot "fullPage" sposta barra e bottone fissi e, se si
+  spengono le animazioni, lascia il titolo dell'hero a opacità zero. Fermare
+  `setInterval` (l'occhio) e le animazioni infinite. Le schermate JPG danno
+  rumore anche confrontando una versione con se stessa.
+- 🔴 **GA4 parte prima del consenso, e il banner non esiste**: `gtag` si carica
+  nel `<head>` di tutte le 75 pagine, senza Consent Mode. L'informativa invece
+  dice che i cookie analitici «richiedono il tuo consenso» e cita «il banner
+  presente al primo accesso». Solo riferito, non toccato.

@@ -170,7 +170,7 @@ fare. `og:locale:alternate` e l'alt tradotto li scrive `lingue.py`.
 - `netlify dev` **sovrascrive sempre `cache-control`**: `_headers` lo legge
   (verificato con un'intestazione di prova) ma la cache lunga si vede solo in
   produzione.
-- **23/10/2026** (ramo `seo-redirect-registrati`): `/registrati` e `/en|fr|de|es/registrati` → 301 a `https://app.colgo.app/registrati`, regole in cima a `_redirects`.
+- **23/10/2026** (ramo `seo-redirect-registrati`): `/registrati` e `/en|fr|de|es/registrati` → 301 a `https://app.colgo.app/registrati`, regole in cima a `_redirects`. **Pubblicato il 23/10/2026 con il merge `ff9dd6f`** (ramo conservato); verificato in produzione con curl: le 5 `/registrati` → 301 all'app, `/` e `/prezzi` 200, `/xyz-inesistente` 404.
 
 ### 🔑 Font in casa, identici al pixel
 Google serve **font variabili**: 9 file in tutto, non 18 statici. Usati quelli

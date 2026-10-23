@@ -9,7 +9,7 @@ Sito di presentazione di Colgo. HTML statico, pubblicato da Netlify così com'è
   file veri, **generati** da `scripts/lingue.py` a partire dagli attributi
   `data-en/fr/de/es`. Si modifica l'italiano e si rigenera — mai il contrario.
 - `scripts/lingue.py` produce anche **hreflang, canonical, il `sitemap.xml`
-  (75 indirizzi) e il blocco `FAQPage`**, che ricava leggendo `.faq-q` / `.faq-a`
+  (95 indirizzi) e il blocco `FAQPage`**, che ricava leggendo `.faq-q` / `.faq-a`
   dalla pagina: i dati strutturati non possono dire domande che non ci sono.
 - `kb.json` è il materiale dell'**assistente del sito**. Non è una copia
   interna: `api/site-chat.js` (nell'altro repo, `~/stayring`) fa
@@ -188,3 +188,50 @@ dello spagnolo arrivano da lì. `privacy.html` non usava font web e non li ha.
   nel `<head>` di tutte le 75 pagine, senza Consent Mode. L'informativa invece
   dice che i cookie analitici «richiedono il tuo consenso» e cita «il banner
   presente al primo accesso». Solo riferito, non toccato.
+
+## Sessione del 23/10/2026 — «Chi siamo» e tre guide (ramo `contenuti-chi-siamo-guide`, PR NON unita)
+Un commit per punto. Niente su `main`: push del ramo e PR per la Deploy Preview.
+
+### 📐 Pagine nuove (×5 lingue, sitemap da 75 a **95**)
+- `/chi-siamo` — i paragrafi della storia sono **quelli della home con le loro
+  traduzioni**, copiati, non riscritti. JSON-LD `AboutPage` generato da
+  `lingue.py` (`chi_siamo()`), con l'`Organization` **letta dal JSON-LD della
+  home**: una entità sola, non due copie che divergono.
+- `/menu-digitale-qr-code`, `/guida-digitale-ospiti`,
+  `/catalogo-digitale-negozio` — una per settore, struttura di
+  `qr-code-in-camera` (q-lead, q-h2, q-p, `q-limits` con `li.q-li`, FAQ in
+  fondo, «Da leggere anche»). Ogni funzione citata è già scritta altrove nel
+  sito o in `kb.json`; nessuna cifra, nessuna statistica.
+
+### 🔑 Il piede lo scrive lo script
+`lingue.py` → `piede()` aggiunge a TUTTE le sorgenti italiane i link di
+`PIEDE_PAGINE` (Chi siamo) e `PIEDE_APPROFONDIMENTI` (le guide). Tre forme di
+piede: comune (`footer-links`), home (stili in linea), informativa (una riga);
+una forma nuova **ferma lo script** invece di perdere il link. Idempotente
+(verificato: due esecuzioni, stesso hash). Una pagina nuova d'ora in poi si
+aggiunge al piede con una riga, non in sedici file.
+- `menu_chi_siamo()`: la voce CHI SIAMO porta a `/chi-siamo`, non più a `/#storia`.
+- ⚠️ Ordine dei blocchi in `<head>`: FAQ → briciole → Chi siamo. Ognuno si
+  pulisce cercando il proprio blocco **attaccato a `</head>`**, quindi si tolgono
+  in ordine inverso (prima `RE_ABOUT`, poi le briciole) e l'AboutPage si scrive
+  per ultimo.
+
+### 📐 Script
+- **`scripts/controlla.py`** (nuovo): title/description (lunghezze e unicità),
+  un h1 e un main, JSON-LD, canonical e hreflang reciproci, testo italiano
+  rimasto nelle tradotte, link interni, widget identico per lingua, sitemap,
+  `_redirects` (una 301! per pagina e lingua, catene, /registrati, 404).
+  Provato in negativo. Unico avviso: `en/privacy` ha lo stesso title
+  dell'italiana («Privacy Policy — Colgo»), già prima.
+- `kb-pagina.py`: `es` in `LINGUE`, e la whitelist prende le classi `q-*` e
+  `faq-q/faq-a`. ⚠️ Le pagine del 25/08 (qr-code-in-camera, catalogo-complesso,
+  struttura-stagionale) in `kb.json` hanno ancora voci di ~350 caratteri: con la
+  whitelist nuova si potrebbero rigenerare, ma `struttura-stagionale` contiene
+  prezzi — è una scelta da fare, non fatta.
+
+### 🔴 Da sapere
+- `kb.json` («Se rinomino una camera devo ristampare i QR? No») contraddice
+  `qr-code-in-camera` («rinominare vuol dire ristampare»). Le pagine nuove non
+  toccano l'argomento. Da decidere quale è vera.
+- `kb.json` cresce di ~16.000 caratteri per lingua: il prompt dell'assistente
+  si allunga di conseguenza.

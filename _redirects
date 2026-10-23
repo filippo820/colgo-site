@@ -1,6 +1,15 @@
 # Netlify. Generato a mano il 21/10/2026 (seo-fase-1): se si aggiunge una pagina,
 # va aggiunta anche qui (le regole sono esplicite, una per pagina).
 #
+# 0) La registrazione sta nell'app. In cima, prima di ogni altra regola: le
+#    /xx/registrati finirebbero altrimenti nelle 404 per lingua in fondo.
+#    Nessun file registrati.html esiste, quindi non serve il '!'.
+/registrati  https://app.colgo.app/registrati  301
+/en/registrati  https://app.colgo.app/registrati  301
+/fr/registrati  https://app.colgo.app/registrati  301
+/de/registrati  https://app.colgo.app/registrati  301
+/es/registrati  https://app.colgo.app/registrati  301
+
 # 1) Un solo indirizzo per pagina: /pagina.html -> /pagina, permanente.
 #    Il '!' serve perche' i file .html ESISTONO: senza, Netlify li servirebbe
 #    e la regola non scatterebbe mai.

@@ -29,6 +29,10 @@
 /catalogo-complesso.html  /catalogo-complesso  301!
 /struttura-stagionale.html  /struttura-stagionale  301!
 /confronto.html  /confronto  301!
+/chi-siamo.html  /chi-siamo  301!
+/menu-digitale-qr-code.html  /menu-digitale-qr-code  301!
+/guida-digitale-ospiti.html  /guida-digitale-ospiti  301!
+/catalogo-digitale-negozio.html  /catalogo-digitale-negozio  301!
 
 /en/index.html  /en/  301!
 /en/come-funziona.html  /en/come-funziona  301!
@@ -45,6 +49,10 @@
 /en/catalogo-complesso.html  /en/catalogo-complesso  301!
 /en/struttura-stagionale.html  /en/struttura-stagionale  301!
 /en/confronto.html  /en/confronto  301!
+/en/chi-siamo.html  /en/chi-siamo  301!
+/en/menu-digitale-qr-code.html  /en/menu-digitale-qr-code  301!
+/en/guida-digitale-ospiti.html  /en/guida-digitale-ospiti  301!
+/en/catalogo-digitale-negozio.html  /en/catalogo-digitale-negozio  301!
 
 /fr/index.html  /fr/  301!
 /fr/come-funziona.html  /fr/come-funziona  301!
@@ -61,6 +69,10 @@
 /fr/catalogo-complesso.html  /fr/catalogo-complesso  301!
 /fr/struttura-stagionale.html  /fr/struttura-stagionale  301!
 /fr/confronto.html  /fr/confronto  301!
+/fr/chi-siamo.html  /fr/chi-siamo  301!
+/fr/menu-digitale-qr-code.html  /fr/menu-digitale-qr-code  301!
+/fr/guida-digitale-ospiti.html  /fr/guida-digitale-ospiti  301!
+/fr/catalogo-digitale-negozio.html  /fr/catalogo-digitale-negozio  301!
 
 /de/index.html  /de/  301!
 /de/come-funziona.html  /de/come-funziona  301!
@@ -77,6 +89,10 @@
 /de/catalogo-complesso.html  /de/catalogo-complesso  301!
 /de/struttura-stagionale.html  /de/struttura-stagionale  301!
 /de/confronto.html  /de/confronto  301!
+/de/chi-siamo.html  /de/chi-siamo  301!
+/de/menu-digitale-qr-code.html  /de/menu-digitale-qr-code  301!
+/de/guida-digitale-ospiti.html  /de/guida-digitale-ospiti  301!
+/de/catalogo-digitale-negozio.html  /de/catalogo-digitale-negozio  301!
 
 /es/index.html  /es/  301!
 /es/come-funziona.html  /es/come-funziona  301!
@@ -93,6 +109,10 @@
 /es/catalogo-complesso.html  /es/catalogo-complesso  301!
 /es/struttura-stagionale.html  /es/struttura-stagionale  301!
 /es/confronto.html  /es/confronto  301!
+/es/chi-siamo.html  /es/chi-siamo  301!
+/es/menu-digitale-qr-code.html  /es/menu-digitale-qr-code  301!
+/es/guida-digitale-ospiti.html  /es/guida-digitale-ospiti  301!
+/es/catalogo-digitale-negozio.html  /es/catalogo-digitale-negozio  301!
 
 # 2) Pagina non trovata nella lingua che si sta leggendo. Senza '!': i file
 #    che esistono hanno la precedenza. L'italiana (/404.html) Netlify la usa da sola.

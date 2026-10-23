@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Google Analytics 4 — Colgo (tracciamento esteso) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+
+    // Lingua scelta dall'utente (il sito cambia lingua senza cambiare URL:
+    // senza questo parametro GA non saprebbe mai in che lingua è stata letta la pagina)
+    var lang = 'it';
+    try { lang = localStorage.getItem('colgo_lang') || document.documentElement.lang || 'it'; } catch(e){}
+
+    // Nome pulito della pagina (home, prezzi, hotel, ristorante...)
+    var slug = location.pathname.replace(/\/+$/,'').split('/').pop() || 'home';
+    slug = slug.replace(/\.html$/,'') || 'home';
+
+    gtag('config', 'G-4JCQ1EGSR9', {
+      colgo_lang: lang,
+      colgo_page: slug
+    });
+
+    var t0 = Date.now(), maxScroll = 0, sent = {};
+    function ev(name, params){ params = params || {}; params.colgo_lang = lang; params.colgo_page = slug; gtag('event', name, params); }
+    function secs(){ return Math.round((Date.now() - t0)/1000); }
+
+    function start(){
+
+      // 1. PROFONDITÀ DI LETTURA — quanto scende nella pagina
+      function onScroll(){
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / h) * 100));
+        if (pct > maxScroll) maxScroll = pct;
+        [25,50,75,90,100].forEach(function(s){
+          if (pct >= s && !sent['s'+s]) { sent['s'+s] = 1; ev('scroll_depth', { percent: s, seconds: secs() }); }
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+
+      // 2. TEMPO SULLA PAGINA — soglie progressive
+      [10,30,60,120,300].forEach(function(s){
+        setTimeout(function(){ if (!document.hidden) ev('time_on_page', { seconds: s }); }, s*1000);
+      });
+
+      // 3. SEZIONI EFFETTIVAMENTE VISTE — dove si è fermato a leggere
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            var name = el.id || (el.querySelector('h1,h2,h3') ? el.querySelector('h1,h2,h3').textContent.trim().slice(0,40) : '');
+            if (!name || sent['sec_'+name]) return;
+            sent['sec_'+name] = 1;
+            ev('section_view', { section: name, seconds: secs() });
+          });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section, header, footer').forEach(function(el){ io.observe(el); });
+      }
+
+      // 4. CLIC — CTA, navigazione, link esterni, email
+      document.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a || !a.href) return;
+        var href = a.href, label = (a.textContent || '').trim().slice(0,50);
+        if (href.indexOf('mailto:') === 0)            ev('click_email',   { link: href });
+        else if (href.indexOf('/demo') > -1)          ev('cta_demo',      { link: href, label: label });
+        else if (href.indexOf('/registrati') > -1)    ev('cta_signup',    { link: href, label: label });
+        else if (href.indexOf(location.hostname) > -1) ev('nav_click',    { link: href, label: label });
+        else                                          ev('click_esterno', { link: href, label: label });
+      }, true);
+
+      // 5. CAMBIO LINGUA
+      if (typeof window.setLang === 'function') {
+        var orig = window.setLang;
+        window.setLang = function(l){ var r = orig.apply(this, arguments); lang = l; ev('lang_switch', { nuova_lingua: l }); return r; };
+      }
+
+      // 6. USCITA — durata reale e punto massimo raggiunto
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState === 'hidden' && !sent.exit) {
+          sent.exit = 1;
+          ev('page_exit', { seconds: secs(), max_scroll: maxScroll });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  })();
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="alternate" hreflang="it" href="https://colgo.app/guida-digitale-ospiti" />
+  <link rel="alternate" hreflang="en" href="https://colgo.app/en/guida-digitale-ospiti" />
+  <link rel="alternate" hreflang="fr" href="https://colgo.app/fr/guida-digitale-ospiti" />
+  <link rel="alternate" hreflang="de" href="https://colgo.app/de/guida-digitale-ospiti" />
+  <link rel="alternate" hreflang="es" href="https://colgo.app/es/guida-digitale-ospiti" />
+  <link rel="alternate" hreflang="x-default" href="https://colgo.app/guida-digitale-ospiti" />
+  <link rel="canonical" href="https://colgo.app/de/guida-digitale-ospiti" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
+  <title>Digitale Gästemappe: was hineingehört und wie</title>
+
+  <!-- Open Graph — anteprima quando il link viene condiviso su
+       WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
+       JavaScript, quindi leggono solo questi meta e il testo gia' presente
+       nei tag: senza, un link a colgo.app arriva in chat senza titolo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Colgo" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="es_419" />
+  <meta property="og:title" content="Digitale Gästemappe: was hineingehört und wie" />
+  <meta property="og:description" content="Was in die digitale Gästemappe von Hotel, B&B oder Ferienhof gehört: Anreise, WLAN, Zeiten, Leistungen, Anfragen an die Rezeption. Vor Anreise und im Zimmer." />
+  <meta property="og:url" content="https://colgo.app/de/guida-digitale-ospiti" />
+  <meta property="og:image" content="https://colgo.app/colgo-og.png" />
+  <meta property="og:image:width" content="1254" />
+  <meta property="og:image:height" content="1254" />
+  <meta property="og:image:alt" content="Colgo-Logo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Digitale Gästemappe: was hineingehört und wie" />
+  <meta name="twitter:description" content="Was in die digitale Gästemappe von Hotel, B&B oder Ferienhof gehört: Anreise, WLAN, Zeiten, Leistungen, Anfragen an die Rezeption. Vor Anreise und im Zimmer." />
+  <meta name="twitter:image" content="https://colgo.app/colgo-og.png" />
+  <meta name="description" content="Was in die digitale Gästemappe von Hotel, B&B oder Ferienhof gehört: Anreise, WLAN, Zeiten, Leistungen, Anfragen an die Rezeption. Vor Anreise und im Zimmer." />
+  <!-- Font in casa (21/10/2026): gli stessi file variabili che serviva Google
+       Fonts (Cormorant Garamond v21, Josefin Sans v34), stesse @font-face,
+       sottoinsiemi latin, latin-ext e vietnamese — quest'ultimo serve agli
+       accenti combinanti (U+0300/0301) che compaiono in prezzi e nello
+       spagnolo. Prima il CSS di Google bloccava il rendering. Se si cambia un
+       file, cambia il nome: /fonts e' in cache per un anno (_headers). -->
+  <link rel="preload" href="/fonts/josefin-sans-v34-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/cormorant-garamond-v21-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
+<style>
+    :root{
+      --ground: #0A100E;   /* terreno: nero con una punta di verde */--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.8);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;--gold-light:#d4a84b;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ground);color:var(--cream);font-family:'Josefin Sans',sans-serif;font-weight:300;font-size:16px;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;background:linear-gradient(to bottom,rgba(10,16,14,0.95),transparent);}
+    .nav-logo{height:38px;opacity:0.95;}
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:12px;letter-spacing:1.5px;transition:color 0.2s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+    .nav-lang{display:flex;gap:6px;}
+    .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
+    .lang-btn.active,.lang-btn:hover{color:var(--gold);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:4px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--cream);transition:transform .25s,opacity .25s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+    .nav-overlay.open{display:block;}
+    .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
+    .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .page-label{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
+    .page-title em{font-style:italic;color:var(--ochre-l);}
+    .page-sub{font-size:16px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .venues-section{max-width:1000px;margin:0 auto;padding:80px 32px 120px;}
+    .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 64px;}
+    .venues-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;}
+    .venue-card{background:rgba(245,241,232,0.03);border:1px solid rgba(245,241,232,0.07);padding:48px 36px;transition:background 0.3s,border-color 0.3s;}
+    .venue-card:hover{background:rgba(30,58,53,0.25);border-color:rgba(200,146,42,0.25);}
+    .venue-icon{font-size:36px;margin-bottom:24px;}
+    .venue-type{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:12px;}
+    .venue-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:28px;line-height:1.2;margin-bottom:20px;}
+    .venue-title em{font-style:italic;color:var(--ochre-l);}
+    .venue-desc{font-size:15px;color:var(--white-dim);line-height:1.9;margin-bottom:20px;}
+    .venue-tag{display:inline-block;font-size:9px;letter-spacing:2px;color:rgba(200,146,42,0.85);padding:2px 0;margin:4px 8px 0 0;}
+    .venue-more{display:inline-block;margin-top:20px;font-size:13px;letter-spacing:2px;color:var(--ochre);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;}
+    .venue-more:hover{border-color:var(--ochre);}
+    .principle-section{background:var(--petrol);padding:100px 32px;text-align:center;position:relative;overflow:hidden;}
+    .principle-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,146,42,0.08) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+    .section-label{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;}
+    .section-title em{font-style:italic;color:var(--ochre-l);}
+    .section-sub{font-size:14px;color:var(--white-dim);max-width:600px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .cta-section{text-align:center;padding:100px 32px;}
+    .cta-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.2;margin-bottom:40px;}
+    .cta-headline em{font-style:italic;color:var(--ochre-l);}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{display:inline-block;background:var(--ochre);color:var(--black);font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:background 0.25s;}
+    .btn-primary:hover{background:var(--ochre-l);}
+    .btn-ghost{display:inline-block;border:1px solid rgba(200,146,42,0.4);color:var(--ochre);font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:border-color 0.25s;}
+    .btn-ghost:hover{border-color:var(--ochre);}
+    footer{text-align:center;padding:48px 32px;border-top:1px solid rgba(245,241,232,0.06);font-size:12px;letter-spacing:2px;color:rgba(245,241,232,0.4);}
+    footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
+    footer a:hover{color:var(--ochre);}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-eyebrow{color:rgba(245,241,232,0.3);letter-spacing:2px;align-self:center;}
+    .footer-approfondimenti{gap:20px;}
+    .footer-legale{gap:20px;margin-top:4px;}
+    .footer-legale a{color:rgba(245,241,232,0.35);}
+    @media(max-width:700px){nav{padding:20px 24px;}.nav-toggle{display:flex;}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--ground);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}.nav-links.open{transform:translateX(0);}.venues-section{padding:40px 20px 80px;}.venues-grid{grid-template-columns:1fr;}}
+  
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 13px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 13px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 15px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .venue-tag { font-size: 13px; letter-spacing: 1.5px; }
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 13px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 13px; }
+  footer, .footer-links a { font-size: 14px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 14px; padding: 17px 32px; }
+}
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 15px; }
+footer, .footer-links a, .footer-copy { font-size: 15px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.venue-type, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 14px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 15px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 13px; }
+  .lang-btn { font-size: 13px; }
+}
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
+
+/* ── Nero con riflessi petrolio (16/08/2026) ──────────────────────────
+   Il fondo pieno #10231F era troppo verde ("lo vedevo più scuro"), il nero
+   puro troppo freddo. Qui la base torna quasi nera — con una punta di verde
+   che non si vede ma si sente — e il petrolio diventa un RIFLESSO: due
+   sfumature larghe e morbide dietro tutto il contenuto, fisse, che non
+   intercettano il puntatore. */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(70% 50% at 50% 0%,   rgba(30,58,53,0.55) 0%, transparent 70%),
+    radial-gradient(60% 45% at 12% 42%,  rgba(30,58,53,0.30) 0%, transparent 72%),
+    radial-gradient(65% 50% at 88% 78%,  rgba(30,58,53,0.34) 0%, transparent 74%);
+}
+
+/* ── Logo compatto su telefono (16/08/2026) ───────────────────────────
+   Il marchio esteso e' largo 157px: su 390px di schermo spingeva il
+   pulsante del menu' a x=432, cioe' FUORI DALLO SCHERMO — e la
+   navigazione diventava irraggiungibile (si tornava indietro solo
+   toccando il logo). Sotto i 700px resta il solo occhio, 38px. */
+.nav-logo-mini { display: none; }
+@media (max-width: 700px) {
+  .nav-logo-full { display: none; }
+  .nav-logo-mini { display: block; }
+}
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 14px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
+
+/* ── Leggibilita' sul telefono (17/08/2026) ────────────────────────────
+   Misurato a 390px sul sito vero, non a occhio: 96 blocchi di testo vanno a
+   capo con meno di 6px fra una riga e l'altra. Il peggiore e' l'occhiello
+   della home — 12px di corpo, 4px di spaziatura fra le lettere, tre righe e
+   2,4px d'aria: sembra un blocco compatto invece di tre righe.
+   Le maiuscole molto spaziate hanno bisogno di PIU' interlinea, non di meno:
+   la riga e' piu' larga e l'occhio, tornando a capo, sbaglia riga.
+   Si tocca solo il telefono: sul desktop queste stesse scritte stanno su una
+   riga sola e l'interlinea non le riguarda. */
+@media (max-width: 700px) {
+  /* etichette maiuscole spaziate — le piu' schiacciate */
+  .hero-eyebrow, .section-label, .page-label, .demo-label, .verticals-label,
+  .venue-type, .pricing-name, .feat-title, .tech-card-title, .step-label,
+  .faq-category, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+  .tab-btn, .pd-eyebrow, .pd-riquadro-firma, .numeri-label, .screens-hint,
+  .cta-or, .storia-firma, .lbl { line-height: 1.6; }
+
+  /* bottoni: "PROVA SENZA REGISTRAZIONE" va a capo dentro il bottone */
+  .btn-primary, .btn-ghost, .btn-demo,
+  .venue-more, .vertical-more, .numeri-link { line-height: 1.45; }
+
+  /* il piede: undici righe di link, tutte attaccate */
+  footer, .footer-links, .footer-copy { line-height: 1.7; }
+
+  /* titoli: 36px su cinque righe con 5,4px d'aria */
+  h1, h2, .hero-headline, .page-title, .section-title, .cta-headline,
+  .demo-title, .storia-titolo, .venue-title, .problem-title, .step-title,
+  .numeri-titolo, .pd-titolo { line-height: 1.28; }
+
+  /* Corti ma su due righe lo stesso: il badge sotto il titolo, le didascalie
+     del carosello, lo slogan (che non ha classe: sta come figlio dell'eroe) e
+     le domande delle FAQ, che sono testo da leggere, non titoli. */
+  .zero-barrier-badge, .zero-barrier-badge span, .screen-caption,
+  .hero > p, .faq-q { line-height: 1.5; }
+}
+
+/* ── Contrasto: opacita' troppo basse (17/08/2026) ─────────────────────
+   Rapporti calcolati sul fondo REALE, campionato dai pixel: la pagina ha due
+   sfumature fisse (body::after) e una velatura di rumore, quindi il colore
+   dichiarato nel CSS non e' quello che l'occhio riceve. Soglia 4,5 per il
+   testo sotto i 18px, che qui e' tutto. */
+.cta-or        { color: rgba(245,241,232,0.60); font-size: 14px; }  /* 2,54 → 6,36 */
+.cta-opt-note  { color: rgba(245,241,232,0.62); }                   /* 3,68 → 6,45 */
+.demo-note     { color: rgba(245,241,232,0.68); }                   /* 3,99 → 5,93 */
+.pd-nota-alta  { color: rgba(245,241,232,0.60); }                   /* 4,13 → 6,54 */
+.pd-fonti-testo{ color: rgba(245,241,232,0.72); }
+
+/* L'oro pieno su fondo petrolio si ferma a 3,99-4,43: sotto la soglia per una
+   scritta di 12px. Su quei fondi (e SOLO su quelli) passa l'oro chiaro, che e'
+   gia' nella palette come --gold-light. */
+.demo .demo-label, .demo .section-label,
+.principle-section .section-label,
+.tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
+</style>
+
+<style>
+.q-section{max-width:760px;margin:0 auto;padding:0 32px 40px;}
+.q-lead{font-size:19px;line-height:1.85;color:var(--cream);letter-spacing:0.2px;margin:48px 0 8px;}
+.q-h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:56px 0 20px;font-weight:400;text-transform:uppercase;}
+.q-p{font-size:16px;line-height:1.9;color:rgba(245,241,232,0.82);letter-spacing:0.2px;margin:0 0 20px;}
+.q-limits{list-style:none;padding:0;margin:0;}
+.q-limits li{font-size:16px;line-height:1.85;color:rgba(245,241,232,0.82);padding:14px 0 14px 22px;border-bottom:1px solid rgba(245,241,232,0.08);position:relative;}
+.q-limits li::before{content:'—';position:absolute;left:0;color:var(--ochre);}
+@media(max-width:700px){.q-section{padding:0 22px 32px;}.q-lead{font-size:17px;}.q-p,.q-limits li{font-size:15px;}}
+.faq-section{max-width:800px;margin:0 auto;padding:0 32px 120px;}
+    .faq-category{letter-spacing:4px;color:var(--ochre);margin:64px 0 32px;}
+    .faq-item{border-bottom:1px solid rgba(245,241,232,0.08);padding:28px 0;}
+    .faq-q{font-size:15px;letter-spacing:0.5px;color:var(--cream);cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.6;}
+    .faq-q::after{content:'+';color:var(--ochre);font-size:20px;font-weight:300;flex-shrink:0;transition:transform 0.3s;}
+    .faq-item.open .faq-q::after{transform:rotate(45deg);}
+    .faq-a{font-size:15px;color:rgba(245,241,232,0.8);line-height:1.9;letter-spacing:0.3px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;}
+    .faq-item.open .faq-a{max-height:400px;padding-top:20px;}
+
+.q-limits li strong{color:var(--cream);font-weight:600;}
+.q-tesi{color:var(--cream);}
+.q-p a{color:var(--ochre);}
+.q-firma{font-size:14px;letter-spacing:2px;color:rgba(245,241,232,0.55);margin:28px 0 0;padding-top:18px;border-top:1px solid rgba(245,241,232,0.1);}
+/* «Da leggere anche»: i link contestuali alle pagine che prima stavano solo
+   nel footer, in mezzo ai documenti legali. */
+.altre-letture{max-width:760px;margin:0 auto;padding:0 32px 96px;}
+.altre-letture h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:0 0 18px;font-weight:400;text-transform:uppercase;}
+.altre-letture ul{list-style:none;padding:0;margin:0;}
+.altre-letture li{border-bottom:1px solid rgba(245,241,232,0.08);}
+.altre-letture a{display:block;padding:16px 0 16px 22px;position:relative;font-size:16px;line-height:1.7;color:rgba(245,241,232,0.82);text-decoration:none;transition:color 0.2s;}
+.altre-letture a::before{content:'→';position:absolute;left:0;color:var(--ochre);}
+.altre-letture a:hover{color:var(--ochre);}
+@media(max-width:700px){.altre-letture{padding:0 22px 64px;}.altre-letture a{font-size:15px;}}
+</style>
+
+<!-- FAQ: generato da scripts/lingue.py leggendo gli attributi della
+     pagina. Non si modifica a mano: rispecchia sempre le domande che
+     ci sono davvero, nella lingua che si sta leggendo. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://colgo.app/de/guida-digitale-ospiti#faq",
+  "inLanguage": "de",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Muss der Gast eine App herunterladen, um die Mappe zu lesen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Link und QR-Code öffnen eine Webseite im Browser des Handys: nichts zu installieren und keine Registrierung für den Gast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich die Mappe vor der Anreise schicken?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Sie schicken den Link vor dem Check-in, zum Beispiel indem Sie ihn einmal in die Nachrichten einfügen, die Sie Gästen ohnehin senden. Der Gast findet Anfahrt, WLAN und Leistungen und kann sie im Voraus buchen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich eine Leistung nur bestimmten Zimmern zeigen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, pro Einheit oder pro Typ: eine Leistung nur für die Apartments zum Beispiel. Der Eintrag erscheint bei den anderen einfach nicht."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Funktioniert das auch für einen Campingplatz oder Ferienhof?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Aus „Zimmer“ wird Stellplatz, Bungalow oder Liegeplatz, je nachdem, wie Sie den Betrieb einrichten: Die Funktionsweise bleibt dieselbe."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Briciole: generato da scripts/lingue.py. Non si modifica a mano. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Startseite",
+      "item": "https://colgo.app/de/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Gästemappe",
+      "item": "https://colgo.app/de/guida-digitale-ospiti"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+<nav>
+  <a href="/de/"><svg class="nav-logo nav-logo-full" viewBox="0 0 232 56" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <text x="2" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">C</text>
+  <g transform="translate(52,26)">
+    <circle cx="0" cy="0" r="15.5" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+    <path d="M -12 0 A 12 12 0 0 0 5.5 10" fill="none" stroke="#C8922A" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="1.2" cy="-1.4" r="2.9" fill="#C8922A"/>
+  </g>
+  <text x="80" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">LGO</text>
+</svg><svg class="nav-logo nav-logo-mini" viewBox="0 0 40 40" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="16" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+  <path d="M 7.5 20 A 12.5 12.5 0 0 0 26 30.5" fill="none" stroke="#C8922A" stroke-width="1.9" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="21.4" cy="18.4" r="3" fill="#C8922A"/>
+</svg></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/de/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT&#39;S" data-es="CÓMO FUNCIONA">SO FUNKTIONIERT'S</a>
+      <a href="/de/hotel.html" data-it="HOTEL" data-en="HOTEL" data-fr="HÔTEL" data-de="HOTEL" data-es="HOTEL">HOTEL</a>
+      <a href="/de/ristorante.html" data-it="RISTORANTE" data-en="RESTAURANT" data-fr="RESTAURANT" data-de="RESTAURANT" data-es="RESTAURANTE">RESTAURANT</a>
+      <a href="/de/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT" data-es="TIENDA">GESCHÄFT</a>
+      <a href="/de/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG" data-es="ACCESOS Y CATÁLOGO">ZUGRIFFE & KATALOG</a>
+      <a href="/de/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE" data-es="PRECIOS">PREISE</a>
+      <a href="/de/confronto.html" data-it="CONFRONTO" data-en="COMPARISON" data-fr="COMPARATIF" data-de="VERGLEICH" data-es="COMPARATIVA">VERGLEICH</a>
+      <a href="/de/per-chi.html" data-it="PER CHI" data-en="WHO IT&#39;S FOR" data-fr="POUR QUI" data-de="FÜR WEN" data-es="PARA QUIÉN">FÜR WEN</a>
+      <a href="/de/chi-siamo.html" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS" data-es="QUIÉNES SOMOS">ÜBER UNS</a>
+        <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">FAQ</a>
+    </div>
+    <div class="nav-lang">
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-overlay" onclick="document.querySelector('.nav-links').classList.remove('open');this.classList.remove('open');document.querySelector('.nav-toggle').classList.remove('open');"></div>
+</nav>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-label" data-it="GUIDA PER GLI OSPITI" data-en="GUEST GUIDE" data-fr="LIVRET D'ACCUEIL" data-de="GÄSTEMAPPE" data-es="GUÍA PARA HUÉSPEDES">GÄSTEMAPPE</div>
+  <h1 class="page-title" data-it="Guida digitale per gli ospiti:<br/><em>cosa metterci, e come farla usare?</em>" data-en="A digital guest guide:<br/><em>what to put in it, and how to get it used?</em>" data-fr="Livret d'accueil numérique :<br/><em>que mettre dedans, et comment le faire utiliser ?</em>" data-de="Digitale Gästemappe:<br/><em>was gehört hinein, und wie wird sie genutzt?</em>" data-es="Guía digital para huéspedes:<br/><em>¿qué poner y cómo lograr que la usen?</em>">Digitale Gästemappe:<br/><em>was gehört hinein, und wie wird sie genutzt?</em></h1>
+</div>
+
+<div class="q-section">
+  <div class="gold-line"></div>
+  <p class="q-lead" data-it="Una guida digitale per gli ospiti è il vecchio raccoglitore in camera portato sul telefono: come arrivare, la password del Wi-Fi, gli orari della colazione, i servizi della struttura. Il contenuto lo conosci già, perché è quello che la reception ripete ogni giorno. Il lavoro vero è un altro: metterlo dove l'ospite lo cerca, nella sua lingua, e tenerlo giusto quando qualcosa cambia." data-en="A digital guest guide is the old binder in the room, moved onto the phone: how to get there, the Wi-Fi password, breakfast hours, the property's services. You already know the content, because it's what reception repeats every day. The real work is something else: putting it where guests look for it, in their language, and keeping it right when something changes." data-fr="Un livret d'accueil numérique, c'est le vieux classeur de la chambre passé sur le téléphone : comment venir, le mot de passe du Wi-Fi, les horaires du petit-déjeuner, les services de l'établissement. Le contenu, vous le connaissez déjà : c'est ce que la réception répète chaque jour. Le vrai travail est ailleurs : le mettre là où le client le cherche, dans sa langue, et le garder juste quand quelque chose change." data-de="Eine digitale Gästemappe ist die alte Zimmermappe, aufs Handy gebracht: Anfahrt, WLAN-Passwort, Frühstückszeiten, die Leistungen des Hauses. Den Inhalt kennen Sie schon, denn es ist das, was die Rezeption jeden Tag wiederholt. Die eigentliche Arbeit ist eine andere: ihn dort hinzustellen, wo der Gast sucht, in seiner Sprache, und ihn aktuell zu halten, wenn sich etwas ändert." data-es="Una guía digital para huéspedes es la vieja carpeta de la habitación llevada al teléfono: cómo llegar, la contraseña del Wi-Fi, los horarios del desayuno, los servicios del establecimiento. El contenido ya lo conoces, porque es lo que recepción repite todos los días. El trabajo de verdad es otro: ponerlo donde el huésped lo busca, en su idioma, y mantenerlo correcto cuando algo cambia.">Eine digitale Gästemappe ist die alte Zimmermappe, aufs Handy gebracht: Anfahrt, WLAN-Passwort, Frühstückszeiten, die Leistungen des Hauses. Den Inhalt kennen Sie schon, denn es ist das, was die Rezeption jeden Tag wiederholt. Die eigentliche Arbeit ist eine andere: ihn dort hinzustellen, wo der Gast sucht, in seiner Sprache, und ihn aktuell zu halten, wenn sich etwas ändert.</p>
+
+  <h2 class="q-h2" data-it="Cosa metterci: le domande che senti ogni giorno" data-en="What to put in it: the questions you hear every day" data-fr="Que mettre dedans : les questions que vous entendez chaque jour" data-de="Was hineingehört: die Fragen, die Sie jeden Tag hören" data-es="Qué poner: las preguntas que escuchas todos los días">Was hineingehört: die Fragen, die Sie jeden Tag hören</h2>
+  <p class="q-p" data-it="Il modo più rapido per scriverla è partire da quello che ti chiedono al banco. Di solito sono sempre le stesse cose:" data-en="The quickest way to write it is to start from what people ask you at the desk. It's usually the same things:" data-fr="La façon la plus rapide de le rédiger, c'est de partir de ce qu'on vous demande au comptoir. Ce sont presque toujours les mêmes choses :" data-de="Am schnellsten schreiben Sie sie, wenn Sie bei dem anfangen, was man Sie an der Rezeption fragt. Meist sind es immer dieselben Dinge:" data-es="La forma más rápida de escribirla es partir de lo que te preguntan en el mostrador. Casi siempre son las mismas cosas:">Am schnellsten schreiben Sie sie, wenn Sie bei dem anfangen, was man Sie an der Rezeption fragt. Meist sind es immer dieselben Dinge:</p>
+  <ul class="q-limits">
+      <li class="q-li" data-it="Come arrivare, dove parcheggiare, a che ora si entra in camera." data-en="How to get there, where to park, what time the room is ready." data-fr="Comment venir, où se garer, à quelle heure on peut entrer en chambre." data-de="Anfahrt, Parken, ab wann das Zimmer bezugsfertig ist." data-es="Cómo llegar, dónde estacionar, a qué hora se puede entrar en la habitación.">Anfahrt, Parken, ab wann das Zimmer bezugsfertig ist.</li>
+      <li class="q-li" data-it="Il nome della rete Wi-Fi e la password." data-en="The Wi-Fi network name and password." data-fr="Le nom du réseau Wi-Fi et le mot de passe." data-de="WLAN-Name und Passwort." data-es="El nombre de la red Wi-Fi y la contraseña.">WLAN-Name und Passwort.</li>
+      <li class="q-li" data-it="Gli orari della colazione, del bar, della piscina o della spa." data-en="Opening hours for breakfast, the bar, the pool or the spa." data-fr="Les horaires du petit-déjeuner, du bar, de la piscine ou du spa." data-de="Die Zeiten für Frühstück, Bar, Pool oder Spa." data-es="Los horarios del desayuno, del bar, de la piscina o del spa.">Die Zeiten für Frühstück, Bar, Pool oder Spa.</li>
+      <li class="q-li" data-it="I servizi che offri, con i prezzi: transfer, noleggio bici, massaggi, escursioni." data-en="The services you offer, with prices: transfers, bike hire, massages, excursions." data-fr="Les services que vous proposez, avec les prix : transferts, location de vélos, massages, excursions." data-de="Ihre Leistungen mit Preisen: Transfer, Fahrradverleih, Massagen, Ausflüge." data-es="Los servicios que ofreces, con los precios: traslados, alquiler de bicis, masajes, excursiones.">Ihre Leistungen mit Preisen: Transfer, Fahrradverleih, Massagen, Ausflüge.</li>
+      <li class="q-li" data-it="Le informazioni sul posto: dove mangiare, cosa vedere, i numeri utili." data-en="Local information: where to eat, what to see, useful numbers." data-fr="Les informations locales : où manger, quoi voir, les numéros utiles." data-de="Infos zur Umgebung: wo man isst, was man sieht, wichtige Nummern." data-es="La información de la zona: dónde comer, qué ver, los teléfonos útiles.">Infos zur Umgebung: wo man isst, was man sieht, wichtige Nummern.</li>
+  </ul>
+  <p class="q-p" data-it="Tutto quello che ripeti ogni giorno va nella guida. E va scritto pensando a chi la legge in piedi, con la valigia in mano: frasi corte, l'orario in cima, una cosa per voce." data-en="Everything you repeat every day goes in the guide. And it should be written for someone reading it standing up, suitcase in hand: short sentences, the time at the top, one thing per item." data-fr="Tout ce que vous répétez chaque jour va dans le livret. Et il faut l'écrire pour quelqu'un qui le lit debout, la valise à la main : phrases courtes, l'horaire en haut, une chose par rubrique." data-de="Alles, was Sie jeden Tag wiederholen, gehört in die Mappe. Und zwar so geschrieben, dass man es im Stehen mit dem Koffer in der Hand liest: kurze Sätze, die Uhrzeit oben, eine Sache pro Eintrag." data-es="Todo lo que repites cada día va en la guía. Y hay que escribirlo pensando en quien la lee de pie, con la maleta en la mano: frases cortas, el horario arriba, una cosa por apartado.">Alles, was Sie jeden Tag wiederholen, gehört in die Mappe. Und zwar so geschrieben, dass man es im Stehen mit dem Koffer in der Hand liest: kurze Sätze, die Uhrzeit oben, eine Sache pro Eintrag.</p>
+
+  <h2 class="q-h2" data-it="Due momenti: prima dell'arrivo e in camera" data-en="Two moments: before arrival and in the room" data-fr="Deux moments : avant l'arrivée et en chambre" data-de="Zwei Momente: vor der Anreise und im Zimmer" data-es="Dos momentos: antes de llegar y en la habitación">Zwei Momente: vor der Anreise und im Zimmer</h2>
+  <p class="q-p" data-it="La stessa guida serve in due momenti diversi. Prima di partire l'ospite apre il link che gli mandi: trova come arrivare e il Wi-Fi, guarda i servizi e prenota in anticipo quelli che gli interessano. In Colgo il link pre-arrivo si incolla una volta nei messaggi che già mandi agli ospiti, per esempio da Booking o Airbnb." data-en="The same guide works at two different moments. Before leaving, the guest opens the link you send: they find directions and the Wi-Fi, look at the services and book the ones they want in advance. In Colgo you paste the pre-arrival link once into the messages you already send guests, for example from Booking or Airbnb." data-fr="Le même livret sert à deux moments différents. Avant de partir, le client ouvre le lien que vous lui envoyez : il trouve comment venir et le Wi-Fi, regarde les services et réserve à l'avance ceux qui l'intéressent. Dans Colgo, le lien pré-arrivée se colle une fois dans les messages que vous envoyez déjà aux clients, par exemple depuis Booking ou Airbnb." data-de="Dieselbe Mappe dient in zwei Momenten. Vor der Abreise öffnet der Gast den Link, den Sie ihm schicken: Er findet Anfahrt und WLAN, sieht sich die Leistungen an und bucht im Voraus, was ihn interessiert. In Colgo fügen Sie den Pre-Arrival-Link einmal in die Nachrichten ein, die Sie Gästen ohnehin schicken, zum Beispiel über Booking oder Airbnb." data-es="La misma guía sirve en dos momentos distintos. Antes de salir, el huésped abre el enlace que le mandas: encuentra cómo llegar y el Wi-Fi, mira los servicios y reserva por adelantado los que le interesan. En Colgo el enlace previo a la llegada se pega una vez en los mensajes que ya envías a los huéspedes, por ejemplo desde Booking o Airbnb.">Dieselbe Mappe dient in zwei Momenten. Vor der Abreise öffnet der Gast den Link, den Sie ihm schicken: Er findet Anfahrt und WLAN, sieht sich die Leistungen an und bucht im Voraus, was ihn interessiert. In Colgo fügen Sie den Pre-Arrival-Link einmal in die Nachrichten ein, die Sie Gästen ohnehin schicken, zum Beispiel über Booking oder Airbnb.</p>
+  <p class="q-p" data-it="In struttura l'ospite inquadra il QR in camera — sul comodino, sulla porta o dove preferisci — e trova lo stesso catalogo, legato a quella camera. Da lì può inviare una richiesta, che arriva in reception in tempo reale con la camera di provenienza e l'orario." data-en="At the property, the guest scans the QR code in the room — on the bedside table, on the door or wherever you like — and finds the same catalogue, tied to that room. From there they can send a request, which reaches reception in real time with the room it came from and the time." data-fr="Sur place, le client scanne le QR en chambre — sur la table de nuit, sur la porte ou où vous voulez — et retrouve le même catalogue, lié à cette chambre. De là il peut envoyer une demande, qui arrive à la réception en temps réel avec la chambre d'origine et l'heure." data-de="Im Haus scannt der Gast den QR-Code im Zimmer — auf dem Nachttisch, an der Tür oder wo Sie wollen — und findet denselben Katalog, verknüpft mit diesem Zimmer. Von dort kann er eine Anfrage senden, die in Echtzeit an der Rezeption ankommt, mit Zimmer und Uhrzeit." data-es="Ya en el establecimiento, el huésped escanea el QR de la habitación — en la mesita de noche, en la puerta o donde prefieras — y encuentra el mismo catálogo, vinculado a esa habitación. Desde ahí puede enviar una solicitud, que llega a recepción en tiempo real con la habitación de origen y la hora.">Im Haus scannt der Gast den QR-Code im Zimmer — auf dem Nachttisch, an der Tür oder wo Sie wollen — und findet denselben Katalog, verknüpft mit diesem Zimmer. Von dort kann er eine Anfrage senden, die in Echtzeit an der Rezeption ankommt, mit Zimmer und Uhrzeit.</p>
+
+  <h2 class="q-h2" data-it="Una guida che si legge, o una guida che risponde" data-en="A guide to read, or a guide that answers" data-fr="Un livret qui se lit, ou un livret qui répond" data-de="Eine Mappe zum Lesen oder eine, die antwortet" data-es="Una guía que se lee, o una guía que responde">Eine Mappe zum Lesen oder eine, die antwortet</h2>
+  <p class="q-p" data-it="Molte guide digitali si fermano alla lettura: l'ospite trova l'informazione, ma se vuole qualcosa deve comunque telefonare o scendere al banco. In Colgo l'ospite aggiunge quello che vuole al carrello e invia la richiesta, oppure scrive alla reception. Lo staff la prende in carico e la chiude, e ogni PIN vede solo le camere di sua competenza." data-en="Many digital guides stop at reading: guests find the information, but if they want something they still have to call or go down to the desk. In Colgo the guest adds what they want to the cart and sends the request, or writes to reception. Staff take it on and close it, and each PIN only sees the rooms it is responsible for." data-fr="Beaucoup de livrets numériques s'arrêtent à la lecture : le client trouve l'information, mais s'il veut quelque chose il doit quand même appeler ou descendre à la réception. Dans Colgo le client ajoute ce qu'il veut au panier et envoie la demande, ou écrit à la réception. Le personnel la prend en charge et la clôture, et chaque PIN ne voit que les chambres dont il s'occupe." data-de="Viele digitale Gästemappen hören beim Lesen auf: Der Gast findet die Information, muss aber trotzdem anrufen oder zur Rezeption gehen, wenn er etwas möchte. In Colgo legt der Gast das Gewünschte in den Warenkorb und sendet die Anfrage ab, oder er schreibt der Rezeption. Das Personal übernimmt sie und schließt sie ab, und jede PIN sieht nur die Zimmer, für die sie zuständig ist." data-es="Muchas guías digitales se quedan en la lectura: el huésped encuentra la información, pero si quiere algo tiene que llamar o bajar al mostrador igualmente. En Colgo el huésped agrega lo que quiere al carrito y envía la solicitud, o le escribe a recepción. El personal la toma a cargo y la cierra, y cada PIN ve solo las habitaciones que le corresponden.">Viele digitale Gästemappen hören beim Lesen auf: Der Gast findet die Information, muss aber trotzdem anrufen oder zur Rezeption gehen, wenn er etwas möchte. In Colgo legt der Gast das Gewünschte in den Warenkorb und sendet die Anfrage ab, oder er schreibt der Rezeption. Das Personal übernimmt sie und schließt sie ab, und jede PIN sieht nur die Zimmer, für die sie zuständig ist.</p>
+  <p class="q-p" data-it="Per i servizi a numero chiuso, come un'escursione o un trattamento, i posti si rinnovano per data e la disponibilità viene ricontrollata nel momento in cui la richiesta parte: due ospiti non prendono l'ultimo posto nello stesso istante." data-en="For services with limited places, like an excursion or a treatment, places renew by date and availability is re-checked the moment the request is sent: two guests can't take the last place at the same instant." data-fr="Pour les services à places limitées, comme une excursion ou un soin, les places se renouvellent par date et la disponibilité est revérifiée au moment où la demande part : deux clients ne prennent pas la dernière place au même instant." data-de="Bei Leistungen mit begrenzten Plätzen, etwa einem Ausflug oder einer Behandlung, erneuern sich die Plätze pro Datum, und die Verfügbarkeit wird beim Absenden der Anfrage erneut geprüft: Zwei Gäste bekommen nicht im selben Augenblick den letzten Platz." data-es="Para los servicios con cupo limitado, como una excursión o un tratamiento, las plazas se renuevan por fecha y la disponibilidad se vuelve a comprobar en el momento en que sale la solicitud: dos huéspedes no se quedan con la última plaza en el mismo instante.">Bei Leistungen mit begrenzten Plätzen, etwa einem Ausflug oder einer Behandlung, erneuern sich die Plätze pro Datum, und die Verfügbarkeit wird beim Absenden der Anfrage erneut geprüft: Zwei Gäste bekommen nicht im selben Augenblick den letzten Platz.</p>
+
+  <h2 class="q-h2" data-it="La lingua dell'ospite" data-en="The guest's language" data-fr="La langue du client" data-de="Die Sprache des Gastes" data-es="El idioma del huésped">Die Sprache des Gastes</h2>
+  <p class="q-p" data-it="Al primo accesso l'ospite sceglie la lingua: italiano, inglese, francese, tedesco o spagnolo. La guida è già tradotta, perché Colgo genera le traduzioni quando pubblichi o aggiorni un contenuto. Non scrivi cinque versioni, e quando cambi un orario cambia in tutte le lingue." data-en="The first time, the guest picks a language: Italian, English, French, German or Spanish. The guide is already translated, because Colgo generates translations when you publish or update content. You don't write five versions, and when you change a time it changes in every language." data-fr="Au premier accès, le client choisit la langue : italien, anglais, français, allemand ou espagnol. Le livret est déjà traduit, car Colgo génère les traductions quand vous publiez ou modifiez un contenu. Vous n'écrivez pas cinq versions, et quand vous changez un horaire il change dans toutes les langues." data-de="Beim ersten Aufruf wählt der Gast die Sprache: Italienisch, Englisch, Französisch, Deutsch oder Spanisch. Die Mappe ist schon übersetzt, weil Colgo die Übersetzungen beim Veröffentlichen oder Ändern eines Inhalts erzeugt. Sie schreiben keine fünf Fassungen, und wenn Sie eine Uhrzeit ändern, ändert sie sich in allen Sprachen." data-es="La primera vez, el huésped elige el idioma: italiano, inglés, francés, alemán o español. La guía ya está traducida, porque Colgo genera las traducciones cuando publicas o actualizas un contenido. No escribes cinco versiones, y cuando cambias un horario cambia en todos los idiomas.">Beim ersten Aufruf wählt der Gast die Sprache: Italienisch, Englisch, Französisch, Deutsch oder Spanisch. Die Mappe ist schon übersetzt, weil Colgo die Übersetzungen beim Veröffentlichen oder Ändern eines Inhalts erzeugt. Sie schreiben keine fünf Fassungen, und wenn Sie eine Uhrzeit ändern, ändert sie sich in allen Sprachen.</p>
+
+  <h2 class="q-h2" data-it="Cosa una guida digitale non fa" data-en="What a digital guide doesn't do" data-fr="Ce qu'un livret numérique ne fait pas" data-de="Was eine digitale Gästemappe nicht kann" data-es="Lo que una guía digital no hace">Was eine digitale Gästemappe nicht kann</h2>
+  <ul class="q-limits">
+      <li class="q-li" data-it="Non sa chi arriva. Colgo non si collega al gestionale della struttura: il link pre-arrivo lo manda la reception, non parte da solo con la prenotazione." data-en="It doesn't know who is arriving. Colgo doesn't connect to the property management system: reception sends the pre-arrival link, it isn't triggered by the booking." data-fr="Il ne sait pas qui arrive. Colgo ne se connecte pas au logiciel de gestion de l'établissement : c'est la réception qui envoie le lien pré-arrivée, il ne part pas tout seul avec la réservation." data-de="Sie weiß nicht, wer anreist. Colgo ist nicht mit dem Hotelprogramm (PMS) verbunden: Den Pre-Arrival-Link schickt die Rezeption, er geht nicht von selbst mit der Buchung hinaus." data-es="No sabe quién llega. Colgo no se conecta al sistema de gestión del establecimiento: el enlace previo a la llegada lo manda recepción, no sale solo con la reserva.">Sie weiß nicht, wer anreist. Colgo ist nicht mit dem Hotelprogramm (PMS) verbunden: Den Pre-Arrival-Link schickt die Rezeption, er geht nicht von selbst mit der Buchung hinaus.</li>
+      <li class="q-li" data-it="Non manda messaggi automatici agli ospiti." data-en="It doesn't send automatic messages to guests." data-fr="Il n'envoie pas de messages automatiques aux clients." data-de="Sie verschickt keine automatischen Nachrichten an Gäste." data-es="No envía mensajes automáticos a los huéspedes.">Sie verschickt keine automatischen Nachrichten an Gäste.</li>
+      <li class="q-li" data-it="Non incassa: i servizi richiesti si pagano in reception, di persona." data-en="It doesn't take payments: requested services are paid at reception, in person." data-fr="Il n'encaisse pas : les services demandés se paient à la réception, en personne." data-de="Sie kassiert nicht: Angefragte Leistungen werden persönlich an der Rezeption bezahlt." data-es="No cobra: los servicios solicitados se pagan en recepción, en persona.">Sie kassiert nicht: Angefragte Leistungen werden persönlich an der Rezeption bezahlt.</li>
+      <li class="q-li" data-it="Non gestisce la prenotazione delle camere: raccoglie richieste e ordini." data-en="It doesn't handle room bookings: it collects requests and orders." data-fr="Il ne gère pas la réservation des chambres : il recueille des demandes et des commandes." data-de="Sie verwaltet keine Zimmerbuchungen: Sie sammelt Anfragen und Bestellungen." data-es="No gestiona la reserva de habitaciones: recoge solicitudes y pedidos.">Sie verwaltet keine Zimmerbuchungen: Sie sammelt Anfragen und Bestellungen.</li>
+  </ul>
+</div>
+
+<div class="faq-section">
+  <div class="faq-category" data-it="DOMANDE CORRELATE" data-en="RELATED QUESTIONS" data-fr="QUESTIONS LIÉES" data-de="VERWANDTE FRAGEN" data-es="PREGUNTAS RELACIONADAS">VERWANDTE FRAGEN</div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="L'ospite deve scaricare un'app per leggere la guida?" data-en="Does the guest have to download an app to read the guide?" data-fr="Le client doit-il télécharger une appli pour lire le livret ?" data-de="Muss der Gast eine App herunterladen, um die Mappe zu lesen?" data-es="¿El huésped tiene que descargar una app para leer la guía?">Muss der Gast eine App herunterladen, um die Mappe zu lesen?</div>
+      <div class="faq-a" data-it="No. Il link e il QR aprono una pagina web nel browser del telefono: niente da installare e nessuna registrazione per l'ospite." data-en="No. The link and the QR code open a web page in the phone's browser: nothing to install and no sign-up for the guest." data-fr="Non. Le lien et le QR ouvrent une page web dans le navigateur du téléphone : rien à installer et aucune inscription pour le client." data-de="Nein. Link und QR-Code öffnen eine Webseite im Browser des Handys: nichts zu installieren und keine Registrierung für den Gast." data-es="No. El enlace y el QR abren una página web en el navegador del teléfono: nada que instalar y ningún registro para el huésped.">Nein. Link und QR-Code öffnen eine Webseite im Browser des Handys: nichts zu installieren und keine Registrierung für den Gast.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Posso mandare la guida prima dell'arrivo?" data-en="Can I send the guide before arrival?" data-fr="Puis-je envoyer le livret avant l'arrivée ?" data-de="Kann ich die Mappe vor der Anreise schicken?" data-es="¿Puedo mandar la guía antes de la llegada?">Kann ich die Mappe vor der Anreise schicken?</div>
+      <div class="faq-a" data-it="Sì. Mandi il link prima del check-in, per esempio incollandolo una volta nei messaggi che già invii agli ospiti. L'ospite trova come arrivare, il Wi-Fi e i servizi, e può prenotarli in anticipo." data-en="Yes. You send the link before check-in, for example by pasting it once into the messages you already send guests. They find directions, the Wi-Fi and the services, and can book them in advance." data-fr="Oui. Vous envoyez le lien avant le check-in, par exemple en le collant une fois dans les messages que vous envoyez déjà aux clients. Le client trouve comment venir, le Wi-Fi et les services, et peut les réserver à l'avance." data-de="Ja. Sie schicken den Link vor dem Check-in, zum Beispiel indem Sie ihn einmal in die Nachrichten einfügen, die Sie Gästen ohnehin senden. Der Gast findet Anfahrt, WLAN und Leistungen und kann sie im Voraus buchen." data-es="Sí. Mandas el enlace antes del check-in, por ejemplo pegándolo una vez en los mensajes que ya envías a los huéspedes. El huésped encuentra cómo llegar, el Wi-Fi y los servicios, y puede reservarlos por adelantado.">Ja. Sie schicken den Link vor dem Check-in, zum Beispiel indem Sie ihn einmal in die Nachrichten einfügen, die Sie Gästen ohnehin senden. Der Gast findet Anfahrt, WLAN und Leistungen und kann sie im Voraus buchen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Posso mostrare un servizio solo ad alcune camere?" data-en="Can I show a service only to some rooms?" data-fr="Puis-je montrer un service seulement à certaines chambres ?" data-de="Kann ich eine Leistung nur bestimmten Zimmern zeigen?" data-es="¿Puedo mostrar un servicio solo a algunas habitaciones?">Kann ich eine Leistung nur bestimmten Zimmern zeigen?</div>
+      <div class="faq-a" data-it="Sì, per singola unità o per tipologia: un servizio solo agli appartamenti, per esempio. La voce semplicemente non compare a chi non la riguarda." data-en="Yes, per single unit or per type: a service only for the apartments, for example. The item simply doesn't appear to those it doesn't concern." data-fr="Oui, par unité ou par type : un service réservé aux appartements, par exemple. L'article n'apparaît tout simplement pas à ceux qu'il ne concerne pas." data-de="Ja, pro Einheit oder pro Typ: eine Leistung nur für die Apartments zum Beispiel. Der Eintrag erscheint bei den anderen einfach nicht." data-es="Sí, por unidad o por tipo: un servicio solo para los apartamentos, por ejemplo. El artículo simplemente no aparece a quien no le corresponde.">Ja, pro Einheit oder pro Typ: eine Leistung nur für die Apartments zum Beispiel. Der Eintrag erscheint bei den anderen einfach nicht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Funziona anche per un campeggio o un agriturismo?" data-en="Does it work for a campsite or a farm stay too?" data-fr="Est-ce que ça marche aussi pour un camping ou une ferme-auberge ?" data-de="Funktioniert das auch für einen Campingplatz oder Ferienhof?" data-es="¿Funciona también para un camping o una casa rural?">Funktioniert das auch für einen Campingplatz oder Ferienhof?</div>
+      <div class="faq-a" data-it="Sì. Il termine «camera» diventa piazzola, bungalow o ormeggio, in base a come configuri la struttura: il funzionamento resta lo stesso." data-en="Yes. The word “room” becomes pitch, bungalow or berth, depending on how you set up the property: the way it works stays the same." data-fr="Oui. Le terme « chambre » devient emplacement, bungalow ou ponton, selon la configuration de l'établissement : le fonctionnement reste le même." data-de="Ja. Aus „Zimmer“ wird Stellplatz, Bungalow oder Liegeplatz, je nachdem, wie Sie den Betrieb einrichten: Die Funktionsweise bleibt dieselbe." data-es="Sí. El término «habitación» pasa a ser parcela, bungalow o amarre, según cómo configures el establecimiento: el funcionamiento es el mismo.">Ja. Aus „Zimmer“ wird Stellplatz, Bungalow oder Liegeplatz, je nachdem, wie Sie den Betrieb einrichten: Die Funktionsweise bleibt dieselbe.</div>
+    </div>
+</div>
+
+<div class="altre-letture">
+  <h2 data-it="Da leggere anche" data-en="Read next" data-fr="À lire aussi" data-de="Auch lesenswert" data-es="También te puede servir">Auch lesenswert</h2>
+  <ul>
+    <li><a href="/de/hotel.html" data-it="Colgo per hotel, B&amp;B e agriturismi — catalogo digitale" data-en="Colgo for hotels, B&amp;Bs and farm stays — digital catalogue" data-fr="Colgo pour hôtels et fermes-auberges — catalogue numérique" data-de="Colgo für Hotels, B&amp;Bs und Ferienhöfe — digitaler Katalog" data-es="Colgo para hoteles, B&amp;B y casas rurales — catálogo digital">Colgo für Hotels, B&Bs und Ferienhöfe — digitaler Katalog</a></li>
+    <li><a href="/de/qr-code-in-camera.html" data-it="QR code in camera: cosa serve per partire" data-en="In-room QR codes: what you need to start" data-fr="QR en chambre : ce qu'il faut pour démarrer" data-de="QR im Zimmer: was man zum Start braucht" data-es="QR en la habitación: qué hace falta para empezar">QR im Zimmer: was man zum Start braucht</a></li>
+    <li><a href="/de/come-funziona.html" data-it="Come funziona Colgo — catalogo digitale via QR" data-en="How Colgo works — Digital catalogue for hospitality" data-fr="Comment fonctionne Colgo — catalogue numérique par QR" data-de="So funktioniert Colgo — digitaler Katalog per QR" data-es="Cómo funciona Colgo — catálogo digital por QR">So funktioniert Colgo — digitaler Katalog per QR</a></li>
+  </ul>
+</div>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/de/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite" data-es="Inicio">Startseite</a>
+    <a href="/de/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert&#39;s" data-es="Cómo funciona">So funktioniert's</a>
+    <a href="/de/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen" data-es="Para quién">Für wen</a>
+    <a href="/de/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Preise</a>
+    <a href="/de/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog" data-es="Accesos y catálogo">Zugriffe & Katalog</a>
+    <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="Preguntas">FAQ</a>
+    <a href="/de/chi-siamo.html" data-it="Chi siamo" data-en="About us" data-fr="Qui sommes-nous" data-de="Über uns" data-es="Quiénes somos">Über uns</a>
+  </div>
+  <!-- Approfondimenti: pagine di CONTENUTO, non documenti legali. Stavano
+       mescolate alla privacy e nessuno le trovava. -->
+  <div class="footer-links footer-approfondimenti">
+    <span class="footer-eyebrow" data-it="Approfondimenti" data-en="In depth" data-fr="Pour aller plus loin" data-de="Zum Vertiefen" data-es="Para profundizar">Zum Vertiefen</span>
+    <a href="/de/confronto.html" data-it="Confronto con le alternative" data-en="Compared with the alternatives" data-fr="Comparatif avec les alternatives" data-de="Vergleich mit den Alternativen" data-es="Comparativa con las alternativas">Vergleich mit den Alternativen</a>
+    <a href="/de/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Warum digital</a>
+    <a href="/de/qr-code-in-camera.html" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">QR im Zimmer</a>
+    <a href="/de/catalogo-complesso.html" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Komplexe Kataloge</a>
+    <a href="/de/struttura-stagionale.html" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Saisonbetrieb</a>
+    <a href="/de/menu-digitale-qr-code.html" data-it="Menù digitale con QR" data-en="QR code menu" data-fr="Menu numérique QR" data-de="Digitale Speisekarte" data-es="Menú digital con QR">Digitale Speisekarte</a>
+    <a href="/de/guida-digitale-ospiti.html" data-it="Guida per gli ospiti" data-en="Guest guide" data-fr="Livret d'accueil" data-de="Gästemappe" data-es="Guía para huéspedes">Gästemappe</a>
+    <a href="/de/catalogo-digitale-negozio.html" data-it="Catalogo per negozi" data-en="Shop catalogue" data-fr="Catalogue boutique" data-de="Katalog fürs Geschäft" data-es="Catálogo para tiendas">Katalog fürs Geschäft</a>
+  </div>
+  <div class="footer-links footer-legale">
+    <a href="/de/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Datenschutzerklärung</a>
+    <a href="/de/privacy.html#cookie" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Cookie-Richtlinie</a>
+    <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+  </div>
+  © 2026 COLGO · COLGO.APP
+</footer>
+
+<script>
+  let currentLang = 'it';
+    // Ogni lingua ha il suo indirizzo (/en /fr /de /es): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
+    function setLang(l) {
+      var supp = ['it','en','fr','de','es'];
+      if (supp.indexOf(l) === -1) return;
+      try { localStorage.setItem('colgo_lang', l); } catch (e) {}
+      var p = location.pathname.replace(/^\/(en|fr|de|es)(?=\/|$)/, '');
+      if (!p || p === '/') p = '/';
+      location.href = (l === 'it' ? '' : '/' + l) + (p === '/' ? '/' : p) + location.hash;
+    }
+</script>
+
+
+
+
+
+
+<!-- ══ colgo-assistente ══ generato da widget.py — non modificare a mano -->
+<style>
+/* ══ Assistente e invito fisso (16/08/2026) ═════════════════════════════
+   Vivono nello stesso angolo, quindi si conoscono: sul telefono il pulsante
+   dell'assistente sale quando c'e' la barra d'invito e riscende quando viene
+   chiusa (--colgo-fondo). Se stessero in due blocchi indipendenti finirebbero
+   uno sopra l'altro. */
+:root { --colgo-fondo: 24px; }
+/* Difesa: il sito ha regole scritte sui TAG (section{padding:120px} e' quella
+   che mi ha fregato, nav{position:fixed} lo aveva fatto poco prima). Entrano
+   in qualunque elemento nuovo dello stesso tag. Qui si azzera in partenza,
+   cosi' la prossima regola globale non arriva fin dentro. */
+.colgo-fab, .colgo-chat, .colgo-invito, .colgo-barra,
+.colgo-chat *, .colgo-invito *, .colgo-barra * {
+  margin: 0; max-width: none; box-sizing: border-box; }
+.colgo-chat, .colgo-invito, .colgo-barra, .colgo-fab { padding: 0; }
+.colgo-fab { position: fixed; right: 22px; bottom: var(--colgo-fondo); z-index: 300;
+  width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; border: 1px solid rgba(200,146,42,0.55);
+  background: rgba(15,24,21,0.92); color: var(--ochre); box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+  transition: bottom .25s ease, transform .18s ease, border-color .18s ease; }
+.colgo-fab:hover { transform: translateY(-2px); border-color: var(--ochre); }
+.colgo-fab .ci { width: 24px; height: 24px; }
+.colgo-fab[hidden] { display: none; }
+
+.colgo-chat { position: fixed; right: 22px; bottom: calc(var(--colgo-fondo) + 68px); z-index: 301;
+  width: 370px; max-width: calc(100vw - 44px); height: auto; min-height: 260px;
+  max-height: calc(100vh - 150px);
+  display: none; flex-direction: column; border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 4px; background: rgba(13,20,18,0.985); box-shadow: 0 18px 60px rgba(0,0,0,0.65);
+  overflow: hidden; transition: bottom .25s ease; }
+.colgo-chat.aperta { display: flex; }
+.colgo-chat-testa { display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid rgba(245,241,232,0.1); flex-shrink: 0; }
+.colgo-chat-testa strong { font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 19px; color: var(--cream); letter-spacing: 0.3px; }
+.colgo-x { background: none; border: none; color: rgba(245,241,232,0.5); cursor: pointer;
+  padding: 6px; display: flex; border-radius: 50%; }
+.colgo-x:hover { color: var(--cream); }
+.colgo-x .ci { width: 18px; height: 18px; }
+.colgo-corpo { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.colgo-riga { max-width: 86%; font-size: 14px; line-height: 1.65; letter-spacing: 0.2px;
+  padding: 11px 14px; border-radius: 3px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.colgo-riga.da-lui { align-self: flex-start; background: rgba(245,241,232,0.06); color: var(--cream); }
+.colgo-riga.da-te  { align-self: flex-end; background: rgba(200,146,42,0.16); color: var(--cream);
+  border: 1px solid rgba(200,146,42,0.3); }
+.colgo-attesa { align-self: flex-start; display: flex; gap: 5px; padding: 13px 14px; }
+.colgo-attesa i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre);
+  opacity: 0.4; animation: colgoPuls 1.1s infinite; }
+.colgo-attesa i:nth-child(2) { animation-delay: .18s; }
+.colgo-attesa i:nth-child(3) { animation-delay: .36s; }
+@keyframes colgoPuls { 0%,60%,100% { opacity:.25; transform:translateY(0);} 30% { opacity:1; transform:translateY(-3px);} }
+.colgo-spunti { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; }
+.colgo-spunto { font-family: 'Josefin Sans', sans-serif; font-size: 14px; letter-spacing: 0.5px;
+  color: var(--ochre); background: none; border: 1px solid rgba(200,146,42,0.35);
+  padding: 7px 12px; border-radius: 3px; cursor: pointer; }
+.colgo-spunto:hover { background: rgba(200,146,42,0.12); }
+.colgo-piede { border-top: 1px solid rgba(245,241,232,0.1); padding: 12px 14px 10px; flex-shrink: 0; }
+.colgo-form { display: flex; gap: 8px; align-items: center; }
+.colgo-input { flex: 1; font-family: 'Josefin Sans', sans-serif; font-size: 15px; color: var(--cream);
+  background: rgba(245,241,232,0.05); border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 3px; padding: 11px 12px; outline: none; min-width: 0; }
+.colgo-input:focus { border-color: rgba(200,146,42,0.6); }
+.colgo-input::placeholder { color: rgba(245,241,232,0.35); }
+.colgo-invia { background: var(--ochre); border: none; color: #0D0D0D; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 3px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; }
+.colgo-invia:disabled { opacity: .4; cursor: default; }
+.colgo-invia .ci { width: 19px; height: 19px; }
+.colgo-nota { font-size: 14px; line-height: 1.5; letter-spacing: 0.3px;
+  color: rgba(245,241,232,0.3); margin-top: 9px; text-align: center; }
+
+/* invito fisso — riquadro a lato sul computer */
+.colgo-invito { position: fixed; right: 22px; top: 50%; transform: translateY(-50%) translateX(14px);
+  z-index: 290; width: 232px; padding: 20px 18px 18px; border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 4px; background: rgba(15,24,21,0.94); box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
+.colgo-invito.si-vede { opacity: 1; transform: translateY(-50%) translateX(0); pointer-events: auto; }
+/* Con la conversazione aperta l'invito starebbe dietro al pannello, visibile
+   in trasparenza: si fa da parte finche' e' aperta. */
+body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(14px); }
+.colgo-invito strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 21px; color: var(--cream); margin-bottom: 8px; }
+.colgo-invito p { font-size: 14px; line-height: 1.6; color: rgba(245,241,232,0.45); margin-bottom: 15px; }
+.colgo-invito a { display: block; text-align: center; font-size: 15px; letter-spacing: 1.6px;
+  text-decoration: none; padding: 11px 8px; margin-bottom: 8px; }
+.colgo-invito .i-demo { color: var(--ochre); border: 1px solid rgba(200,146,42,0.45); }
+.colgo-invito .i-demo:hover { background: rgba(200,146,42,0.12); }
+.colgo-invito .i-prova { color: #0D0D0D; background: var(--ochre); margin-bottom: 0; }
+.colgo-invito .colgo-x { position: absolute; top: 6px; right: 6px; }
+.colgo-invito .colgo-x .ci { width: 14px; height: 14px; }
+
+/* invito fisso — barra in fondo sul telefono */
+.colgo-barra { display: none; }
+@media (max-width: 900px) {
+  .colgo-invito { display: none; }
+  .colgo-barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 290;
+    align-items: center; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10,16,14,0.97); border-top: 1px solid rgba(200,146,42,0.28);
+    transform: translateY(105%); transition: transform .35s ease; }
+  .colgo-barra.si-vede { transform: translateY(0); }
+  .colgo-barra a { flex: 1; text-align: center; font-size: 15px; letter-spacing: 1.4px;
+    text-decoration: none; color: #0D0D0D; background: var(--ochre); padding: 12px 8px; }
+  .colgo-barra .colgo-x { flex-shrink: 0; }
+  body.colgo-con-barra { --colgo-fondo: 88px; }
+  .colgo-fab { right: 16px; width: 50px; height: 50px; }
+  .colgo-chat { right: 12px; left: 12px; width: auto; max-width: none;
+    max-height: calc(100vh - 190px); bottom: calc(var(--colgo-fondo) + 62px); }
+}
+@media (max-width: 900px) and (max-height: 620px) { .colgo-chat { max-height: calc(100vh - 130px); } }
+</style>
+
+<div class="colgo-invito" id="colgoInvito" aria-hidden="true">
+  <button type="button" class="colgo-x" id="colgoInvitoX" aria-label="Chiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <strong data-it="Provalo davvero." data-en="Try it for real." data-fr="Essayez pour de vrai." data-de="Probieren Sie es aus." data-es="Pruébalo de verdad.">Probieren Sie es aus.</strong>
+  <p data-it="Una struttura già pronta, senza dare niente." data-en="A ready-made business, without giving anything." data-fr="Un établissement déjà prêt, sans rien donner." data-de="Ein fertiger Betrieb, ohne Angaben." data-es="Un establecimiento ya listo, sin dar nada a cambio.">Ein fertiger Betrieb, ohne Angaben.</p>
+  <a class="i-demo" href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Guarda la demo" data-en="See the demo" data-fr="Voir la démo" data-de="Demo ansehen" data-es="Mira la demo">Demo ansehen</a>
+  <a class="i-prova" href="https://app.colgo.app/registrati" target="_blank" rel="noopener" data-it="30 giorni gratis" data-en="30 days free" data-fr="30 jours gratuits" data-de="30 Tage gratis" data-es="30 días gratis">30 Tage gratis</a>
+</div>
+
+<div class="colgo-barra" id="colgoBarra">
+  <a href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Provalo senza registrarti" data-en="Try it without signing up" data-fr="Essayer sans s'inscrire" data-de="Ohne Anmeldung testen" data-es="Pruébalo sin registrarte">Ohne Anmeldung testen</a>
+  <button type="button" class="colgo-x" id="colgoBarraX"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+</div>
+
+<button type="button" class="colgo-fab" id="colgoFab" aria-expanded="false"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></button>
+
+<div class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
+  <div class="colgo-chat-testa">
+    <strong id="colgoTit" data-it="Domande su Colgo?" data-en="Questions about Colgo?" data-fr="Des questions sur Colgo ?" data-de="Fragen zu Colgo?" data-es="¿Dudas sobre Colgo?">Fragen zu Colgo?</strong>
+    <button type="button" class="colgo-x" id="colgoChiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  </div>
+  <div class="colgo-corpo" id="colgoCorpo" aria-live="polite"></div>
+  <div class="colgo-spunti" id="colgoSpunti"><button type="button" class="colgo-spunto" data-it="Quanto costa?" data-en="How much does it cost?" data-fr="Combien ça coûte ?" data-de="Was kostet es?" data-es="¿Cuánto cuesta?">Was kostet es?</button><button type="button" class="colgo-spunto" data-it="I clienti devono scaricare un'app?" data-en="Do customers need an app?" data-fr="Faut-il une appli ?" data-de="Brauchen Gäste eine App?" data-es="¿Los clientes tienen que descargar una app?">Brauchen Gäste eine App?</button><button type="button" class="colgo-spunto" data-it="Come inizio?" data-en="How do I start?" data-fr="Comment commencer ?" data-de="Wie fange ich an?" data-es="¿Cómo empiezo?">Wie fange ich an?</button></div>
+  <div class="colgo-piede">
+    <form class="colgo-form" id="colgoForm">
+      <input class="colgo-input" id="colgoInput" type="text" autocomplete="off" maxlength="500" />
+      <button class="colgo-invia" id="colgoInvia" type="submit"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></button>
+    </form>
+    <p class="colgo-nota" data-it="Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com" data-en="It answers from what's on this site. For anything else: colgoapp@gmail.com" data-fr="Il répond à partir de ce qui est sur ce site. Pour le reste : colgoapp@gmail.com" data-de="Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com" data-es="Responde según lo que hay en este sitio. Para lo demás: colgoapp@gmail.com">Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = 'https://app.colgo.app/api/site-chat';
+  var T = {
+    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten.", "Hola. Pregúntame lo que quieras saber sobre Colgo: precios, cómo funciona, qué hace falta para empezar."],
+    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…", "Escribe tu pregunta…"],
+    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen", "Haz una pregunta sobre Colgo"],
+    chiudi: ["Chiudi", "Close", "Fermer", "Schließen", "Cerrar"],
+    invia:  ["Invia", "Send", "Envoyer", "Senden", "Enviar"],
+    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com.", "No puedo responder ahora. Escribe a colgoapp@gmail.com."]
+  };
+  var L = ['it','en','fr','de','es'];
+  function lang() {
+    var l = document.documentElement.lang || 'it';
+    return L.indexOf(l) > -1 ? l : 'it';
+  }
+  function dice(k) { return T[k][L.indexOf(lang())] || T[k][0]; }
+
+  var fab = document.getElementById('colgoFab');
+  var chat = document.getElementById('colgoChat');
+  var corpo = document.getElementById('colgoCorpo');
+  var spunti = document.getElementById('colgoSpunti');
+  var form = document.getElementById('colgoForm');
+  var input = document.getElementById('colgoInput');
+  var invia = document.getElementById('colgoInvia');
+  var invito = document.getElementById('colgoInvito');
+  var barra = document.getElementById('colgoBarra');
+  if (!fab || !chat) return;
+
+  // ── etichette che dipendono dalla lingua e non stanno in data-* ──
+  // (segnaposto del campo e descrizioni per il lettore vocale)
+  function etichette() {
+    input.placeholder = dice('scrivi');
+    fab.setAttribute('aria-label', dice('apri'));
+    invia.setAttribute('aria-label', dice('invia'));
+    document.getElementById('colgoChiudi').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoBarraX').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoInvitoX').setAttribute('aria-label', dice('chiudi'));
+  }
+  // setLang non sa di queste: gli si sta accanto invece di modificarlo
+  var origSetLang = window.setLang;
+  if (typeof origSetLang === 'function') {
+    window.setLang = function (l) {
+      var r = origSetLang.apply(this, arguments);
+      etichette();
+      // Il saluto non e' un messaggio scambiato, e' un'etichetta: finche' non
+      // si e' chiesto nulla deve seguire la lingua. I messaggi veri no —
+      // riscrivere quello che qualcuno ha gia' letto sarebbe peggio.
+      if (!storia.length && corpo.firstChild) corpo.firstChild.textContent = dice('benv');
+      return r;
+    };
+  }
+
+  // ── conversazione ──
+  var storia = [];      // {ruolo, testo} — senza data-*, non si traduce
+  var occupato = false;
+
+  function riga(cls, testo) {
+    var d = document.createElement('div');
+    d.className = 'colgo-riga ' + cls;
+    d.textContent = testo;          // testo, mai HTML: la risposta e' di un modello
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+  function attesa() {
+    var d = document.createElement('div');
+    d.className = 'colgo-attesa';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+
+  function chiedi(testo) {
+    if (occupato || !testo.trim()) return;
+    occupato = true; invia.disabled = true;
+    spunti.style.display = 'none';
+    riga('da-te', testo);
+    storia.push({ ruolo: 'persona', testo: testo });
+    var att = attesa();
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lingua: lang(), messaggi: storia.slice(-12) })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        att.remove();
+        var t = (d && d.risposta) ? d.risposta : dice('err');
+        riga('da-lui', t);
+        storia.push({ ruolo: 'assistente', testo: t });
+      })
+      .catch(function () { att.remove(); riga('da-lui', dice('err')); })
+      .then(function () { occupato = false; invia.disabled = false; input.focus(); });
+  }
+
+  function apri() {
+    chat.classList.add('aperta');
+    document.body.classList.add('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'true');
+    if (!corpo.children.length) riga('da-lui', dice('benv'));
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  function chiudiChat() {
+    chat.classList.remove('aperta');
+    document.body.classList.remove('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+  fab.addEventListener('click', function () {
+    chat.classList.contains('aperta') ? chiudiChat() : apri();
+  });
+  document.getElementById('colgoChiudi').addEventListener('click', chiudiChat);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && chat.classList.contains('aperta')) { chiudiChat(); fab.focus(); }
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); var v = input.value; input.value = ''; chiedi(v);
+  });
+  spunti.addEventListener('click', function (e) {
+    var b = e.target.closest('.colgo-spunto'); if (b) chiedi(b.textContent.trim());
+  });
+
+  // ── invito fisso: compare dopo un po' di lettura, e si puo' zittire ──
+  var CHIAVE = 'colgo_invito_chiuso';
+  var zitto = false;
+  try { zitto = localStorage.getItem(CHIAVE) === '1'; } catch (e) {}
+
+  function mostraInvito(si) {
+    if (zitto) si = false;
+    invito.classList.toggle('si-vede', si);
+    invito.setAttribute('aria-hidden', si ? 'false' : 'true');
+    barra.classList.toggle('si-vede', si);
+    document.body.classList.toggle('colgo-con-barra', si);
+  }
+  function spegni() {
+    zitto = true;
+    try { localStorage.setItem(CHIAVE, '1'); } catch (e) {}
+    mostraInvito(false);
+  }
+  document.getElementById('colgoInvitoX').addEventListener('click', spegni);
+  document.getElementById('colgoBarraX').addEventListener('click', spegni);
+
+  var ultimo = null;
+  function guarda() {
+    // Compare dopo 700px di lettura, e sparisce vicino al fondo pagina, dove
+    // l'invito grande c'e' gia': due inviti identici a un dito di distanza
+    // sarebbero solo rumore.
+    var y = window.scrollY;
+    var vicinoFondo = (y + window.innerHeight) > (document.documentElement.scrollHeight - 700);
+    var si = y > 700 && !vicinoFondo;
+    if (si !== ultimo) { ultimo = si; mostraInvito(si); }
+  }
+  window.addEventListener('scroll', guarda, { passive: true });
+  window.addEventListener('resize', guarda);
+  // setLang traduce l'intero documento, ma viene chiamato al caricamento —
+  // e il mio blocco sta in fondo alla pagina, quindi allora non esisteva
+  // ancora: le sue scritte restavano nella lingua scritta nel file. Al primo
+  // giro le traduco qui, con la stessa regola.
+  function traduci() {
+    var l = lang();
+    [chat, invito, barra, fab].forEach(function (radice) {
+      if (!radice) return;
+      var tutti = radice.querySelectorAll('[data-it]');
+      (radice.hasAttribute && radice.hasAttribute('data-it') ? [radice] : []).concat([].slice.call(tutti))
+        .forEach(function (el) {
+          var t = el.getAttribute('data-' + l) || el.getAttribute('data-en') || el.getAttribute('data-it');
+          if (t) el.innerHTML = t;
+        });
+    });
+  }
+  traduci();
+  etichette();
+  guarda();
+})();
+</script>
+<script>document.querySelectorAll('.faq-q').forEach(q => { q.addEventListener('click', () => { q.parentElement.classList.toggle('open'); }); });</script>
+</body>
+</html>

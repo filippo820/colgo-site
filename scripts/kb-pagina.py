@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Aggiorna kb.json — il materiale che l'assistente del sito cita — con il
-contenuto di UNA pagina, in tutte e quattro le lingue.
+contenuto di UNA pagina, in tutte e cinque le lingue.
 
     python3 scripts/kb-pagina.py perche-digitale.html
 
@@ -18,7 +18,7 @@ un byte (verificato a fine esecuzione, non promesso).
 import io, json, os, re, sys
 from html.parser import HTMLParser
 
-LINGUE = ('it', 'en', 'fr', 'de')
+LINGUE = ('it', 'en', 'fr', 'de', 'es')
 
 # Che cosa entra nel materiale: il testo che argomenta. Restano fuori il
 # menu', il piede, i pulsanti e il widget dell'assistente — sono navigazione,
@@ -31,6 +31,10 @@ CLASSI = (
     # classi delle altre pagine, se un giorno si rigenerano da qui
     'section-label', 'section-title', 'section-sub', 'venue-type',
     'venue-title', 'venue-desc', 'venue-tag', 'step-title', 'step-desc',
+    # le pagine costruite su una domanda (guide, chi siamo): paragrafi, voci
+    # di elenco e domande in fondo. Le voci di elenco senza la classe q-li
+    # (le pagine del 25/08) restano fuori: rigenerarle e' una scelta a parte.
+    'q-lead', 'q-h2', 'q-p', 'q-li', 'q-firma', 'faq-q', 'faq-a',
 )
 
 

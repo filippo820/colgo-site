@@ -45,7 +45,10 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
           'privacy.html', 'ristorante.html',
            'qr-code-in-camera.html', 'catalogo-complesso.html',
            'struttura-stagionale.html',
-           'confronto.html']
+           'confronto.html',
+           # 23/10/2026: la pagina "Chi siamo" e tre guide
+           'chi-siamo.html', 'menu-digitale-qr-code.html',
+           'guida-digitale-ospiti.html', 'catalogo-digitale-negozio.html']
 
 # Pagine di servizio: generate in ogni lingua ma FUORI da sitemap, hreflang e
 # briciole. Non hanno canonical (una 404 non ha un indirizzo suo), quindi
@@ -74,6 +77,42 @@ OFFERTE = {
 }
 
 META = {
+ 'chi-siamo.html': {
+  'en': ('About us — Colgo, born at a family business on Lake Garda',
+         "Who is behind Colgo: born at a family business on Lake Garda, what it does, who it's for and how we work, with the product's limits stated first."),
+  'fr': ('Qui sommes-nous — Colgo, né au bord du lac de Garde',
+         "Qui est derrière Colgo : né dans une structure familiale au bord du lac de Garde, ce qu'il fait, à qui il sert et comment nous travaillons, limites d'abord."),
+  'de': ('Über uns — Colgo, entstanden in einem Betrieb am Gardasee',
+         'Wer hinter Colgo steht: entstanden in einem Familienbetrieb am Gardasee, was es kann, für wen es ist und wie wir arbeiten, mit den Grenzen vorweg.'),
+  'es': ('Quiénes somos — Colgo, nacido junto al lago de Garda',
+         'Quién está detrás de Colgo: nacido en un establecimiento familiar del lago de Garda, qué hace, para quién es y cómo trabajamos, con los límites primero.')},
+ 'menu-digitale-qr-code.html': {
+  'en': ('QR code menus: how they work and what you need',
+         "How a QR code menu works and what it should have: languages, hours per category, variants with their own price, table orders. And what it doesn't do."),
+  'fr': ('Menu numérique par QR : fonctionnement et essentiel',
+         "Comment fonctionne un menu numérique par QR code et ce qu'il doit avoir : langues, horaires par catégorie, variantes avec leur prix, commandes à table."),
+  'de': ('Digitale Speisekarte per QR: wie sie funktioniert',
+         'Wie eine digitale Speisekarte per QR-Code funktioniert und was sie können muss: Sprachen, Zeiten je Kategorie, Varianten mit Preis, Bestellung am Tisch.'),
+  'es': ('Menú digital con QR: cómo funciona y qué hace falta',
+         'Cómo funciona un menú digital con código QR y qué debe tener: idiomas, horarios por categoría, variantes con su precio, pedidos desde la mesa. Y qué no hace.')},
+ 'guida-digitale-ospiti.html': {
+  'en': ('Digital guest guide: what to include and how',
+         'What to put in the digital guide of a hotel, B&B or farm stay: arrival, Wi-Fi, opening hours, services, requests to reception. Before arrival and in the room.'),
+  'fr': ("Livret d'accueil numérique : que mettre dedans",
+         "Le contenu du livret d'accueil numérique d'un hôtel ou d'un B&B : arrivée, Wi-Fi, horaires, services, demandes à la réception. Avant l'arrivée et en chambre."),
+  'de': ('Digitale Gästemappe: was hineingehört und wie',
+         'Was in die digitale Gästemappe von Hotel, B&B oder Ferienhof gehört: Anreise, WLAN, Zeiten, Leistungen, Anfragen an die Rezeption. Vor Anreise und im Zimmer.'),
+  'es': ('Guía digital para huéspedes: qué poner y cómo',
+         'Qué poner en la guía digital de un hotel, B&B o casa rural: llegada, Wi-Fi, horarios, servicios, solicitudes a recepción. Antes de llegar y en la habitación.')},
+ 'catalogo-digitale-negozio.html': {
+  'en': ('Digital catalogue for shops, without e-commerce',
+         "How to show a shop's products on customers' phones without opening an online store: QR code in the window, variants, availability and the counter list."),
+  'fr': ('Catalogue numérique pour boutiques, sans site marchand',
+         "Montrer les produits d'une boutique sur le téléphone des clients sans ouvrir de site marchand : QR en vitrine, variantes, disponibilité et liste au comptoir."),
+  'de': ('Digitaler Katalog fürs Geschäft, ohne Onlineshop',
+         'Wie ein Geschäft seine Produkte aufs Handy der Kunden bringt, ohne Onlineshop: QR-Code im Schaufenster, Varianten, Verfügbarkeit und die Liste für die Theke.'),
+  'es': ('Catálogo digital para tiendas, sin tienda online',
+         'Cómo mostrar los productos de una tienda en el teléfono de los clientes sin abrir una tienda online: QR en la vitrina, variantes, disponibilidad y la lista.')},
  '404.html': {
   'en': ("Page not found — Colgo",
          "The page you were looking for isn't here: the address has changed or contains a mistake. Go back to the home page, pricing, the FAQ or try the Colgo demo."),
@@ -240,6 +279,10 @@ BRICIOLE = {
  'qr-code-in-camera.html':    ('QR in camera', 'In-room QR', 'QR en chambre', 'QR im Zimmer', 'QR en la habitación'),
  'catalogo-complesso.html':   ('Cataloghi complessi', 'Complex catalogues', 'Catalogues complexes', 'Komplexe Kataloge', 'Catálogos complejos'),
  'struttura-stagionale.html': ('Stagionali', 'Seasonal', 'Saisonnier', 'Saisonbetrieb', 'De temporada'),
+ 'chi-siamo.html':            ('Chi siamo', 'About us', 'Qui sommes-nous', 'Über uns', 'Quiénes somos'),
+ 'menu-digitale-qr-code.html':     ('Menù digitale con QR', 'QR code menu', 'Menu numérique QR', 'Digitale Speisekarte', 'Menú digital con QR'),
+ 'guida-digitale-ospiti.html':     ('Guida per gli ospiti', 'Guest guide', "Livret d'accueil", 'Gästemappe', 'Guía para huéspedes'),
+ 'catalogo-digitale-negozio.html': ('Catalogo per negozi', 'Shop catalogue', 'Catalogue boutique', 'Katalog fürs Geschäft', 'Catálogo para tiendas'),
 }
 
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
@@ -534,10 +577,13 @@ def genera(pagina, lingua):
 
     # ovunque ci siano domande, non solo su faq.html: le pagine costruite
     # su una domanda hanno il loro blocco in fondo
-    s = RE_BRICIOLE.sub('', s)
+    s = RE_BRICIOLE.sub('', RE_ABOUT.sub('', s))
     if 'faq-q' in s:
         s = faqpage(s, lingua, indirizzo(pagina, lingua))
     s = briciole(s, pagina, lingua)
+    # per ultimo: la pulizia delle briciole cerca il loro blocco attaccato a </head>
+    if pagina == ABOUT:
+        s = chi_siamo(s, lingua, titolo, descr)
 
     # la description della home sta anche nel JSON-LD (SoftwareApplication):
     # quella italiana si sostituisce con quella della lingua
@@ -560,6 +606,121 @@ def genera(pagina, lingua):
                       f'  <div class="privacy-prevale">{PREVALE_ITALIANO[lingua]}</div>\n</header>', 1)
 
     return s, p.tradotti
+
+
+# Piede: i link alle pagine nuove li scrive questo script in TUTTE le sorgenti
+# italiane, non si aggiungono a mano. Il 27/08 quattro pagine avevano zero link
+# fuori dal piede perche' ognuna andava ricordata in sedici file; qui basta una
+# riga. Nell'ordine it en fr de es, come BRICIOLE.
+PIEDE_PAGINE = [
+ ('chi-siamo.html', ('Chi siamo', 'About us', 'Qui sommes-nous', 'Über uns', 'Quiénes somos')),
+]
+PIEDE_APPROFONDIMENTI = [
+ ('menu-digitale-qr-code.html',     ('Menù digitale con QR', 'QR code menu', 'Menu numérique QR', 'Digitale Speisekarte', 'Menú digital con QR')),
+ ('guida-digitale-ospiti.html',     ('Guida per gli ospiti', 'Guest guide', "Livret d'accueil", 'Gästemappe', 'Guía para huéspedes')),
+ ('catalogo-digitale-negozio.html', ('Catalogo per negozi', 'Shop catalogue', 'Catalogue boutique', 'Katalog fürs Geschäft', 'Catálogo para tiendas')),
+]
+
+
+def _ancora(pagina, nomi, stile=''):
+    dati = ' '.join(f'data-{l}="{n}"' for l, n in zip(('it',) + LINGUE, nomi))
+    stile = f' style="{stile}"' if stile else ''
+    return f'<a href="/{pagina}"{stile} {dati}>{nomi[0]}</a>'
+
+
+def piede(s, nome):
+    """Aggiunge al piede i link di PIEDE_PAGINE e PIEDE_APPROFONDIMENTI che
+    mancano. Rifarlo non cambia niente: un link gia' presente non si ripete.
+
+    Tre forme di piede: quella comune (classi footer-links), quella della home
+    (stili in linea) e quella minima dell'informativa. Una pagina che non ne
+    ha nessuna ferma lo script: meglio saperlo che perdere il link."""
+    m = re.search(r'<footer>.*?</footer>', s, re.S)
+    if not m:
+        raise SystemExit(f'{nome}: nessun <footer>')
+    f = vecchio = m.group(0)
+
+    def aggiungi(trova, voci, chiusura, rientro, stile=''):
+        """trova(f) restituisce la riga ATTUALE: dopo ogni inserimento cambia."""
+        nonlocal f
+        for pagina, nomi in voci:
+            if f'href="/{pagina}"' in f:
+                continue
+            riga = trova(f)
+            f = f.replace(riga, riga[:-len(chiusura)] + f'\n{rientro}{_ancora(pagina, nomi, stile)}' + chiusura, 1)
+
+    if '<div class="footer-links footer-approfondimenti">' in f:
+        aggiungi(lambda t: re.search(r'<div class="footer-links">.*?\n  </div>', t, re.S).group(0),
+                 PIEDE_PAGINE, '\n  </div>', '    ')
+        aggiungi(lambda t: re.search(r'<div class="footer-links footer-approfondimenti">.*?\n  </div>', t, re.S).group(0),
+                 PIEDE_APPROFONDIMENTI, '\n  </div>', '    ')
+    elif 'data-it="Approfondimenti"' in f:
+        # home: righe con stili in linea, si copia lo stile dei link vicini
+        trova = lambda t: re.search(r'\n      <div style="[^"]*">\n        <span [^>]*data-it="Approfondimenti".*?\n      </div>', t, re.S).group(0)
+        stile = re.search(r'<a href="/[^"]*" style="([^"]*)"', trova(f)).group(1)
+        aggiungi(trova, PIEDE_APPROFONDIMENTI, '\n      </div>', '        ', stile)
+        # le pagine (Chi siamo) in una riga loro, sopra gli Approfondimenti
+        mancano = [(p, n) for p, n in PIEDE_PAGINE if f'href="/{p}"' not in f]
+        if mancano:
+            appr = trova(f)
+            c = re.search(r'\n      <!-- Approfondimenti:.*?-->(?=' + re.escape(appr) + ')', f, re.S)
+            if c:
+                appr = c.group(0) + appr
+            apri = re.search(r'\n      <div style="[^"]*">', appr).group(0)
+            link = ''.join(f'\n        {_ancora(p, n, stile)}' for p, n in mancano)
+            f = f.replace(appr, f'\n      <!-- Pagine: le scrive scripts/lingue.py (PIEDE_PAGINE) -->{apri}{link}\n      </div>\n' + appr, 1)
+    elif re.search(r'<footer>\n  © 2026 Colgo', f):
+        # informativa: una riga sola
+        for pagina, nomi in PIEDE_PAGINE:
+            if f'href="/{pagina}"' not in f:
+                f = f.replace('<a href="mailto:', f'{_ancora(pagina, nomi)} · <a href="mailto:', 1)
+    else:
+        raise SystemExit(f'{nome}: piede di forma sconosciuta, aggiungi il caso a piede()')
+    return s.replace(vecchio, f, 1)
+
+
+# Nel menu «CHI SIAMO» portava alla sezione della home: ora che la pagina c'e',
+# porta alla pagina.
+def menu_chi_siamo(s):
+    return re.sub(r'<a href="/?#storia"( class="active")? data-it="CHI SIAMO"',
+                  r'<a href="/chi-siamo.html"\1 data-it="CHI SIAMO"', s)
+
+
+ABOUT = 'chi-siamo.html'
+RE_ABOUT = re.compile(r'\n<!-- Chi siamo: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', re.S)
+
+
+def chi_siamo(html, lingua, titolo, descr):
+    """AboutPage + Organization per la pagina «Chi siamo», nella lingua letta.
+
+    L'Organization non si riscrive: si legge dal JSON-LD della home, cosi'
+    resta UNA entita' (stesso @id) e non due che col tempo si contraddicono."""
+    import json as _json
+    html = RE_ABOUT.sub('', html)
+    home = io.open(os.path.join(RADICE, 'index.html'), encoding='utf-8').read()
+    for blocco in re.findall(r'<script type="application/ld\+json">(.*?)</script>', home, re.S):
+        dati = _json.loads(blocco)
+        org = next((n for n in dati.get('@graph', []) if n.get('@type') == 'Organization'), None)
+        if org:
+            break
+    else:
+        raise SystemExit('index.html: Organization non trovata nel JSON-LD')
+    url = indirizzo(ABOUT, lingua)
+    grafo = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "AboutPage", "@id": url + "#pagina", "url": url,
+             "name": titolo, "description": descr, "inLanguage": lingua,
+             "isPartOf": {"@id": SITO + "/#sito"},
+             "about": {"@id": org["@id"]}, "mainEntity": {"@id": org["@id"]}},
+            org,
+        ],
+    }
+    blocco = ('\n<!-- Chi siamo: generato da scripts/lingue.py (l\'Organization e\' quella\n'
+              '     della home). Non si modifica a mano. -->\n'
+              '<script type="application/ld+json">\n'
+              + _json.dumps(grafo, ensure_ascii=False, indent=2) + '\n</script>\n</head>')
+    return html.replace('</head>', blocco, 1)
 
 
 def controlla_voce_attiva():
@@ -591,6 +752,14 @@ def controlla_voce_attiva():
 
 
 def main():
+    # prima di tutto il piede e il menu, nelle sorgenti: le lingue si generano
+    # da qui, quindi devono gia' averli
+    for pagina in PAGINE + SERVIZIO:
+        f = os.path.join(RADICE, pagina)
+        s = io.open(f, encoding='utf-8').read()
+        nuovo = menu_chi_siamo(piede(s, pagina))
+        if nuovo != s:
+            io.open(f, 'w', encoding='utf-8').write(nuovo)
     controlla_voce_attiva()
     tot = 0
     for l in LINGUE:
@@ -614,11 +783,16 @@ def main():
         s = locali_alternative(s, 'it')
         # il FAQPage si rigenera anche qui: e' l'unico blocco di dati
         # strutturati che NON si scrive a mano nel file
-        s = RE_BRICIOLE.sub('', s)
+        s = RE_BRICIOLE.sub('', RE_ABOUT.sub('', s))
         s = re.sub(r'\n<!-- FAQ: generato da scripts/lingue\.py.*?</script>\n(?=</head>)', '', s, flags=re.S)
         if 'faq-q' in s:
             s = faqpage(s, 'it', indirizzo(pagina, 'it'))
         s = briciole(s, pagina, 'it')
+        if pagina == ABOUT:
+            import html as _html
+            s = chi_siamo(s, 'it',
+                          _html.unescape(re.search(r'<title>(.*?)</title>', s).group(1)),
+                          _html.unescape(re.search(r'<meta name="description" content="([^"]*)"', s).group(1)))
         io.open(f, 'w', encoding='utf-8').write(s)
     print(f'{len(PAGINE)} pagine italiane: aggiunto hreflang')
 
@@ -631,7 +805,9 @@ def main():
     PRIO = {'index.html':'1.0','come-funziona.html':'0.9','prezzi.html':'0.9','hotel.html':'0.8',
             'ristorante.html':'0.8','negozio.html':'0.8','perche-digitale.html':'0.8',
             'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3',
-            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8','confronto.html':'0.9'}
+            'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8','confronto.html':'0.9',
+            'chi-siamo.html':'0.6','menu-digitale-qr-code.html':'0.8','guida-digitale-ospiti.html':'0.8',
+            'catalogo-digitale-negozio.html':'0.8'}
     voci = []
     for pagina in sorted(PAGINE, key=lambda x: (-float(PRIO[x]), x)):
         lm = lastmod(pagina)

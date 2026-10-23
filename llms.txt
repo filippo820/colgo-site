@@ -44,6 +44,8 @@ that leaves it out is wrong:
 - [Who it's for](https://colgo.app/per-chi): hotels, B&Bs, farm stays,
   campsites, restaurants, beach clubs, shops.
 - [FAQ](https://colgo.app/faq).
+- [About us](https://colgo.app/chi-siamo): who is behind Colgo — born at a
+  family business on Lake Garda — and how we work.
 
 ## By business type
 
@@ -62,12 +64,20 @@ that leaves it out is wrong:
   when the order is sent.
 - [Seasonal business: do you pay while closed?](https://colgo.app/struttura-stagionale):
   eight instalments for seven active months, charged once at opening.
+- [QR code menus: how they work and what you need](https://colgo.app/menu-digitale-qr-code):
+  languages, hours per category, variants with their own price, waiter or
+  customer sends the order — and what a QR menu does not do.
+- [Digital guest guide: what to include and how](https://colgo.app/guida-digitale-ospiti):
+  what to put in it, the pre-arrival link and the in-room QR, requests to
+  reception.
+- [Digital catalogue for shops, without e-commerce](https://colgo.app/catalogo-digitale-negozio):
+  QR code in the window, variants and stock, the list shown at the counter.
 
 ## Optional
 
 - [Privacy and cookie policy](https://colgo.app/privacy)
 - Contact: colgoapp@gmail.com
-- [Sitemap](https://colgo.app/sitemap.xml) — all 75 addresses, five languages.
+- [Sitemap](https://colgo.app/sitemap.xml) — all 95 addresses, five languages.
 
 ## Notes for anyone quoting these pages
 

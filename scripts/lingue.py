@@ -46,8 +46,9 @@ PAGINE = ['index.html', 'come-funziona.html', 'faq.html', 'hotel.html', 'negozio
            'qr-code-in-camera.html', 'catalogo-complesso.html',
            'struttura-stagionale.html',
            'confronto.html',
-           # 23/10/2026: la pagina "Chi siamo"
-           'chi-siamo.html']
+           # 23/10/2026: la pagina "Chi siamo" e tre guide
+           'chi-siamo.html', 'menu-digitale-qr-code.html',
+           'guida-digitale-ospiti.html', 'catalogo-digitale-negozio.html']
 
 # Pagine di servizio: generate in ogni lingua ma FUORI da sitemap, hreflang e
 # briciole. Non hanno canonical (una 404 non ha un indirizzo suo), quindi
@@ -85,6 +86,33 @@ META = {
          'Wer hinter Colgo steht: entstanden in einem Familienbetrieb am Gardasee, was es kann, für wen es ist und wie wir arbeiten, mit den Grenzen vorweg.'),
   'es': ('Quiénes somos — Colgo, nacido junto al lago de Garda',
          'Quién está detrás de Colgo: nacido en un establecimiento familiar del lago de Garda, qué hace, para quién es y cómo trabajamos, con los límites primero.')},
+ 'menu-digitale-qr-code.html': {
+  'en': ('QR code menus: how they work and what you need',
+         "How a QR code menu works and what it should have: languages, hours per category, variants with their own price, table orders. And what it doesn't do."),
+  'fr': ('Menu numérique par QR : fonctionnement et essentiel',
+         "Comment fonctionne un menu numérique par QR code et ce qu'il doit avoir : langues, horaires par catégorie, variantes avec leur prix, commandes à table."),
+  'de': ('Digitale Speisekarte per QR: wie sie funktioniert',
+         'Wie eine digitale Speisekarte per QR-Code funktioniert und was sie können muss: Sprachen, Zeiten je Kategorie, Varianten mit Preis, Bestellung am Tisch.'),
+  'es': ('Menú digital con QR: cómo funciona y qué hace falta',
+         'Cómo funciona un menú digital con código QR y qué debe tener: idiomas, horarios por categoría, variantes con su precio, pedidos desde la mesa. Y qué no hace.')},
+ 'guida-digitale-ospiti.html': {
+  'en': ('Digital guest guide: what to include and how',
+         'What to put in the digital guide of a hotel, B&B or farm stay: arrival, Wi-Fi, opening hours, services, requests to reception. Before arrival and in the room.'),
+  'fr': ("Livret d'accueil numérique : que mettre dedans",
+         "Le contenu du livret d'accueil numérique d'un hôtel ou d'un B&B : arrivée, Wi-Fi, horaires, services, demandes à la réception. Avant l'arrivée et en chambre."),
+  'de': ('Digitale Gästemappe: was hineingehört und wie',
+         'Was in die digitale Gästemappe von Hotel, B&B oder Ferienhof gehört: Anreise, WLAN, Zeiten, Leistungen, Anfragen an die Rezeption. Vor Anreise und im Zimmer.'),
+  'es': ('Guía digital para huéspedes: qué poner y cómo',
+         'Qué poner en la guía digital de un hotel, B&B o casa rural: llegada, Wi-Fi, horarios, servicios, solicitudes a recepción. Antes de llegar y en la habitación.')},
+ 'catalogo-digitale-negozio.html': {
+  'en': ('Digital catalogue for shops, without e-commerce',
+         "How to show a shop's products on customers' phones without opening an online store: QR code in the window, variants, availability and the counter list."),
+  'fr': ('Catalogue numérique pour boutiques, sans site marchand',
+         "Montrer les produits d'une boutique sur le téléphone des clients sans ouvrir de site marchand : QR en vitrine, variantes, disponibilité et liste au comptoir."),
+  'de': ('Digitaler Katalog fürs Geschäft, ohne Onlineshop',
+         'Wie ein Geschäft seine Produkte aufs Handy der Kunden bringt, ohne Onlineshop: QR-Code im Schaufenster, Varianten, Verfügbarkeit und die Liste für die Theke.'),
+  'es': ('Catálogo digital para tiendas, sin tienda online',
+         'Cómo mostrar los productos de una tienda en el teléfono de los clientes sin abrir una tienda online: QR en la vitrina, variantes, disponibilidad y la lista.')},
  '404.html': {
   'en': ("Page not found — Colgo",
          "The page you were looking for isn't here: the address has changed or contains a mistake. Go back to the home page, pricing, the FAQ or try the Colgo demo."),
@@ -252,6 +280,9 @@ BRICIOLE = {
  'catalogo-complesso.html':   ('Cataloghi complessi', 'Complex catalogues', 'Catalogues complexes', 'Komplexe Kataloge', 'Catálogos complejos'),
  'struttura-stagionale.html': ('Stagionali', 'Seasonal', 'Saisonnier', 'Saisonbetrieb', 'De temporada'),
  'chi-siamo.html':            ('Chi siamo', 'About us', 'Qui sommes-nous', 'Über uns', 'Quiénes somos'),
+ 'menu-digitale-qr-code.html':     ('Menù digitale con QR', 'QR code menu', 'Menu numérique QR', 'Digitale Speisekarte', 'Menú digital con QR'),
+ 'guida-digitale-ospiti.html':     ('Guida per gli ospiti', 'Guest guide', "Livret d'accueil", 'Gästemappe', 'Guía para huéspedes'),
+ 'catalogo-digitale-negozio.html': ('Catalogo per negozi', 'Shop catalogue', 'Catalogue boutique', 'Katalog fürs Geschäft', 'Catálogo para tiendas'),
 }
 
 VUOTI = {'br','img','meta','link','input','hr','source','path','circle','rect','line',
@@ -585,6 +616,9 @@ PIEDE_PAGINE = [
  ('chi-siamo.html', ('Chi siamo', 'About us', 'Qui sommes-nous', 'Über uns', 'Quiénes somos')),
 ]
 PIEDE_APPROFONDIMENTI = [
+ ('menu-digitale-qr-code.html',     ('Menù digitale con QR', 'QR code menu', 'Menu numérique QR', 'Digitale Speisekarte', 'Menú digital con QR')),
+ ('guida-digitale-ospiti.html',     ('Guida per gli ospiti', 'Guest guide', "Livret d'accueil", 'Gästemappe', 'Guía para huéspedes')),
+ ('catalogo-digitale-negozio.html', ('Catalogo per negozi', 'Shop catalogue', 'Catalogue boutique', 'Katalog fürs Geschäft', 'Catálogo para tiendas')),
 ]
 
 
@@ -772,7 +806,8 @@ def main():
             'ristorante.html':'0.8','negozio.html':'0.8','perche-digitale.html':'0.8',
             'organizzazione.html':'0.7','per-chi.html':'0.7','faq.html':'0.7','privacy.html':'0.3',
             'qr-code-in-camera.html':'0.8','catalogo-complesso.html':'0.8','struttura-stagionale.html':'0.8','confronto.html':'0.9',
-            'chi-siamo.html':'0.6'}
+            'chi-siamo.html':'0.6','menu-digitale-qr-code.html':'0.8','guida-digitale-ospiti.html':'0.8',
+            'catalogo-digitale-negozio.html':'0.8'}
     voci = []
     for pagina in sorted(PAGINE, key=lambda x: (-float(PRIO[x]), x)):
         lm = lastmod(pagina)

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Google Analytics 4 — Colgo (tracciamento esteso) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JCQ1EGSR9"></script>
+  <script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+
+    // Lingua scelta dall'utente (il sito cambia lingua senza cambiare URL:
+    // senza questo parametro GA non saprebbe mai in che lingua è stata letta la pagina)
+    var lang = 'it';
+    try { lang = localStorage.getItem('colgo_lang') || document.documentElement.lang || 'it'; } catch(e){}
+
+    // Nome pulito della pagina (home, prezzi, hotel, ristorante...)
+    var slug = location.pathname.replace(/\/+$/,'').split('/').pop() || 'home';
+    slug = slug.replace(/\.html$/,'') || 'home';
+
+    gtag('config', 'G-4JCQ1EGSR9', {
+      colgo_lang: lang,
+      colgo_page: slug
+    });
+
+    var t0 = Date.now(), maxScroll = 0, sent = {};
+    function ev(name, params){ params = params || {}; params.colgo_lang = lang; params.colgo_page = slug; gtag('event', name, params); }
+    function secs(){ return Math.round((Date.now() - t0)/1000); }
+
+    function start(){
+
+      // 1. PROFONDITÀ DI LETTURA — quanto scende nella pagina
+      function onScroll(){
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / h) * 100));
+        if (pct > maxScroll) maxScroll = pct;
+        [25,50,75,90,100].forEach(function(s){
+          if (pct >= s && !sent['s'+s]) { sent['s'+s] = 1; ev('scroll_depth', { percent: s, seconds: secs() }); }
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+
+      // 2. TEMPO SULLA PAGINA — soglie progressive
+      [10,30,60,120,300].forEach(function(s){
+        setTimeout(function(){ if (!document.hidden) ev('time_on_page', { seconds: s }); }, s*1000);
+      });
+
+      // 3. SEZIONI EFFETTIVAMENTE VISTE — dove si è fermato a leggere
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (!en.isIntersecting) return;
+            var el = en.target;
+            var name = el.id || (el.querySelector('h1,h2,h3') ? el.querySelector('h1,h2,h3').textContent.trim().slice(0,40) : '');
+            if (!name || sent['sec_'+name]) return;
+            sent['sec_'+name] = 1;
+            ev('section_view', { section: name, seconds: secs() });
+          });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section, header, footer').forEach(function(el){ io.observe(el); });
+      }
+
+      // 4. CLIC — CTA, navigazione, link esterni, email
+      document.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a || !a.href) return;
+        var href = a.href, label = (a.textContent || '').trim().slice(0,50);
+        if (href.indexOf('mailto:') === 0)            ev('click_email',   { link: href });
+        else if (href.indexOf('/demo') > -1)          ev('cta_demo',      { link: href, label: label });
+        else if (href.indexOf('/registrati') > -1)    ev('cta_signup',    { link: href, label: label });
+        else if (href.indexOf(location.hostname) > -1) ev('nav_click',    { link: href, label: label });
+        else                                          ev('click_esterno', { link: href, label: label });
+      }, true);
+
+      // 5. CAMBIO LINGUA
+      if (typeof window.setLang === 'function') {
+        var orig = window.setLang;
+        window.setLang = function(l){ var r = orig.apply(this, arguments); lang = l; ev('lang_switch', { nuova_lingua: l }); return r; };
+      }
+
+      // 6. USCITA — durata reale e punto massimo raggiunto
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState === 'hidden' && !sent.exit) {
+          sent.exit = 1;
+          ev('page_exit', { seconds: secs(), max_scroll: maxScroll });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  })();
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="alternate" hreflang="it" href="https://colgo.app/catalogo-digitale-negozio" />
+  <link rel="alternate" hreflang="en" href="https://colgo.app/en/catalogo-digitale-negozio" />
+  <link rel="alternate" hreflang="fr" href="https://colgo.app/fr/catalogo-digitale-negozio" />
+  <link rel="alternate" hreflang="de" href="https://colgo.app/de/catalogo-digitale-negozio" />
+  <link rel="alternate" hreflang="es" href="https://colgo.app/es/catalogo-digitale-negozio" />
+  <link rel="alternate" hreflang="x-default" href="https://colgo.app/catalogo-digitale-negozio" />
+  <link rel="canonical" href="https://colgo.app/de/catalogo-digitale-negozio" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0A100E" />
+  <title>Digitaler Katalog fürs Geschäft, ohne Onlineshop</title>
+
+  <!-- Open Graph — anteprima quando il link viene condiviso su
+       WhatsApp, LinkedIn, Facebook, Slack. Quei servizi NON eseguono il
+       JavaScript, quindi leggono solo questi meta e il testo gia' presente
+       nei tag: senza, un link a colgo.app arriva in chat senza titolo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Colgo" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="es_419" />
+  <meta property="og:title" content="Digitaler Katalog fürs Geschäft, ohne Onlineshop" />
+  <meta property="og:description" content="Wie ein Geschäft seine Produkte aufs Handy der Kunden bringt, ohne Onlineshop: QR-Code im Schaufenster, Varianten, Verfügbarkeit und die Liste für die Theke." />
+  <meta property="og:url" content="https://colgo.app/de/catalogo-digitale-negozio" />
+  <meta property="og:image" content="https://colgo.app/colgo-og.png" />
+  <meta property="og:image:width" content="1254" />
+  <meta property="og:image:height" content="1254" />
+  <meta property="og:image:alt" content="Colgo-Logo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Digitaler Katalog fürs Geschäft, ohne Onlineshop" />
+  <meta name="twitter:description" content="Wie ein Geschäft seine Produkte aufs Handy der Kunden bringt, ohne Onlineshop: QR-Code im Schaufenster, Varianten, Verfügbarkeit und die Liste für die Theke." />
+  <meta name="twitter:image" content="https://colgo.app/colgo-og.png" />
+  <meta name="description" content="Wie ein Geschäft seine Produkte aufs Handy der Kunden bringt, ohne Onlineshop: QR-Code im Schaufenster, Varianten, Verfügbarkeit und die Liste für die Theke." />
+  <!-- Font in casa (21/10/2026): gli stessi file variabili che serviva Google
+       Fonts (Cormorant Garamond v21, Josefin Sans v34), stesse @font-face,
+       sottoinsiemi latin, latin-ext e vietnamese — quest'ultimo serve agli
+       accenti combinanti (U+0300/0301) che compaiono in prezzi e nello
+       spagnolo. Prima il CSS di Google bloccava il rendering. Se si cambia un
+       file, cambia il nome: /fonts e' in cache per un anno (_headers). -->
+  <link rel="preload" href="/fonts/josefin-sans-v34-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/cormorant-garamond-v21-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/cormorant-garamond-v21-normal-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 200; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Josefin Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/josefin-sans-v34-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  </style>
+<style>
+    :root{
+      --ground: #0A100E;   /* terreno: nero con una punta di verde */--black:#0D0D0D;--petrol:#1E3A35;--ochre:#C8922A;--ochre-l:#d4a84b;--cream:#F5F1E8;--grey:#AEB8AE;--white-dim:rgba(245,241,232,0.8);--white-faint:rgba(245,241,232,0.08);--gold:#C8922A;--gold-light:#d4a84b;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ground);color:var(--cream);font-family:'Josefin Sans',sans-serif;font-weight:300;font-size:16px;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;background:linear-gradient(to bottom,rgba(10,16,14,0.95),transparent);}
+    .nav-logo{height:38px;opacity:0.95;}
+    .nav-right{display:flex;align-items:center;gap:32px;}
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;}
+    .nav-links a{color:var(--white-dim);text-decoration:none;font-size:12px;letter-spacing:1.5px;transition:color 0.2s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+    .nav-lang{display:flex;gap:6px;}
+    .lang-btn{background:none;border:none;color:var(--white-dim);font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;padding:4px 8px;transition:color 0.2s;}
+    .lang-btn.active,.lang-btn:hover{color:var(--gold);}
+    .lang-btn:not(:last-child)::after{content:'/';margin-left:6px;color:var(--white-faint);}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:4px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--cream);transition:transform .25s,opacity .25s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+    .nav-overlay.open{display:block;}
+    .page-hero{padding:160px 32px 80px;text-align:center;position:relative;overflow:hidden;}
+    .page-hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,53,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .page-label{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.15;margin-bottom:24px;position:relative;z-index:1;}
+    .page-title em{font-style:italic;color:var(--ochre-l);}
+    .page-sub{font-size:16px;letter-spacing:1px;color:var(--white-dim);max-width:560px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .venues-section{max-width:1000px;margin:0 auto;padding:80px 32px 120px;}
+    .gold-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--ochre),transparent);margin:0 auto 64px;}
+    .venues-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;}
+    .venue-card{background:rgba(245,241,232,0.03);border:1px solid rgba(245,241,232,0.07);padding:48px 36px;transition:background 0.3s,border-color 0.3s;}
+    .venue-card:hover{background:rgba(30,58,53,0.25);border-color:rgba(200,146,42,0.25);}
+    .venue-icon{font-size:36px;margin-bottom:24px;}
+    .venue-type{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:12px;}
+    .venue-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:28px;line-height:1.2;margin-bottom:20px;}
+    .venue-title em{font-style:italic;color:var(--ochre-l);}
+    .venue-desc{font-size:15px;color:var(--white-dim);line-height:1.9;margin-bottom:20px;}
+    .venue-tag{display:inline-block;font-size:9px;letter-spacing:2px;color:rgba(200,146,42,0.85);padding:2px 0;margin:4px 8px 0 0;}
+    .venue-more{display:inline-block;margin-top:20px;font-size:13px;letter-spacing:2px;color:var(--ochre);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;}
+    .venue-more:hover{border-color:var(--ochre);}
+    .principle-section{background:var(--petrol);padding:100px 32px;text-align:center;position:relative;overflow:hidden;}
+    .principle-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,146,42,0.08) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+    .section-label{font-size:12px;letter-spacing:4px;color:var(--ochre);margin-bottom:24px;position:relative;z-index:1;}
+    .section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.2;margin-bottom:16px;position:relative;z-index:1;}
+    .section-title em{font-style:italic;color:var(--ochre-l);}
+    .section-sub{font-size:14px;color:var(--white-dim);max-width:600px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+    .cta-section{text-align:center;padding:100px 32px;}
+    .cta-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.2;margin-bottom:40px;}
+    .cta-headline em{font-style:italic;color:var(--ochre-l);}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{display:inline-block;background:var(--ochre);color:var(--black);font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:background 0.25s;}
+    .btn-primary:hover{background:var(--ochre-l);}
+    .btn-ghost{display:inline-block;border:1px solid rgba(200,146,42,0.4);color:var(--ochre);font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:3px;padding:18px 40px;text-decoration:none;transition:border-color 0.25s;}
+    .btn-ghost:hover{border-color:var(--ochre);}
+    footer{text-align:center;padding:48px 32px;border-top:1px solid rgba(245,241,232,0.06);font-size:12px;letter-spacing:2px;color:rgba(245,241,232,0.4);}
+    footer a{color:rgba(245,241,232,0.5);text-decoration:none;}
+    footer a:hover{color:var(--ochre);}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-eyebrow{color:rgba(245,241,232,0.3);letter-spacing:2px;align-self:center;}
+    .footer-approfondimenti{gap:20px;}
+    .footer-legale{gap:20px;margin-top:4px;}
+    .footer-legale a{color:rgba(245,241,232,0.35);}
+    @media(max-width:700px){nav{padding:20px 24px;}.nav-toggle{display:flex;}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:var(--ground);border-left:1px solid rgba(200,146,42,0.15);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px 40px;transform:translateX(100%);transition:transform .3s ease;z-index:100;}.nav-links.open{transform:translateX(0);}.venues-section{padding:40px 20px 80px;}.venues-grid{grid-template-columns:1fr;}}
+  
+/* ── Leggibilità su telefono (15/08/2026) ────────────────────────────
+   Il contrasto era già buono (11:1); il problema era la DIMENSIONE: una
+   scala tipografica da poster desktop applicata identica al telefono —
+   menù a 10px, tag a 9px, footer a 10px. Qui si riporta a misura di
+   pollice e di occhio. Il padding sui link del menù serve a portare
+   l'area toccabile a ~40px: prima era alta quanto il testo. */
+@media (max-width: 700px) {
+  .nav-links a { font-size: 13px; letter-spacing: 1px; color: var(--cream); padding: 6px 0; }
+  .lang-btn { font-size: 13px; }
+
+  .page-sub, .hero-sub { font-size: 15px; }
+  .pain-desc, .venue-desc, .feat-desc, .step-desc,
+  .problem-desc, .tech-card-desc, .section-sub,
+  .pricing-features li, .faq-a, .faq-q { font-size: 14px; line-height: 1.75; }
+  .screen-caption { font-size: 15px; }
+  .onboarding-note, .pricing-note { font-size: 14px; }
+
+  .venue-tag { font-size: 13px; letter-spacing: 1.5px; }
+  .section-label, .page-label, .feat-title, .tech-card-title,
+  .pricing-name, .verticals-label { font-size: 13px; letter-spacing: 2.5px; }
+  .screens-hint { font-size: 13px; }
+  footer, .footer-links a { font-size: 14px; letter-spacing: 1px; }
+
+  .btn-primary, .btn-ghost { font-size: 14px; padding: 17px 32px; }
+}
+
+/* ── Scala tipografica leggibile — DESKTOP e non solo (16/08/2026) ─────
+   L'intervento del 15/08 aveva alzato solo il telefono. Misurato dopo:
+   sul desktop 48 classi di testo su 82 stavano SOTTO i 14px — il testo di
+   lettura a 12-13, le etichette a 9-10. Lo standard del settore e' 16px
+   per il corpo del testo, e 18 quando il pubblico ha piu' di 50 anni o
+   esigenze di vista: che e' esattamente chi compra Colgo (albergatori,
+   ristoratori, negozianti) e chi lo costruisce.
+   Le etichette maiuscole molto spaziate restano piu' piccole del corpo —
+   sono segnali, non testo da leggere — ma non scendono sotto i 12px. */
+
+/* Testo che si legge davvero */
+.page-sub, .hero-sub { font-size: 18px; line-height: 1.75; }
+.pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+.tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+.demo-text, .demo-list li, .onboarding-note, .pricing-note,
+.who-desc, .vertical-desc { font-size: 16px; line-height: 1.8; }
+.faq-q { font-size: 17px; }
+.screen-caption { font-size: 15px; }
+
+/* Navigazione, bottoni, footer: si toccano, devono vedersi */
+.nav-links a { font-size: 13px; }
+.lang-btn { font-size: 13px; }
+.btn-primary, .btn-ghost, .btn-demo { font-size: 15px; }
+footer, .footer-links a, .footer-copy { font-size: 15px; }
+
+/* Etichette e microtesto: mai sotto i 12 */
+.section-label, .page-label, .hero-eyebrow, .demo-label, .verticals-label,
+.pricing-name, .feat-title, .tech-card-title, .step-label, .faq-category,
+.venue-type, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+.tab-btn, .venue-more, .vertical-more, .lbl { font-size: 14px; }
+.zero-barrier-badge, .demo-note, .pricing-annual-note,
+.pp-m, .pp-a, .screens-hint { font-size: 15px; }
+
+/* Sul telefono il corpo sale a 16 come sul desktop: la soglia non cambia
+   con lo schermo, cambia solo lo spazio attorno. */
+@media (max-width: 700px) {
+  .pain-desc, .venue-desc, .feat-desc, .step-desc, .problem-desc,
+  .tech-card-desc, .section-sub, .pricing-features li, .faq-a,
+  .demo-text, .demo-list li, .onboarding-note, .pricing-note { font-size: 16px; line-height: 1.8; }
+  .page-sub, .hero-sub { font-size: 17px; }
+  .faq-q { font-size: 16px; }
+  .nav-links a { font-size: 13px; }
+  .lang-btn { font-size: 13px; }
+}
+
+/* ── Icone disegnate al posto delle emoji (16/08/2026) ────────────────
+   Un'emoji la disegna il sistema operativo: cambia fra iPhone, Android e
+   Windows, non si puo' colorare e il lettore vocale la annuncia col nome
+   unicode. Queste seguono la dimensione (1em) e il colore del contenitore,
+   quindi le regole di font-size gia' scritte continuano a valere. */
+.ic { width: 1em; height: 1em; display: block; flex-shrink: 0; }
+.vertical-icon, .problem-icon, .pain-icon, .tech-card-icon, .venue-icon { color: var(--ochre); }
+.vertical-icon .ic, .problem-icon .ic, .pain-icon .ic,
+.tech-card-icon .ic, .venue-icon .ic { margin: 0 auto; }
+.zero-barrier-badge .ic { width: 1.2em; height: 1.2em; display: inline-block; vertical-align: -0.2em; }
+
+/* ── Nero con riflessi petrolio (16/08/2026) ──────────────────────────
+   Il fondo pieno #10231F era troppo verde ("lo vedevo più scuro"), il nero
+   puro troppo freddo. Qui la base torna quasi nera — con una punta di verde
+   che non si vede ma si sente — e il petrolio diventa un RIFLESSO: due
+   sfumature larghe e morbide dietro tutto il contenuto, fisse, che non
+   intercettano il puntatore. */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(70% 50% at 50% 0%,   rgba(30,58,53,0.55) 0%, transparent 70%),
+    radial-gradient(60% 45% at 12% 42%,  rgba(30,58,53,0.30) 0%, transparent 72%),
+    radial-gradient(65% 50% at 88% 78%,  rgba(30,58,53,0.34) 0%, transparent 74%);
+}
+
+/* ── Logo compatto su telefono (16/08/2026) ───────────────────────────
+   Il marchio esteso e' largo 157px: su 390px di schermo spingeva il
+   pulsante del menu' a x=432, cioe' FUORI DALLO SCHERMO — e la
+   navigazione diventava irraggiungibile (si tornava indietro solo
+   toccando il logo). Sotto i 700px resta il solo occhio, 38px. */
+.nav-logo-mini { display: none; }
+@media (max-width: 700px) {
+  .nav-logo-full { display: none; }
+  .nav-logo-mini { display: block; }
+}
+
+    /* ── Titoli bilanciati (16/08/2026) ───────────────────────────────────
+       Su schermo stretto una frase si spezzava lasciando l'ultima parola da
+       sola su una riga ("...struttura di / famiglia."). 'balance' distribuisce
+       le parole fra le righe invece di riempire la prima fino al bordo.
+       Chi non lo conosce lo ignora: si comporta come prima, non peggio. */
+    h1, h2, .hero-headline, .storia-titolo, .section-title, .cta-headline,
+    .demo-title, .page-title, .feat-title, .pricing-name, .venue-title,
+    .faq-q, .problem-title, .pain-title { text-wrap: balance; }
+    .hero-sub, .storia-p, .section-sub, .cta-sub, .demo-sub { text-wrap: pretty; }
+
+    /* ── I due inviti finali (16/08/2026) ─────────────────────────────────
+       Su telefono si toccavano: il distacco dipendeva dall'ordine, perche'
+       nasceva da un margine sul solo bottone fantasma. Qui e' il contenitore
+       a tenerli distanti, quindi l'ordine non conta piu'. E la riga sotto
+       ciascuno dice che cosa sono davvero le due strade: un'occhiata senza
+       dare niente, oppure la propria struttura per trenta giorni. */
+    .hero-cta, .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+    .hero-cta > a, .cta-buttons > a { margin: 0; }
+    .cta-choice { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 38px; }
+    .cta-opt { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 290px; }
+    .cta-opt > a { margin: 0; }
+    .cta-opt-note { font-size: 14px; line-height: 1.65; letter-spacing: 0.3px; color: rgba(245,241,232,0.42); text-align: center; }
+    .cta-or { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,241,232,0.3); padding-top: 15px; }
+    @media (max-width: 700px) {
+      .hero-cta, .cta-buttons { flex-direction: column; gap: 14px; }
+      .hero-cta > a, .cta-buttons > a { display: block; width: 100%; max-width: 330px; }
+      .cta-choice { flex-direction: column; align-items: center; gap: 24px; }
+      .cta-opt { max-width: 330px; width: 100%; }
+      .cta-opt > a { display: block; width: 100%; }
+      .cta-or { padding: 0; }
+    }
+
+    /* La barra con dieci voci sta stretta fra 700 e 1500: stringo margini e
+       spaziature per tenerla su una riga, senza toccare la dimensione del
+       testo che e' gia' al minimo leggibile. */
+    @media (min-width: 701px) and (max-width: 1499px) {
+      nav { padding: 26px 26px; }
+      .nav-right { gap: 20px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { letter-spacing: 1.1px; }
+    }
+
+/* ── Leggibilita' sul telefono (17/08/2026) ────────────────────────────
+   Misurato a 390px sul sito vero, non a occhio: 96 blocchi di testo vanno a
+   capo con meno di 6px fra una riga e l'altra. Il peggiore e' l'occhiello
+   della home — 12px di corpo, 4px di spaziatura fra le lettere, tre righe e
+   2,4px d'aria: sembra un blocco compatto invece di tre righe.
+   Le maiuscole molto spaziate hanno bisogno di PIU' interlinea, non di meno:
+   la riga e' piu' larga e l'occhio, tornando a capo, sbaglia riga.
+   Si tocca solo il telefono: sul desktop queste stesse scritte stanno su una
+   riga sola e l'interlinea non le riguarda. */
+@media (max-width: 700px) {
+  /* etichette maiuscole spaziate — le piu' schiacciate */
+  .hero-eyebrow, .section-label, .page-label, .demo-label, .verticals-label,
+  .venue-type, .pricing-name, .feat-title, .tech-card-title, .step-label,
+  .faq-category, .vs-label, .qr-hint, .venue-tag, .pricing-badge, .who-tag,
+  .tab-btn, .pd-eyebrow, .pd-riquadro-firma, .numeri-label, .screens-hint,
+  .cta-or, .storia-firma, .lbl { line-height: 1.6; }
+
+  /* bottoni: "PROVA SENZA REGISTRAZIONE" va a capo dentro il bottone */
+  .btn-primary, .btn-ghost, .btn-demo,
+  .venue-more, .vertical-more, .numeri-link { line-height: 1.45; }
+
+  /* il piede: undici righe di link, tutte attaccate */
+  footer, .footer-links, .footer-copy { line-height: 1.7; }
+
+  /* titoli: 36px su cinque righe con 5,4px d'aria */
+  h1, h2, .hero-headline, .page-title, .section-title, .cta-headline,
+  .demo-title, .storia-titolo, .venue-title, .problem-title, .step-title,
+  .numeri-titolo, .pd-titolo { line-height: 1.28; }
+
+  /* Corti ma su due righe lo stesso: il badge sotto il titolo, le didascalie
+     del carosello, lo slogan (che non ha classe: sta come figlio dell'eroe) e
+     le domande delle FAQ, che sono testo da leggere, non titoli. */
+  .zero-barrier-badge, .zero-barrier-badge span, .screen-caption,
+  .hero > p, .faq-q { line-height: 1.5; }
+}
+
+/* ── Contrasto: opacita' troppo basse (17/08/2026) ─────────────────────
+   Rapporti calcolati sul fondo REALE, campionato dai pixel: la pagina ha due
+   sfumature fisse (body::after) e una velatura di rumore, quindi il colore
+   dichiarato nel CSS non e' quello che l'occhio riceve. Soglia 4,5 per il
+   testo sotto i 18px, che qui e' tutto. */
+.cta-or        { color: rgba(245,241,232,0.60); font-size: 14px; }  /* 2,54 → 6,36 */
+.cta-opt-note  { color: rgba(245,241,232,0.62); }                   /* 3,68 → 6,45 */
+.demo-note     { color: rgba(245,241,232,0.68); }                   /* 3,99 → 5,93 */
+.pd-nota-alta  { color: rgba(245,241,232,0.60); }                   /* 4,13 → 6,54 */
+.pd-fonti-testo{ color: rgba(245,241,232,0.72); }
+
+/* L'oro pieno su fondo petrolio si ferma a 3,99-4,43: sotto la soglia per una
+   scritta di 12px. Su quei fondi (e SOLO su quelli) passa l'oro chiaro, che e'
+   gia' nella palette come --gold-light. */
+.demo .demo-label, .demo .section-label,
+.principle-section .section-label,
+.tech-card-title { color: #d4a84b; }                                /* → 4,99-5,54 */
+
+/* Le immagini dichiarano le loro misure (per non far saltare il contenuto
+   mentre caricano): la larghezza pero' la decide il CSS, quindi l'altezza
+   deve tornare automatica o si deformano. */
+/* Il tedesco ha parole che in 390px non ci stanno: "Datenschutzerklärung" e'
+   larga 353px in un titolo che ne ha 310, e non potendo andare a capo faceva
+   scorrere la pagina di lato. hyphens:auto la sillaba come si deve (il browser
+   sa la lingua: sta in <html lang>); break-word e' la rete se la sillabazione
+   non e' disponibile. Nelle altre tre lingue non cambia nulla. */
+h1, h2, .page-title, .section-title, .cta-headline, .demo-title, .storia-titolo,
+.venue-title, .problem-title, .step-title, .numeri-titolo, .pd-titolo,
+.feat-title, .pricing-name { overflow-wrap: break-word; hyphens: auto; }
+
+img { height: auto; }
+/* Il marchio nel piede fa il contrario: l'altezza la fissa il CSS (20px),
+   quindi e' la larghezza a doversi adattare — altrimenti prende i 160px
+   dell'attributo e si schiaccia. */
+.footer-logo { width: auto; }
+</style>
+
+<style>
+.q-section{max-width:760px;margin:0 auto;padding:0 32px 40px;}
+.q-lead{font-size:19px;line-height:1.85;color:var(--cream);letter-spacing:0.2px;margin:48px 0 8px;}
+.q-h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:56px 0 20px;font-weight:400;text-transform:uppercase;}
+.q-p{font-size:16px;line-height:1.9;color:rgba(245,241,232,0.82);letter-spacing:0.2px;margin:0 0 20px;}
+.q-limits{list-style:none;padding:0;margin:0;}
+.q-limits li{font-size:16px;line-height:1.85;color:rgba(245,241,232,0.82);padding:14px 0 14px 22px;border-bottom:1px solid rgba(245,241,232,0.08);position:relative;}
+.q-limits li::before{content:'—';position:absolute;left:0;color:var(--ochre);}
+@media(max-width:700px){.q-section{padding:0 22px 32px;}.q-lead{font-size:17px;}.q-p,.q-limits li{font-size:15px;}}
+.faq-section{max-width:800px;margin:0 auto;padding:0 32px 120px;}
+    .faq-category{letter-spacing:4px;color:var(--ochre);margin:64px 0 32px;}
+    .faq-item{border-bottom:1px solid rgba(245,241,232,0.08);padding:28px 0;}
+    .faq-q{font-size:15px;letter-spacing:0.5px;color:var(--cream);cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.6;}
+    .faq-q::after{content:'+';color:var(--ochre);font-size:20px;font-weight:300;flex-shrink:0;transition:transform 0.3s;}
+    .faq-item.open .faq-q::after{transform:rotate(45deg);}
+    .faq-a{font-size:15px;color:rgba(245,241,232,0.8);line-height:1.9;letter-spacing:0.3px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;}
+    .faq-item.open .faq-a{max-height:400px;padding-top:20px;}
+
+.q-limits li strong{color:var(--cream);font-weight:600;}
+.q-tesi{color:var(--cream);}
+.q-p a{color:var(--ochre);}
+.q-firma{font-size:14px;letter-spacing:2px;color:rgba(245,241,232,0.55);margin:28px 0 0;padding-top:18px;border-top:1px solid rgba(245,241,232,0.1);}
+/* «Da leggere anche»: i link contestuali alle pagine che prima stavano solo
+   nel footer, in mezzo ai documenti legali. */
+.altre-letture{max-width:760px;margin:0 auto;padding:0 32px 96px;}
+.altre-letture h2{font-size:14px;letter-spacing:4px;color:var(--ochre);margin:0 0 18px;font-weight:400;text-transform:uppercase;}
+.altre-letture ul{list-style:none;padding:0;margin:0;}
+.altre-letture li{border-bottom:1px solid rgba(245,241,232,0.08);}
+.altre-letture a{display:block;padding:16px 0 16px 22px;position:relative;font-size:16px;line-height:1.7;color:rgba(245,241,232,0.82);text-decoration:none;transition:color 0.2s;}
+.altre-letture a::before{content:'→';position:absolute;left:0;color:var(--ochre);}
+.altre-letture a:hover{color:var(--ochre);}
+@media(max-width:700px){.altre-letture{padding:0 22px 64px;}.altre-letture a{font-size:15px;}}
+</style>
+
+<!-- FAQ: generato da scripts/lingue.py leggendo gli attributi della
+     pagina. Non si modifica a mano: rispecchia sempre le domande che
+     ci sono davvero, nella lingua che si sta leggendo. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://colgo.app/de/catalogo-digitale-negozio#faq",
+  "inLanguage": "de",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kann der Kunde aus dem Katalog kaufen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Er stellt die Liste am Handy zusammen, zeigt sie an der Theke und zahlt im Laden. Es gibt keinen Online-Checkout: keine Gebühren auf Verkäufe und keine Zahlungsdaten."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Funktioniert das auch, wenn der Laden geschlossen ist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Der QR-Code im Schaufenster lässt sich zu jeder Zeit scannen: Der Kunde blättert im Katalog und stellt seine Liste auch außerhalb der Öffnungszeiten zusammen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sieht der Kunde, ob ein Produkt ausverkauft ist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mit der Bestandsführung im Pro-Tarif verschwindet ein ausverkauftes Produkt von selbst aus dem Katalog, und bei den Varianten wählt Colgo eine verfügbare Kombination vor. Ohne Bestandsführung stellen Sie die Verfügbarkeit selbst im Panel ein, Eintrag für Eintrag."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ich habe zwei Geschäfte: Brauche ich für jedes einen Zugang?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Mit derselben E-Mail verwalten Sie mehrere Standorte und wechseln mit einem Tippen, und eine einzige Personal-PIN kann Zugang zu allen Standorten geben, die Sie auswählen."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Briciole: generato da scripts/lingue.py. Non si modifica a mano. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Startseite",
+      "item": "https://colgo.app/de/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Katalog fürs Geschäft",
+      "item": "https://colgo.app/de/catalogo-digitale-negozio"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+<nav>
+  <a href="/de/"><svg class="nav-logo nav-logo-full" viewBox="0 0 232 56" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <text x="2" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">C</text>
+  <g transform="translate(52,26)">
+    <circle cx="0" cy="0" r="15.5" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+    <path d="M -12 0 A 12 12 0 0 0 5.5 10" fill="none" stroke="#C8922A" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="1.2" cy="-1.4" r="2.9" fill="#C8922A"/>
+  </g>
+  <text x="80" y="39" font-family="'Josefin Sans',sans-serif" font-size="34" font-weight="300" letter-spacing="9" fill="#F5F1E8">LGO</text>
+</svg><svg class="nav-logo nav-logo-mini" viewBox="0 0 40 40" role="img" aria-label="Colgo" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="16" fill="none" stroke="#C8922A" stroke-width="2.2"/>
+  <path d="M 7.5 20 A 12.5 12.5 0 0 0 26 30.5" fill="none" stroke="#C8922A" stroke-width="1.9" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="21.4" cy="18.4" r="3" fill="#C8922A"/>
+</svg></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/de/come-funziona.html" data-it="COME FUNZIONA" data-en="HOW IT WORKS" data-fr="COMMENT ÇA MARCHE" data-de="SO FUNKTIONIERT&#39;S" data-es="CÓMO FUNCIONA">SO FUNKTIONIERT'S</a>
+      <a href="/de/hotel.html" data-it="HOTEL" data-en="HOTEL" data-fr="HÔTEL" data-de="HOTEL" data-es="HOTEL">HOTEL</a>
+      <a href="/de/ristorante.html" data-it="RISTORANTE" data-en="RESTAURANT" data-fr="RESTAURANT" data-de="RESTAURANT" data-es="RESTAURANTE">RESTAURANT</a>
+      <a href="/de/negozio.html" data-it="NEGOZIO" data-en="SHOP" data-fr="BOUTIQUE" data-de="GESCHÄFT" data-es="TIENDA">GESCHÄFT</a>
+      <a href="/de/organizzazione.html" data-it="ACCESSI E CATALOGO" data-en="ACCESS &amp; CATALOGUE" data-fr="ACCÈS ET CATALOGUE" data-de="ZUGRIFFE &amp; KATALOG" data-es="ACCESOS Y CATÁLOGO">ZUGRIFFE & KATALOG</a>
+      <a href="/de/prezzi.html" data-it="PREZZI" data-en="PRICING" data-fr="TARIFS" data-de="PREISE" data-es="PRECIOS">PREISE</a>
+      <a href="/de/confronto.html" data-it="CONFRONTO" data-en="COMPARISON" data-fr="COMPARATIF" data-de="VERGLEICH" data-es="COMPARATIVA">VERGLEICH</a>
+      <a href="/de/per-chi.html" data-it="PER CHI" data-en="WHO IT&#39;S FOR" data-fr="POUR QUI" data-de="FÜR WEN" data-es="PARA QUIÉN">FÜR WEN</a>
+      <a href="/de/chi-siamo.html" data-it="CHI SIAMO" data-en="ABOUT US" data-fr="QUI SOMMES-NOUS" data-de="ÜBER UNS" data-es="QUIÉNES SOMOS">ÜBER UNS</a>
+        <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="PREGUNTAS">FAQ</a>
+    </div>
+    <div class="nav-lang">
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-overlay" onclick="document.querySelector('.nav-links').classList.remove('open');this.classList.remove('open');document.querySelector('.nav-toggle').classList.remove('open');"></div>
+</nav>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-label" data-it="CATALOGO PER NEGOZI" data-en="SHOP CATALOGUE" data-fr="CATALOGUE POUR BOUTIQUES" data-de="KATALOG FÜRS GESCHÄFT" data-es="CATÁLOGO PARA TIENDAS">KATALOG FÜRS GESCHÄFT</div>
+  <h1 class="page-title" data-it="Catalogo digitale per il negozio:<br/><em>serve davvero un e-commerce?</em>" data-en="A digital catalogue for your shop:<br/><em>do you really need e-commerce?</em>" data-fr="Catalogue numérique pour la boutique :<br/><em>faut-il vraiment un site marchand ?</em>" data-de="Digitaler Katalog fürs Geschäft:<br/><em>braucht es wirklich einen Onlineshop?</em>" data-es="Catálogo digital para la tienda:<br/><em>¿hace falta de verdad una tienda online?</em>">Digitaler Katalog fürs Geschäft:<br/><em>braucht es wirklich einen Onlineshop?</em></h1>
+</div>
+
+<div class="q-section">
+  <div class="gold-line"></div>
+  <p class="q-lead" data-it="No, se quello che ti serve è far vedere cosa vendi. Un e-commerce vuol dire pagamenti online, spedizioni, resi, un magazzino tenuto per chi compra da lontano. Molti negozi non vogliono niente di tutto questo: vogliono che chi passa davanti alla vetrina, o chi ci ripensa la sera da casa, sappia cosa c'è dentro e a che prezzo. Per questo basta un catalogo digitale, aperto con un QR." data-en="No, if what you need is to show what you sell. E-commerce means online payments, shipping, returns, stock managed for people buying from far away. Many shops want none of that: they want whoever walks past the window, or thinks about it again at home in the evening, to know what's inside and at what price. For that, a digital catalogue opened with a QR code is enough." data-fr="Non, si ce qu'il vous faut, c'est montrer ce que vous vendez. Un site marchand, ce sont des paiements en ligne, des expéditions, des retours, un stock tenu pour ceux qui achètent de loin. Beaucoup de boutiques ne veulent rien de tout cela : elles veulent que celui qui passe devant la vitrine, ou qui y repense le soir chez lui, sache ce qu'il y a à l'intérieur et à quel prix. Pour cela, un catalogue numérique ouvert par un QR suffit." data-de="Nein, wenn Sie zeigen wollen, was Sie verkaufen. Ein Onlineshop heißt Onlinezahlung, Versand, Retouren, ein Lager für Kunden in der Ferne. Viele Geschäfte wollen nichts davon: Sie wollen, dass wer am Schaufenster vorbeigeht oder abends zu Hause noch einmal daran denkt, weiß, was drinnen ist und was es kostet. Dafür genügt ein digitaler Katalog, geöffnet per QR-Code." data-es="No, si lo que necesitas es mostrar lo que vendes. Una tienda online significa pagos en línea, envíos, devoluciones, un inventario pensado para quien compra desde lejos. Muchas tiendas no quieren nada de eso: quieren que quien pasa frente a la vitrina, o lo vuelve a pensar por la noche en casa, sepa qué hay adentro y a qué precio. Para eso basta un catálogo digital que se abre con un QR.">Nein, wenn Sie zeigen wollen, was Sie verkaufen. Ein Onlineshop heißt Onlinezahlung, Versand, Retouren, ein Lager für Kunden in der Ferne. Viele Geschäfte wollen nichts davon: Sie wollen, dass wer am Schaufenster vorbeigeht oder abends zu Hause noch einmal daran denkt, weiß, was drinnen ist und was es kostet. Dafür genügt ein digitaler Katalog, geöffnet per QR-Code.</p>
+
+  <h2 class="q-h2" data-it="Come funziona per il cliente" data-en="How it works for the customer" data-fr="Comment ça marche pour le client" data-de="So funktioniert es für den Kunden" data-es="Cómo funciona para el cliente">So funktioniert es für den Kunden</h2>
+  <p class="q-p" data-it="Il QR è in vetrina. Il cliente lo inquadra con la fotocamera, anche a negozio chiuso, e il catalogo si apre nel browser del telefono, senza scaricare niente e senza registrarsi. Sfoglia i prodotti per categoria, con i prezzi, e si prepara una lista. Quando entra la mostra al banco: sa già cosa vuole, e tu non cerchi a vuoto." data-en="The QR code is in the window. The customer scans it with the camera, even when the shop is closed, and the catalogue opens in the phone's browser, with nothing to download and no sign-up. They browse products by category, with prices, and put together a list. When they come in, they show it at the counter: they already know what they want, and you don't search for nothing." data-fr="Le QR est en vitrine. Le client le scanne avec l'appareil photo, même boutique fermée, et le catalogue s'ouvre dans le navigateur du téléphone, sans rien télécharger ni s'inscrire. Il parcourt les produits par catégorie, avec les prix, et se prépare une liste. Quand il entre, il la montre au comptoir : il sait déjà ce qu'il veut, et vous ne cherchez pas pour rien." data-de="Der QR-Code hängt im Schaufenster. Der Kunde scannt ihn mit der Kamera, auch bei geschlossenem Laden, und der Katalog öffnet sich im Browser des Handys, ohne Download und ohne Registrierung. Er blättert die Produkte nach Kategorien durch, mit Preisen, und stellt sich eine Liste zusammen. Im Laden zeigt er sie an der Theke: Er weiß schon, was er will, und Sie suchen nicht umsonst." data-es="El QR está en la vitrina. El cliente lo escanea con la cámara, incluso con la tienda cerrada, y el catálogo se abre en el navegador del teléfono, sin descargar nada y sin registrarse. Recorre los productos por categoría, con los precios, y arma una lista. Cuando entra, la muestra en el mostrador: ya sabe lo que quiere, y tú no buscas en vano.">Der QR-Code hängt im Schaufenster. Der Kunde scannt ihn mit der Kamera, auch bei geschlossenem Laden, und der Katalog öffnet sich im Browser des Handys, ohne Download und ohne Registrierung. Er blättert die Produkte nach Kategorien durch, mit Preisen, und stellt sich eine Liste zusammen. Im Laden zeigt er sie an der Theke: Er weiß schon, was er will, und Sie suchen nicht umsonst.</p>
+  <p class="q-p" data-it="Non c'è un carrello da pagare: il cliente paga in negozio, come sempre. Colgo non incassa e non raccoglie dati di pagamento." data-en="There is no cart to pay for: the customer pays in the shop, as always. Colgo doesn't take payments or collect payment data." data-fr="Il n'y a pas de panier à payer : le client paie en boutique, comme toujours. Colgo n'encaisse pas et ne collecte aucune donnée de paiement." data-de="Es gibt keinen Warenkorb zum Bezahlen: Der Kunde zahlt wie immer im Laden. Colgo kassiert nicht und erhebt keine Zahlungsdaten." data-es="No hay un carrito que pagar: el cliente paga en la tienda, como siempre. Colgo no cobra ni recoge datos de pago.">Es gibt keinen Warenkorb zum Bezahlen: Der Kunde zahlt wie immer im Laden. Colgo kassiert nicht und erhebt keine Zahlungsdaten.</p>
+
+  <h2 class="q-h2" data-it="Cosa deve avere un catalogo per negozio" data-en="What a shop catalogue needs" data-fr="Ce que doit avoir un catalogue de boutique" data-de="Was ein Katalog fürs Geschäft können muss" data-es="Qué debe tener un catálogo para tienda">Was ein Katalog fürs Geschäft können muss</h2>
+  <ul class="q-limits">
+      <li class="q-li" data-it="<strong>Varianti vere.</strong> Taglia, colore, formato: ogni combinazione ha il suo prezzo e la sua disponibilità. Quando il cliente apre un prodotto, Colgo gli preseleziona una combinazione disponibile, non una esaurita." data-en="<strong>Real variants.</strong> Size, colour, format: each combination has its own price and availability. When the customer opens a product, Colgo preselects a combination that is available, not one that's sold out." data-fr="<strong>De vraies variantes.</strong> Taille, couleur, format : chaque combinaison a son prix et sa disponibilité. Quand le client ouvre un produit, Colgo lui présélectionne une combinaison disponible, pas une épuisée." data-de="<strong>Echte Varianten.</strong> Größe, Farbe, Format: Jede Kombination hat ihren eigenen Preis und ihre Verfügbarkeit. Öffnet der Kunde ein Produkt, wählt Colgo eine verfügbare Kombination vor, keine ausverkaufte." data-es="<strong>Variantes de verdad.</strong> Talla, color, formato: cada combinación tiene su precio y su disponibilidad. Cuando el cliente abre un producto, Colgo le preselecciona una combinación disponible, no una agotada."><strong>Echte Varianten.</strong> Größe, Farbe, Format: Jede Kombination hat ihren eigenen Preis und ihre Verfügbarkeit. Öffnet der Kunde ein Produkt, wählt Colgo eine verfügbare Kombination vor, keine ausverkaufte.</li>
+      <li class="q-li" data-it="<strong>Un magazzino che si aggiorna da solo.</strong> Nel piano Pro le scorte si tengono per taglia e colore e si scalano alla consegna, e il prodotto esaurito sparisce dal catalogo senza toglierlo a mano." data-en="<strong>Stock that updates itself.</strong> On the Pro plan, stock is tracked by size and colour and deducted on handover, and a sold-out product disappears from the catalogue without you removing it by hand." data-fr="<strong>Un stock qui se met à jour seul.</strong> Avec la formule Pro, les stocks se tiennent par taille et couleur et se décomptent à la remise, et le produit épuisé disparaît du catalogue sans le retirer à la main." data-de="<strong>Ein Bestand, der sich selbst aktualisiert.</strong> Im Pro-Tarif wird der Bestand nach Größe und Farbe geführt und bei Übergabe abgebucht, und ein ausverkauftes Produkt verschwindet aus dem Katalog, ohne dass Sie es von Hand entfernen." data-es="<strong>Un inventario que se actualiza solo.</strong> En el plan Pro las existencias se llevan por talla y color y se descuentan al entregar, y el producto agotado desaparece del catálogo sin quitarlo a mano."><strong>Ein Bestand, der sich selbst aktualisiert.</strong> Im Pro-Tarif wird der Bestand nach Größe und Farbe geführt und bei Übergabe abgebucht, und ein ausverkauftes Produkt verschwindet aus dem Katalog, ohne dass Sie es von Hand entfernen.</li>
+      <li class="q-li" data-it="<strong>Categorie su più livelli.</strong> Donna, poi Maglieria, poi Cardigan: le categorie si annidano, e non c'è un limite al numero di articoli." data-en="<strong>Categories on several levels.</strong> Women, then Knitwear, then Cardigans: categories nest, and there is no limit on the number of items." data-fr="<strong>Des catégories sur plusieurs niveaux.</strong> Femme, puis Maille, puis Gilets : les catégories s'imbriquent, et il n'y a pas de limite au nombre d'articles." data-de="<strong>Kategorien über mehrere Ebenen.</strong> Damen, dann Strick, dann Cardigans: Kategorien lassen sich verschachteln, und die Zahl der Artikel ist nicht begrenzt." data-es="<strong>Categorías en varios niveles.</strong> Mujer, luego Tejidos, luego Cárdigans: las categorías se anidan, y no hay límite de artículos."><strong>Kategorien über mehrere Ebenen.</strong> Damen, dann Strick, dann Cardigans: Kategorien lassen sich verschachteln, und die Zahl der Artikel ist nicht begrenzt.</li>
+      <li class="q-li" data-it="<strong>Le lingue di chi passa.</strong> Il catalogo viene tradotto in italiano, inglese, francese, tedesco e spagnolo quando pubblichi un prodotto: il turista legge nella sua lingua." data-en="<strong>The languages of passers-by.</strong> The catalogue is translated into Italian, English, French, German and Spanish when you publish a product: tourists read it in their own language." data-fr="<strong>Les langues de ceux qui passent.</strong> Le catalogue est traduit en italien, anglais, français, allemand et espagnol quand vous publiez un produit : le touriste lit dans sa langue." data-de="<strong>Die Sprachen der Passanten.</strong> Der Katalog wird beim Veröffentlichen eines Produkts ins Italienische, Englische, Französische, Deutsche und Spanische übersetzt: Touristen lesen in ihrer Sprache." data-es="<strong>Los idiomas de quien pasa.</strong> El catálogo se traduce al italiano, inglés, francés, alemán y español cuando publicas un producto: el turista lee en su idioma."><strong>Die Sprachen der Passanten.</strong> Der Katalog wird beim Veröffentlichen eines Produkts ins Italienische, Englische, Französische, Deutsche und Spanische übersetzt: Touristen lesen in ihrer Sprache.</li>
+      <li class="q-li" data-it="<strong>Foto e anteprima.</strong> Ogni prodotto ha titolo, descrizione e foto, e dal pannello vedi l'anteprima esatta di quello che vedrà il cliente." data-en="<strong>Photos and preview.</strong> Every product has a title, description and photo, and the panel shows you an exact preview of what the customer will see." data-fr="<strong>Photos et aperçu.</strong> Chaque produit a un titre, une description et une photo, et le panneau vous montre l'aperçu exact de ce que verra le client." data-de="<strong>Fotos und Vorschau.</strong> Jedes Produkt hat Titel, Beschreibung und Foto, und im Panel sehen Sie eine genaue Vorschau dessen, was der Kunde sehen wird." data-es="<strong>Fotos y vista previa.</strong> Cada producto tiene título, descripción y foto, y desde el panel ves la vista previa exacta de lo que verá el cliente."><strong>Fotos und Vorschau.</strong> Jedes Produkt hat Titel, Beschreibung und Foto, und im Panel sehen Sie eine genaue Vorschau dessen, was der Kunde sehen wird.</li>
+      <li class="q-li" data-it="<strong>Un modo rapido di caricarlo.</strong> Nel piano Pro il catalogo si importa da un file CSV o si carica da foto, invece di inserirlo voce per voce." data-en="<strong>A quick way to load it.</strong> On the Pro plan you can import the catalogue from a CSV file or load it from photos, instead of entering it item by item." data-fr="<strong>Une façon rapide de le charger.</strong> Avec la formule Pro, le catalogue s'importe depuis un fichier CSV ou se charge à partir de photos, au lieu de le saisir article par article." data-de="<strong>Ein schneller Weg, ihn zu befüllen.</strong> Im Pro-Tarif importieren Sie den Katalog aus einer CSV-Datei oder laden ihn aus Fotos, statt ihn Eintrag für Eintrag einzugeben." data-es="<strong>Una forma rápida de cargarlo.</strong> En el plan Pro el catálogo se importa desde un archivo CSV o se carga a partir de fotos, en vez de ingresarlo artículo por artículo."><strong>Ein schneller Weg, ihn zu befüllen.</strong> Im Pro-Tarif importieren Sie den Katalog aus einer CSV-Datei oder laden ihn aus Fotos, statt ihn Eintrag für Eintrag einzugeben.</li>
+  </ul>
+
+  <h2 class="q-h2" data-it="Catalogo, Instagram, WhatsApp: cosa cambia" data-en="Catalogue, Instagram, WhatsApp: what's different" data-fr="Catalogue, Instagram, WhatsApp : ce qui change" data-de="Katalog, Instagram, WhatsApp: was sich ändert" data-es="Catálogo, Instagram, WhatsApp: qué cambia">Katalog, Instagram, WhatsApp: was sich ändert</h2>
+  <p class="q-p" data-it="Per un negozio di paese il confronto vero non è con un altro software: è con Instagram, WhatsApp e il volantino di carta. Sono strumenti utili per farsi trovare e per parlare con chi ti conosce già. Ma un post scorre via, una foto mandata su WhatsApp non dice quali taglie sono rimaste, e il volantino è vecchio appena cambia un prezzo." data-en="For a local shop, the real comparison isn't with another piece of software: it's with Instagram, WhatsApp and the paper flyer. They're useful for being found and for talking to people who already know you. But a post scrolls away, a photo sent on WhatsApp doesn't say which sizes are left, and the flyer is out of date as soon as a price changes." data-fr="Pour une boutique de quartier, la vraie comparaison n'est pas avec un autre logiciel : c'est avec Instagram, WhatsApp et le prospectus papier. Ce sont des outils utiles pour se faire trouver et parler à ceux qui vous connaissent déjà. Mais une publication défile, une photo envoyée sur WhatsApp ne dit pas quelles tailles restent, et le prospectus est périmé dès qu'un prix change." data-de="Für ein Geschäft im Ort ist der echte Vergleich nicht eine andere Software, sondern Instagram, WhatsApp und der Papierflyer. Sie sind nützlich, um gefunden zu werden und mit Leuten zu reden, die Sie schon kennen. Aber ein Beitrag rutscht weg, ein Foto per WhatsApp sagt nicht, welche Größen noch da sind, und der Flyer ist veraltet, sobald sich ein Preis ändert." data-es="Para una tienda de barrio, la comparación de verdad no es con otro software: es con Instagram, WhatsApp y el volante de papel. Son herramientas útiles para que te encuentren y para hablar con quien ya te conoce. Pero una publicación se pierde al deslizar, una foto mandada por WhatsApp no dice qué tallas quedan, y el volante queda viejo en cuanto cambia un precio.">Für ein Geschäft im Ort ist der echte Vergleich nicht eine andere Software, sondern Instagram, WhatsApp und der Papierflyer. Sie sind nützlich, um gefunden zu werden und mit Leuten zu reden, die Sie schon kennen. Aber ein Beitrag rutscht weg, ein Foto per WhatsApp sagt nicht, welche Größen noch da sind, und der Flyer ist veraltet, sobald sich ein Preis ändert.</p>
+  <p class="q-p" data-it="Il catalogo fa una cosa diversa: resta in vetrina, dice cosa c'è adesso e a che prezzo, e lo dice a chiunque lo inquadri, anche a chi non ti segue. Non sostituisce i social: risponde alla domanda che arriva dopo, «ce l'avete?»." data-en="The catalogue does something different: it stays in the window, says what's there right now and at what price, and says it to anyone who scans it, including people who don't follow you. It doesn't replace social media: it answers the question that comes next, “do you have it?”." data-fr="Le catalogue fait autre chose : il reste en vitrine, dit ce qu'il y a maintenant et à quel prix, et le dit à quiconque le scanne, même à ceux qui ne vous suivent pas. Il ne remplace pas les réseaux sociaux : il répond à la question qui vient après, « vous l'avez ? »." data-de="Der Katalog macht etwas anderes: Er bleibt im Schaufenster, sagt, was jetzt da ist und was es kostet, und sagt es jedem, der ihn scannt, auch denen, die Ihnen nicht folgen. Er ersetzt die sozialen Netzwerke nicht: Er beantwortet die Frage, die danach kommt, „Haben Sie das?“." data-es="El catálogo hace otra cosa: se queda en la vitrina, dice qué hay ahora y a qué precio, y se lo dice a cualquiera que lo escanee, incluso a quien no te sigue. No reemplaza a las redes sociales: responde a la pregunta que viene después, «¿lo tienen?».">Der Katalog macht etwas anderes: Er bleibt im Schaufenster, sagt, was jetzt da ist und was es kostet, und sagt es jedem, der ihn scannt, auch denen, die Ihnen nicht folgen. Er ersetzt die sozialen Netzwerke nicht: Er beantwortet die Frage, die danach kommt, „Haben Sie das?“.</p>
+
+  <h2 class="q-h2" data-it="Cosa un catalogo digitale non fa" data-en="What a digital catalogue doesn't do" data-fr="Ce qu'un catalogue numérique ne fait pas" data-de="Was ein digitaler Katalog nicht kann" data-es="Lo que un catálogo digital no hace">Was ein digitaler Katalog nicht kann</h2>
+  <ul class="q-limits">
+      <li class="q-li" data-it="Non vende online: niente checkout e niente spedizioni. Il cliente mostra la lista al banco e paga in negozio." data-en="It doesn't sell online: no checkout and no shipping. The customer shows the list at the counter and pays in the shop." data-fr="Il ne vend pas en ligne : ni paiement en ligne ni expédition. Le client montre la liste au comptoir et paie en boutique." data-de="Er verkauft nicht online: kein Checkout, kein Versand. Der Kunde zeigt die Liste an der Theke und zahlt im Laden." data-es="No vende en línea: ni pago online ni envíos. El cliente muestra la lista en el mostrador y paga en la tienda.">Er verkauft nicht online: kein Checkout, kein Versand. Der Kunde zeigt die Liste an der Theke und zahlt im Laden.</li>
+      <li class="q-li" data-it="Non si collega alla cassa: quello che passa da Colgo non arriva al tuo gestionale né al POS." data-en="It doesn't connect to the till: what goes through Colgo doesn't reach your management software or POS." data-fr="Il ne se connecte pas à la caisse : ce qui passe par Colgo n'arrive ni à votre logiciel de gestion ni au terminal de caisse." data-de="Er ist nicht mit der Kasse verbunden: Was über Colgo läuft, kommt weder in Ihrer Warenwirtschaft noch am Kassensystem an." data-es="No se conecta a la caja: lo que pasa por Colgo no llega a tu sistema de gestión ni al punto de venta.">Er ist nicht mit der Kasse verbunden: Was über Colgo läuft, kommt weder in Ihrer Warenwirtschaft noch am Kassensystem an.</li>
+      <li class="q-li" data-it="Non porta clienti da solo: lo vede chi inquadra il QR o apre il link che gli mandi tu." data-en="It doesn't bring customers on its own: it's seen by people who scan the QR code or open the link you send them." data-fr="Il n'amène pas de clients tout seul : le voient ceux qui scannent le QR ou ouvrent le lien que vous leur envoyez." data-de="Er bringt keine Kunden von allein: Ihn sieht, wer den QR-Code scannt oder den Link öffnet, den Sie schicken." data-es="No trae clientes por sí solo: lo ve quien escanea el QR o abre el enlace que tú le mandas.">Er bringt keine Kunden von allein: Ihn sieht, wer den QR-Code scannt oder den Link öffnet, den Sie schicken.</li>
+  </ul>
+</div>
+
+<div class="faq-section">
+  <div class="faq-category" data-it="DOMANDE CORRELATE" data-en="RELATED QUESTIONS" data-fr="QUESTIONS LIÉES" data-de="VERWANDTE FRAGEN" data-es="PREGUNTAS RELACIONADAS">VERWANDTE FRAGEN</div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Il cliente può comprare dal catalogo?" data-en="Can the customer buy from the catalogue?" data-fr="Le client peut-il acheter depuis le catalogue ?" data-de="Kann der Kunde aus dem Katalog kaufen?" data-es="¿El cliente puede comprar desde el catálogo?">Kann der Kunde aus dem Katalog kaufen?</div>
+      <div class="faq-a" data-it="No. Prepara la lista dal telefono, la mostra al banco e paga in negozio. Non c'è un checkout online: nessuna commissione sulle vendite e nessun dato di pagamento raccolto." data-en="No. They prepare the list on their phone, show it at the counter and pay in the shop. There is no online checkout: no fees on sales and no payment data collected." data-fr="Non. Il prépare la liste sur son téléphone, la montre au comptoir et paie en boutique. Il n'y a pas de paiement en ligne : aucune commission sur les ventes et aucune donnée de paiement collectée." data-de="Nein. Er stellt die Liste am Handy zusammen, zeigt sie an der Theke und zahlt im Laden. Es gibt keinen Online-Checkout: keine Gebühren auf Verkäufe und keine Zahlungsdaten." data-es="No. Arma la lista en el teléfono, la muestra en el mostrador y paga en la tienda. No hay pago en línea: ninguna comisión sobre las ventas y ningún dato de pago recogido.">Nein. Er stellt die Liste am Handy zusammen, zeigt sie an der Theke und zahlt im Laden. Es gibt keinen Online-Checkout: keine Gebühren auf Verkäufe und keine Zahlungsdaten.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Funziona anche quando il negozio è chiuso?" data-en="Does it work when the shop is closed?" data-fr="Est-ce que ça marche quand la boutique est fermée ?" data-de="Funktioniert das auch, wenn der Laden geschlossen ist?" data-es="¿Funciona también con la tienda cerrada?">Funktioniert das auch, wenn der Laden geschlossen ist?</div>
+      <div class="faq-a" data-it="Sì. Il QR in vetrina si scansiona a qualsiasi ora: il cliente sfoglia il catalogo e prepara la lista anche fuori orario." data-en="Yes. The QR code in the window can be scanned at any time: customers browse the catalogue and prepare their list outside opening hours too." data-fr="Oui. Le QR en vitrine se scanne à toute heure : le client parcourt le catalogue et prépare sa liste même en dehors des horaires d'ouverture." data-de="Ja. Der QR-Code im Schaufenster lässt sich zu jeder Zeit scannen: Der Kunde blättert im Katalog und stellt seine Liste auch außerhalb der Öffnungszeiten zusammen." data-es="Sí. El QR de la vitrina se escanea a cualquier hora: el cliente recorre el catálogo y arma la lista incluso fuera del horario.">Ja. Der QR-Code im Schaufenster lässt sich zu jeder Zeit scannen: Der Kunde blättert im Katalog und stellt seine Liste auch außerhalb der Öffnungszeiten zusammen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Il cliente vede se un prodotto è esaurito?" data-en="Can the customer see if a product is sold out?" data-fr="Le client voit-il si un produit est épuisé ?" data-de="Sieht der Kunde, ob ein Produkt ausverkauft ist?" data-es="¿El cliente ve si un producto está agotado?">Sieht der Kunde, ob ein Produkt ausverkauft ist?</div>
+      <div class="faq-a" data-it="Con il magazzino del piano Pro il prodotto esaurito sparisce dal catalogo da solo, e tra le varianti Colgo preseleziona una combinazione disponibile. Senza magazzino, la disponibilità la imposti tu dal pannello, voce per voce." data-en="With stock management on the Pro plan, a sold-out product disappears from the catalogue by itself, and among the variants Colgo preselects an available combination. Without it, you set availability yourself in the panel, item by item." data-fr="Avec la gestion du stock de la formule Pro, le produit épuisé disparaît du catalogue tout seul, et parmi les variantes Colgo présélectionne une combinaison disponible. Sans gestion du stock, vous réglez la disponibilité vous-même dans le panneau, article par article." data-de="Mit der Bestandsführung im Pro-Tarif verschwindet ein ausverkauftes Produkt von selbst aus dem Katalog, und bei den Varianten wählt Colgo eine verfügbare Kombination vor. Ohne Bestandsführung stellen Sie die Verfügbarkeit selbst im Panel ein, Eintrag für Eintrag." data-es="Con el inventario del plan Pro el producto agotado desaparece solo del catálogo, y entre las variantes Colgo preselecciona una combinación disponible. Sin inventario, la disponibilidad la defines tú desde el panel, artículo por artículo.">Mit der Bestandsführung im Pro-Tarif verschwindet ein ausverkauftes Produkt von selbst aus dem Katalog, und bei den Varianten wählt Colgo eine verfügbare Kombination vor. Ohne Bestandsführung stellen Sie die Verfügbarkeit selbst im Panel ein, Eintrag für Eintrag.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" data-it="Ho due negozi: serve un accesso per ognuno?" data-en="I have two shops: do I need a login for each?" data-fr="J'ai deux boutiques : faut-il un accès pour chacune ?" data-de="Ich habe zwei Geschäfte: Brauche ich für jedes einen Zugang?" data-es="Tengo dos tiendas: ¿necesito un acceso para cada una?">Ich habe zwei Geschäfte: Brauche ich für jedes einen Zugang?</div>
+      <div class="faq-a" data-it="No. Con la stessa email gestisci più sedi e passi dall'una all'altra con un tap, e un solo PIN dello staff può dare accesso a tutte le sedi che scegli tu." data-en="No. With the same email you manage several locations and switch between them with a tap, and a single staff PIN can give access to all the locations you choose." data-fr="Non. Avec la même adresse e-mail vous gérez plusieurs sites et passez de l'un à l'autre d'un geste, et un seul PIN du personnel peut donner accès à tous les sites que vous choisissez." data-de="Nein. Mit derselben E-Mail verwalten Sie mehrere Standorte und wechseln mit einem Tippen, und eine einzige Personal-PIN kann Zugang zu allen Standorten geben, die Sie auswählen." data-es="No. Con el mismo correo gestionas varias sedes y pasas de una a otra con un toque, y un solo PIN del personal puede dar acceso a todas las sedes que elijas.">Nein. Mit derselben E-Mail verwalten Sie mehrere Standorte und wechseln mit einem Tippen, und eine einzige Personal-PIN kann Zugang zu allen Standorten geben, die Sie auswählen.</div>
+    </div>
+</div>
+
+<div class="altre-letture">
+  <h2 data-it="Da leggere anche" data-en="Read next" data-fr="À lire aussi" data-de="Auch lesenswert" data-es="También te puede servir">Auch lesenswert</h2>
+  <ul>
+    <li><a href="/de/negozio.html" data-it="Colgo per Negozi e Boutique — Catalogo digitale in vetrina" data-en="Colgo for shops and boutiques — digital catalogue" data-fr="Colgo pour boutiques et magasins — catalogue en vitrine" data-de="Colgo für Geschäfte — digitaler Katalog im Schaufenster" data-es="Colgo para tiendas y boutiques — catálogo digital">Colgo für Geschäfte — digitaler Katalog im Schaufenster</a></li>
+    <li><a href="/de/catalogo-complesso.html" data-it="Menù complesso: regge un catalogo digitale?" data-en="Complex menu: can a digital catalogue cope?" data-fr="Menu complexe : un catalogue numérique tient-il ?" data-de="Komplexe Karte: hält ein digitaler Katalog das aus?" data-es="Menú complejo: ¿aguanta un catálogo digital?">Komplexe Karte: hält ein digitaler Katalog das aus?</a></li>
+    <li><a href="/de/confronto.html" data-it="Colgo e le alternative: il confronto" data-en="Colgo and the alternatives: the comparison" data-fr="Colgo et les alternatives : le comparatif" data-de="Colgo und die Alternativen: der Vergleich" data-es="Colgo y las alternativas: la comparativa">Colgo und die Alternativen: der Vergleich</a></li>
+  </ul>
+</div>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/de/" data-it="Home" data-en="Home" data-fr="Accueil" data-de="Startseite" data-es="Inicio">Startseite</a>
+    <a href="/de/come-funziona.html" data-it="Come funziona" data-en="How it works" data-fr="Comment ça marche" data-de="So funktioniert&#39;s" data-es="Cómo funciona">So funktioniert's</a>
+    <a href="/de/per-chi.html" data-it="Per chi" data-en="For who" data-fr="Pour qui" data-de="Für wen" data-es="Para quién">Für wen</a>
+    <a href="/de/prezzi.html" data-it="Prezzi" data-en="Pricing" data-fr="Tarifs" data-de="Preise" data-es="Precios">Preise</a>
+    <a href="/de/organizzazione.html" data-it="Accessi e catalogo" data-en="Access &amp; catalogue" data-fr="Accès et catalogue" data-de="Zugriffe &amp; Katalog" data-es="Accesos y catálogo">Zugriffe & Katalog</a>
+    <a href="/de/faq.html" data-it="FAQ" data-en="FAQ" data-fr="FAQ" data-de="FAQ" data-es="Preguntas">FAQ</a>
+    <a href="/de/chi-siamo.html" data-it="Chi siamo" data-en="About us" data-fr="Qui sommes-nous" data-de="Über uns" data-es="Quiénes somos">Über uns</a>
+  </div>
+  <!-- Approfondimenti: pagine di CONTENUTO, non documenti legali. Stavano
+       mescolate alla privacy e nessuno le trovava. -->
+  <div class="footer-links footer-approfondimenti">
+    <span class="footer-eyebrow" data-it="Approfondimenti" data-en="In depth" data-fr="Pour aller plus loin" data-de="Zum Vertiefen" data-es="Para profundizar">Zum Vertiefen</span>
+    <a href="/de/confronto.html" data-it="Confronto con le alternative" data-en="Compared with the alternatives" data-fr="Comparatif avec les alternatives" data-de="Vergleich mit den Alternativen" data-es="Comparativa con las alternativas">Vergleich mit den Alternativen</a>
+    <a href="/de/perche-digitale.html" data-it="Perché digitale" data-en="Why digital" data-fr="Pourquoi le numérique" data-de="Warum digital" data-es="Por qué digital">Warum digital</a>
+    <a href="/de/qr-code-in-camera.html" data-it="QR in camera" data-en="In-room QR" data-fr="QR en chambre" data-de="QR im Zimmer" data-es="QR en la habitación">QR im Zimmer</a>
+    <a href="/de/catalogo-complesso.html" data-it="Cataloghi complessi" data-en="Complex catalogues" data-fr="Catalogues complexes" data-de="Komplexe Kataloge" data-es="Catálogos complejos">Komplexe Kataloge</a>
+    <a href="/de/struttura-stagionale.html" data-it="Stagionali" data-en="Seasonal" data-fr="Saisonnier" data-de="Saisonbetrieb" data-es="De temporada">Saisonbetrieb</a>
+    <a href="/de/menu-digitale-qr-code.html" data-it="Menù digitale con QR" data-en="QR code menu" data-fr="Menu numérique QR" data-de="Digitale Speisekarte" data-es="Menú digital con QR">Digitale Speisekarte</a>
+    <a href="/de/guida-digitale-ospiti.html" data-it="Guida per gli ospiti" data-en="Guest guide" data-fr="Livret d'accueil" data-de="Gästemappe" data-es="Guía para huéspedes">Gästemappe</a>
+    <a href="/de/catalogo-digitale-negozio.html" data-it="Catalogo per negozi" data-en="Shop catalogue" data-fr="Catalogue boutique" data-de="Katalog fürs Geschäft" data-es="Catálogo para tiendas">Katalog fürs Geschäft</a>
+  </div>
+  <div class="footer-links footer-legale">
+    <a href="/de/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-de="Datenschutzerklärung" data-es="Política de Privacidad">Datenschutzerklärung</a>
+    <a href="/de/privacy.html#cookie" data-it="Cookie Policy" data-en="Cookie Policy" data-fr="Politique de cookies" data-de="Cookie-Richtlinie" data-es="Política de Cookies">Cookie-Richtlinie</a>
+    <a href="mailto:colgoapp@gmail.com">colgoapp@gmail.com</a>
+  </div>
+  © 2026 COLGO · COLGO.APP
+</footer>
+
+<script>
+  let currentLang = 'it';
+    // Ogni lingua ha il suo indirizzo (/en /fr /de /es): il selettore NAVIGA invece
+    // di riscrivere il testo. Prima le pagine italiane riscrivevano e quelle
+    // tradotte navigavano — cosi' da / si poteva leggere l'inglese restando a /,
+    // e l'indirizzo diceva il falso.
+    function setLang(l) {
+      var supp = ['it','en','fr','de','es'];
+      if (supp.indexOf(l) === -1) return;
+      try { localStorage.setItem('colgo_lang', l); } catch (e) {}
+      var p = location.pathname.replace(/^\/(en|fr|de|es)(?=\/|$)/, '');
+      if (!p || p === '/') p = '/';
+      location.href = (l === 'it' ? '' : '/' + l) + (p === '/' ? '/' : p) + location.hash;
+    }
+</script>
+
+
+
+
+
+
+<!-- ══ colgo-assistente ══ generato da widget.py — non modificare a mano -->
+<style>
+/* ══ Assistente e invito fisso (16/08/2026) ═════════════════════════════
+   Vivono nello stesso angolo, quindi si conoscono: sul telefono il pulsante
+   dell'assistente sale quando c'e' la barra d'invito e riscende quando viene
+   chiusa (--colgo-fondo). Se stessero in due blocchi indipendenti finirebbero
+   uno sopra l'altro. */
+:root { --colgo-fondo: 24px; }
+/* Difesa: il sito ha regole scritte sui TAG (section{padding:120px} e' quella
+   che mi ha fregato, nav{position:fixed} lo aveva fatto poco prima). Entrano
+   in qualunque elemento nuovo dello stesso tag. Qui si azzera in partenza,
+   cosi' la prossima regola globale non arriva fin dentro. */
+.colgo-fab, .colgo-chat, .colgo-invito, .colgo-barra,
+.colgo-chat *, .colgo-invito *, .colgo-barra * {
+  margin: 0; max-width: none; box-sizing: border-box; }
+.colgo-chat, .colgo-invito, .colgo-barra, .colgo-fab { padding: 0; }
+.colgo-fab { position: fixed; right: 22px; bottom: var(--colgo-fondo); z-index: 300;
+  width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; border: 1px solid rgba(200,146,42,0.55);
+  background: rgba(15,24,21,0.92); color: var(--ochre); box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+  transition: bottom .25s ease, transform .18s ease, border-color .18s ease; }
+.colgo-fab:hover { transform: translateY(-2px); border-color: var(--ochre); }
+.colgo-fab .ci { width: 24px; height: 24px; }
+.colgo-fab[hidden] { display: none; }
+
+.colgo-chat { position: fixed; right: 22px; bottom: calc(var(--colgo-fondo) + 68px); z-index: 301;
+  width: 370px; max-width: calc(100vw - 44px); height: auto; min-height: 260px;
+  max-height: calc(100vh - 150px);
+  display: none; flex-direction: column; border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 4px; background: rgba(13,20,18,0.985); box-shadow: 0 18px 60px rgba(0,0,0,0.65);
+  overflow: hidden; transition: bottom .25s ease; }
+.colgo-chat.aperta { display: flex; }
+.colgo-chat-testa { display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid rgba(245,241,232,0.1); flex-shrink: 0; }
+.colgo-chat-testa strong { font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 19px; color: var(--cream); letter-spacing: 0.3px; }
+.colgo-x { background: none; border: none; color: rgba(245,241,232,0.5); cursor: pointer;
+  padding: 6px; display: flex; border-radius: 50%; }
+.colgo-x:hover { color: var(--cream); }
+.colgo-x .ci { width: 18px; height: 18px; }
+.colgo-corpo { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.colgo-riga { max-width: 86%; font-size: 14px; line-height: 1.65; letter-spacing: 0.2px;
+  padding: 11px 14px; border-radius: 3px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.colgo-riga.da-lui { align-self: flex-start; background: rgba(245,241,232,0.06); color: var(--cream); }
+.colgo-riga.da-te  { align-self: flex-end; background: rgba(200,146,42,0.16); color: var(--cream);
+  border: 1px solid rgba(200,146,42,0.3); }
+.colgo-attesa { align-self: flex-start; display: flex; gap: 5px; padding: 13px 14px; }
+.colgo-attesa i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre);
+  opacity: 0.4; animation: colgoPuls 1.1s infinite; }
+.colgo-attesa i:nth-child(2) { animation-delay: .18s; }
+.colgo-attesa i:nth-child(3) { animation-delay: .36s; }
+@keyframes colgoPuls { 0%,60%,100% { opacity:.25; transform:translateY(0);} 30% { opacity:1; transform:translateY(-3px);} }
+.colgo-spunti { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; }
+.colgo-spunto { font-family: 'Josefin Sans', sans-serif; font-size: 14px; letter-spacing: 0.5px;
+  color: var(--ochre); background: none; border: 1px solid rgba(200,146,42,0.35);
+  padding: 7px 12px; border-radius: 3px; cursor: pointer; }
+.colgo-spunto:hover { background: rgba(200,146,42,0.12); }
+.colgo-piede { border-top: 1px solid rgba(245,241,232,0.1); padding: 12px 14px 10px; flex-shrink: 0; }
+.colgo-form { display: flex; gap: 8px; align-items: center; }
+.colgo-input { flex: 1; font-family: 'Josefin Sans', sans-serif; font-size: 15px; color: var(--cream);
+  background: rgba(245,241,232,0.05); border: 1px solid rgba(245,241,232,0.14);
+  border-radius: 3px; padding: 11px 12px; outline: none; min-width: 0; }
+.colgo-input:focus { border-color: rgba(200,146,42,0.6); }
+.colgo-input::placeholder { color: rgba(245,241,232,0.35); }
+.colgo-invia { background: var(--ochre); border: none; color: #0D0D0D; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 3px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; }
+.colgo-invia:disabled { opacity: .4; cursor: default; }
+.colgo-invia .ci { width: 19px; height: 19px; }
+.colgo-nota { font-size: 14px; line-height: 1.5; letter-spacing: 0.3px;
+  color: rgba(245,241,232,0.3); margin-top: 9px; text-align: center; }
+
+/* invito fisso — riquadro a lato sul computer */
+.colgo-invito { position: fixed; right: 22px; top: 50%; transform: translateY(-50%) translateX(14px);
+  z-index: 290; width: 232px; padding: 20px 18px 18px; border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 4px; background: rgba(15,24,21,0.94); box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
+.colgo-invito.si-vede { opacity: 1; transform: translateY(-50%) translateX(0); pointer-events: auto; }
+/* Con la conversazione aperta l'invito starebbe dietro al pannello, visibile
+   in trasparenza: si fa da parte finche' e' aperta. */
+body.colgo-chat-aperta .colgo-invito { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(14px); }
+.colgo-invito strong { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 21px; color: var(--cream); margin-bottom: 8px; }
+.colgo-invito p { font-size: 14px; line-height: 1.6; color: rgba(245,241,232,0.45); margin-bottom: 15px; }
+.colgo-invito a { display: block; text-align: center; font-size: 15px; letter-spacing: 1.6px;
+  text-decoration: none; padding: 11px 8px; margin-bottom: 8px; }
+.colgo-invito .i-demo { color: var(--ochre); border: 1px solid rgba(200,146,42,0.45); }
+.colgo-invito .i-demo:hover { background: rgba(200,146,42,0.12); }
+.colgo-invito .i-prova { color: #0D0D0D; background: var(--ochre); margin-bottom: 0; }
+.colgo-invito .colgo-x { position: absolute; top: 6px; right: 6px; }
+.colgo-invito .colgo-x .ci { width: 14px; height: 14px; }
+
+/* invito fisso — barra in fondo sul telefono */
+.colgo-barra { display: none; }
+@media (max-width: 900px) {
+  .colgo-invito { display: none; }
+  .colgo-barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 290;
+    align-items: center; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10,16,14,0.97); border-top: 1px solid rgba(200,146,42,0.28);
+    transform: translateY(105%); transition: transform .35s ease; }
+  .colgo-barra.si-vede { transform: translateY(0); }
+  .colgo-barra a { flex: 1; text-align: center; font-size: 15px; letter-spacing: 1.4px;
+    text-decoration: none; color: #0D0D0D; background: var(--ochre); padding: 12px 8px; }
+  .colgo-barra .colgo-x { flex-shrink: 0; }
+  body.colgo-con-barra { --colgo-fondo: 88px; }
+  .colgo-fab { right: 16px; width: 50px; height: 50px; }
+  .colgo-chat { right: 12px; left: 12px; width: auto; max-width: none;
+    max-height: calc(100vh - 190px); bottom: calc(var(--colgo-fondo) + 62px); }
+}
+@media (max-width: 900px) and (max-height: 620px) { .colgo-chat { max-height: calc(100vh - 130px); } }
+</style>
+
+<div class="colgo-invito" id="colgoInvito" aria-hidden="true">
+  <button type="button" class="colgo-x" id="colgoInvitoX" aria-label="Chiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <strong data-it="Provalo davvero." data-en="Try it for real." data-fr="Essayez pour de vrai." data-de="Probieren Sie es aus." data-es="Pruébalo de verdad.">Probieren Sie es aus.</strong>
+  <p data-it="Una struttura già pronta, senza dare niente." data-en="A ready-made business, without giving anything." data-fr="Un établissement déjà prêt, sans rien donner." data-de="Ein fertiger Betrieb, ohne Angaben." data-es="Un establecimiento ya listo, sin dar nada a cambio.">Ein fertiger Betrieb, ohne Angaben.</p>
+  <a class="i-demo" href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Guarda la demo" data-en="See the demo" data-fr="Voir la démo" data-de="Demo ansehen" data-es="Mira la demo">Demo ansehen</a>
+  <a class="i-prova" href="https://app.colgo.app/registrati" target="_blank" rel="noopener" data-it="30 giorni gratis" data-en="30 days free" data-fr="30 jours gratuits" data-de="30 Tage gratis" data-es="30 días gratis">30 Tage gratis</a>
+</div>
+
+<div class="colgo-barra" id="colgoBarra">
+  <a href="https://app.colgo.app/demo" target="_blank" rel="noopener" data-it="Provalo senza registrarti" data-en="Try it without signing up" data-fr="Essayer sans s'inscrire" data-de="Ohne Anmeldung testen" data-es="Pruébalo sin registrarte">Ohne Anmeldung testen</a>
+  <button type="button" class="colgo-x" id="colgoBarraX"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+</div>
+
+<button type="button" class="colgo-fab" id="colgoFab" aria-expanded="false"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a2 2 0 0 1-2 2H8l-4.5 3.5v-15a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 12.5h5"/></svg></button>
+
+<div class="colgo-chat" id="colgoChat" role="dialog" aria-modal="false" aria-labelledby="colgoTit">
+  <div class="colgo-chat-testa">
+    <strong id="colgoTit" data-it="Domande su Colgo?" data-en="Questions about Colgo?" data-fr="Des questions sur Colgo ?" data-de="Fragen zu Colgo?" data-es="¿Dudas sobre Colgo?">Fragen zu Colgo?</strong>
+    <button type="button" class="colgo-x" id="colgoChiudi"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  </div>
+  <div class="colgo-corpo" id="colgoCorpo" aria-live="polite"></div>
+  <div class="colgo-spunti" id="colgoSpunti"><button type="button" class="colgo-spunto" data-it="Quanto costa?" data-en="How much does it cost?" data-fr="Combien ça coûte ?" data-de="Was kostet es?" data-es="¿Cuánto cuesta?">Was kostet es?</button><button type="button" class="colgo-spunto" data-it="I clienti devono scaricare un'app?" data-en="Do customers need an app?" data-fr="Faut-il une appli ?" data-de="Brauchen Gäste eine App?" data-es="¿Los clientes tienen que descargar una app?">Brauchen Gäste eine App?</button><button type="button" class="colgo-spunto" data-it="Come inizio?" data-en="How do I start?" data-fr="Comment commencer ?" data-de="Wie fange ich an?" data-es="¿Cómo empiezo?">Wie fange ich an?</button></div>
+  <div class="colgo-piede">
+    <form class="colgo-form" id="colgoForm">
+      <input class="colgo-input" id="colgoInput" type="text" autocomplete="off" maxlength="500" />
+      <button class="colgo-invia" id="colgoInvia" type="submit"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></button>
+    </form>
+    <p class="colgo-nota" data-it="Risponde in base a quello che c'è su questo sito. Per il resto: colgoapp@gmail.com" data-en="It answers from what's on this site. For anything else: colgoapp@gmail.com" data-fr="Il répond à partir de ce qui est sur ce site. Pour le reste : colgoapp@gmail.com" data-de="Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com" data-es="Responde según lo que hay en este sitio. Para lo demás: colgoapp@gmail.com">Es antwortet anhand dessen, was auf dieser Seite steht. Für alles Weitere: colgoapp@gmail.com</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = 'https://app.colgo.app/api/site-chat';
+  var T = {
+    benv:   ["Ciao. Chiedimi quello che vuoi sapere su Colgo: prezzi, come funziona, cosa serve per iniziare.", "Hi. Ask me anything about Colgo: pricing, how it works, what you need to get started.", "Bonjour. Demandez-moi ce que vous voulez savoir sur Colgo : tarifs, fonctionnement, comment commencer.", "Hallo. Fragen Sie mich alles zu Colgo: Preise, Funktionsweise, wie Sie starten.", "Hola. Pregúntame lo que quieras saber sobre Colgo: precios, cómo funciona, qué hace falta para empezar."],
+    scrivi: ["Scrivi la tua domanda…", "Type your question…", "Écrivez votre question…", "Ihre Frage…", "Escribe tu pregunta…"],
+    apri:   ["Fai una domanda su Colgo", "Ask a question about Colgo", "Poser une question sur Colgo", "Eine Frage zu Colgo stellen", "Haz una pregunta sobre Colgo"],
+    chiudi: ["Chiudi", "Close", "Fermer", "Schließen", "Cerrar"],
+    invia:  ["Invia", "Send", "Envoyer", "Senden", "Enviar"],
+    err:    ["Non riesco a rispondere adesso. Scrivi a colgoapp@gmail.com.", "I can't answer right now. Write to colgoapp@gmail.com.", "Je ne peux pas répondre maintenant. Écrivez à colgoapp@gmail.com.", "Ich kann gerade nicht antworten. Schreiben Sie an colgoapp@gmail.com.", "No puedo responder ahora. Escribe a colgoapp@gmail.com."]
+  };
+  var L = ['it','en','fr','de','es'];
+  function lang() {
+    var l = document.documentElement.lang || 'it';
+    return L.indexOf(l) > -1 ? l : 'it';
+  }
+  function dice(k) { return T[k][L.indexOf(lang())] || T[k][0]; }
+
+  var fab = document.getElementById('colgoFab');
+  var chat = document.getElementById('colgoChat');
+  var corpo = document.getElementById('colgoCorpo');
+  var spunti = document.getElementById('colgoSpunti');
+  var form = document.getElementById('colgoForm');
+  var input = document.getElementById('colgoInput');
+  var invia = document.getElementById('colgoInvia');
+  var invito = document.getElementById('colgoInvito');
+  var barra = document.getElementById('colgoBarra');
+  if (!fab || !chat) return;
+
+  // ── etichette che dipendono dalla lingua e non stanno in data-* ──
+  // (segnaposto del campo e descrizioni per il lettore vocale)
+  function etichette() {
+    input.placeholder = dice('scrivi');
+    fab.setAttribute('aria-label', dice('apri'));
+    invia.setAttribute('aria-label', dice('invia'));
+    document.getElementById('colgoChiudi').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoBarraX').setAttribute('aria-label', dice('chiudi'));
+    document.getElementById('colgoInvitoX').setAttribute('aria-label', dice('chiudi'));
+  }
+  // setLang non sa di queste: gli si sta accanto invece di modificarlo
+  var origSetLang = window.setLang;
+  if (typeof origSetLang === 'function') {
+    window.setLang = function (l) {
+      var r = origSetLang.apply(this, arguments);
+      etichette();
+      // Il saluto non e' un messaggio scambiato, e' un'etichetta: finche' non
+      // si e' chiesto nulla deve seguire la lingua. I messaggi veri no —
+      // riscrivere quello che qualcuno ha gia' letto sarebbe peggio.
+      if (!storia.length && corpo.firstChild) corpo.firstChild.textContent = dice('benv');
+      return r;
+    };
+  }
+
+  // ── conversazione ──
+  var storia = [];      // {ruolo, testo} — senza data-*, non si traduce
+  var occupato = false;
+
+  function riga(cls, testo) {
+    var d = document.createElement('div');
+    d.className = 'colgo-riga ' + cls;
+    d.textContent = testo;          // testo, mai HTML: la risposta e' di un modello
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+  function attesa() {
+    var d = document.createElement('div');
+    d.className = 'colgo-attesa';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    corpo.appendChild(d);
+    corpo.scrollTop = corpo.scrollHeight;
+    return d;
+  }
+
+  function chiedi(testo) {
+    if (occupato || !testo.trim()) return;
+    occupato = true; invia.disabled = true;
+    spunti.style.display = 'none';
+    riga('da-te', testo);
+    storia.push({ ruolo: 'persona', testo: testo });
+    var att = attesa();
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lingua: lang(), messaggi: storia.slice(-12) })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        att.remove();
+        var t = (d && d.risposta) ? d.risposta : dice('err');
+        riga('da-lui', t);
+        storia.push({ ruolo: 'assistente', testo: t });
+      })
+      .catch(function () { att.remove(); riga('da-lui', dice('err')); })
+      .then(function () { occupato = false; invia.disabled = false; input.focus(); });
+  }
+
+  function apri() {
+    chat.classList.add('aperta');
+    document.body.classList.add('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'true');
+    if (!corpo.children.length) riga('da-lui', dice('benv'));
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  function chiudiChat() {
+    chat.classList.remove('aperta');
+    document.body.classList.remove('colgo-chat-aperta');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+  fab.addEventListener('click', function () {
+    chat.classList.contains('aperta') ? chiudiChat() : apri();
+  });
+  document.getElementById('colgoChiudi').addEventListener('click', chiudiChat);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && chat.classList.contains('aperta')) { chiudiChat(); fab.focus(); }
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); var v = input.value; input.value = ''; chiedi(v);
+  });
+  spunti.addEventListener('click', function (e) {
+    var b = e.target.closest('.colgo-spunto'); if (b) chiedi(b.textContent.trim());
+  });
+
+  // ── invito fisso: compare dopo un po' di lettura, e si puo' zittire ──
+  var CHIAVE = 'colgo_invito_chiuso';
+  var zitto = false;
+  try { zitto = localStorage.getItem(CHIAVE) === '1'; } catch (e) {}
+
+  function mostraInvito(si) {
+    if (zitto) si = false;
+    invito.classList.toggle('si-vede', si);
+    invito.setAttribute('aria-hidden', si ? 'false' : 'true');
+    barra.classList.toggle('si-vede', si);
+    document.body.classList.toggle('colgo-con-barra', si);
+  }
+  function spegni() {
+    zitto = true;
+    try { localStorage.setItem(CHIAVE, '1'); } catch (e) {}
+    mostraInvito(false);
+  }
+  document.getElementById('colgoInvitoX').addEventListener('click', spegni);
+  document.getElementById('colgoBarraX').addEventListener('click', spegni);
+
+  var ultimo = null;
+  function guarda() {
+    // Compare dopo 700px di lettura, e sparisce vicino al fondo pagina, dove
+    // l'invito grande c'e' gia': due inviti identici a un dito di distanza
+    // sarebbero solo rumore.
+    var y = window.scrollY;
+    var vicinoFondo = (y + window.innerHeight) > (document.documentElement.scrollHeight - 700);
+    var si = y > 700 && !vicinoFondo;
+    if (si !== ultimo) { ultimo = si; mostraInvito(si); }
+  }
+  window.addEventListener('scroll', guarda, { passive: true });
+  window.addEventListener('resize', guarda);
+  // setLang traduce l'intero documento, ma viene chiamato al caricamento —
+  // e il mio blocco sta in fondo alla pagina, quindi allora non esisteva
+  // ancora: le sue scritte restavano nella lingua scritta nel file. Al primo
+  // giro le traduco qui, con la stessa regola.
+  function traduci() {
+    var l = lang();
+    [chat, invito, barra, fab].forEach(function (radice) {
+      if (!radice) return;
+      var tutti = radice.querySelectorAll('[data-it]');
+      (radice.hasAttribute && radice.hasAttribute('data-it') ? [radice] : []).concat([].slice.call(tutti))
+        .forEach(function (el) {
+          var t = el.getAttribute('data-' + l) || el.getAttribute('data-en') || el.getAttribute('data-it');
+          if (t) el.innerHTML = t;
+        });
+    });
+  }
+  traduci();
+  etichette();
+  guarda();
+})();
+</script>
+<script>document.querySelectorAll('.faq-q').forEach(q => { q.addEventListener('click', () => { q.parentElement.classList.toggle('open'); }); });</script>
+</body>
+</html>
